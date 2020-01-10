@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 using EC.Business.Actions.Email;
@@ -32,13 +33,18 @@ namespace EC.Controllers
         // GET: Service
         public ActionResult Login(string host_url)
         {
-            foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
-            {
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+
+            //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
+            //{
                 //       user.password = PasswordUtils.GetHash(user.password);
-            }
+            //}
             //       db.SaveChanges();
 
             Session.Clear();
+
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
 
@@ -149,6 +155,11 @@ namespace EC.Controllers
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             ViewBag.fullNameLanguage = FullNameLanguage;
+
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
@@ -158,6 +169,11 @@ namespace EC.Controllers
             if (selectedCompany == null)
             {
                 return RedirectToAction("Index", "Index");
+            } else
+            {
+                UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             }
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", selectedCompany);
         }

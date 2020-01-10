@@ -3,9 +3,10 @@
     ViewBag.Title = LocalizationGetter.GetString("MySettings");
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     int activePageId = 8;
+    var role_id = 1;
 }
+@Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", new ViewDataDictionary { { "active", activePageId }, { "role_id", role_id } })
 
-@Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", activePageId)
 <style>
     .oldstyle {
         display: table !important;
@@ -68,7 +69,7 @@
                         <p>Header color Managament</p>
                         <form><input type="text" id="HeaderColor" name="color" value="@ViewBag.header_color_code" /></form>
                         <div id="HeaderColorpicker"></div>
-                        <div id="HeaderColorSave" class="btn-link btn-link_small pull-right ng-binding" >
+                        <div id="HeaderColorSave" class="btn-link btn-link_small pull-right ng-binding">
                             Save
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                             <input type="text" id="HeaderLinks" name="color" value="@ViewBag.header_links_color_code" />
                         </form>
                         <div id="HeaderLinksColorpicker"></div>
-                        <div id="HeaderLinksSave" class="btn-link btn-link_small pull-right ng-binding" >
+                        <div id="HeaderLinksSave" class="btn-link btn-link_small pull-right ng-binding">
                             Save
                         </div>
                     </div>

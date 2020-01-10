@@ -42,6 +42,15 @@
     }
     String class_ext = ViewBag.cc_extension;
 }
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+    <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+    </style>
+}
 <style>
     .error {
         border: 2px solid red !important;
@@ -63,11 +72,12 @@
     @{
         int active = 1;
     }
-    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", active)
+    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", new ViewDataDictionary { { "active", active }, { "role_id", um._user.role_id } })
+
 
     @using (Html.BeginForm("UpdateUser", "Settings", FormMethod.Post, new { }))
     {
-      @*   @Html.AntiForgeryToken() *@
+        @*   @Html.AntiForgeryToken() *@
         @model user
         @Html.HiddenFor(model => Model.id)
         <div class="contentSettings">
@@ -103,7 +113,7 @@
                     <p class="title">@LocalizationGetter.GetString("Location")</p>
                     @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id, 2), "id", "location_en"), "", new { @class = "selectStyled" })
                 </div>
-                <div class="blockPersonalSettings greyBorder"ng-class="{error: val_email }">
+                <div class="blockPersonalSettings greyBorder" ng-class="{error: val_email }">
                     <p class="title">@LocalizationGetter.GetString("Email")</p>
                     @Html.TextBoxFor(model => model.email, new { email = "email" })
                 </div>

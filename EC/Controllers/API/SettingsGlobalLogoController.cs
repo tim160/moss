@@ -20,7 +20,7 @@ namespace EC.Controllers.API
         {
             string result = "false";
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
-            if (user == null || user.id == 0)
+            if (user == null || user.id == 0 || user.role_id > ECLevelConstants.level_escalation_mediator)
                 return result;
 
             var photo = System.Web.HttpContext.Current.Request.Files["_file"];

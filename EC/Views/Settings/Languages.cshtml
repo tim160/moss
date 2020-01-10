@@ -21,8 +21,9 @@
 <div class="blockSettings">
     @{
         int active = 6;
+        int role_id = 1;
     }
-    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", active)
+    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", new ViewDataDictionary { { "active", active }, { "role_id", role_id } })
 
 
     <div class="contentCompanyProfile contentCompanyProfile">

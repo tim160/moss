@@ -5,6 +5,17 @@
     bool showDDLanguages = true;
     bool is_cc = false;
 }
+
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+    <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+    </style>
+}
+
 <input type="hidden" value="@Url.Action("SeekCompany", "Index")" id="SeekCompanyLocation" />
 <div class="general-container login">
     @Html.Partial("Header", showDDLanguages)

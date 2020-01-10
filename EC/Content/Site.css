@@ -35,6 +35,10 @@ body{
     background: rgb(140, 160, 163);
     margin: 0;
 }
+:root {
+    --HeaderColor: #e5ebeb;
+    --HeaderLinksColor: #fff;
+}
 
 .fullContainer{
     margin: 0 auto;
@@ -70,9 +74,10 @@ body{
     padding: 31px;
     padding-bottom: 220px;
 }
-.headerBlock .firstBlock{
+.headerBlock .firstBlock {
     min-height: 60px;
     height: 100%;
+    background-color: var(--HeaderColor);
 }
 
 .headerBlock .secondBlock{
