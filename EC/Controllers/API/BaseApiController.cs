@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using EC.Common.Util;
 using EC.Common.Util.Models.API;
 using EC.Models;
@@ -55,7 +56,7 @@ namespace EC.Controllers.API
 
 		#region Response results
 
-		protected static ApiResponseResult ApiOk(
+		protected ApiResponseResult ApiOk(
 			string message = null,
 			string status = null,
 			string exceptionDetails = null)
@@ -63,7 +64,7 @@ namespace EC.Controllers.API
 			return new ApiResponseResult(HttpStatusCode.OK, message, status, exceptionDetails);
 		}
 
-		protected static ApiResponseResult<T> ApiOk<T>(
+		protected ApiResponseResult<T> ApiOk<T>(
 			T data,
 			string message = null,
 			string status = null,
@@ -72,13 +73,20 @@ namespace EC.Controllers.API
 			return new ApiResponseResult<T>(HttpStatusCode.OK, data, message, status, exceptionDetails);
 		}
 
-		protected static ApiResponseResult ApiCreated(
+		protected ApiResponseResult<T> ApiCreated<T>(
+			T data,
 			string message = null,
 			string status = null,
 			string exceptionDetails = null)
 		{
-			return new ApiResponseResult(HttpStatusCode.Created, message, status, exceptionDetails);
+			return new ApiResponseResult<T>(HttpStatusCode.Created, data, message, status, exceptionDetails);
 		}
+
+		protected ApiBadRequestResult ApiBadRequest(string message) => new ApiBadRequestResult(message);
+
+		protected ApiBadRequestResult ApiBadRequest(ModelStateDictionary modelState) => new ApiBadRequestResult(modelState, this);
+
+		protected ApiResponseResult ApiNotFound(string message = null) => new ApiResponseResult(HttpStatusCode.NotFound, message);
 
 		#endregion
 	}
