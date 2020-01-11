@@ -2,10 +2,10 @@
 
 namespace EC.Models.API.v1.Company
 {
-	public class ModifyCompanyModel
+	public class UpdateCompanyModel
 	{
 		[Required]
-		[StringLength(500)]
-		public string Name { get; set; }
+		[StringLength(250)]
+		public string EmployeeQuantity { get; set; }
 	}
 }

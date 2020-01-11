@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using EC.Common.Util;
 using EC.Constants;
 using EC.Models.Database;
+using EC.Models.Database.Contexts;
 
 namespace EC.Models
 {
 	public class GenerateRecordsModel
 	{
-		private ECEntities db = new ECEntities();
+		private ApplicationContext db = new ApplicationContext();
 
 
 		public bool isLoginInUse(string login)
@@ -125,6 +129,32 @@ namespace EC.Models
 			while (isCodeInUse(_first_short + _last_short));
 
 			return _first_short + _last_short;
+		}
+
+		public async Task<string> GenerateUnusedCompanyShortName(string shortName)
+		{
+			const int maxIteration = 1000;  // TODO: What is 1000?
+			Dictionary<int, string> shortNames = new Dictionary<int, string>(maxIteration + 1)
+			{
+				{ 0, shortName }
+			};
+			for (int i = 1; i <= maxIteration; i++)
+			{
+				shortNames.Add(i, shortName + i);
+			}
+
+			List<string> existsCompanies = await db.company
+				.AsNoTracking()
+				.Where(company => shortNames.Values.Contains(company.company_short_name))
+				.Select(company => company.company_short_name)
+				.ToListAsync()
+				.ConfigureAwait(false);
+
+			return shortNames
+				.Where(item => !existsCompanies.Contains(item.Value))
+				.OrderBy(item => item.Key)
+				.FirstOrDefault()
+				.Value;
 		}
 
 		public string GenerateInvoiceNumber()

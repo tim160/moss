@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EC.Common.Base;
+using EC.Common.Util;
 using EC.Common.Util.Filters;
 using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.Company;
@@ -44,11 +47,11 @@ namespace EC.Controllers.API.v1
 
 		[HttpPost]
 		[Route("new")]
-		public async Task<IHttpActionResult> Create(ModifyCompanyModel modifyCompanyModel)
+		public async Task<IHttpActionResult> Create(CreateCompanyModel createCompanyModel)
 		{
-			if (modifyCompanyModel is null)
+			if (createCompanyModel is null)
 			{
-				ModelState.AddModelError(nameof(modifyCompanyModel), "Company data required.");
+				ModelState.AddModelError(nameof(createCompanyModel), "Company data required.");
 			}
 
 			if (!ModelState.IsValid)
@@ -56,22 +59,31 @@ namespace EC.Controllers.API.v1
 				return ApiBadRequest(ModelState);
 			}
 
-			int id = await _companyService
-				.CreateOrUpdate(modifyCompanyModel)
-				.ConfigureAwait(false);
+			bool isCC = DomainUtil.IsCC(Request.RequestUri.AbsoluteUri);
+			int id;
+			try
+			{
+				id = await _companyService
+					.CreateAsync(createCompanyModel, isCC)
+					.ConfigureAwait(false);
+			}
+			catch (AggregateException exception)
+			{
+				return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
+			}
 
 			return ApiCreated(id);
 		}
 
 		[HttpPut]
 		[Route("{id}")]
-		public async Task<IHttpActionResult> Update(int id, ModifyCompanyModel modifyCompanyModel)
+		public async Task<IHttpActionResult> Update(int id, UpdateCompanyModel updateCompanyModel)
 		{
 			_logger.Debug($"id={id}");
 
-			if (modifyCompanyModel is null)
+			if (updateCompanyModel is null)
 			{
-				ModelState.AddModelError(nameof(modifyCompanyModel), "Company data required.");
+				ModelState.AddModelError(nameof(updateCompanyModel), "Company data required.");
 			}
 			if (id == 0)
 			{
@@ -86,7 +98,7 @@ namespace EC.Controllers.API.v1
 			try
 			{
 				await _companyService
-					.CreateOrUpdate(modifyCompanyModel, id)
+					.UpdateAsync(updateCompanyModel, id)
 					.ConfigureAwait(false);
 			}
 			catch (NotFoundException exception)

@@ -30,7 +30,7 @@ namespace EC.Services.API.v1
 			return dbSet.Add(item);
 		}
 
-		public static async Task<T> Update<T, TModel>(
+		public static async Task<T> UpdateAsync<T, TModel>(
 			this DbSet<T> dbSet,
 			int id,
 			TModel model,

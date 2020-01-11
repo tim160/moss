@@ -13,11 +13,12 @@ namespace EC.AutoMapperProfiles.API.v1
 					destinationMember => destinationMember.Name,
 					options => options.MapFrom(sourceMember => sourceMember.company_nm)
 					);
-			CreateMap<ModifyCompanyModel, company>()
+			CreateMap<CreateCompanyModel, company>()
 				.ForMember(
 					destinationMember => destinationMember.company_nm,
-					options => options.MapFrom(sourceMember => sourceMember.Name)
+					options => options.MapFrom(sourceMember => sourceMember.Name.Trim())
 					);
+			CreateMap<UpdateCompanyModel, company>();
 		}
 	}
 }

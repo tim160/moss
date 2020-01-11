@@ -1478,7 +1478,8 @@
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Models\AnalyticsModel.cs" />
-    <Compile Include="Models\API\v1\Company\ModifyCompanyModel.cs" />
+    <Compile Include="Models\API\v1\Company\UpdateCompanyModel.cs" />
+    <Compile Include="Models\API\v1\Company\CreateCompanyModel.cs" />
     <Compile Include="Models\API\v1\Company\CompanyModel.cs" />
     <Compile Include="Models\CaseMessagesModel.cs" />
     <Compile Include="Models\Database\action.cs">
