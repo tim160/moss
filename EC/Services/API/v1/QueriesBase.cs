@@ -19,7 +19,7 @@ namespace EC.Services.API.v1
 			params Expression<Func<T, object>>[] includes)
 			where T : class
 		{
-			IQueryable<T> querySource = set;
+			IQueryable<T> querySource = set.AsNoTracking();
 
 			if (includes.Length > 0)
 			{
