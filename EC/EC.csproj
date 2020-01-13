@@ -1481,6 +1481,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NewCaseController.cs" />
     <Compile Include="Controllers\NewController.cs" />
+    <Compile Include="Controllers\OauthController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReporterDashboardController.cs" />
@@ -1828,6 +1829,10 @@
     <Compile Include="Models\ReadStatusModel.cs" />
     <Compile Include="Models\ReportStringModel.cs" />
     <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
+    <Compile Include="Models\SSO\ApiResponse.cs" />
+    <Compile Include="Models\SSO\OAuthTokenResponse.cs" />
+    <Compile Include="Models\SSO\OidcTokenResponse.cs" />
+    <Compile Include="Models\SSO\SSOUser.cs" />
     <Compile Include="Models\UserColorSchemaModel.cs" />
     <Compile Include="Models\ViewModels\ActiveCasesViewModel.cs" />
     <Compile Include="Models\ViewModels\AnonimityViewModel.cs" />
@@ -1889,6 +1894,7 @@
     <Compile Include="Models\ViewModels\ReportedOutsideViewModel.cs" />
     <Compile Include="Models\ViewModels\RoleInReportViewModel.cs" />
     <Compile Include="Models\ViewModels\SecondaryMandatoryViewModel.cs" />
+    <Compile Include="Models\ViewModels\SSOErrorViewModel.cs" />
     <Compile Include="Models\ViewModels\UserLevelViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersReportIDsViewModel.cs" />
     <Compile Include="Models\ViewModels\UserStatusViewModel.cs" />
@@ -1917,6 +1923,7 @@
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />
+    <Folder Include="Views\Oauth\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
