@@ -6,7 +6,7 @@
  
 
   string username = ViewBag.username;
-  string pass = ViewBag.pass;
+  string token = ViewBag.token;
 
   string iFrameName = "embeddedIframe";
 }
@@ -19,23 +19,35 @@
 
 
 @*<form id=@loginFormId
+          target=@iFrameName
+          action="https://ec.conveyor.cloud/Service/LoginSso"
+          method="post">
+        <input type="text" name="Login" value="" />
+        <input type="text" name="Password" value="" />
+        <input type="submit">
+    </form>
+
+      action="https://ec.conveyor.cloud/Service/LoginSso"
+         action="https://ecreport.azurewebsites.net/Service/LoginSso"
+
+    <form id="loginForm"
         target=@iFrameName
-        action="https://ec.conveyor.cloud/Service/LoginSso"
-        method="post">
-      <input type="text" name="Login" value="" />
-      <input type="text" name="Password" value="" />
-      <input type="submit">
+        action="http://stark.employeeconfidential.com/Service/LoginSsoString?jwt=@token"
+        method="get">
+
+      <input type="text" hidden  name="jwt" value="@token" />
+      <input type="submit" hidden>
   </form>
 
 
-       action="https://ecreport.azurewebsites.net/Service/LoginSso"
+
 *@
 <form id="loginForm"
       target=@iFrameName
       action="http://stark.employeeconfidential.com/Service/LoginSso"
-      method="post">
-    <input type="text" hidden  name="Login" value="@username" />
-    <input type="text" hidden  name="Password" value="@pass" />
+      method="get">
+
+    <input type="text" hidden  name="jwt" value="@token" />
     <input type="submit" hidden>
 </form>
 
