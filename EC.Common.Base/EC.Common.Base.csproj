@@ -46,6 +46,7 @@
     <Compile Include="FileSizeHelper.cs" />
     <Compile Include="GuidTools.cs" />
     <Compile Include="HtmlDataHelper.cs" />
+    <Compile Include="PagedList.cs" />
     <Compile Include="PreciseTickCount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecureRandomGUID.cs" />
