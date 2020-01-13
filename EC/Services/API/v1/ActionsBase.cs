@@ -54,7 +54,7 @@ namespace EC.Services.API.v1
 			T item = await dbSet
 				.FindAsync(id)
 				.ConfigureAwait(false);
-			if (item is null)
+			if (item == null)
 			{
 				throw new NotFoundException($"Item with ID '{id}' not found.", typeof(T));
 			}

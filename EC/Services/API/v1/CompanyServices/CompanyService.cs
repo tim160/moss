@@ -29,7 +29,7 @@ namespace EC.Services.API.v1.CompanyServices
 
 		public async Task<int> CreateAsync(CreateCompanyModel createCompanyModel, bool isCC)
 		{
-			if (createCompanyModel is null)
+			if (createCompanyModel == null)
 			{
 				throw new ArgumentNullException(nameof(createCompanyModel));
 			}
@@ -68,7 +68,7 @@ namespace EC.Services.API.v1.CompanyServices
 					item.created_by_company_id
 				})
 				.FirstOrDefaultAsync();
-			if (companyInvitation is null)
+			if (companyInvitation == null)
 			{
 				errors.Add(new ParameterValidationException(nameof(createCompanyModel.InvitationCode), LocalizationGetter.GetString("InvalidCode")));
 			}
@@ -145,7 +145,7 @@ namespace EC.Services.API.v1.CompanyServices
 
 		public async Task<int> UpdateAsync(UpdateCompanyModel updateCompanyModel, int id)
 		{
-			if (updateCompanyModel is null)
+			if (updateCompanyModel == null)
 			{
 				throw new ArgumentNullException(nameof(updateCompanyModel));
 			}

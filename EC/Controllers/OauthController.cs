@@ -17,12 +17,14 @@ namespace EC.Controllers
         [HttpPost]
         public ActionResult Token(string jwt)
         {
-            //{
-         /*     "access_token": < Your Token >,
-        "token_type": "bearer",
-        "expires_in": 7200,
-        "created_at": 1429931390*/
-            //}
+      //{
+      /*     "access_token": < Your Token >,
+     "token_type": "bearer",
+     "expires_in": 7200,
+     "created_at": 1429931390*/
+      //}
+      return View();
           }
+
     }
 }

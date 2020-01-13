@@ -49,7 +49,7 @@ namespace EC.Controllers.API.v1
 		[Route("new")]
 		public async Task<IHttpActionResult> Create(CreateCompanyModel createCompanyModel)
 		{
-			if (createCompanyModel is null)
+			if (createCompanyModel == null)
 			{
 				ModelState.AddModelError(nameof(createCompanyModel), "Company data required.");
 			}
@@ -81,7 +81,7 @@ namespace EC.Controllers.API.v1
 		{
 			_logger.Debug($"id={id}");
 
-			if (updateCompanyModel is null)
+			if (updateCompanyModel == null)
 			{
 				ModelState.AddModelError(nameof(updateCompanyModel), "Company data required.");
 			}
