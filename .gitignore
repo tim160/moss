@@ -79,7 +79,8 @@ EC/Libs/
 EC/node_modules/
 EC/Content/img/TestPdf.pdf
 EC/Upload/
-EC/Models/Database/
+EC/Models/Database/*
+!EC/Models/Database/Contexts
 EC/Web.config
 EC.COM/Areas/
 EC/ConnectionStrings.config
