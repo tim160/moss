@@ -78,7 +78,7 @@
         };
     });
 
-    angular.module('EC').directive('checkFileSize', ['uploadImage', function (uploadImage) {
+    angular.module('EC').directive('checkFileSize', ['uploadImage', 'SettingsGlobalLogo',  function (uploadImage, SettingsGlobalLogo) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -142,6 +142,18 @@
                                             }
                                         });
                                     }
+                                    break;
+                                case 'globalSettings':
+                                    var formData = new FormData();
+                                    var fileInput = angular.element('#_file');
+                                    formData.append('_file', fileInput[0].files[0]);
+                                    var globalSettings = SettingsGlobalLogo.getData(formData);
+                                    globalSettings.then(function (response) {
+                                        var srcLink = angular.element('#logoCompany').attr('src') + '?' + new Date().getTime();
+                                        angular.element('#logoCompany').attr('src', srcLink );
+                                         var result = 'url(' + srcLink + ')';
+                                         angular.element('.headerTop-logo__img').css('background-image', result);
+                                    });
                                     break;
                             }
                         }

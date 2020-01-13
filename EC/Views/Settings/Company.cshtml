@@ -80,11 +80,13 @@
 <div id="companyId" data-value="@company_id"></div>
 <div id="userId" data-value="@user_id"></div>
 <div class="blockSettings">
-    
+
     @{
         int active = 3;
     }
-    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", active)
+    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", new ViewDataDictionary { { "active", active }, { "role_id", role_id } })
+
+
     <div class="contentSettings secondHeader oldstyle">
         <div class="headerCompanyProfile">
             <div class="headerBlock">
@@ -309,38 +311,38 @@
             </div>
 
             @*<div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController" ng-cloak>
-                @if (is_valid_mediator)
-                {
-                    <div class="addIncidentTypeBtn" ng-show="!addMode">
-                        <p ng-click="addMode = !addMode">Add New Secondary Type</p>
+                    @if (is_valid_mediator)
+                    {
+                        <div class="addIncidentTypeBtn" ng-show="!addMode">
+                            <p ng-click="addMode = !addMode">Add New Secondary Type</p>
+                        </div>
+                        <div class="addIncidentTypeBtn" ng-show="addMode">
+                            <p style="min-width: 50px;" ng-click="add()">@LocalizationGetter.GetString("Add")</p>
+                        </div>
+                    }
+                    <div ng-show="addMode">
+                        <p>Incident Type</p>
+                        <select ng-model="addType" ng-options="item.id as item.secondary_type_en for item in secondaryTypes"></select>
                     </div>
-                    <div class="addIncidentTypeBtn" ng-show="addMode">
-                        <p style="min-width: 50px;" ng-click="add()">@LocalizationGetter.GetString("Add")</p>
+                    <div class="addNewIncidentType" ng-show="addMode" style="display: block;">
+                        <input type="text" name="newIncidentTypeName" required="" value="" ng-model="addName">
+                        <div class="closeIcon"></div>
                     </div>
-                }
-                <div ng-show="addMode">
-                    <p>Incident Type</p>
-                    <select ng-model="addType" ng-options="item.id as item.secondary_type_en for item in secondaryTypes"></select>
-                </div>
-                <div class="addNewIncidentType" ng-show="addMode" style="display: block;">
-                    <input type="text" name="newIncidentTypeName" required="" value="" ng-model="addName">
-                    <div class="closeIcon"></div>
-                </div>
-                <div class="tableIncidentType">
-                    <table style="width: 100%;">
-                        <tr ng-repeat="item in third_level_types">
-                            <td width="50%">
-                                <p>{{item.third_level_type_name_en}}</p>
-                                @if (is_valid_mediator)
-                                {
-                                    <div class="deleteRootCauses" ng-click="delete(item.id)"></div>
-                                }
-                            </td>
-                            <td width="50%">{{findST(item.company_secondary_type_id)}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>*@
+                    <div class="tableIncidentType">
+                        <table style="width: 100%;">
+                            <tr ng-repeat="item in third_level_types">
+                                <td width="50%">
+                                    <p>{{item.third_level_type_name_en}}</p>
+                                    @if (is_valid_mediator)
+                                    {
+                                        <div class="deleteRootCauses" ng-click="delete(item.id)"></div>
+                                    }
+                                </td>
+                                <td width="50%">{{findST(item.company_secondary_type_id)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>*@
 
             <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController" ng-cloak>
                 @if (is_valid_mediator)

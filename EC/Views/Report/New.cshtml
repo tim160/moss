@@ -37,7 +37,15 @@
         logo = logo.Trim();
     }
 }
-
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+    <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+    </style>
+}
 
 @section pageStyles{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -425,18 +433,18 @@
                             {
                                 foreach (var item in ViewBag.secondary_type_mandatory)
                                 {
-                            <div style="padding: 10px 20px" class="freeBlock inputRadio option" data-val="@String.Concat(@item.SecondaryMandatory)">
-                                <div style="width:13px;height:13px;float:left;padding-top: 5px;">
-                                <input id="@String.Concat(@item.SecondaryMandatory)" type="checkbox" name="whatHappened" value="@item.id" />
-                                </div>
-                                <div>
-                                    <label style="padding:0px;" class="inputBlock" for="@String.Concat(@item.SecondaryMandatory)">
-                                        <span class="radioTitle">@item.SecondaryMandatory</span>
-                                    </label>
-                                </div>
+                                    <div style="padding: 10px 20px" class="freeBlock inputRadio option" data-val="@String.Concat(@item.SecondaryMandatory)">
+                                        <div style="width:13px;height:13px;float:left;padding-top: 5px;">
+                                            <input id="@String.Concat(@item.SecondaryMandatory)" type="checkbox" name="whatHappened" value="@item.id" />
+                                        </div>
+                                        <div>
+                                            <label style="padding:0px;" class="inputBlock" for="@String.Concat(@item.SecondaryMandatory)">
+                                                <span class="radioTitle">@item.SecondaryMandatory</span>
+                                            </label>
+                                        </div>
 
 
-                            </div>
+                                    </div>
                                 }
                             }
                             <div class="freeBlock inputRadio option" data-val="Other">
@@ -737,8 +745,8 @@
                                 </table>
 
                                 @*<div class="attachedFilesTitle">
-            <div class="addedFilesList"></div>
-        </div>*@
+                                        <div class="addedFilesList"></div>
+                                    </div>*@
                             </div>
                         </div>
                     </div>

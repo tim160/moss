@@ -1,10 +1,12 @@
 ﻿using EC.Controllers.ViewModel;
+using EC.Localization;
 using EC.Models.Database;
 using EC.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 
 namespace EC.Models
 {
@@ -639,6 +641,56 @@ namespace EC.Models
                 }
             }
             return result;
+        }
+
+        public bool checkIsExistGlobalSettings(int userId)
+        {
+            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == userId).FirstOrDefault();
+            if (globalSetting != null)
+            {
+                return true;
+            } else
+            {
+                return createNewGlobalSetting(userId);
+            }
+        }
+        public bool createNewGlobalSetting(int userId)
+        {
+            var globalSetting = new global_settings();
+            globalSetting.client_id = userId;
+            globalSetting.application_name = LocalizationGetter.GetString("EmployeeConfidential");
+            globalSetting.header_color_code = WebConfigurationManager.AppSettings["HeaderColor"];
+            globalSetting.header_links_color_code = WebConfigurationManager.AppSettings["HeaderLinksColor"];
+            db.global_settings.Add(globalSetting);
+            db.SaveChanges();
+            return true;
+        }
+        public bool updateIconPath(int userId, string iconPath)
+        {
+            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == userId).FirstOrDefault();
+            if (globalSetting != null)
+            {
+                globalSetting.custom_logo_path = iconPath;
+                db.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+        public bool updateColorGlobalSettings(int userId, string header_color_code, string header_links_color_code)
+        {
+            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == userId).FirstOrDefault();
+            if (globalSetting != null)
+            {
+                globalSetting.header_color_code = header_color_code;
+                globalSetting.header_links_color_code = header_links_color_code;
+                db.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

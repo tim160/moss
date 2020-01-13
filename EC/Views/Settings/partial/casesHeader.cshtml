@@ -1,7 +1,10 @@
 ﻿@using EC.Localization;
-
+@using EC.Constants
 @{
-    int temp = Model;
+    //active, role_id
+    var number_active_page = ViewBag.active;
+    var role_id = ViewBag.role_id;
+
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -14,39 +17,42 @@
         <tr>
             <td>
                 <a href="/Settings/Index" class="caseesTab1">@LocalizationGetter.GetString("MyProfile")</a>
-                <div class="divCasesTabActive @(temp == 1 ? "active":"")">
+                <div class="divCasesTabActive @(number_active_page == 1 ? "active":"")">
                 </div>
             </td>
             <td>
                 <a href="/Settings/Mediators" class="caseesTab1">@LocalizationGetter.GetString("CompanyMediators", is_cc)</a>
-                <div class="divCasesTabActive @(temp == 4 ? "active":"")">
+                <div class="divCasesTabActive @(number_active_page == 4 ? "active":"")">
                 </div>
             </td>
             <td>
                 <a href="/Settings/Company" class="caseesTab1">@LocalizationGetter.GetString("CompanyProfile", is_cc)</a>
-                <div class="divCasesTabActive @(temp == 3 ? "active":"")">
+                <div class="divCasesTabActive @(number_active_page == 3 ? "active":"")">
                 </div>
             </td>
             <td>
                 <a href="/Settings/Cases" class="caseesTab1">@LocalizationGetter.GetString("CaseManagementDeadlines")</a>
-                <div class="divCasesTabActive @(temp == 5 ? "active":"")">
+                <div class="divCasesTabActive @(number_active_page == 5 ? "active":"")">
                 </div>
             </td>
             <td>
                 <a href="/Settings/Languages" class="caseesTab1">@LocalizationGetter.GetString("Languages")</a>
-                <div class="divCasesTabActive @(temp == 6 ? "active":"")">
+                <div class="divCasesTabActive @(number_active_page == 6 ? "active":"")">
                 </div>
             </td>
             <td>
                 <a href="/Settings/CaseRouting" class="caseesTab1">@LocalizationGetter.GetString("CaseRouting")</a>
-                <div class="divCasesTabActive @(temp == 7 ? "active":"")">
+                <div class="divCasesTabActive @(number_active_page == 7 ? "active":"")">
                 </div>
             </td>
-            <td>
-                <a href="/Settings/GlobalSettings" class="caseesTab1">Global Settings</a>
-                <div class="divCasesTabActive @(temp == 8 ? "active":"")">
-                </div>
-            </td>
+            @if (role_id <= ECLevelConstants.level_escalation_mediator)
+            {
+                <td>
+                    <a href="/Settings/GlobalSettings" class="caseesTab1">@LocalizationGetter.GetString("GlobalSettings")</a>
+                    <div class="divCasesTabActive @(number_active_page == 8 ? "active":"")">
+                    </div>
+                </td>
+            }
         </tr>
     </table>
 </div>

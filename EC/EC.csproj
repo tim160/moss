@@ -65,6 +65,18 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.6.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.6.0\lib\net45\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.6.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -85,6 +97,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -616,6 +632,12 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\js\common.js" />
     <Content Include="Content\js\common.min.js" />
+    <Content Include="Content\libs\farbtastic\farbtastic.css" />
+    <Content Include="Content\libs\farbtastic\farbtastic.js" />
+    <Content Include="Content\libs\farbtastic\farbtastic.min.js" />
+    <Content Include="Content\libs\farbtastic\marker.png" />
+    <Content Include="Content\libs\farbtastic\mask.png" />
+    <Content Include="Content\libs\farbtastic\wheel.png" />
     <Content Include="Content\libs\fontello-a8edc99e\css\animation.css" />
     <Content Include="Content\libs\fontello-a8edc99e\css\e800-codes.css" />
     <Content Include="Content\libs\fontello-a8edc99e\css\e800-embedded.css" />
@@ -1230,7 +1252,6 @@
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -1353,7 +1374,6 @@
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
-    <Content Include="Views\Settings\partial\casesHeared.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\Unavailable.cshtml" />
@@ -1419,6 +1439,8 @@
     <Content Include="Views\Service\Footer.cshtml" />
     <Content Include="Views\Service\ForgetLogin.cshtml" />
     <Content Include="Views\Service\ForgetLogin-CC.cshtml" />
+    <Content Include="Views\Settings\partial\casesHeader.cshtml" />
+    <Content Include="Views\Settings\GlobalSettings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1454,6 +1476,7 @@
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
     <Compile Include="Controllers\API\CasesController.cs" />
     <Compile Include="Controllers\API\SettingsDisclaimerController.cs" />
+    <Compile Include="Controllers\API\SettingsGlobalLogoController.cs" />
     <Compile Include="Controllers\API\SettingsUserEditController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
@@ -1616,6 +1639,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\frequency.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\global_settings.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\industry.cs">
@@ -1817,6 +1843,7 @@
     <Compile Include="Models\ReadStatusModel.cs" />
     <Compile Include="Models\ReportStringModel.cs" />
     <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
+    <Compile Include="Models\UserColorSchemaModel.cs" />
     <Compile Include="Models\ViewModels\ActiveCasesViewModel.cs" />
     <Compile Include="Models\ViewModels\AnonimityViewModel.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />

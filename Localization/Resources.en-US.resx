@@ -3066,4 +3066,7 @@ Do not want to involve</value>
   <data name="AllMembers" xml:space="preserve">
     <value>All Members</value>
   </data>
+  <data name="GlobalSettings" xml:space="preserve">
+    <value>Global Settings</value>
+  </data>
 </root>

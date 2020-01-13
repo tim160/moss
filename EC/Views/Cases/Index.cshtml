@@ -27,6 +27,7 @@
         }
     }
 
+
     <style>
         td.case {
             width: 8%;
@@ -73,7 +74,15 @@
         }
     </style>
 }
-
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+    <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+    </style>
+}
 <div ng-controller="CasesController" ng-cloak>
     <div id="casesHeader" class="pageCases">
         <div id="menu">
@@ -100,7 +109,7 @@
                     <span ng-show="counts.Pending > 0">{{counts.Pending}}</span>
                 </a>
                 @*<a href="#" class="caseesTab">
-            </a>*@
+                    </a>*@
 
 
 
@@ -108,17 +117,17 @@
             <input type="hidden" value="@LocalizationGetter.GetString("AllSchools", is_cc)" id="ddListDefaultValue" />
             <div id="ddListForCases" ng-show="Companies.length > 1">
                 <div class="parentClass" ng-click="showDDMenu = !showDDMenu">
-                    <div class="menuItem" >
+                    <div class="menuItem">
                         <div class="positionText">
                             <span class="dropMenuText">{{displayCompanyName}}</span>
                             <img src="~/Content/img/arrowSelect.png" />
                         </div>
-                        <ul class="menuUl" ng-show="showDDMenu" >
+                        <ul class="menuUl" ng-show="showDDMenu">
                             <li>
                                 <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
                                     @*<div class="checked">
-                                        <img class="" src="~/Content/img/check.png" />
-                                    </div>*@
+                                            <img class="" src="~/Content/img/check.png" />
+                                        </div>*@
                                     <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
                                         @LocalizationGetter.GetString("AllSchools", is_cc)
                                     </span>
@@ -127,8 +136,8 @@
                             <li ng-repeat="company in Companies" callback-on-end="onEnd()">
                                 <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
                                     @*<div class="checked">
-                                        <img class="" src="~/Content/img/check.png" />
-                                    </div>*@
+                                            <img class="" src="~/Content/img/check.png" />
+                                        </div>*@
                                     <span class="positionText liText" ng-click="ddListClickedCompany(company.id, company.company_nm)">
                                         {{company.company_nm}}
                                     </span>
@@ -207,7 +216,7 @@
                                     Team
                                 </div>
                                 <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('team_number')"></div>
-                            </div> 
+                            </div>
                             @if (is_cc == true)
                             {
                                 <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-hide="mode == 5" ng-click="sort('team_number')">
@@ -218,12 +227,12 @@
                                 </div><!-- /.dashboard-col__team dashboard-colHeader -->
                             }
 
-                          <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-show="mode == 5">
-                            <div class="dashboard-colHeader__text">
-                              Closure Report
+                            <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-show="mode == 5">
+                                <div class="dashboard-colHeader__text">
+                                    Closure Report
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow"></div>
                             </div>
-                            <div class="dashboard-colHeader__sortArrow sortArrow"></div>
-                          </div>
                         </div><!-- /.dashboard-rowHeader -->
 
                         <div class="dashboard-rowbody" ng-repeat="report in reports | filter:casesFilterFunction" ng-click="openCase(report.report_id)">
@@ -307,13 +316,13 @@
                                     </div><!-- /.dashboard-col__tasks-text -->
                                 </div><!-- /.dashboard-col__tasks dashboard-colbody clearfix -->
                             }
-                          <div class="dashboard-col__alert dashboard-colbody clearfix" ng-show="mode == 5">
-                            <div class="dashboard-col__tasks-text">
-                              <a href='/NewCase/PrintToPdf/{{report.report_id}}' class="subNavigationIcons__a" target="_blank">
-                                <img class="subNavigationIcons__imgPrint subNavigationIcons__imgPrintPosition" src="@Url.Content("~/Content/Icons/print-icon.png")" alt="Print/Download Case Closure Report" />
-                              </a>
+                            <div class="dashboard-col__alert dashboard-colbody clearfix" ng-show="mode == 5">
+                                <div class="dashboard-col__tasks-text">
+                                    <a href='/NewCase/PrintToPdf/{{report.report_id}}' class="subNavigationIcons__a" target="_blank">
+                                        <img class="subNavigationIcons__imgPrint subNavigationIcons__imgPrintPosition" src="@Url.Content("~/Content/Icons/print-icon.png")" alt="Print/Download Case Closure Report" />
+                                    </a>
+                                </div>
                             </div>
-                          </div> 
                         </div><!-- /.dashboard-rowbody -->
 
                     </div><!-- /.dashboard -->

@@ -348,3 +348,12 @@ html, body {
     text-decoration: none;
     color: #3c3e3f;
 }
+
+.setCenterItems {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: stretch;
+}

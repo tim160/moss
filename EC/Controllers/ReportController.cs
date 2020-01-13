@@ -14,6 +14,7 @@ using EC.Models.ViewModels;
 using EC.Models.Culture;
 using EC.Utils;
 using EC.Common.Util;
+using System.Web.Configuration;
 
 namespace EC.Controllers
 {
@@ -138,6 +139,10 @@ namespace EC.Controllers
                 {
                     ViewBag.companyLogo = null;
                 }
+
+                var userColors = new UserColorSchemaModel(currentCompany.id);
+                ViewBag.header_color_code = userColors.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColors.global_Setting.header_links_color_code;
             }
             else
             {

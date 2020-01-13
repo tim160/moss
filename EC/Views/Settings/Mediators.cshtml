@@ -46,7 +46,8 @@
     @{
         int active = 4;
     }
-    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", active)
+    @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", new ViewDataDictionary { { "active", active }, { "role_id", role_id } })
+
     <p class="textMediators">
         @LocalizationGetter.GetString(um.CanEditUserProfiles ? "SetupMediatorProfiles" : "CaseAdministratorsUp", is_cc)
         @if (ViewBag.All == false)
@@ -183,8 +184,8 @@
 
             <div class="contentSettings secondHeader oldstyle">
                 @*<div class="row">
-                    <p class="title">Campus Alert and Daily Crime Log managers info</p>
-                </div><!-- /.row -->*@
+                        <p class="title">Campus Alert and Daily Crime Log managers info</p>
+                    </div><!-- /.row -->*@
                 <div class="row">
                     <div class="col-4">
                         <div class="p-h5">Campus Alert Manager</div><!-- /.p-h5 -->
@@ -228,16 +229,16 @@
     }
     <div class="footerInputPosition footerInputStyle">
         <div class="contentSettings secondHeader oldstyle">
-        @if (1 == 0)
-        {
-            <div class="headerCompanyProfile">
-                @if (is_cc.Value && is_valid_mediator)
-                {
-                    <div class="headerBlock">
-                        <div class="blockText">
-                            <p class="title">Invite new college mediator by email</p>
+            @if (1 == 0)
+            {
+                <div class="headerCompanyProfile">
+                    @if (is_cc.Value && is_valid_mediator)
+                    {
+                        <div class="headerBlock">
+                            <div class="blockText">
+                                <p class="title">Invite new college mediator by email</p>
+                            </div>
                         </div>
-                    </div>
                         <div class="blockSendEmail blockSendEmail_cc greyBorder">
                             <input type="text" id="sendEmail" name="newLocationName" placeholder="email@youremail.com" required="" value="">
                             <div class="closeIcon"></div>
@@ -245,12 +246,12 @@
                             <input id="sendMessage" type="submit" />
                             <span class="sendBtn">@LocalizationGetter.GetString("Send", is_cc).ToLower()</span>
                         </div>
-                }
-                else
-                {
-                    if (is_valid_mediator)
+                    }
+                    else
                     {
-                        <div class="headerBlock">
+                        if (is_valid_mediator)
+                        {
+                            <div class="headerBlock">
                                 <div class="blockText">
                                     <p class="title">@LocalizationGetter.GetString("invite_new_mediator", is_cc)</p>
                                 </div>
@@ -261,21 +262,21 @@
                                 <input id="sendMessage" type="submit" />
                                 <span class="sendBtn">@LocalizationGetter.GetString("Send", is_cc).ToLower()</span>
                             </div>
-                        <div class="headerBlock">
-                            <div class="blockText">
-                                <p class="title"></p>
+                            <div class="headerBlock">
+                                <div class="blockText">
+                                    <p class="title"></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="blockSendEmail greyBorder">
-                            <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
-                            <div class="closeIcon"></div>
-                            <input id="sendMessage" type="submit" />
-                            <span class="sendBtn"></span>
-                        </div>
+                            <div class="blockSendEmail greyBorder">
+                                <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
+                                <div class="closeIcon"></div>
+                                <input id="sendMessage" type="submit" />
+                                <span class="sendBtn"></span>
+                            </div>
+                        }
                     }
-                }
-            </div>
-        }
+                </div>
+            }
         </div><!--contentSettings.secondHeader-->
         <p class="center boldText">@LocalizationGetter.GetString("ListSaveSites")</p>
     </div>

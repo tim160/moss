@@ -431,6 +431,10 @@ p {
 /*=====================================================*/
 /*==================  User style  =====================*/
 /*=====================================================*/
+:root {
+    --HeaderColor: #085c68;
+    --HeaderLinksColor: #fff;
+}
 .m_t_20 {
   margin-top: 20px; }
 
@@ -459,7 +463,8 @@ p {
   grid-template-areas: "header" "main" "footer"; }
 
 .top-headerBg {
-  background-color: #085c68; }
+    background-color: var(--HeaderColor);
+}
 
 .header-cc .top-headerBg {
   background-color: #4b5a4d; }
@@ -1094,7 +1099,7 @@ input::-webkit-contacts-auto-fill-button {
 
 .top-header__backLink {
   font-family: "Lato-Regular-LatinWeb";
-  color: #fff;
+  color: var(--HeaderLinksColor);
   position: relative;
   display: block;
   justify-self: start;

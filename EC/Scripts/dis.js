@@ -78,7 +78,7 @@
         };
     });
 
-    angular.module('EC').directive('checkFileSize', ['uploadImage', function (uploadImage) {
+    angular.module('EC').directive('checkFileSize', ['uploadImage', 'SettingsGlobalLogo',  function (uploadImage, SettingsGlobalLogo) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -142,6 +142,18 @@
                                             }
                                         });
                                     }
+                                    break;
+                                case 'globalSettings':
+                                    var formData = new FormData();
+                                    var fileInput = angular.element('#_file');
+                                    formData.append('_file', fileInput[0].files[0]);
+                                    var globalSettings = SettingsGlobalLogo.getData(formData);
+                                    globalSettings.then(function (response) {
+                                        var srcLink = angular.element('#logoCompany').attr('src') + '?' + new Date().getTime();
+                                        angular.element('#logoCompany').attr('src', srcLink );
+                                         var result = 'url(' + srcLink + ')';
+                                         angular.element('.headerTop-logo__img').css('background-image', result);
+                                    });
                                     break;
                             }
                         }
@@ -250,6 +262,108 @@
 
 })();
 
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (id) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('SettingsGlobalLogo',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/api/SettingsGlobalLogo',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('uploadImage',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/Settings/AddLogoCompany',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
+            return {
+                validate: function (value, rv) {
+                    if (rv === undefined) {
+                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
+                            return false;
+                        }
+                    } else {
+                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            };
+        }]);
+}());
 
 (function () {
 
@@ -2088,81 +2202,6 @@
             },
         };
     }
-}());
-
-(function () {
-
-    'use strict';
-
-    angular
-        .module('EC')
-        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (id) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'GET',
-                        url: '/api/AdditionalCompanies/' + id
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('uploadImage',['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (fd) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'POST',
-                        data: fd,
-                        url: '/Settings/AddLogoCompany',
-                        headers: { 'Content-Type': undefined },
-                        transformRequest: angular.identity
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
-            return {
-                validate: function (value, rv) {
-                    if (rv === undefined) {
-                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
-                            return false;
-                        }
-                    } else {
-                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            };
-        }]);
 }());
 
 (function () {

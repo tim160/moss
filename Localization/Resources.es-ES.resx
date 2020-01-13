@@ -3059,4 +3059,7 @@
   <data name="LoginEmailSent" xml:space="preserve">
     <value>Correo electrónico con inicio de sesión enviado.</value>
   </data>
+  <data name="GlobalSettings" xml:space="preserve">
+    <value>Configuración global</value>
+  </data>
 </root>

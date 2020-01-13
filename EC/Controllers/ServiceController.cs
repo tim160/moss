@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 using EC.Business.Actions.Email;
@@ -13,6 +14,10 @@ using EC.Localization;
 using EC.Models;
 using EC.Models.Database;
 using EC.Utils;
+
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EC.Controllers
 {
@@ -32,13 +37,18 @@ namespace EC.Controllers
         // GET: Service
         public ActionResult Login(string host_url)
         {
-            foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
-            {
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+
+            //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
+            //{
                 //       user.password = PasswordUtils.GetHash(user.password);
-            }
+            //}
             //       db.SaveChanges();
 
             Session.Clear();
+
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
 
@@ -48,12 +58,7 @@ namespace EC.Controllers
             return DoLogin(model, returnUrl, "Login", false);
         }
 
-        [HttpPost]
-        public ActionResult LoginSso(LoginViewModel model, string returnUrl)
-        {
 
-            return DoLogin(model, returnUrl, "Login", true);
-        }
 
         [HttpPost]
         public ActionResult CheckStatus(LoginViewModel model, string returnUrl)
@@ -121,7 +126,7 @@ namespace EC.Controllers
                         return RedirectToAction("Index", "Trainer");
                     }
 
-                    if (returnUrl != null)
+                    if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
@@ -149,6 +154,11 @@ namespace EC.Controllers
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             ViewBag.fullNameLanguage = FullNameLanguage;
+
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
@@ -158,6 +168,11 @@ namespace EC.Controllers
             if (selectedCompany == null)
             {
                 return RedirectToAction("Index", "Index");
+            } else
+            {
+                UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             }
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", selectedCompany);
         }
@@ -949,5 +964,135 @@ namespace EC.Controllers
             Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(lang);
             return Redirect(returnUrl);
         }
+
+
+
+        static string key = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
+
+        [HttpPost]
+        public ActionResult LoginSso(string jwt)
+        {
+
+      Session.Clear();
+
+ //     return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel {});
+
+
+      string tokenString = jwt;
+          var handler = new JwtSecurityTokenHandler();
+          var jsonToken = handler.ReadToken(tokenString);
+          var jwtToken = handler.ReadJwtToken(tokenString);
+
+          var tokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+          var user_id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
+
+
+          var temp = jwtToken.SigningKey;
+          var jwtTokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+
+          string token  = Decode(tokenString, key, true);
+          if (  !string.IsNullOrWhiteSpace(user_id))
+          {
+            var user = db.user.Where(t => t.id.ToString() == user_id).FirstOrDefault();
+            if (user != null)
+            {
+                LoginViewModel model = new LoginViewModel();
+                model.Login = user.login_nm;
+                model.Password = user.password;
+ 
+                return DoLogin(model, "", "Login", true);
+            }
+
+              Response.Write("1" + tokenString);
+              Response.Flush();
+          }
+          else
+          {
+            Response.Write("whitespace");
+            Response.Flush();
+          }
+
+      Response.Write("whitespace");
+      Response.Flush();
+      return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel {}); 
+    }
+
+    public ActionResult LoginSsoString(string jwt)
+    {
+
+      Session.Clear();
+
+      string tokenString = jwt;
+      var handler = new JwtSecurityTokenHandler();
+      var jsonToken = handler.ReadToken(tokenString);
+      var jwtToken = handler.ReadJwtToken(tokenString);
+
+      var tokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+      var user_id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
+
+
+      var temp = jwtToken.SigningKey;
+      var jwtTokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+
+      string token = Decode(tokenString, key, true);
+      if (!string.IsNullOrWhiteSpace(user_id))
+      {
+        var user = db.user.Where(t => t.id.ToString() == user_id).FirstOrDefault();
+        if (user != null)
+        {
+          LoginViewModel model = new LoginViewModel();
+          model.Login = user.login_nm;
+          model.Password = user.password;
+
+          return DoLogin(model, "", "Login", true);
+        }
+
+        Response.Write("1" + tokenString);
+        Response.Flush();
+      }
+      else
+      {
+        Response.Write("whitespace");
+        Response.Flush();
+      }
+
+      Response.Write("whitespace");
+      Response.Flush();
+      return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { });
+    }
+    public static string Decode(string token, string key, bool verify = true)
+    {
+      if (string.IsNullOrEmpty(token))
+        throw new ArgumentException("Given token is null or empty.");
+
+      JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+
+      var tokenHandler = new JwtSecurityTokenHandler();
+      //byte[] symmetricKey = Convert.FromBase64String(key);
+      //byte[] symmetricKey = (Encoding.UTF8.GetBytes(key));// Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature
+      var symmetricKey = Convert.FromBase64String(key);
+      var tokenValidationParameters = new TokenValidationParameters
+      {
+        RequireSignedTokens = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = false,
+
+        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(symmetricKey)
+      };
+
+      //  Microsoft.IdentityModel.Tokens.SecurityToken validatedToken = new 
+      var tokenSec = tokenHandler.ReadToken(token) as Microsoft.IdentityModel.Tokens.SecurityToken;
+      try
+      {
+        ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out tokenSec);
+        return "";
+      }
+      catch (Exception ex)
+      {
+        throw ex;
+      }
+    }
+
     }
 }
