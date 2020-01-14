@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -62,6 +65,18 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.6.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.6.0\lib\net45\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.6.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -82,6 +97,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -89,6 +108,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Abstractions">
       <Private>True</Private>
     </Reference>
@@ -610,6 +632,12 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\js\common.js" />
     <Content Include="Content\js\common.min.js" />
+    <Content Include="Content\libs\farbtastic\farbtastic.css" />
+    <Content Include="Content\libs\farbtastic\farbtastic.js" />
+    <Content Include="Content\libs\farbtastic\farbtastic.min.js" />
+    <Content Include="Content\libs\farbtastic\marker.png" />
+    <Content Include="Content\libs\farbtastic\mask.png" />
+    <Content Include="Content\libs\farbtastic\wheel.png" />
     <Content Include="Content\libs\fontello-a8edc99e\css\animation.css" />
     <Content Include="Content\libs\fontello-a8edc99e\css\e800-codes.css" />
     <Content Include="Content\libs\fontello-a8edc99e\css\e800-embedded.css" />
@@ -902,7 +930,9 @@
       <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.cs</LastGenOutput>
     </Content>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Code\Helpers.cshtml" />
     <Content Include="Content\fonts\lato-heavy.ttf" />
     <Content Include="Content\fonts\Lato-Regular.ttf" />
@@ -1222,7 +1252,6 @@
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -1345,7 +1374,6 @@
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
-    <Content Include="Views\Settings\partial\casesHeared.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\Unavailable.cshtml" />
@@ -1411,6 +1439,8 @@
     <Content Include="Views\Service\Footer.cshtml" />
     <Content Include="Views\Service\ForgetLogin.cshtml" />
     <Content Include="Views\Service\ForgetLogin-CC.cshtml" />
+    <Content Include="Views\Settings\partial\casesHeader.cshtml" />
+    <Content Include="Views\Settings\GlobalSettings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1425,6 +1455,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="AutoMapperProfiles\API\v1\CompanyProfile.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\API\AdditionalCompaniesController.cs" />
     <Compile Include="Controllers\API\AnalyticsDashboardCasesController.cs" />
@@ -1445,11 +1476,14 @@
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
     <Compile Include="Controllers\API\CasesController.cs" />
     <Compile Include="Controllers\API\SettingsDisclaimerController.cs" />
+    <Compile Include="Controllers\API\SettingsGlobalLogoController.cs" />
     <Compile Include="Controllers\API\SettingsUserEditController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\API\TrainerController.cs" />
     <Compile Include="Controllers\API\UserStatusButtonsController.cs" />
+    <Compile Include="Controllers\API\v1\CompanyController.cs" />
+    <Compile Include="Controllers\API\v1\TokenController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CasesController.cs" />
@@ -1458,6 +1492,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NewCaseController.cs" />
     <Compile Include="Controllers\NewController.cs" />
+    <Compile Include="Controllers\OauthController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReporterDashboardController.cs" />
@@ -1467,6 +1502,9 @@
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Models\AnalyticsModel.cs" />
+    <Compile Include="Models\API\v1\Company\UpdateCompanyModel.cs" />
+    <Compile Include="Models\API\v1\Company\CreateCompanyModel.cs" />
+    <Compile Include="Models\API\v1\Company\CompanyModel.cs" />
     <Compile Include="Models\CaseMessagesModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
@@ -1597,10 +1635,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\Contexts\ApplicationContext.cs" />
     <Compile Include="Models\Database\email.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\frequency.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\global_settings.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\industry.cs">
@@ -1802,6 +1844,11 @@
     <Compile Include="Models\ReadStatusModel.cs" />
     <Compile Include="Models\ReportStringModel.cs" />
     <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
+    <Compile Include="Models\SSO\ApiResponse.cs" />
+    <Compile Include="Models\SSO\OAuthTokenResponse.cs" />
+    <Compile Include="Models\SSO\OidcTokenResponse.cs" />
+    <Compile Include="Models\SSO\SSOUser.cs" />
+    <Compile Include="Models\UserColorSchemaModel.cs" />
     <Compile Include="Models\ViewModels\ActiveCasesViewModel.cs" />
     <Compile Include="Models\ViewModels\AnonimityViewModel.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
@@ -1862,12 +1909,19 @@
     <Compile Include="Models\ViewModels\ReportedOutsideViewModel.cs" />
     <Compile Include="Models\ViewModels\RoleInReportViewModel.cs" />
     <Compile Include="Models\ViewModels\SecondaryMandatoryViewModel.cs" />
+    <Compile Include="Models\ViewModels\SSOErrorViewModel.cs" />
     <Compile Include="Models\ViewModels\UserLevelViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersReportIDsViewModel.cs" />
     <Compile Include="Models\ViewModels\UserStatusViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersUnreadReportsNumberViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\API\v1\ActionsBase.cs" />
+    <Compile Include="Services\API\v1\CompanyServices\CompanyActions.cs" />
+    <Compile Include="Services\API\v1\QueriesBase.cs" />
+    <Compile Include="Services\API\v1\CompanyServices\CompanyService.cs" />
+    <Compile Include="Services\API\v1\CompanyServices\CompanyQueries.cs" />
+    <Compile Include="Services\API\v1\ServiceBase.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Auth\AuthHttpModule .cs" />
     <Compile Include="Utils\Auth\AuthUser.cs" />
@@ -1890,6 +1944,7 @@
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />
+    <Folder Include="Views\Oauth\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1922,6 +1977,10 @@
     <ProjectReference Include="..\EC.Core.Common\EC.Core.Common.csproj">
       <Project>{a6dc770d-89c5-483b-b73c-077df5c7fefe}</Project>
       <Name>EC.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Errors\EC.Errors.csproj">
+      <Project>{A84CFBFD-9BCD-423A-B8F8-8175C0EA93EF}</Project>
+      <Name>EC.Errors</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Model.Impl\EC.Model.Impl.csproj">
       <Project>{ff040d47-bd8a-4c3c-a285-0d6f2f11754c}</Project>
