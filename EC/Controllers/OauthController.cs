@@ -1,25 +1,20 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using EC.Common.Util;
-using EC.Common.Util.Authentication;
-using EC.Common.Util.Models.API.v1.Token;
+﻿using EC.Common.Util;
 using EC.Constants;
-using EC.Controllers.API;
 using EC.Localization;
 using EC.Models;
 using EC.Models.Auth;
 using EC.Services;
 using EC.Utils;
-using EC.Utils.Auth;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+
 using Microsoft.IdentityModel.Tokens;
+
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
+using System.Web.Mvc;
+
 using static EC.Controllers.ServiceController;
 
 namespace EC.Controllers
@@ -209,67 +204,5 @@ namespace EC.Controllers
             var tokenSec = tokenHandler.ReadToken(token) as JwtSecurityToken;
             return tokenSec;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //static string key = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
-        //static string companyID = "123456";
-
-
-        //[AllowAnonymous]
-        //[HttpPost]
-        //[Route]
-        //public async Task<IHttpActionResult> Token([FromBody]TokenRequestModel tokenRequest)
-        //{
-        //  if (CheckCompany(tokenRequest.CompanyId, tokenRequest.SecretKey))
-        //  {
-        //    return ApiOk<string>(JwtManager.GenerateToken(tokenRequest.CompanyId));
-        //  }
-
-        //  throw new HttpResponseException(HttpStatusCode.Unauthorized);
-        //}
-
-
-        //private bool CheckCompany(string companyId, string secretKey)
-        //{
-        //  // TODO: should check in the database, merge with another CheckCompany
-        //  if ((companyId == companyID) && (secretKey == key))
-        //    return true;
-        //  return false;
-        //}
-
-
-        /*  [HttpPost]
-              public ActionResult Token(string jwt)
-              {
-
-            //{
-                "access_token": < Your Token >,
-           "token_type": "bearer",
-           "expires_in": 7200,
-           "created_at": 1429931390
-            //}
-            return View();
-                }*/
-
     }
 }

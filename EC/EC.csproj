@@ -106,6 +106,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -1505,6 +1506,7 @@
     <Compile Include="Models\API\v1\Company\UpdateCompanyModel.cs" />
     <Compile Include="Models\API\v1\Company\CreateCompanyModel.cs" />
     <Compile Include="Models\API\v1\Company\CompanyModel.cs" />
+    <Compile Include="Models\Auth\TokenModel.cs" />
     <Compile Include="Models\CaseMessagesModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
@@ -1922,6 +1924,7 @@
     <Compile Include="Services\API\v1\CompanyServices\CompanyService.cs" />
     <Compile Include="Services\API\v1\CompanyServices\CompanyQueries.cs" />
     <Compile Include="Services\API\v1\ServiceBase.cs" />
+    <Compile Include="Services\MemoryCacheService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Auth\AuthHttpModule .cs" />
     <Compile Include="Utils\Auth\AuthUser.cs" />
