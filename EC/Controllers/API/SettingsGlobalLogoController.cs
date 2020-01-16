@@ -20,14 +20,14 @@ namespace EC.Controllers.API
         {
             string result = "false";
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
-            if (user == null || user.id == 0 || user.role_id > ECLevelConstants.level_escalation_mediator)
+            if (user == null || user.id == 0 || user.role_id >= ECLevelConstants.level_supervising_mediator)
                 return result;
 
             var photo = System.Web.HttpContext.Current.Request.Files["_file"];
 
             try
             {
-                if (photo.ContentLength > 0 && user.role_id == ECLevelConstants.level_supervising_mediator)
+                if (photo.ContentLength > 0 && (user.role_id == ECLevelConstants.level_ec_mediator || user.role_id == ECLevelConstants.level_escalation_mediator))
                 {
                     if (!System.IO.Directory.Exists(GLOBAL_LOGO_PATH))
                     {
