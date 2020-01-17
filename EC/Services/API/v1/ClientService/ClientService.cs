@@ -24,8 +24,14 @@ namespace EC.Services.API.v1.ClientService
                 throw new AggregateException(errors);
             }
 
-            client newClient = _set.Add(createClientModel, company =>
-            {
+            client newClient = _set.Add(createClientModel, client =>
+            { 
+                client.address_id = createClientModel.address_id;
+                client.status_id = createClientModel.status_id;
+                client.client_nm = createClientModel.client_nm;
+                client.client_ds = createClientModel.client_ds;
+                client.notepad_tx = createClientModel.notepad_tx;
+                client.user_id = createClientModel.user_id;
             });
 
             await _appContext

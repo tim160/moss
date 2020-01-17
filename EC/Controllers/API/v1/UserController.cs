@@ -4,12 +4,13 @@ using EC.Models.API.v1.User;
 using EC.Services.API.v1.UserService;
 using log4net;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace EC.Controllers.API.v1
 {
-    [RoutePrefix("api/v1/client")]
+    [RoutePrefix("api/v1/user")]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
