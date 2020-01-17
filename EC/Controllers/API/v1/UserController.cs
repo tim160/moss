@@ -4,10 +4,12 @@ using EC.Models.API.v1.User;
 using EC.Services.API.v1.UserService;
 using log4net;
 using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace EC.Controllers.API.v1
 {
+    [RoutePrefix("api/v1/client")]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
@@ -73,6 +75,28 @@ namespace EC.Controllers.API.v1
             {
                 await _userService
                     .UpdateAsync(updateUserModel, id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
+
+            try
+            {
+                await _userService
+                    .DeleteAsync(id)
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)

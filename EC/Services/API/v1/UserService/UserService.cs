@@ -109,5 +109,23 @@ namespace EC.Services.API.v1.UserService
                 .ConfigureAwait(false);
             return user.id;
         }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentException("The ID can't be empty.", nameof(id));
+            }
+            user userForDelete = await _set.FindAsync(id);
+            if (userForDelete == null)
+            {
+                throw new ArgumentException("User not found.", nameof(id));
+            }
+            userForDelete.status_id = 2;
+            user user = await _set
+                .UpdateAsync(id, userForDelete)
+                .ConfigureAwait(false);
+            return user.id;
+        }
     }
 }

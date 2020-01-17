@@ -54,5 +54,24 @@ namespace EC.Services.API.v1.ClientService
                 .ConfigureAwait(false);
             return client.id;
         }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentException("The ID can't be empty.", nameof(id));
+            }
+            client clientForDelete = await _set.FindAsync(id);
+            if (clientForDelete == null)
+            {
+                throw new ArgumentException("Client not found.", nameof(id));
+            }
+
+            clientForDelete.status_id = 2;
+            client client = await _set
+                .UpdateAsync(id, clientForDelete)
+                .ConfigureAwait(false);
+            return client.id;
+        }
     }
 }

@@ -163,5 +163,24 @@ namespace EC.Services.API.v1.CompanyServices
 				.ConfigureAwait(false);
 			return company.id;
 		}
-	}
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentException("The ID can't be empty.", nameof(id));
+            }
+            company companyForDelete = await _set.FindAsync(id);
+            if (companyForDelete == null)
+            {
+                throw new ArgumentException("Client not found.", nameof(id));
+            }
+
+            companyForDelete.status_id = 2;
+            company client = await _set
+                .UpdateAsync(id, companyForDelete)
+                .ConfigureAwait(false);
+            return client.id;
+        }
+    }
 }

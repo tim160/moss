@@ -10,7 +10,7 @@ using EC.Errors.CommonExceptions;
 
 namespace EC.Controllers.API.v1
 {
-    [RoutePrefix("api/v1/companies")]
+    [RoutePrefix("api/v1/client")]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;
