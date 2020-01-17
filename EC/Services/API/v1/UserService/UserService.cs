@@ -1,10 +1,13 @@
-﻿using EC.Models.API.v1.User;
+﻿using EC.Common.Interfaces;
+using EC.Core.Common;
+using EC.Errors.CommonExceptions;
+using EC.Localization;
+using EC.Models;
+using EC.Models.API.v1.User;
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace EC.Services.API.v1.UserService
 {
@@ -12,66 +15,26 @@ namespace EC.Services.API.v1.UserService
     {
         public async Task<int> CreateAsync(CreateUserModel createUserModel, bool isCC)
         {
-            //if (createUserModel == null)
-            //{
-            //    throw new ArgumentNullException(nameof(createUserModel));
-            //}
+            if (createUserModel == null)
+            {
+                throw new ArgumentNullException(nameof(createUserModel));
+            }
 
-            //List<Exception> errors = new List<Exception>();
+            List<Exception> errors = new List<Exception>();
 
-            //Models.GenerateRecordsModel generateRecordsModel = new Models.GenerateRecordsModel();
-            //string messageCompanyInUse = LocalizationGetter.GetString("CompanyInUse", isCC);
+            IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
+            if (!emailAddressHelper.IsValidEmail(createUserModel.Email, false))
+            {
+                errors.Add(new EmailFormatException(LocalizationGetter.GetString("EmailInvalid"), createUserModel.Email));
+            }
 
-            //if (generateRecordsModel.isCompanyInUse(createUserModel.Name))
-            //{
-            //    errors.Add(new AlreadyExistsException(messageCompanyInUse, createUserModel.Name));
-            //}
-
-            //string shortName = StringUtil.ShortString(createUserModel.Name);
-            //shortName = await generateRecordsModel.GenerateUnusedCompanyShortName(shortName);
-            //if (string.IsNullOrWhiteSpace(shortName))
-            //{
-            //    errors.Add(new AlreadyExistsException(messageCompanyInUse, createUserModel.Name));
-            //}
-
-            //IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
-            //if (!emailAddressHelper.IsValidEmail(createUserModel.Email, false))
-            //{
-            //    errors.Add(new EmailFormatException(LocalizationGetter.GetString("EmailInvalid"), createUserModel.Email));
-            //}
-
-            //var companyInvitation = await _appContext.company_invitation
-            //    .AsNoTracking()
-            //    .Where(item =>
-            //        item.is_active == 1
-            //        && item.invitation_code.Trim().ToLower() == createUserModel.InvitationCode.Trim().ToLower())
-            //    .Select(item => new
-            //    {
-            //        item.id,
-            //        item.created_by_company_id
-            //    })
-            //    .FirstOrDefaultAsync();
-            //if (companyInvitation == null)
-            //{
-            //    errors.Add(new ParameterValidationException(nameof(createUserModel.InvitationCode), LocalizationGetter.GetString("InvalidCode")));
-            //}
-
-            //if (errors.Count > 0)
-            //{
-            //    throw new AggregateException(errors);
-            //}
-
-            //var varInfo = await _appContext.var_info
-            //    .AsNoTracking()
-            //    .Where(item => item.emailed_code_to_customer == createUserModel.EmailedCodeToCustomer)
-            //    .Select(item => new
-            //    {
-            //        item.employee_no,
-            //        item.customers_no,
-            //        item.onboarding_session_numbers
-            //    })
-            //    .FirstOrDefaultAsync();
-
+            if (errors.Count > 0)
+            {
+                throw new AggregateException(errors);
+            }
+            user newUser = _set.Add(createUserModel, user => {
+                user.email = createUserModel.Email;
+            });
             //company newCompany = _set.Add(createUserModel, company =>
             //{
             //    company.registration_dt = DateTime.Now;
@@ -120,11 +83,10 @@ namespace EC.Services.API.v1.UserService
             //    company.step6_postpone = 1;
             //    ////////////////////////////////////////////////////////
             //});
-            //await _appContext
-            //    .SaveChangesAsync()
-            //    .ConfigureAwait(false);
-            //return newCompany.id;
-            return 0;
+            await _appContext
+                .SaveChangesAsync()
+                .ConfigureAwait(false);
+            return newUser.id;
         }
 
         public async Task<int> UpdateAsync(UpdateUserModel updateUserModel, int id)

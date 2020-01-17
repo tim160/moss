@@ -7,5 +7,6 @@ namespace EC.Models.API.v1.User
 {
     public class CreateUserModel
     {
+        public string Email {get;set;}
     }
 }
