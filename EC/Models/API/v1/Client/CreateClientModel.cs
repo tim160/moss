@@ -5,21 +5,22 @@ namespace EC.Models.API.v1.Client
     public class CreateClientModel
     {
         [Required]
-        [StringLength(500)]
-        public string Name { get; set; }
+        public int address_id { get; set; }
 
         [Required]
-        [StringLength(250)]
-        public string EmployeeQuantity { get; set; }
+        public int status_id { get; set; }
+
+        [StringLength(100)]
+        [Required]
+        public string client_nm { get; set; }
+
+        [StringLength(100)]
+        public string client_ds { get; set; }
+
+        [StringLength(255)]
+        public string notepad_tx { get; set; }
 
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
-        public string InvitationCode { get; set; }
-
-        [Required]
-        public string EmailedCodeToCustomer { get; set; }
+        public int user_id { get; set; }
     }
 }
