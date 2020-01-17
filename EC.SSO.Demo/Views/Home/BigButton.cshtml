@@ -12,8 +12,8 @@
 
 <div class="container align-content-center" style="padding-top: 100px;">
     @Html.ActionLink(
-        "Employee Confidential App",
-        "EmbeddedApp",
+        "Get Link for Test Connect EC",
+        "GetLink",
         "Home",
         new
         {
@@ -25,3 +25,12 @@
             role = "button"
         })
 </div>
+@{ 
+    if(ViewBag.Link != string.Empty && ViewBag.Link != null)
+    {
+        <div class="container align-content-center" style="padding-top: 100px;">
+            <a href="@ViewBag.Link">Connect</a>
+        </div>
+    }
+}
+
