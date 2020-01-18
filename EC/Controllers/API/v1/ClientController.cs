@@ -85,5 +85,27 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Client ID required.");
+            }
+
+            try
+            {
+                await _clientService
+                    .DeleteAsync(id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
     }
 }

@@ -12,17 +12,36 @@ namespace EC.AutoMapperProfiles.API.v1
     {
         public ClientProfile()
         {
-            CreateMap<client, ClientModel>()
-                .ForMember(
-                    destinationMember => destinationMember.Name,
-                    options => options.MapFrom(sourceMember => sourceMember.company_nm)
-                    );
+            //CreateMap<client, ClientModel>()
+            //    .ForMember(
+            //        destinationMember => destinationMember.Name,
+            //        options => options.MapFrom(sourceMember => sourceMember.company_nm)
+            //        );
+
+
             CreateMap<CreateClientModel, client>()
                 .ForMember(
-                    destinationMember => destinationMember.company_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.Name.Trim())
+                    destinationMember => destinationMember.address_id,
+                    options => options.MapFrom(sourceMember => sourceMember.address_id)
+                    ).ForMember(
+                    destinationMember => destinationMember.status_id,
+                    options => options.MapFrom(sourceMember => sourceMember.status_id)
+                    ).ForMember(
+                    destinationMember => destinationMember.client_nm,
+                    options => options.MapFrom(sourceMember => sourceMember.client_nm.Trim())
+                    ).ForMember(
+                    destinationMember => destinationMember.client_ds,
+                    options => options.MapFrom(sourceMember => sourceMember.client_ds.Trim())
+                    ).ForMember(
+                    destinationMember => destinationMember.notepad_tx,
+                    options => options.MapFrom(sourceMember => sourceMember.notepad_tx.Trim())
+                    ).ForMember(
+                    destinationMember => destinationMember.user_id,
+                    options => options.MapFrom(sourceMember => sourceMember.user_id)
                     );
-            CreateMap<CreateClientModel, client>();
+
+
+            //CreateMap<CreateClientModel, client>();
         }
     }
 }

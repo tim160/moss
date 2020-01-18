@@ -9,17 +9,17 @@ namespace EC.AutoMapperProfiles.API.v1
     {
         public UserProfile()
         {
-            CreateMap<user, UserModel>()
-                .ForMember(
-                    destinationMember => destinationMember.Name,
-                    options => options.MapFrom(sourceMember => sourceMember.company_nm)
-                    );
-            CreateMap<CreateCompanyModel, user>()
-                .ForMember(
-                    destinationMember => destinationMember.company_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.Name.Trim())
-                    );
-            CreateMap<UpdateCompanyModel, user>();
+            //CreateMap<user, UserModel>()
+            //    .ForMember(
+            //        destinationMember => destinationMember.Name,
+            //        options => options.MapFrom(sourceMember => sourceMember.company_nm)
+            //        );
+            //CreateMap<CreateCompanyModel, user>()
+            //    .ForMember(
+            //        destinationMember => destinationMember.company_nm,
+            //        options => options.MapFrom(sourceMember => sourceMember.Name.Trim())
+            //        );
+            //CreateMap<UpdateCompanyModel, user>();
         }
     }
 }

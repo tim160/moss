@@ -32,6 +32,8 @@ namespace EC.Services.API.v1.ClientService
                 client.client_ds = createClientModel.client_ds;
                 client.notepad_tx = createClientModel.notepad_tx;
                 client.user_id = createClientModel.user_id;
+                client.last_update_dt = DateTime.Now;
+                client.registration_dt = DateTime.Now;
             });
 
             await _appContext
