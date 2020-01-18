@@ -1,4 +1,5 @@
-﻿using EC.Models.API.v1.Client;
+﻿using EC.Constants;
+using EC.Models.API.v1.Client;
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace EC.Services.API.v1.ClientService
                 throw new ArgumentException("Client not found.", nameof(id));
             }
 
-            clientForDelete.status_id = 2;
+            clientForDelete.status_id = ECStatusConstants.Inactive_Value;
             client client = await _set
                 .UpdateAsync(id, clientForDelete)
                 .ConfigureAwait(false);

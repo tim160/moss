@@ -1,4 +1,5 @@
 ﻿using EC.Common.Interfaces;
+using EC.Constants;
 using EC.Core.Common;
 using EC.Errors.CommonExceptions;
 using EC.Localization;
@@ -121,7 +122,9 @@ namespace EC.Services.API.v1.UserService
             {
                 throw new ArgumentException("User not found.", nameof(id));
             }
-            userForDelete.status_id = 2;
+
+            userForDelete.status_id = ECStatusConstants.Inactive_Value;
+
             user user = await _set
                 .UpdateAsync(id, userForDelete)
                 .ConfigureAwait(false);

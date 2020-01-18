@@ -175,8 +175,8 @@ namespace EC.Services.API.v1.CompanyServices
             {
                 throw new ArgumentException("Client not found.", nameof(id));
             }
+            companyForDelete.status_id = ECStatusConstants.Inactive_Value;
 
-            companyForDelete.status_id = 2;
             company client = await _set
                 .UpdateAsync(id, companyForDelete)
                 .ConfigureAwait(false);
