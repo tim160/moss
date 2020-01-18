@@ -35,7 +35,7 @@ namespace EC.Models.API.v1.User
         [Required]
         [StringLength(500)]
         public string answer_ds { get; set; }
-        public DateTime last_update_dt { get; set; }
+        public string last_update_dt { get; set; }
         [Required]
         public int user_id { get; set; }
         [Required]

@@ -68,7 +68,9 @@ namespace EC.Services.API.v1.UserService
             user user = await _set
                 .UpdateAsync(id, updateUserModel)
                 .ConfigureAwait(false);
-            updateUserModel.last_update_dt = DateTime.Now;
+
+            user.last_update_dt = DateTime.Now;
+
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
