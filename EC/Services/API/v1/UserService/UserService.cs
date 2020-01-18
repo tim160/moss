@@ -23,67 +23,30 @@ namespace EC.Services.API.v1.UserService
 
             List<Exception> errors = new List<Exception>();
 
-            IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
-            if (!emailAddressHelper.IsValidEmail(createUserModel.Email, false))
-            {
-                errors.Add(new EmailFormatException(LocalizationGetter.GetString("EmailInvalid"), createUserModel.Email));
-            }
 
             if (errors.Count > 0)
             {
                 throw new AggregateException(errors);
             }
             user newUser = _set.Add(createUserModel, user => {
-                user.email = createUserModel.Email;
+                user.company_id = createUserModel.company_id;
+                user.role_id = createUserModel.role_id;
+                user.status_id = createUserModel.status_id;
+                user.first_nm = createUserModel.first_nm;
+                user.last_nm = createUserModel.last_nm;
+                user.login_nm = createUserModel.login_nm;
+                user.password = createUserModel.password;
+                user.photo_path = createUserModel.photo_path;
+                user.preferred_contact_method_id = createUserModel.preferred_contact_method_id;
+                user.question_ds = createUserModel.question_ds;
+                user.answer_ds = createUserModel.answer_ds;
+                //user.last_update_dt = DateTime.Now;
+                user.preferred_email_language_id = createUserModel.preferred_email_language_id;
+                user.notification_messages_actions_flag = createUserModel.notification_messages_actions_flag;
+                user.notification_new_reports_flag = createUserModel.notification_new_reports_flag;
+                user.notification_marketing_flag = createUserModel.notification_marketing_flag;
+                user.notification_summary_period = createUserModel.notification_summary_period;
             });
-            //company newCompany = _set.Add(createUserModel, company =>
-            //{
-            //    company.registration_dt = DateTime.Now;
-            //    company.last_update_dt = DateTime.Now;
-
-            //    company.company_invitation_id = companyInvitation.id;
-            //    company.client_id = companyInvitation.created_by_company_id;
-            //    company.status_id = ECSessionConstants.status_active;
-            //    company.company_code = generateRecordsModel.GenerateCompanyCode(company.company_nm);
-            //    company.language_id = (int)Language_Values.English;
-            //    company.company_short_name = shortName;
-
-            //    if (varInfo != null)
-            //    {
-            //        company.contractors_number = varInfo.employee_no;
-            //        company.customers_number = varInfo.customers_no;
-            //        company.onboard_sessions_paid = varInfo.onboarding_session_numbers;
-            //        if (varInfo.onboarding_session_numbers > 0)
-            //        {
-            //            company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
-            //        }
-            //    }
-
-            //    ////////////////////////////////////////////////////////
-            //    // TODO: Необходимо определиться с заполнением обязательных полей и просто полей из модели.
-            //    company.address_id = 1;
-            //    company.billing_info_id = 1;
-            //    company.implicated_title_name_id = 1;
-            //    company.witness_show_id = 1;
-            //    company.show_location_id = 1;
-            //    company.show_department_id = 1;
-            //    company.default_anonymity_id = 1;
-            //    company.user_id = 1;
-            //    company.time_zone_id = 1;
-            //    company.step1_delay = 1;
-            //    company.step1_postpone = 1;
-            //    company.step2_delay = 1;
-            //    company.step2_postpone = 1;
-            //    company.step3_delay = 1;
-            //    company.step3_postpone = 1;
-            //    company.step4_delay = 1;
-            //    company.step4_postpone = 1;
-            //    company.step5_delay = 1;
-            //    company.step5_postpone = 1;
-            //    company.step6_delay = 1;
-            //    company.step6_postpone = 1;
-            //    ////////////////////////////////////////////////////////
-            //});
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
