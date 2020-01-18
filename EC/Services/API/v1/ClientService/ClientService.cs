@@ -57,6 +57,8 @@ namespace EC.Services.API.v1.ClientService
                 .UpdateAsync(id, updateClientModel)
                 .ConfigureAwait(false);
 
+            client.last_update_dt = DateTime.Now;
+
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
