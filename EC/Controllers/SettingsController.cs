@@ -948,8 +948,17 @@ namespace EC.Controllers
                 var globalSettings = db.global_settings.FirstOrDefault();
                 if (globalSettings != null)
                 {
-                    ViewBag.header_color_code = globalSettings.header_color_code;
-                    ViewBag.header_links_color_code = globalSettings.header_links_color_code;
+                    if(globalSettings.header_color_code == null)
+                    {
+                        ViewBag.header_color_code = WebConfigurationManager.AppSettings["HeaderColor"];
+                        ViewBag.header_links_color_code = WebConfigurationManager.AppSettings["HeaderLinksColor"];
+                    } else
+                    {
+                        ViewBag.header_color_code = globalSettings.header_color_code;
+                        ViewBag.header_links_color_code = globalSettings.header_links_color_code;
+                    }
+
+
                 }
                 return View();
             } else

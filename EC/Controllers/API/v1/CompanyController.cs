@@ -108,5 +108,26 @@ namespace EC.Controllers.API.v1
 
 			return ApiOk();
 		}
-	}
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
+
+            try
+            {
+                await _companyService
+                    .DeleteAsync(id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+    }
 }
