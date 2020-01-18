@@ -109,6 +109,7 @@ namespace EC.Controllers.API.v1
 			return ApiOk();
 		}
         [HttpDelete]
+        [Route("delete/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)

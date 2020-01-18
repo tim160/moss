@@ -7,10 +7,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EC.Errors.CommonExceptions;
+using EC.Common.Util.Filters;
 
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/client")]
+    [JwtAuthentication]
+    [Authorize]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;

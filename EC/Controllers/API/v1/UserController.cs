@@ -1,4 +1,5 @@
 ﻿using EC.Common.Util;
+using EC.Common.Util.Filters;
 using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.User;
 using EC.Services.API.v1.UserService;
@@ -11,6 +12,8 @@ using System.Web.Http;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/user")]
+    [JwtAuthentication]
+    [Authorize]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;

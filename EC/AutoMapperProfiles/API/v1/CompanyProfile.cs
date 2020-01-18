@@ -20,6 +20,7 @@ namespace EC.AutoMapperProfiles.API.v1
 			//		);
 			//CreateMap<UpdateCompanyModel, company>();
 			CreateMap<CreateCompanyModel, company>();
+			CreateMap<UpdateCompanyModel, company>();
 		}
 	}
 }

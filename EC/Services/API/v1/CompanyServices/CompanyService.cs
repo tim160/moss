@@ -192,6 +192,8 @@ namespace EC.Services.API.v1.CompanyServices
 				.UpdateAsync(id, updateCompanyModel)
 				.ConfigureAwait(false);
 
+            company.last_update_dt = DateTime.Now;
+
 			await _appContext
 				.SaveChangesAsync()
 				.ConfigureAwait(false);
@@ -213,6 +215,9 @@ namespace EC.Services.API.v1.CompanyServices
 
             company client = await _set
                 .UpdateAsync(id, companyForDelete)
+                .ConfigureAwait(false);
+            await _appContext
+                .SaveChangesAsync()
                 .ConfigureAwait(false);
             return client.id;
         }
