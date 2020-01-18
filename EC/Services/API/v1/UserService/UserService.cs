@@ -40,12 +40,13 @@ namespace EC.Services.API.v1.UserService
                 user.preferred_contact_method_id = createUserModel.preferred_contact_method_id;
                 user.question_ds = createUserModel.question_ds;
                 user.answer_ds = createUserModel.answer_ds;
-                //user.last_update_dt = DateTime.Now;
+                user.last_update_dt = DateTime.Now;
                 user.preferred_email_language_id = createUserModel.preferred_email_language_id;
                 user.notification_messages_actions_flag = createUserModel.notification_messages_actions_flag;
                 user.notification_new_reports_flag = createUserModel.notification_new_reports_flag;
                 user.notification_marketing_flag = createUserModel.notification_marketing_flag;
                 user.notification_summary_period = createUserModel.notification_summary_period;
+                user.user_id = createUserModel.user_id;
             });
             await _appContext
                 .SaveChangesAsync()

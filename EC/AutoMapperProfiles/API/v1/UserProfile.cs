@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using EC.Models.API.v1.Company;
 using EC.Models.API.v1.User;
 using EC.Models.Database;
 
@@ -9,7 +8,7 @@ namespace EC.AutoMapperProfiles.API.v1
     {
         public UserProfile()
         {
-            CreateMap<user, CreateUserModel>()
+            CreateMap<CreateUserModel, user>()
                 .ForMember(
                     destinationMember => destinationMember.company_id,
                     options => options.MapFrom(sourceMember => sourceMember.company_id)
