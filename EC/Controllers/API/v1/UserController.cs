@@ -28,7 +28,7 @@ namespace EC.Controllers.API.v1
         {
             if (createUserModel == null)
             {
-                ModelState.AddModelError(nameof(createUserModel), "Company data required.");
+                ModelState.AddModelError(nameof(createUserModel), "User data required.");
             }
 
             if (!ModelState.IsValid)
@@ -60,11 +60,11 @@ namespace EC.Controllers.API.v1
 
             if (updateUserModel == null)
             {
-                ModelState.AddModelError(nameof(updateUserModel), "Company data required.");
+                ModelState.AddModelError(nameof(updateUserModel), "User data required.");
             }
             if (id == 0)
             {
-                ModelState.AddModelError(nameof(id), "Company ID required.");
+                ModelState.AddModelError(nameof(id), "User ID required.");
             }
 
             if (!ModelState.IsValid)
@@ -87,11 +87,12 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpDelete]
+        [Route("delete/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)
             {
-                ModelState.AddModelError(nameof(id), "Company ID required.");
+                ModelState.AddModelError(nameof(id), "User ID required.");
             }
 
             try
