@@ -22,5 +22,6 @@ namespace EC.Models.API.v1.Client
 
         [Required]
         public int user_id { get; set; }
+        public string PartnerInternalID { get; set; }
     }
 }

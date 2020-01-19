@@ -48,5 +48,6 @@ namespace EC.Models.API.v1.User
         public int notification_marketing_flag { get; set; }
         [Required]
         public int notification_summary_period { get; set; }
+        public string PartnerInternalID { get; set; }
     }
 }

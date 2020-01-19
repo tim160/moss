@@ -66,5 +66,6 @@ namespace EC.Models.API.v1.Company
         public int onboard_sessions_paid { get; set; }
         [Required]
         public bool controls_client { get; set; }
+        public string PartnerInternalID { get; set; }
     }
 }

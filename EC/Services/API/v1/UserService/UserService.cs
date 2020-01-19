@@ -8,6 +8,8 @@ using EC.Models.API.v1.User;
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EC.Services.API.v1.UserService
@@ -23,6 +25,14 @@ namespace EC.Services.API.v1.UserService
 
             List<Exception> errors = new List<Exception>();
 
+            if (!String.IsNullOrEmpty(createUserModel.PartnerInternalID))
+            {
+                var partnerInternal = _appContext.user.Where(user => user.partner_api_id.Equals(createUserModel.PartnerInternalID)).FirstOrDefault();
+                if (partnerInternal != null)
+                {
+                    errors.Add(new Exception("PartnerInternalID already exists"));
+                }
+            }
 
             if (errors.Count > 0)
             {
@@ -47,7 +57,13 @@ namespace EC.Services.API.v1.UserService
                 user.notification_marketing_flag = createUserModel.notification_marketing_flag;
                 user.notification_summary_period = createUserModel.notification_summary_period;
                 user.user_id = createUserModel.user_id;
+                user.is_api = true;
+                user.api_source_id = null;
+                user.partner_api_id = createUserModel.PartnerInternalID;
             });
+
+
+
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);

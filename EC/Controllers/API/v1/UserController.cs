@@ -12,8 +12,8 @@ using System.Web.Http;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/user")]
-    [JwtAuthentication]
-    [Authorize]
+    //[JwtAuthentication]
+    //[Authorize]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
@@ -89,6 +89,46 @@ namespace EC.Controllers.API.v1
             return ApiOk();
         }
 
+        [HttpPut]
+        [Route("externaluser/{id}")]
+        public async Task<IHttpActionResult> UpdateExternalUser(string id, UpdateUserModel updateUserModel)
+        {
+            _logger.Debug($"id={id}");
+
+            if (updateUserModel == null)
+            {
+                ModelState.AddModelError(nameof(updateUserModel), "User data required.");
+            }
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "User ID required.");
+            }
+
+            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "User not found.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
+
+            try
+            {
+                await _userService
+                    .UpdateAsync(updateUserModel, idFromDb)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
         [HttpDelete]
         [Route("delete/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
@@ -98,10 +138,41 @@ namespace EC.Controllers.API.v1
                 ModelState.AddModelError(nameof(id), "User ID required.");
             }
 
+
+
             try
             {
                 await _userService
                     .DeleteAsync(id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
+        [HttpDelete]
+        [Route("externaldelete/{id}")]
+        public async Task<IHttpActionResult> Delete(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "User ID required.");
+            }
+
+            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "User not found.");
+            }
+
+            try
+            {
+                await _userService
+                    .DeleteAsync(idFromDb)
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)

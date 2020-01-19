@@ -12,8 +12,8 @@ using EC.Common.Util.Filters;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/client")]
-    [JwtAuthentication]
-    [Authorize]
+    //[JwtAuthentication]
+    //[Authorize]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;
@@ -88,6 +88,47 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
+
+        [HttpPut]
+        [Route("externalclient/{id}")]
+        public async Task<IHttpActionResult> UpdateExternalUser(string id, UpdateClientModel updateClientModel)
+        {
+            _logger.Debug($"id={id}");
+
+            if (updateClientModel == null)
+            {
+                ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
+            }
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "Client ID required.");
+            }
+
+            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+            if (idFromDb == 0) 
+            {
+                ModelState.AddModelError(nameof(id), "Client not found.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
+
+            try
+            {
+                await _clientService
+                    .UpdateAsync(updateClientModel, idFromDb)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
         [HttpDelete]
         [Route("delete/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
@@ -101,6 +142,34 @@ namespace EC.Controllers.API.v1
             {
                 await _clientService
                     .DeleteAsync(id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
+        [HttpDelete]
+        [Route("externaldelete/{id}")]
+        public async Task<IHttpActionResult> Delete(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "Client ID required.");
+            }
+            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Client not found.");
+            }
+
+            try
+            {
+                await _clientService
+                    .DeleteAsync(idFromDb)
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)

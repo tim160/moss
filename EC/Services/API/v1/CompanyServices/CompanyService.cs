@@ -34,49 +34,58 @@ namespace EC.Services.API.v1.CompanyServices
 				throw new ArgumentNullException(nameof(createCompanyModel));
 			}
 
-            //List<Exception> errors = new List<Exception>();
+            List<Exception> errors = new List<Exception>();
 
-            //Models.GenerateRecordsModel generateRecordsModel = new Models.GenerateRecordsModel();
-            //string messageCompanyInUse = LocalizationGetter.GetString("CompanyInUse", isCC);
+            Models.GenerateRecordsModel generateRecordsModel = new Models.GenerateRecordsModel();
+            string messageCompanyInUse = LocalizationGetter.GetString("CompanyInUse", isCC);
 
-            //if (generateRecordsModel.isCompanyInUse(createCompanyModel.Name))
-            //{
-            //	errors.Add(new AlreadyExistsException(messageCompanyInUse, createCompanyModel.Name));
-            //}
+            if (generateRecordsModel.isCompanyInUse(createCompanyModel.company_nm))
+            {
+                errors.Add(new AlreadyExistsException(messageCompanyInUse, createCompanyModel.company_nm));
+            }
 
-            //string shortName = StringUtil.ShortString(createCompanyModel.Name);
-            //shortName = await generateRecordsModel.GenerateUnusedCompanyShortName(shortName);
-            //if (string.IsNullOrWhiteSpace(shortName))
-            //{
-            //	errors.Add(new AlreadyExistsException(messageCompanyInUse, createCompanyModel.Name));
-            //}
+            string shortName = StringUtil.ShortString(createCompanyModel.company_nm);
+            shortName = await generateRecordsModel.GenerateUnusedCompanyShortName(shortName);
+            if (string.IsNullOrWhiteSpace(shortName))
+            {
+                errors.Add(new AlreadyExistsException(messageCompanyInUse, createCompanyModel.company_nm));
+            }
 
             //IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
             //if (!emailAddressHelper.IsValidEmail(createCompanyModel.Email, false))
             //{
-            //	errors.Add(new EmailFormatException(LocalizationGetter.GetString("EmailInvalid"), createCompanyModel.Email));
+            //    errors.Add(new EmailFormatException(LocalizationGetter.GetString("EmailInvalid"), createCompanyModel.Email));
             //}
 
             //var companyInvitation = await _appContext.company_invitation
-            //	.AsNoTracking()
-            //	.Where(item =>
-            //		item.is_active == 1
-            //		&& item.invitation_code.Trim().ToLower() == createCompanyModel.InvitationCode.Trim().ToLower())
-            //	.Select(item => new
-            //	{
-            //		item.id,
-            //		item.created_by_company_id
-            //	})
-            //	.FirstOrDefaultAsync();
+            //    .AsNoTracking()
+            //    .Where(item =>
+            //        item.is_active == 1
+            //        && item.invitation_code.Trim().ToLower() == createCompanyModel.InvitationCode.Trim().ToLower())
+            //    .Select(item => new
+            //    {
+            //        item.id,
+            //        item.created_by_company_id
+            //    })
+            //    .FirstOrDefaultAsync();
             //if (companyInvitation == null)
             //{
-            //	errors.Add(new ParameterValidationException(nameof(createCompanyModel.InvitationCode), LocalizationGetter.GetString("InvalidCode")));
+            //    errors.Add(new ParameterValidationException(nameof(createCompanyModel.InvitationCode), LocalizationGetter.GetString("InvalidCode")));
             //}
 
-            //if (errors.Count > 0)
-            //{
-            //	throw new AggregateException(errors);
-            //}
+            if (!String.IsNullOrEmpty(createCompanyModel.PartnerInternalID))
+            {
+                var partnerInternal = _appContext.company.Where(company => company.partner_api_id.Equals(createCompanyModel.PartnerInternalID)).FirstOrDefault();
+                if (partnerInternal != null)
+                {
+                    errors.Add(new Exception("PartnerInternalID already exists"));
+                }
+            }
+
+            if (errors.Count > 0)
+            {
+                throw new AggregateException(errors);
+            }
 
             //var varInfo = await _appContext.var_info
             //	.AsNoTracking()
@@ -167,6 +176,9 @@ namespace EC.Services.API.v1.CompanyServices
                 company.step6_postpone = createCompanyModel.step6_postpone;
                 company.onboard_sessions_paid = createCompanyModel.onboard_sessions_paid;
                 company.controls_client = createCompanyModel.controls_client;
+                company.is_api = true;
+                company.api_source_id = null;
+                company.partner_api_id = createCompanyModel.PartnerInternalID;
             });
             newCompany.registration_dt = DateTime.Now;
             newCompany.last_update_dt = DateTime.Now;
