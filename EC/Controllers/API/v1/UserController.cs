@@ -12,8 +12,8 @@ using System.Web.Http;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/user")]
-    //[JwtAuthentication]
-    //[Authorize]
+    [JwtAuthentication]
+    [Authorize]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
