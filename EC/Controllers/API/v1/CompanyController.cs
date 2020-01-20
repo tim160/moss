@@ -14,8 +14,8 @@ using log4net;
 namespace EC.Controllers.API.v1
 {
 	[RoutePrefix("api/v1/companies")]
-	//[JwtAuthentication]
-	//[Authorize]
+	[JwtAuthentication]
+	[Authorize]
 	public class CompanyController : BaseApiController
 	{
 		private readonly CompanyService _companyService;
