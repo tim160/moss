@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EC.Models.API.v1.GlobalSettings;
+using System.ComponentModel.DataAnnotations;
 
 namespace EC.Models.API.v1.Client
 {
@@ -23,5 +24,6 @@ namespace EC.Models.API.v1.Client
         [Required]
         public int user_id { get; set; }
         public string PartnerInternalID { get; set; }
+        public CreateGlobalSettingsModel globalSettings { get; set; }
     }
 }

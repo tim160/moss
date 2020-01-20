@@ -7,22 +7,26 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EC.Errors.CommonExceptions;
+using EC.Services.API.v1.GlobalSettingsService;
 using EC.Common.Util.Filters;
 
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/client")]
-    //[JwtAuthentication]
-    //[Authorize]
+    [JwtAuthentication]
+    [Authorize]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;
+        private readonly GlobalSettingsService _globalSettingsService;
+
         protected readonly ILog _logger;
 
         public ClientController()
         {
             _logger = LogManager.GetLogger(GetType());
             _clientService = new ClientService();
+            _globalSettingsService = new GlobalSettingsService();
         }
 
         [HttpPost]
@@ -51,6 +55,21 @@ namespace EC.Controllers.API.v1
             catch (AggregateException exception)
             {
                 return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
+            }
+
+            if (createClientModel.globalSettings!=null)
+            {
+                try
+                {
+                    createClientModel.globalSettings.client_id = id;
+                    await _globalSettingsService
+                        .CreateAsync(createClientModel.globalSettings, isCC)
+                        .ConfigureAwait(false);
+                }
+                catch (AggregateException exception)
+                {
+                    return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
+                }
             }
 
             return ApiCreated(id);
@@ -84,6 +103,20 @@ namespace EC.Controllers.API.v1
             catch (NotFoundException exception)
             {
                 return ApiNotFound(exception.Message);
+            }
+
+            if (updateClientModel.globalSettings != null)
+            {
+                try
+                {
+                    await _globalSettingsService
+                        .UpdateAsync(updateClientModel.globalSettings, id)
+                        .ConfigureAwait(false);
+                }
+                catch (NotFoundException exception)
+                {
+                    return ApiNotFound(exception.Message);
+                }
             }
 
             return ApiOk();

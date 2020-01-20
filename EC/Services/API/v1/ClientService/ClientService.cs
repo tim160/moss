@@ -76,6 +76,7 @@ namespace EC.Services.API.v1.ClientService
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
+
             return client.id;
         }
 
