@@ -12,8 +12,8 @@ namespace EC.Models.API.v1.User
         public int company_id { get; set; }
         [Required]
         public int role_id { get; set; }
-        [Required]
-        public int status_id { get; set; }
+        //[Required]
+        //public int status_id { get; set; }
         [Required]
         [StringLength(250)]
         public string first_nm { get; set; }

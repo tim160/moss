@@ -47,7 +47,6 @@ namespace EC.Services.API.v1.UserService
             user newUser = _set.Add(createUserModel, user => {
                 user.company_id = createUserModel.company_id;
                 user.role_id = createUserModel.role_id;
-                user.status_id = createUserModel.status_id;
                 user.first_nm = createUserModel.first_nm;
                 user.last_nm = createUserModel.last_nm;
                 user.login_nm = login;

@@ -17,7 +17,7 @@ namespace EC.AutoMapperProfiles.API.v1
                     options => options.MapFrom(sourceMember => sourceMember.role_id)
                     ).ForMember(
                     destinationMember => destinationMember.status_id,
-                    options => options.MapFrom(sourceMember => sourceMember.status_id)
+                    options => options.UseValue(3)
                     ).ForMember(
                     destinationMember => destinationMember.first_nm,
                     options => options.MapFrom(sourceMember => sourceMember.first_nm)
@@ -71,7 +71,7 @@ namespace EC.AutoMapperProfiles.API.v1
                     options => options.MapFrom(sourceMember => sourceMember.role_id)
                     ).ForMember(
                     destinationMember => destinationMember.status_id,
-                    options => options.MapFrom(sourceMember => sourceMember.status_id)
+                    options => options.UseValue(3)
                     ).ForMember(
                     destinationMember => destinationMember.first_nm,
                     options => options.MapFrom(sourceMember => sourceMember.first_nm)
