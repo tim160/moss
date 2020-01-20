@@ -17,7 +17,6 @@ namespace EC.Services.API.v1.GlobalSettingsService
             global_settings newGlobal_Settings = _set.Add(createGlobalSettingsModel, global_setting =>
             {
                 global_setting.client_id = createGlobalSettingsModel.client_id;
-                global_setting.application_name = createGlobalSettingsModel.application_name;
                 global_setting.custom_logo_path = createGlobalSettingsModel.custom_logo_path;
                 global_setting.header_color_code = createGlobalSettingsModel.header_color_code;
                 global_setting.header_links_color_code = createGlobalSettingsModel.header_links_color_code;

@@ -13,8 +13,8 @@ using EC.Common.Util.Filters;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/client")]
-    [JwtAuthentication]
-    [Authorize]
+    //[JwtAuthentication]
+    //[Authorize]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;
