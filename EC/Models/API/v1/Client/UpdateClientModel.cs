@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EC.Models.API.v1.Client
 {
-    public class CreateClientModel
+    public class UpdateClientModel
     {
         //[Required]
         //public int address_id { get; set; }

@@ -1,10 +1,17 @@
-﻿using EC.Models.API.v1.User;
+﻿using EC.Common.Interfaces;
+using EC.Constants;
+using EC.Core.Common;
+using EC.Errors.CommonExceptions;
+using EC.Localization;
+using EC.Models;
+using EC.Models.API.v1.User;
 using EC.Models.Database;
+using EC.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace EC.Services.API.v1.UserService
 {
@@ -12,119 +19,80 @@ namespace EC.Services.API.v1.UserService
     {
         public async Task<int> CreateAsync(CreateUserModel createUserModel, bool isCC)
         {
-            //if (createUserModel == null)
-            //{
-            //    throw new ArgumentNullException(nameof(createUserModel));
-            //}
+            if (createUserModel == null)
+            {
+                throw new ArgumentNullException(nameof(createUserModel));
+            }
 
-            //List<Exception> errors = new List<Exception>();
+            List<Exception> errors = new List<Exception>();
 
-            //Models.GenerateRecordsModel generateRecordsModel = new Models.GenerateRecordsModel();
-            //string messageCompanyInUse = LocalizationGetter.GetString("CompanyInUse", isCC);
+            if (!String.IsNullOrEmpty(createUserModel.PartnerInternalID))
+            {
+                var partnerInternal = _appContext.user.Where(user => user.partner_api_id.Equals(createUserModel.PartnerInternalID)).FirstOrDefault();
+                if (partnerInternal != null)
+                {
+                    errors.Add(new Exception("PartnerInternalID already exists"));
+                }
+            }
 
-            //if (generateRecordsModel.isCompanyInUse(createUserModel.Name))
-            //{
-            //    errors.Add(new AlreadyExistsException(messageCompanyInUse, createUserModel.Name));
-            //}
+            if (errors.Count > 0)
+            {
+                throw new AggregateException(errors);
+            }
 
-            //string shortName = StringUtil.ShortString(createUserModel.Name);
-            //shortName = await generateRecordsModel.GenerateUnusedCompanyShortName(shortName);
-            //if (string.IsNullOrWhiteSpace(shortName))
-            //{
-            //    errors.Add(new AlreadyExistsException(messageCompanyInUse, createUserModel.Name));
-            //}
+            var generateModel = new GenerateRecordsModel();
+            string login = generateModel.GenerateLoginName(createUserModel.first_nm, createUserModel.last_nm);
+            string pass = generateModel.GeneretedPassword().Trim();
 
-            //IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
-            //if (!emailAddressHelper.IsValidEmail(createUserModel.Email, false))
-            //{
-            //    errors.Add(new EmailFormatException(LocalizationGetter.GetString("EmailInvalid"), createUserModel.Email));
-            //}
+            user newUser = _set.Add(createUserModel, user => {
+                user.company_id = createUserModel.company_id;
+                user.role_id = createUserModel.role_id;
+                user.first_nm = createUserModel.first_nm;
+                user.last_nm = createUserModel.last_nm;
+                user.login_nm = login;
+                user.password = PasswordUtils.GetHash(pass);
+                user.photo_path = createUserModel.photo_path;
+                user.last_update_dt = DateTime.Now;
+                user.is_api = true;
+                user.api_source_id = null;
+                user.partner_api_id = createUserModel.PartnerInternalID;
+            });
 
-            //var companyInvitation = await _appContext.company_invitation
-            //    .AsNoTracking()
-            //    .Where(item =>
-            //        item.is_active == 1
-            //        && item.invitation_code.Trim().ToLower() == createUserModel.InvitationCode.Trim().ToLower())
-            //    .Select(item => new
-            //    {
-            //        item.id,
-            //        item.created_by_company_id
-            //    })
-            //    .FirstOrDefaultAsync();
-            //if (companyInvitation == null)
-            //{
-            //    errors.Add(new ParameterValidationException(nameof(createUserModel.InvitationCode), LocalizationGetter.GetString("InvalidCode")));
-            //}
+            await _appContext
+                .SaveChangesAsync()
+                .ConfigureAwait(false);
 
-            //if (errors.Count > 0)
-            //{
-            //    throw new AggregateException(errors);
-            //}
+            try
+            {
+                var currentCreateduser = _appContext.user.Find(newUser.id);
+                var sessionUser = _appContext.user.Find(currentCreateduser.user_id);
 
-            //var varInfo = await _appContext.var_info
-            //    .AsNoTracking()
-            //    .Where(item => item.emailed_code_to_customer == createUserModel.EmailedCodeToCustomer)
-            //    .Select(item => new
-            //    {
-            //        item.employee_no,
-            //        item.customers_no,
-            //        item.onboarding_session_numbers
-            //    })
-            //    .FirstOrDefaultAsync();
+                if (sessionUser != null)
+                {
+                    var company = _appContext.company.Find(sessionUser.company_id);
+                    if (company != null)
+                    {
+                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(isCC);
+                        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, "");
+                        eb.NewMediator(
+                            $"{sessionUser.first_nm} {sessionUser.last_nm}",
+                            $"{company.company_nm}",
+                            System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
+                            System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
+                            $"{currentCreateduser.login_nm}",
+                            $"{pass}");
+                        string body = eb.Body;
+                        EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
+                        emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, currentCreateduser.id, sessionUser.company_id, currentCreateduser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
-            //company newCompany = _set.Add(createUserModel, company =>
-            //{
-            //    company.registration_dt = DateTime.Now;
-            //    company.last_update_dt = DateTime.Now;
+            }
 
-            //    company.company_invitation_id = companyInvitation.id;
-            //    company.client_id = companyInvitation.created_by_company_id;
-            //    company.status_id = ECSessionConstants.status_active;
-            //    company.company_code = generateRecordsModel.GenerateCompanyCode(company.company_nm);
-            //    company.language_id = (int)Language_Values.English;
-            //    company.company_short_name = shortName;
-
-            //    if (varInfo != null)
-            //    {
-            //        company.contractors_number = varInfo.employee_no;
-            //        company.customers_number = varInfo.customers_no;
-            //        company.onboard_sessions_paid = varInfo.onboarding_session_numbers;
-            //        if (varInfo.onboarding_session_numbers > 0)
-            //        {
-            //            company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
-            //        }
-            //    }
-
-            //    ////////////////////////////////////////////////////////
-            //    // TODO: Необходимо определиться с заполнением обязательных полей и просто полей из модели.
-            //    company.address_id = 1;
-            //    company.billing_info_id = 1;
-            //    company.implicated_title_name_id = 1;
-            //    company.witness_show_id = 1;
-            //    company.show_location_id = 1;
-            //    company.show_department_id = 1;
-            //    company.default_anonymity_id = 1;
-            //    company.user_id = 1;
-            //    company.time_zone_id = 1;
-            //    company.step1_delay = 1;
-            //    company.step1_postpone = 1;
-            //    company.step2_delay = 1;
-            //    company.step2_postpone = 1;
-            //    company.step3_delay = 1;
-            //    company.step3_postpone = 1;
-            //    company.step4_delay = 1;
-            //    company.step4_postpone = 1;
-            //    company.step5_delay = 1;
-            //    company.step5_postpone = 1;
-            //    company.step6_delay = 1;
-            //    company.step6_postpone = 1;
-            //    ////////////////////////////////////////////////////////
-            //});
-            //await _appContext
-            //    .SaveChangesAsync()
-            //    .ConfigureAwait(false);
-            //return newCompany.id;
-            return 0;
+            return newUser.id;
         }
 
         public async Task<int> UpdateAsync(UpdateUserModel updateUserModel, int id)
@@ -140,6 +108,32 @@ namespace EC.Services.API.v1.UserService
 
             user user = await _set
                 .UpdateAsync(id, updateUserModel)
+                .ConfigureAwait(false);
+
+            user.last_update_dt = DateTime.Now;
+
+            await _appContext
+                .SaveChangesAsync()
+                .ConfigureAwait(false);
+            return user.id;
+        }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentException("The ID can't be empty.", nameof(id));
+            }
+            user userForDelete = await _set.FindAsync(id);
+            if (userForDelete == null)
+            {
+                throw new ArgumentException("User not found.", nameof(id));
+            }
+
+            userForDelete.status_id = ECStatusConstants.Inactive_Value;
+
+            user user = await _set
+                .UpdateAsync(id, userForDelete)
                 .ConfigureAwait(false);
 
             await _appContext
