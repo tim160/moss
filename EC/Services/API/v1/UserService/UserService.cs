@@ -1,4 +1,5 @@
-﻿using EC.Common.Interfaces;
+﻿using EC.Common.Base;
+using EC.Common.Interfaces;
 using EC.Constants;
 using EC.Core.Common;
 using EC.Errors.CommonExceptions;
@@ -11,12 +12,17 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace EC.Services.API.v1.UserService
 {
     internal class UserService : ServiceBase<user>
     {
+        public Task<PagedList<EC.Models.API.v1.User.UserModel>> GetPagedAsync(int page, int pageSize, Expression<Func<user, bool>> filter = null)
+        {
+            return GetPagedAsync<string, EC.Models.API.v1.User.UserModel>(page, pageSize, filter, null);
+        }
         public async Task<int> CreateAsync(CreateUserModel createUserModel, bool isCC)
         {
             if (createUserModel == null)
@@ -44,7 +50,8 @@ namespace EC.Services.API.v1.UserService
             string login = generateModel.GenerateLoginName(createUserModel.first_nm, createUserModel.last_nm);
             string pass = generateModel.GeneretedPassword().Trim();
 
-            user newUser = _set.Add(createUserModel, user => {
+            user newUser = _set.Add(createUserModel, user =>
+            {
                 user.company_id = createUserModel.company_id;
                 user.role_id = createUserModel.role_id;
                 user.first_nm = createUserModel.first_nm;

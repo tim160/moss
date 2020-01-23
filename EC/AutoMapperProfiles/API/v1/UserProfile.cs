@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EC.Models;
 using EC.Models.API.v1.User;
 using EC.Models.Database;
 
@@ -115,6 +116,11 @@ namespace EC.AutoMapperProfiles.API.v1
                     destinationMember => destinationMember.notification_summary_period,
                     options => options.UseValue(1)
                     );
+
+
+
+            CreateMap<user, Models.API.v1.User.UserModel>().BeforeMap((s, d) => d.usersUnreadEntities = new ReadStatusModel().GetUserUnreadEntitiesNumbers(s.id));
+
         }
     }
 }

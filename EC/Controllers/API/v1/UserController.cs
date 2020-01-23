@@ -1,13 +1,18 @@
-﻿using EC.Common.Util;
+﻿using EC.Common.Base;
+using EC.Common.Util;
 using EC.Common.Util.Filters;
 using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.User;
+using EC.Models.Database;
 using EC.Services.API.v1.UserService;
 using log4net;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
+using EC.Constants;
 
 namespace EC.Controllers.API.v1
 {
@@ -23,6 +28,31 @@ namespace EC.Controllers.API.v1
         {
             _logger = LogManager.GetLogger(GetType());
             _userService = new UserService();
+        }
+
+        [HttpGet]
+        [Route]
+        [ResponseType(typeof(PagedList<UserModel>))]
+        public async Task<IHttpActionResult> GetList(int page = 1, int pageSize = 10)
+        {
+            _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
+
+        Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
+            PagedList<UserModel> result = await _userService
+                .GetPagedAsync(page, pageSize, filterApp)
+                .ConfigureAwait(false);
+            var statusModel = new Models.ReadStatusModel();
+            result.Items.ForEach(entity =>
+            {
+                entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+            });
+
+            return ApiOk(result);
         }
 
         [HttpPost]

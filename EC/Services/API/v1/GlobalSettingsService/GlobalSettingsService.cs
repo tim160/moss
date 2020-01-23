@@ -8,6 +8,20 @@ namespace EC.Services.API.v1.GlobalSettingsService
 {
     internal class GlobalSettingsService : ServiceBase<global_settings>
     {
+        public GlobalSettingsModel getByClientId(int client_id)
+        {
+            var globalSetting = _set.Where(gl => gl.client_id == client_id).FirstOrDefault();
+            if(globalSetting!=null)
+            {
+                return new GlobalSettingsModel()
+                {
+                    custom_logo_path = globalSetting.custom_logo_path,
+                    header_color_code = globalSetting.header_color_code,
+                    header_links_color_code = globalSetting.header_links_color_code
+                };
+            }
+            return null;
+        }
         public async Task<int> CreateAsync(CreateGlobalSettingsModel createGlobalSettingsModel, bool isCC)
         {
             if (createGlobalSettingsModel == null)

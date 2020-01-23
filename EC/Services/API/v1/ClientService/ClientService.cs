@@ -1,10 +1,12 @@
-﻿using EC.Constants;
+﻿using EC.Common.Base;
+using EC.Constants;
 using EC.Models.API.v1.Client;
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -12,6 +14,10 @@ namespace EC.Services.API.v1.ClientService
 {
     internal class ClientService : ServiceBase<client>
     {
+        public Task<PagedList<ClientModel>> GetPagedAsync(int page, int pageSize, Expression<Func<client, bool>> filter = null)
+        {
+            return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
+        }
         public async Task<int> CreateAsync(CreateClientModel createClientModel, bool isCC)
         {
             if (createClientModel == null)
