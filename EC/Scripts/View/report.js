@@ -889,6 +889,14 @@
                 submitCaseSummary.addClass('active');
             }
         });
+
+        $(".option.mediator").on('click', function (event) {
+            var allItems = $(".option.mediator").length;
+            var checkedItems = $(".option.mediator input:checked").length;
+            if (allItems === checkedItems) {
+                event.preventDefault();
+            }
+        });
     }
 
     function loginInformationProcess() {
