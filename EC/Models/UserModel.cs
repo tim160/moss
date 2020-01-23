@@ -959,7 +959,6 @@ namespace EC.Models
                             days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
                             reported_dt = rm._reportStringModel.ReportedDateString(),
-                    //  case_dt = rm.IncidentDateString(),
 
                     tasks_number = rm.ReportTasksCount(0).ToString(),
                             messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
@@ -971,8 +970,7 @@ namespace EC.Models
                                 first_nm = z.first_nm,
                                 last_nm = z.last_nm,
                                 photo_path = string.IsNullOrWhiteSpace(z.photo_path) ? _no_photo_path : z.photo_path,
-                        //photo_path = glb.Photo_Path_String(z.photo_path, 1, 5),
-                        is_owner = z.is_owner
+                                is_owner = z.is_owner
                             }),
                             case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
                             severity_s = !rm._report.severity_id.HasValue ? LocalizationGetter.GetString("Unspecified").ToUpper() : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,

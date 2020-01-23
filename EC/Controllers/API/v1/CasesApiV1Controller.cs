@@ -1,51 +1,40 @@
-﻿using System;
+﻿using EC.Constants;
+using EC.Localization;
+using EC.Models;
+using EC.Models.ViewModels;
+using EC.Models.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using System.Web;
+using System.Web.Http;
+using System.Web.Http.Description;
+using EC.Common.Base;
+using System.Threading.Tasks;
+using EC.Common.Util.Filters;
 
-using EC.Models;
-using EC.Models.Database;
-using EC.Constants;
-using EC.Core.Common;
-
-using EC.Models.ViewModel;
-using EC.Common.Interfaces;
-using EC.Localization;
-using EC.Models.ViewModels;
-
-namespace EC.Controllers.API
+namespace EC.Controllers.API.v1
 {
-    public class CasesController : BaseApiController
+    [RoutePrefix("api/v1/cases")]
+    [JwtAuthentication]
+    [Authorize]
+    public class CasesApiV1Controller : BaseApiController
     {
-        public class Filter
-        {
-            public int ReportFlag { get; set; }
-        }
-
         [HttpGet]
-        public object Get([FromUri] Filter filter)
+        [Route]
+        [ResponseType(typeof(PagedList<CompanyModel>))]
+        public async Task<IHttpActionResult> GetList(int userId, int reportFlag = 0)
         {
             var _started = DateTime.Now;
 
-            user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
-
-            if (user == null || user.id == 0)
-            {
-                return null;
-            }
-
-            UserModel um = new UserModel(user.id);
+            UserModel um = new UserModel(userId);
             ReadStatusModel rsm = new ReadStatusModel();
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
 
-            UsersUnreadReportsNumberViewModel vmUnreadReports = rsm.GetUserUnreadCasesNumbers(vmAllIDs, user.id);
+            UsersUnreadReportsNumberViewModel vmUnreadReports = rsm.GetUserUnreadCasesNumbers(vmAllIDs, userId);
 
             List<int> report_ids = new List<int>();
-            switch (filter.ReportFlag)
+            switch (reportFlag)
             {
                 case 1:
                     //active
@@ -77,7 +66,7 @@ namespace EC.Controllers.API
             string investigation_status = LocalizationGetter.GetString("Investigation");
             int delay_allowed = 2;
             int investigation_status_id = (int)CaseStatusConstants.CaseStatusValues.Investigation;
-            if (report_ids!= null &&  report_ids.Count > 0)
+            if (report_ids != null && report_ids.Count > 0)
             {
                 ReportModel tempRm = new ReportModel(report_ids[0]);
                 investigation_status = tempRm._reportStringModel.InvestigationStatusString();
@@ -93,10 +82,10 @@ namespace EC.Controllers.API
             var reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed, is_cc).ToList();
 
             string title = LocalizationGetter.GetString("ActiveCasesUp");
-            title = filter.ReportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;
-            title = filter.ReportFlag == 5 ? LocalizationGetter.GetString("ClosedCasesUp") : title;
-            title = filter.ReportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
-            title = filter.ReportFlag == 4 ? LocalizationGetter.GetString("NewReportsUp") : title;
+            title = reportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;
+            title = reportFlag == 5 ? LocalizationGetter.GetString("ClosedCasesUp") : title;
+            title = reportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
+            title = reportFlag == 4 ? LocalizationGetter.GetString("NewReportsUp") : title;
 
             CompanyModel cm = new CompanyModel(um._user.company_id);
             var additionalCompanies = cm.AdditionalCompanies().Select(additional_company => new
@@ -106,7 +95,7 @@ namespace EC.Controllers.API
             });
             var m = new
             {
-                Mode = filter.ReportFlag,
+                Mode = reportFlag,
 
                 Reports = reports,
 
@@ -120,11 +109,10 @@ namespace EC.Controllers.API
                 },
 
                 Title = title,
-                
-              Companies = additionalCompanies.Distinct()
-            };
 
-            return ResponseObject2Json(m);
+                Companies = additionalCompanies.Distinct()
+            };
+            return ApiOk(m);
         }
     }
 }
