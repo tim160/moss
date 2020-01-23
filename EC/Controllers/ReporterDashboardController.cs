@@ -6,7 +6,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Models.ViewModel;
 using EC.Constants;
-using Rotativa.MVC;
+using Rotativa;
 
 namespace EC.Controllers
 {

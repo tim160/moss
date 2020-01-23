@@ -7,9 +7,10 @@ using EC.Models.Database;
 using EC.Models.ViewModels;
 using EC.Models;
 using EC.Models.ECModel;
-using Rotativa.MVC;
+using Rotativa;
 using EC.Localization;
 using EC.Business.Actions;
+using System.Threading.Tasks;
 
 namespace EC.Controllers
 {
@@ -570,9 +571,9 @@ namespace EC.Controllers
             if (pdf)
             {
                 var report = db.report.FirstOrDefault(x => x.id == id);
-                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}";
+                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}.pdf"; 
                 //return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
-                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { };
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
             }
 
             ViewBag.user_id = user.id;
