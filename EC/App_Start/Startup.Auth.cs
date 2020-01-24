@@ -3,11 +3,14 @@ using Owin;
 using EC.Models;
 using Microsoft.Owin.Security.OpenIdConnect;
 using EC.Code;
+using System.Configuration;
 
 namespace EC
 {
     public partial class Startup {
 
+        static string siteUrl = ConfigurationManager.AppSettings.Get("SiteUrl").TrimEnd('/');
+        static string isUrl = ConfigurationManager.AppSettings.Get("IdentityServerUrl").TrimEnd('/');
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301883
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -21,10 +24,10 @@ namespace EC
             });
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-                Authority = "https://localhost:44305/identity",
+                Authority = isUrl + "/identity",
                 ClientId = "ec_client",
                 Scope = "openid profile roles sampleApi",
-                RedirectUri = "http://localhost:50877/Service/SignInGoogle",
+                RedirectUri = siteUrl + "/Service/SignInGoogle",
                 ResponseType = "id_token token",
 
                 SignInAsAuthenticationType = "Cookies",

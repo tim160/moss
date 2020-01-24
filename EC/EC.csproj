@@ -1461,6 +1461,8 @@
     <Content Include="Views\Settings\partial\casesHeader.cshtml" />
     <Content Include="Views\Settings\GlobalSettings.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\CallApi\Index.cshtml" />
+    <Content Include="Views\CallApi\ShowApiResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1507,6 +1509,7 @@
     <Compile Include="Controllers\API\v1\TokenController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CallApiController.cs" />
     <Compile Include="Controllers\CasesController.cs" />
     <Compile Include="Controllers\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
