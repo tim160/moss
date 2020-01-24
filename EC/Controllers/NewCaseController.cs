@@ -580,13 +580,19 @@ namespace EC.Controllers
             return View(rm);
         }
 
-        public ActionResult PrintToPdfOriginal(Guid id, bool pdf = true)
+        public ActionResult PrintToPdfOriginal(Guid id, Guid? ug, bool pdf = true)
         {
             var report = db.report.FirstOrDefault(x => x.guid == id);
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null && ug.HasValue)
+            {
+                user = db.user.FirstOrDefault(x => x.guid == ug);
+            }
             if (user == null || user.id == 0)
+            {
                 return RedirectToAction("Login", "Service");
+            }
 
             var rm = new ReportModel(report.id);
             if (!rm.HasAccessToReport(user.id))
@@ -596,7 +602,7 @@ namespace EC.Controllers
             {
                 var fn = $"Report to {rm.CompanyName()}";
                 //return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
-                return new ActionAsPdf("PrintToPdfOriginal", new { id = id, pdf = false }) { };
+                return new ActionAsPdf("PrintToPdfOriginal", new { id = id, pdf = false, ug = user.guid }) { };
             }
 
             ViewBag.Roles = db.role_in_report.ToList();
