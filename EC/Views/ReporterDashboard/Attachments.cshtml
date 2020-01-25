@@ -43,102 +43,90 @@
 {
     { Html.RenderPartial("~/Views/ReporterDashboard/settingMenu.cshtml", new { user_id = user_id, unread_message_number = unread_message_number, active = "Attachments" }); }
 
-    <div id="attachmentPage">
+    <div id="attachmentPage" ng-controller="ReporterDashboardAttachments">
         @using (Html.BeginForm("SaveAttachments", "ReporterDashboard", FormMethod.Post, new { enctype = "multipart/form-data", id = "formDrop" }))
         {
             @Html.Hidden("report_id", report_id)
             @Html.Hidden("mode", "upload_rd")
             <div class="dragAndDropContainer">
-                <div class="dottedContainer">
+                <div class="dottedContainer drop-box" ngf-drop ngf-select ng-model="files" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                     accept="image/*,application/pdf"
+                     ngf-pattern="'image/*,application/pdf'">
                     <div class="semiboldText blackText weight18">
                         @LocalizationGetter.GetString("DragDropFilesHere", is_cc)
                     </div>
                     <div class="secondSemiboldText">@LocalizationGetter.GetString("or", is_cc)</div>
                     <div class="selectFiles">
                         @LocalizationGetter.GetString("SelectFilesUpload", is_cc)
-                        <input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="" data-id="attachments" check-file-size="">
+                        @*<input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="" data-id="attachments" check-file-size="">*@
                     </div>
 
                 </div>
             </div>
         }
+        @{
+            var users = (List<user>)ViewBag.attachmentAdvUsers;
+        }
+        @foreach (attachment attachment in ViewBag.attachmentAdvFiles)
+        {
+            var user = users.FirstOrDefault(x => x.id == attachment.user_id);
 
-        @*<table>
-            <tbody>*@
-                @{
-                    var users = (List<user>)ViewBag.attachmentAdvUsers;
-                }
-                @foreach (attachment attachment in ViewBag.attachmentAdvFiles)
-                {
-                    var user = users.FirstOrDefault(x => x.id == attachment.user_id);
-                    
-                    <div class="files" style = "width: 100%;height:50px;background-color:#e5ebeb;">
-                        <div class="item">
-                            <div class="setAllFilesPaddingLeft">
-                                <div class="imgCorner">
-                                    <img src="/Content/Icons/generic-file.png">
-                                    <div class="square"></div>
-                                    <div class="treangle"></div>
-                                </div>
-                                <div class="description">
-                                    @attachment.file_nm
-                                    <div class="download">
-                                        <a href="@attachment.path_nm" download="">download</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right setAllFilesPaddingRight">
-                                <p class="date">
-                                    @dth.ConvertDateToLongMonthString(attachment.effective_dt)
-                                </p>
-                                <p class="recipient">
-                                    @if (attachment.user_id != rm._report.reporter_user_id)
-                                    {
-                                        @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
-                                    }
-                                    else
-                                    {
-                                        <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
-                                    }
-                                </p>
+            <div class="files" style="width: 100%;height:50px;background-color:#e5ebeb;">
+                <div class="item">
+                    <div class="setAllFilesPaddingLeft">
+                        <div class="imgCorner">
+                            <img src="/Content/Icons/generic-file.png">
+                            <div class="square"></div>
+                            <div class="treangle"></div>
+                        </div>
+                        <div class="description">
+                            @attachment.file_nm
+                            <div class="download">
+                                <a href="@attachment.path_nm" download="">download</a>
                             </div>
                         </div>
                     </div>
-
-                    @*<tr>
-                <td class="image">
-                    <img src="/Content/Icons/attachment-icon_preview.png">
-                </td>
-                <td class="customWidth">
-                    <p class="secondRow"></p>
-                    <div class="secondRowReporter">@(user == null ? LocalizationGetter.GetString("anonymous_reporter", is_cc) : (user.first_nm + " " + user.last_nm).Trim())</div>
-                    @attachment.file_nm
-                    <p></p>
-                </td>
-                <td>
-                    <p class="recipient">
-                        @if (attachment.user_id != rm._report.reporter_user_id)
-                        {
-                            @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
-                        }
-                        else
-                        {
-                            <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
-                        }
-                    </p>
-                </td>
-                <td>
-                    <p class="date">
-                        @dth.ConvertDateToLongMonthString(attachment.effective_dt)
-                    </p>
-                    <p class="download">
-                        <a href="@attachment.path_nm" download>download</a>
-                    </p>
-                </td>
-            </tr>*@
-                }
-            @*</tbody>
-        </table>*@
+                    <div class="right setAllFilesPaddingRight">
+                        <p class="date">
+                            @dth.ConvertDateToLongMonthString(attachment.effective_dt)
+                        </p>
+                        <p class="recipient">
+                            @if (attachment.user_id != rm._report.reporter_user_id)
+                            {
+                                @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
+                            }
+                            else
+                            {
+                                <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-
 }
+
+    @*<div id="template">
+        <div class="item">
+            <div class="setAllFilesPaddingLeft">
+                <div class="imgCorner">
+                    <img src="/Content/Icons/generic-file.png">
+                    <div class="square"></div>
+                    <div class="treangle"></div>
+                </div>
+                <div class="description">
+                    <span id="description"></span>
+                    <div class="download">
+                        <a href="" download="">download</a>
+                    </div>
+                </div>
+            </div>
+            <div class="right setAllFilesPaddingRight">
+                <p class="date">
+                </p>
+                <p class="recipient">
+                </p>
+            </div>
+        </div>
+    </div>*@
