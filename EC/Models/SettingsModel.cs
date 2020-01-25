@@ -643,15 +643,17 @@ namespace EC.Models
             return result;
         }
 
-        public bool checkIsExistGlobalSettings(int userId)
+        public bool checkIsExistGlobalSettings(int companyId)
         {
-            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == userId).FirstOrDefault();
+            var company = db.company.Find(companyId);
+
+            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == company.client_id).FirstOrDefault();
             if (globalSetting != null)
             {
                 return true;
             } else
             {
-                return createNewGlobalSetting(userId);
+                return createNewGlobalSetting(company.client_id);
             }
         }
         public bool createNewGlobalSetting(int userId)

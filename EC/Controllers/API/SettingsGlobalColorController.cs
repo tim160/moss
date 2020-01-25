@@ -28,7 +28,8 @@ namespace EC.Controllers.API
             }
 
             var settingModel = new SettingsModel();
-            return settingModel.updateColorGlobalSettings(user.id, filter.header_color_code, filter.header_links_color_code);
+            var company = DB.company.Find(user.company_id);
+            return settingModel.updateColorGlobalSettings(company.client_id, filter.header_color_code, filter.header_links_color_code);
         }
     }
 }

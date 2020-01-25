@@ -943,9 +943,10 @@ namespace EC.Controllers
             UserModel um = new UserModel(user.id);
             ViewBag.um = um;
             ViewBag.user_id = user.id;
-            if(SettingsModel.checkIsExistGlobalSettings(user.id))
+            if(SettingsModel.checkIsExistGlobalSettings(user.company_id))
             {
-                var globalSettings = db.global_settings.Where(gl => gl.client_id == user.id).FirstOrDefault();
+                var company = db.company.Find(user.company_id);
+                var globalSettings = db.global_settings.Where(gl => gl.client_id == company.client_id).FirstOrDefault();
                 if (globalSettings != null)
                 {
                     if(globalSettings.header_color_code == null)
