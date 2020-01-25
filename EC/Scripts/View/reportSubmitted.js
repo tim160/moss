@@ -23,14 +23,18 @@
         var body = 'pass=' + encodeURIComponent(pass) +
             '&userId=' + encodeURIComponent(userId);
 
-        xhr.open('POST', '/Report/SaveLoginChanges', false);
+        xhr.open('POST', '/Report/SaveLoginChanges', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $("#successPasswordChanged").modal();
+                document.getElementById("saveChangesButton").style.display = "none";
+            } else {
+                console.log("error saving password");
+            }
+        }
         xhr.send(body);
 
-        if (xhr.status == 200) {
-            $("#successPasswordChanged").modal();
-            document.getElementById("saveChangesButton").style.display = "none";
-        }
     }
     var linkRegistrReport = document.getElementById('linkRegistrationReport');
     if (linkRegistrReport) {

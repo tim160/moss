@@ -245,18 +245,30 @@ namespace EC.Controllers
         }
 
  
-
-        public ActionResult SaveLoginChanges()
+        [HttpPost]
+        public ActionResult SaveLoginChanges(int userId, string pass)
         {
-            int user_Id = Convert.ToInt16(Request["userId"]);
-            string pass = Request["pass"];
-            LoginModel lm = new LoginModel();
-            string result = lm.SaveLoginChanges(user_Id, pass);
-            if(result.ToLower() == "success")
-            {
-                SignIn(db.user.Find(user_Id));
-            }
             JsonResult json = new JsonResult();
+            string result = "false";
+
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+            {
+                json.Data = result;
+                return json;
+            }
+
+            
+            if (user.id == userId)
+            {
+                LoginModel lm = new LoginModel();
+                result = lm.SaveLoginChanges(userId, pass);
+                if (result.ToLower() == "success")
+                {
+                    SignIn(db.user.Find(userId));
+                }
+            }
+            
             json.Data = result;
             return json;
         }
