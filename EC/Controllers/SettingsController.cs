@@ -945,7 +945,7 @@ namespace EC.Controllers
             ViewBag.user_id = user.id;
             if(SettingsModel.checkIsExistGlobalSettings(user.id))
             {
-                var globalSettings = db.global_settings.FirstOrDefault();
+                var globalSettings = db.global_settings.Where(gl => gl.client_id == user.id).FirstOrDefault();
                 if (globalSettings != null)
                 {
                     if(globalSettings.header_color_code == null)
