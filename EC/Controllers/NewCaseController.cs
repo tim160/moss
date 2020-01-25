@@ -7,9 +7,10 @@ using EC.Models.Database;
 using EC.Models.ViewModels;
 using EC.Models;
 using EC.Models.ECModel;
-using Rotativa.MVC;
+using Rotativa;
 using EC.Localization;
 using EC.Business.Actions;
+using System.Threading.Tasks;
 
 namespace EC.Controllers
 {
@@ -570,22 +571,28 @@ namespace EC.Controllers
             if (pdf)
             {
                 var report = db.report.FirstOrDefault(x => x.id == id);
-                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}";
+                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}.pdf"; 
                 //return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
-                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { };
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
             }
 
             ViewBag.user_id = user.id;
             return View(rm);
         }
 
-        public ActionResult PrintToPdfOriginal(Guid id, bool pdf = true)
+        public ActionResult PrintToPdfOriginal(Guid id, Guid? ug, bool pdf = true)
         {
             var report = db.report.FirstOrDefault(x => x.guid == id);
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null && ug.HasValue)
+            {
+                user = db.user.FirstOrDefault(x => x.guid == ug);
+            }
             if (user == null || user.id == 0)
+            {
                 return RedirectToAction("Login", "Service");
+            }
 
             var rm = new ReportModel(report.id);
             if (!rm.HasAccessToReport(user.id))
@@ -595,7 +602,7 @@ namespace EC.Controllers
             {
                 var fn = $"Report to {rm.CompanyName()}";
                 //return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
-                return new ActionAsPdf("PrintToPdfOriginal", new { id = id, pdf = false }) { };
+                return new ActionAsPdf("PrintToPdfOriginal", new { id = id, pdf = false, ug = user.guid }) { };
             }
 
             ViewBag.Roles = db.role_in_report.ToList();

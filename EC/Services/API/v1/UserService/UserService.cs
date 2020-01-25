@@ -1,4 +1,5 @@
-﻿using EC.Common.Interfaces;
+﻿using EC.Common.Base;
+using EC.Common.Interfaces;
 using EC.Constants;
 using EC.Core.Common;
 using EC.Errors.CommonExceptions;
@@ -6,14 +7,22 @@ using EC.Localization;
 using EC.Models;
 using EC.Models.API.v1.User;
 using EC.Models.Database;
+using EC.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace EC.Services.API.v1.UserService
 {
     internal class UserService : ServiceBase<user>
     {
+        public Task<PagedList<EC.Models.API.v1.User.UserModel>> GetPagedAsync(int page, int pageSize, Expression<Func<user, bool>> filter = null)
+        {
+            return GetPagedAsync<string, EC.Models.API.v1.User.UserModel>(page, pageSize, filter, null);
+        }
         public async Task<int> CreateAsync(CreateUserModel createUserModel, bool isCC)
         {
             if (createUserModel == null)
@@ -23,34 +32,73 @@ namespace EC.Services.API.v1.UserService
 
             List<Exception> errors = new List<Exception>();
 
+            if (!String.IsNullOrEmpty(createUserModel.PartnerInternalID))
+            {
+                var partnerInternal = _appContext.user.Where(user => user.partner_api_id.Equals(createUserModel.PartnerInternalID)).FirstOrDefault();
+                if (partnerInternal != null)
+                {
+                    errors.Add(new Exception("PartnerInternalID already exists"));
+                }
+            }
 
             if (errors.Count > 0)
             {
                 throw new AggregateException(errors);
             }
-            user newUser = _set.Add(createUserModel, user => {
+
+            var generateModel = new GenerateRecordsModel();
+            string login = generateModel.GenerateLoginName(createUserModel.first_nm, createUserModel.last_nm);
+            string pass = generateModel.GeneretedPassword().Trim();
+
+            user newUser = _set.Add(createUserModel, user =>
+            {
                 user.company_id = createUserModel.company_id;
                 user.role_id = createUserModel.role_id;
-                user.status_id = createUserModel.status_id;
                 user.first_nm = createUserModel.first_nm;
                 user.last_nm = createUserModel.last_nm;
-                user.login_nm = createUserModel.login_nm;
-                user.password = createUserModel.password;
+                user.login_nm = login;
+                user.password = PasswordUtils.GetHash(pass);
                 user.photo_path = createUserModel.photo_path;
-                user.preferred_contact_method_id = createUserModel.preferred_contact_method_id;
-                user.question_ds = createUserModel.question_ds;
-                user.answer_ds = createUserModel.answer_ds;
                 user.last_update_dt = DateTime.Now;
-                user.preferred_email_language_id = createUserModel.preferred_email_language_id;
-                user.notification_messages_actions_flag = createUserModel.notification_messages_actions_flag;
-                user.notification_new_reports_flag = createUserModel.notification_new_reports_flag;
-                user.notification_marketing_flag = createUserModel.notification_marketing_flag;
-                user.notification_summary_period = createUserModel.notification_summary_period;
-                user.user_id = createUserModel.user_id;
+                user.is_api = true;
+                user.api_source_id = null;
+                user.partner_api_id = createUserModel.PartnerInternalID;
             });
+
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
+
+            try
+            {
+                var currentCreateduser = _appContext.user.Find(newUser.id);
+                var sessionUser = _appContext.user.Find(currentCreateduser.user_id);
+
+                if (sessionUser != null)
+                {
+                    var company = _appContext.company.Find(sessionUser.company_id);
+                    if (company != null)
+                    {
+                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(isCC);
+                        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, "");
+                        eb.NewMediator(
+                            $"{sessionUser.first_nm} {sessionUser.last_nm}",
+                            $"{company.company_nm}",
+                            System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
+                            System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
+                            $"{currentCreateduser.login_nm}",
+                            $"{pass}");
+                        string body = eb.Body;
+                        EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
+                        emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, currentCreateduser.id, sessionUser.company_id, currentCreateduser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             return newUser.id;
         }
 
@@ -68,7 +116,9 @@ namespace EC.Services.API.v1.UserService
             user user = await _set
                 .UpdateAsync(id, updateUserModel)
                 .ConfigureAwait(false);
-            updateUserModel.last_update_dt = DateTime.Now;
+
+            user.last_update_dt = DateTime.Now;
+
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
@@ -91,6 +141,10 @@ namespace EC.Services.API.v1.UserService
 
             user user = await _set
                 .UpdateAsync(id, userForDelete)
+                .ConfigureAwait(false);
+
+            await _appContext
+                .SaveChangesAsync()
                 .ConfigureAwait(false);
             return user.id;
         }

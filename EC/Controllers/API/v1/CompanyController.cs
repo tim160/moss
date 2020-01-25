@@ -108,7 +108,50 @@ namespace EC.Controllers.API.v1
 
 			return ApiOk();
 		}
+
+        [HttpPut]
+        [Route("externalcompany/{id}")]
+        public async Task<IHttpActionResult> UpdateExternalCompany(string id, UpdateCompanyModel updateCompanyModel)
+        {
+            _logger.Debug($"id={id}");
+
+            if (updateCompanyModel == null)
+            {
+                ModelState.AddModelError(nameof(updateCompanyModel), "Company data required.");
+            }
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
+
+            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company not found.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
+
+            try
+            {
+                await _companyService
+                    .UpdateAsync(updateCompanyModel, idFromDb)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
+
         [HttpDelete]
+        [Route("delete/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)
@@ -120,6 +163,35 @@ namespace EC.Controllers.API.v1
             {
                 await _companyService
                     .DeleteAsync(id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
+        [HttpDelete]
+        [Route("externaldelete/{id}")]
+        public async Task<IHttpActionResult> Delete(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
+
+            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company not found.");
+            }
+
+            try
+            {
+                await _companyService
+                    .DeleteAsync(idFromDb)
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)

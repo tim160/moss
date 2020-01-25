@@ -9,7 +9,7 @@ using EC.Controllers.ViewModel;
 using EC.Constants;
 using EC.Common.Base;
 using EC.Localization;
-using Rotativa.MVC;
+using Rotativa;
 using EC.Models.ViewModels;
 using EC.Models.Culture;
 using EC.Utils;
