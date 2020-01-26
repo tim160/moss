@@ -254,31 +254,39 @@
                             }
 
                         }
-                        @if(is_sso == false)
+                        @if (is_sso == false)
                         {
-                          <li class="dropDown-navigation__li active">
-                              <a href="/settings/password/" class="dropDown-navigation__a">
-                                  @LocalizationGetter.GetString("Password")
-                              </a>
-                          </li>
+                            <li class="dropDown-navigation__li active">
+                                <a href="/settings/password/" class="dropDown-navigation__a">
+                                    @LocalizationGetter.GetString("Password")
+                                </a>
+                            </li>
                         }
                         @if (is_sso == false)
                         {
-                        <li class="dropDown-navigation__li">
-                            <form id="logout_form" action="@Url.Action("Logout", "Base")">
-                                <a href="" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
-                                    @LocalizationGetter.GetString("Logout2")
-                                </a>
-                            </form>
-                        </li>
+                            <li class="dropDown-navigation__li">
+                                <form id="logout_form" action="@Url.Action("Logout", "Base")">
+                                    <a href="" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
+                                        @LocalizationGetter.GetString("Logout2")
+                                    </a>
+                                </form>
+                            </li>
                         }
                     </ul>
                 </div>
             </div>
         </div>
     </header>
-
-    <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;" >
+    @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+    {
+        <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+        </style>
+    }
+    <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;">
         <div class="headerBlockTextLeft">
             @{
                 string hrefURL = Request.Url.AbsoluteUri.ToLower();

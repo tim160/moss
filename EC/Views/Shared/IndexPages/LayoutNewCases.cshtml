@@ -243,7 +243,7 @@
                         </a>
                     </li><!-- /.navConteiner -->
                     <li class="navConteiner @_menuTasks">
-                        <a href="/tasks/Index" class="navConteiner__a navConteiner__badgeCount_enable" >
+                        <a href="/tasks/Index" class="navConteiner__a navConteiner__badgeCount_enable">
                             <span class="navConteiner__icon navConteiner__icon_tasks"></span>
                             <span class="navConteiner__name">Tasks</span>
                             @if (unread_task_number_string.Length > 0)
@@ -255,7 +255,7 @@
                             <span class="navConteiner__icon navConteiner__icon_messages"></span>
                             <span class="navConteiner__name">Messages</span>
                             @if (unread_message_number_string.Length > 0)
-                            { <span class="navConteiner__badgeCount ">@unread_message_number_string</span> }
+                            {<span class="navConteiner__badgeCount ">@unread_message_number_string</span>}
                         </a>
                     </li><!-- /.navConteiner -->
                     <li class="navConteiner @_menuCases">
@@ -276,7 +276,7 @@
                                 <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
                                 <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
                             *@
-                            @if (_user!= null)
+                            @if (_user != null)
                             {
                                 var logo = cm.getLogoCompany(_user.company_id);
                                 if (!String.IsNullOrEmpty(logo))
@@ -304,41 +304,41 @@
                                 Posters
                             </a>
                         </li>
-                      <li class="dropDown-navigation__li">
-                        <a href="/Trainer/Calendar" class="dropDown-navigation__a">
-                          Book Training
-                        </a>
-                      </li>
-                      @if (cm.AllPayments().Count > 0)
-                      {
                         <li class="dropDown-navigation__li">
-                          <a href="/Payment/History" class="dropDown-navigation__a">
-                            Subscription
-                          </a>
-                        </li>
-                      }
-                      @if (is_sso == false)
-                      {
-                        <li class="dropDown-navigation__li active">
-                            <a href="/settings/password/" class="dropDown-navigation__a">
-                                @LocalizationGetter.GetString("Password")
+                            <a href="/Trainer/Calendar" class="dropDown-navigation__a">
+                                Book Training
                             </a>
                         </li>
-                      }
+                        @if (cm.AllPayments().Count > 0)
+                        {
+                            <li class="dropDown-navigation__li">
+                                <a href="/Payment/History" class="dropDown-navigation__a">
+                                    Subscription
+                                </a>
+                            </li>
+                        }
+                        @if (is_sso == false)
+                        {
+                            <li class="dropDown-navigation__li active">
+                                <a href="/settings/password/" class="dropDown-navigation__a">
+                                    @LocalizationGetter.GetString("Password")
+                                </a>
+                            </li>
+                        }
                         @*<li class="dropDown-navigation__li">
                                 <a href="/Payment/History" class="dropDown-navigation__a">
                                     @LocalizationGetter.GetString("Subscription")
                                 </a>
                             </li>*@
-                        @if ( is_sso == false)
+                        @if (is_sso == false)
                         {
-                        <li class="dropDown-navigation__li">
-                            <form id="logout_form" action="@Url.Action("Logout", "Base")">
-                                <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
-                                    @LocalizationGetter.GetString("Logout2")
-                                </a>
-                            </form>
-                        </li>
+                            <li class="dropDown-navigation__li">
+                                <form id="logout_form" action="@Url.Action("Logout", "Base")">
+                                    <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
+                                        @LocalizationGetter.GetString("Logout2")
+                                    </a>
+                                </form>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -389,6 +389,15 @@
             hrefURL = "/Payment/History";
             page_subtitle = LocalizationGetter.GetString("Payments");
         }
+    }
+    @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+    {
+        <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+        </style>
     }
     <div class="container clearfix">
         <div class="breadcrumbs clearfix">
@@ -457,7 +466,7 @@
             </ul>
         </div>
     </div>
-    
+
     @RenderBody()
     @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", false } })
     <script src="~/Scripts/View/Settings.js"></script>

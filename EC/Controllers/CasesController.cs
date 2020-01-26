@@ -27,10 +27,7 @@ namespace EC.Controllers
             }
             ViewBag.pending_report_ids = all_pending_reports_ids;
 
-            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
 
-            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
 
             //ViewBag.um = um;
             ViewBag.user_id = user.id;

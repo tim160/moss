@@ -11,22 +11,22 @@
     <link rel="stylesheet" href="~/Content/styleAnalytics.css" />
     <link href="~/Libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 
-  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-  int user_id = (Int32)ViewBag.user_id;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
 
-  string _today = ViewBag._today;
-  string ec_title = "Employee Confidential";
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  if (is_cc.Value)
-  {
-    ec_title = "Campus Confidential";
-  }
-  ViewBag.Title = LocalizationGetter.GetString("Analytics", is_cc);
-  ec_title = ec_title.ToUpper();
+    string _today = ViewBag._today;
+    string ec_title = "Employee Confidential";
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    if (is_cc.Value)
+    {
+        ec_title = "Campus Confidential";
+    }
+    ViewBag.Title = LocalizationGetter.GetString("Analytics", is_cc);
+    ec_title = ec_title.ToUpper();
 }
 
 <!-- Include Date Range Picker -->
@@ -66,6 +66,15 @@
         cursor: pointer;
     }
 </style>
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+    <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+    </style>
+}
 <div class="blockSettings blockAnalytics">
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 

@@ -138,6 +138,11 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
+                        UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
+
+                        Session["header_color_code"] = userColorSchema.global_Setting.header_color_code;
+                        Session["header_links_color_code"] = userColorSchema.global_Setting.header_links_color_code;
+
                         return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
                     return RedirectToAction("Index", "Cases");
@@ -170,7 +175,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Index");
             } else
             {
-                UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+                UserColorSchemaModel userColorSchema = new UserColorSchemaModel(selectedCompany.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
                 ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             }

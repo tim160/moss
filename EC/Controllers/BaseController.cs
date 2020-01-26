@@ -61,7 +61,8 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
 
-
+            ViewBag.header_color_code = Session["header_color_code"];
+            ViewBag.header_links_color_code = Session["header_links_color_code"];
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
             if (user == null)
