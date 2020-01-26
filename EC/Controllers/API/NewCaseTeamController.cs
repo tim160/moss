@@ -19,10 +19,10 @@ namespace EC.Controllers.API
 
         public class Filter
         {
-            public int? ReportFlag { get; set; }
+            public int? id { get; set; } 
+            public int? AddToTeam { get; set; }
             public int? Report_id { get; set; }
             public string NewMessage { get; set; }
-            public int? AddToTeam { get; set; }
             public int? RemoveFromTeam { get; set; }
             public int? MakeCaseOwner { get; set; }
         }
@@ -122,7 +122,7 @@ namespace EC.Controllers.API
         }
 
         [HttpPost]
-        public object Post(Filter filter)
+        public object Post([FromBody]Filter filter)
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
 
@@ -137,9 +137,9 @@ namespace EC.Controllers.API
                 IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
                
                 UserModel _um = new UserModel(filter.AddToTeam.Value);
-                _um.AddToMediators(filter.AddToTeam.Value, filter.Report_id.Value);
+                _um.AddToMediators(filter.AddToTeam.Value, filter.id.Value);
                 _um = _um._user.company_id == user.company_id ? _um : null;
-                logModel.UpdateReportLog(user.id, 5, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
+                logModel.UpdateReportLog(user.id, 5, filter.id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
 
                 if ((_um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_um._user.email.Trim()))
                 {
@@ -148,7 +148,7 @@ namespace EC.Controllers.API
                     List<string> bcc = new List<string>();
 
                     to.Add(_um._user.email.Trim());
-                    ReportModel _rm = new ReportModel(filter.Report_id.Value);
+                    ReportModel _rm = new ReportModel(filter.id.Value);
                     _rm = _rm._report.company_id == user.company_id ? _rm : null;
 
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
@@ -164,22 +164,22 @@ namespace EC.Controllers.API
             {
                 UserModel _um = new UserModel(filter.RemoveFromTeam.Value);
 
-                int tasks_number = _um.UserTasks(1, filter.Report_id.Value, true).Count();
+                int tasks_number = _um.UserTasks(1, filter.id.Value, true).Count();
                 if (tasks_number == 0)
                 {
                     LogModel logModel = new LogModel();
 
-                    _um.RemoveMediator(filter.RemoveFromTeam.Value, filter.Report_id.Value);
-                    logModel.UpdateReportLog(user.id, 6, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
+                    _um.RemoveMediator(filter.RemoveFromTeam.Value, filter.id.Value);
+                    logModel.UpdateReportLog(user.id, 6, filter.id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
                 }
                 else
                 {
-                    return Get(filter.Report_id.Value, false, "User have a tasks");
+                    return Get(filter.id.Value, false, "User have a tasks");
                 }
             }
             if (filter.MakeCaseOwner.HasValue)
             {
-                var list = DB.report_owner.Where(x => x.report_id == filter.Report_id).ToList();
+                var list = DB.report_owner.Where(x => x.id == filter.id).ToList();
                 foreach (var item in list)
                 {
                     item.status_id = item.user_id == filter.MakeCaseOwner.Value ? 2 : 1;
@@ -189,7 +189,7 @@ namespace EC.Controllers.API
                     DB.report_owner.Add(new report_owner
                     {
                         created_on = DateTime.Now,
-                        report_id = filter.Report_id.Value,
+                        id = filter.id.Value,
                         user_id = filter.MakeCaseOwner.Value,
                         status_id = 2,
                     });
@@ -198,7 +198,7 @@ namespace EC.Controllers.API
 
                 UserModel _um = new UserModel(filter.MakeCaseOwner.Value);
                 _um = _um._user.company_id == user.company_id ? _um : null;
-                ReportModel _rm = new ReportModel(filter.Report_id.Value);
+                ReportModel _rm = new ReportModel(filter.id.Value);
                 _rm = _rm._report.company_id == user.company_id ? _rm : null;
 
                 List<string> to = new List<string>();
@@ -212,10 +212,10 @@ namespace EC.Controllers.API
                 string body = eb.Body;
                 emailNotificationModel.SaveEmailBeforeSend(user.id, _um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, false, 65);
 
-                //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, true);
+                em.Send(to, cc, LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, true);
             }
 
-            return Get(filter.Report_id.Value);
+            return Get(filter.id.Value);
         }
     }
 }
