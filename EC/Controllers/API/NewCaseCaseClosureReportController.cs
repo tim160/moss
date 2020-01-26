@@ -21,7 +21,7 @@ namespace EC.Controllers.API
     {
         public class Filter
         {
-            public int Report_id { get; set; }
+            public int id { get; set; }
             public report_cc_crime Report_cc_crime { get; set; }
 
             public report_case_closure_outcome Report_case_closure_outcome { get; set; }
@@ -40,16 +40,16 @@ namespace EC.Controllers.API
             }
 
             UserModel um = new UserModel(user.id);
-            var rm = new ReportModel(filter.Report_id);
+            var rm = new ReportModel(filter.id);
 
-            var report = DB.report.FirstOrDefault(x => x.id == filter.Report_id);
+            var report = DB.report.FirstOrDefault(x => x.id == filter.id);
 
             var report_cc_crime = DB.report_cc_crime
-                .Where(x => x.report_id == filter.Report_id)
+                .Where(x => x.report_id == filter.id)
                 .FirstOrDefault();
 
-            var report_case_closure_outcome = (from mi in DB.report_non_mediator_involved.Where(x => x.report_id == filter.Report_id)
-                                       join jo in DB.report_case_closure_outcome.Where(x => x.report_id == filter.Report_id) on mi.id equals jo.non_mediator_involved_id into j1
+            var report_case_closure_outcome = (from mi in DB.report_non_mediator_involved.Where(x => x.report_id == filter.id)
+                                       join jo in DB.report_case_closure_outcome.Where(x => x.report_id == filter.id) on mi.id equals jo.non_mediator_involved_id into j1
                                        from o in j1.DefaultIfEmpty()
                                        join joc in DB.company_outcome.Where(x => x.company_id == report.company_id) on o.outcome_id equals joc.id into j2
                                        from oc in j2.DefaultIfEmpty()
@@ -65,12 +65,12 @@ namespace EC.Controllers.API
                                            outcome_c = x.outcome_c,
                                        }).ToList();
 
-            var reporter = DB.report_case_closure_outcome.FirstOrDefault(x => x.report_id == filter.Report_id & x.non_mediator_involved_id == null);
+            var reporter = DB.report_case_closure_outcome.FirstOrDefault(x => x.report_id == filter.id & x.non_mediator_involved_id == null);
             if (reporter == null)
             {
                 reporter = new report_case_closure_outcome
                 {
-                    report_id = filter.Report_id,
+                    report_id = filter.id,
                     role_id = 1
                 };
             }
@@ -87,14 +87,14 @@ namespace EC.Controllers.API
                 outcomes.Insert(0, none_outcome);
             }
 
-            var rep_outcome = DB.report_case_closure_outcome.FirstOrDefault(x => x.report_id == filter.Report_id & x.non_mediator_involved_id == null);
+            var rep_outcome = DB.report_case_closure_outcome.FirstOrDefault(x => x.report_id == filter.id & x.non_mediator_involved_id == null);
 
             if (rep_outcome == null)
             {
                 rep_outcome = new report_case_closure_outcome
                 {
                     non_mediator_involved_id = null,
-                    report_id = filter.Report_id                    
+                    report_id = filter.id                    
                 };
                 DB.report_case_closure_outcome.Add(rep_outcome);
                 DB.SaveChanges();
@@ -121,7 +121,7 @@ namespace EC.Controllers.API
                 outcomes = outcomes,
 
                 rep_outcome = DB.report_case_closure_outcome
-                    .Where(x => x.report_id == filter.Report_id & x.non_mediator_involved_id == null)
+                    .Where(x => x.report_id == filter.id & x.non_mediator_involved_id == null)
                     .Select(x => new {
                         outcome = x,
                         outcome_c = DB.company_outcome.FirstOrDefault(z => z.id == x.outcome_id),
@@ -146,12 +146,12 @@ namespace EC.Controllers.API
             if (filter.Report_cc_crime != null)
             {
                 var report_cc_crime = DB.report_cc_crime
-                        .Where(x => x.report_id == filter.Report_id)
+                        .Where(x => x.report_id == filter.id)
                         .FirstOrDefault();
 
                 if (report_cc_crime == null)
                 {
-                    filter.Report_cc_crime.report_id = filter.Report_id;
+                    filter.Report_cc_crime.report_id = filter.id;
 
                     filter.Report_cc_crime.cc_crime_statistics_category_id_user_id = user.id;
                     filter.Report_cc_crime.cc_crime_statistics_category_id_update_dt = DateTime.Now;
@@ -190,7 +190,7 @@ namespace EC.Controllers.API
                 {
                     item = new report_case_closure_outcome
                     {
-                        report_id = filter.Report_id,
+                        report_id = filter.id,
                         outcome_id = filter.Report_case_closure_outcome.outcome_id,
                         note = filter.Report_case_closure_outcome.note,
                         non_mediator_involved_id = filter.Report_case_closure_outcome.non_mediator_involved_id
@@ -210,11 +210,11 @@ namespace EC.Controllers.API
                 LogModel logModel = new LogModel();
                 if ((mediator != null) && (mediator.role_in_report_id == 3)) //49	Recommended Outcome for Alleged Offender Added
                 {
-                  logModel.UpdateReportLog(user.id, 49, filter.Report_id, outcome.outcome_en, null, "");
+                  logModel.UpdateReportLog(user.id, 49, filter.id, outcome.outcome_en, null, "");
                 }
                 else //50	Recommended Action for Witness or Reporter Added
                 {
-                    logModel.UpdateReportLog(user.id, 50, filter.Report_id, outcome.outcome_en, null, "");
+                    logModel.UpdateReportLog(user.id, 50, filter.id, outcome.outcome_en, null, "");
                 }
             }
 
