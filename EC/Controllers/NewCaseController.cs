@@ -25,6 +25,13 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service", new { returnUrl = Request.Url.LocalPath });
 
+            string report_id_from_qs = Request.QueryString["report_id"];
+            if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+            {
+                return RedirectToAction("Index", "NewCase", new { id = report_id_from_qs });
+            }
+   
+
             ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
@@ -56,7 +63,13 @@ namespace EC.Controllers
 
         public ActionResult InvestigationNotes(int id)
         {
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+      string report_id_from_qs = Request.QueryString["report_id"];
+      if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+      {
+        return RedirectToAction("InvestigationNotes", "NewCase", new { id = report_id_from_qs });
+      }
+      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -92,7 +105,13 @@ namespace EC.Controllers
         }
         public ActionResult CaseClosureReport(int id)
         {
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+          string report_id_from_qs = Request.QueryString["report_id"];
+          if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+          {
+            return RedirectToAction("CaseClosureReport", "NewCase", new { id = report_id_from_qs });
+          }
+          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -130,7 +149,13 @@ namespace EC.Controllers
 
         public ActionResult Activity(int id)
         {
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+          string report_id_from_qs = Request.QueryString["report_id"];
+          if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+          {
+            return RedirectToAction("Activity", "NewCase", new { id = report_id_from_qs });
+          }
+
+          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -158,7 +183,9 @@ namespace EC.Controllers
 
         public ActionResult Tasks(int id)
         {
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+
+          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -201,7 +228,13 @@ namespace EC.Controllers
 
         public ActionResult Messages(int id)
         {
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+      string report_id_from_qs = Request.QueryString["report_id"];
+      if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+      {
+        return RedirectToAction("Messages", "NewCase", new { id = report_id_from_qs });
+      }
+      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
@@ -230,6 +263,7 @@ namespace EC.Controllers
 
         public ActionResult Reporter(int id)
         {
+
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
