@@ -2,12 +2,8 @@
 @using EC.Localization;
 @using EC.Utils;
 @{
-
-    //LocalizationGetter.GetString("TrainingTimeslotBooked", is_cc);
     ViewBag.Title = "New Incident Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //List<anonymity> anonimity = ViewBag.anonimity;
-    //List<anonymity> string_anon = anonimity;
 
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -36,15 +32,6 @@
     {
         logo = logo.Trim();
     }
-}
-@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
-{
-    <style>
-    :root {
-        --HeaderColor: @ViewBag.header_color_code;
-        --HeaderLinksColor: @ViewBag.header_links_color_code;
-    }
-    </style>
 }
 
 @section pageStyles{

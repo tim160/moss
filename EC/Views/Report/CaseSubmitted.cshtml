@@ -48,7 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
     <script type="text/javascript" src="~/Scripts/View/reportSubmitted.js?version=1"></script>
-    <script type="text/javascript" src="~/Scripts/View/report.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/View/report.js"></script>*@
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
 }
 
@@ -116,7 +116,7 @@
                 <li data-id="1" class="stepDone"><span>@LocalizationGetter.GetString("GeneralInformation", is_cc)</span></li>
                 <li data-id="2" class="stepDone"><span>@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span></li>
                 <li data-id="3" class="stepDone"><span>@LocalizationGetter.GetString("CaseInformation", is_cc)</span></li>
-                <li data-id="4" class="stepDone"><span>@LocalizationGetter.GetString("CaseSummary", is_cc)</span></li>
+                <li data-id="4" class="clicked" style="opacity: 1;"><span>@LocalizationGetter.GetString("CaseSummary", is_cc)</span></li>
             </ul>
         </div>
 
