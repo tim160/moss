@@ -193,16 +193,16 @@ namespace EC.Controllers
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //      if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
             //           return RedirectToAction("Login", "Service");
-            int sender_id = Convert.ToInt16(Request["sender_id"]);
+            int sender_id = Convert.ToInt32(Request["sender_id"]);
             if (user.id != sender_id)
             {
                 // security issue
                 sender_id = user.id;
             }
 
-            int report_id = Convert.ToInt16(Request["report_id"]);
+            int report_id = Convert.ToInt32(Request["report_id"]);
             // check if sender has access to report
-            int reporter_access = Convert.ToInt16(Request["reporter_access"]);
+            int reporter_access = Convert.ToInt32(Request["reporter_access"]);
             string body_tx = (string)(Request["body_tx"]);
 
             message _message = new message();
