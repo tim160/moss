@@ -14,6 +14,7 @@ using log4net;
 using EC.Constants;
 using EC.Common.Util;
 using EC.Localization;
+using System.Web.Configuration;
 
 namespace EC.Controllers
 {
@@ -51,6 +52,16 @@ namespace EC.Controllers
           }
         }
 
+        internal bool is_sso_domain
+        {
+          get
+          {
+            if (WebConfigurationManager.AppSettings["HeaderLinksColor"] != null && WebConfigurationManager.AppSettings["HeaderLinksColor"]== "1")
+              return true;
+            else
+              return false;
+          }
+        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);

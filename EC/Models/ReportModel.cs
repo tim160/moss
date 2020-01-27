@@ -1005,7 +1005,7 @@ namespace EC.Models
     public report_investigation_status _last_investigation_status()
     {
       report_investigation_status last_status = new report_investigation_status();
-      if (db.report_investigation_status.Any(item => item.report_id == ID))
+      if (db.report_investigation_status.Where(item => item.report_id == ID).Any())
         last_status = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).FirstOrDefault();
 
       if ((last_status != null) && (last_status.investigation_status_id != 0))

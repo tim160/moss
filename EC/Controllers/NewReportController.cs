@@ -40,7 +40,7 @@ namespace EC.Controllers.ViewModel
             if ((rm._investigation_status != 1) && (rm._investigation_status != 2) && (rm._investigation_status != 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewCase", new { report_id = id });
+                return RedirectToAction("Index", "NewCase", new { id = id });
             }
 
             #region EC-CC Viewbag
