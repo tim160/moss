@@ -73,7 +73,7 @@ namespace EC.Controllers
             Session[ECSessionConstants.SessionIsSSO] = "0";
             if (is_sso)
                 Session[ECSessionConstants.SessionIsSSO] = "1";
-            if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
+      ///      if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
 
 

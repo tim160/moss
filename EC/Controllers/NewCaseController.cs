@@ -450,7 +450,7 @@ namespace EC.Controllers
             {
                 return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
             }
-            return RedirectToAction("Attachments", new { report_id = id });
+            return RedirectToAction("Attachments", new { id = id });
         }
 
         [HttpPost]
@@ -473,7 +473,7 @@ namespace EC.Controllers
             file.visible_reporter = type == 2;
             db.SaveChanges();
 
-            return RedirectToAction("Attachments", new { report_id = id });
+            return RedirectToAction("Attachments", new { id = id });
         }
 
         public ActionResult Task(int? id)
