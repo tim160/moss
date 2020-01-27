@@ -3069,4 +3069,7 @@ Do not want to involve</value>
   <data name="GlobalSettings" xml:space="preserve">
     <value>Global Settings</value>
   </data>
+  <data name="CaseManagament" xml:space="preserve">
+    <value>Case Managament</value>
+  </data>
 </root>

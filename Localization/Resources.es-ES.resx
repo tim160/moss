@@ -3062,4 +3062,7 @@
   <data name="GlobalSettings" xml:space="preserve">
     <value>Configuración global</value>
   </data>
+  <data name="CaseManagament" xml:space="preserve">
+    <value>Manejo de caso</value>
+  </data>
 </root>

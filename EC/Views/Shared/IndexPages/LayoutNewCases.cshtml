@@ -229,11 +229,25 @@
         }
         <div class="container clearfix">
             <div class="header__leftBlock">
-                <div class="headerTop-logo">
-                    <a href="#" class="headerTop-logo__link">
-                        <div class="headerTop-logo__img"></div>
-                    </a>
-                </div>
+                @if (ViewBag.is_sso_domain == true)
+                {
+                    <div class="headerTop-logo">
+                        <a href="#" class="headerTop-logo__link" style="padding: 1px 0px;text-align: center;">
+                            <div class="headerTop-Text__text">
+                                @LocalizationGetter.GetString("CaseManagament")
+                            </div>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="headerTop-logo">
+                        <a href="#" class="headerTop-logo__link">
+                            <div class="headerTop-logo__img"></div>
+                        </a>
+                    </div>
+                }
+
                 <ul class="mainNavigation">
                     <li class="navConteiner @_menuAnalytics">
                         <a href="/analytics/Index" class="navConteiner__a ">

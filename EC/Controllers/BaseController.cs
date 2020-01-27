@@ -46,21 +46,21 @@ namespace EC.Controllers
 
         internal bool is_sso
         {
-          get
-          {
-            return (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1");
-          }
+            get
+            {
+                return (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1");
+            }
         }
 
         internal bool is_sso_domain
         {
-          get
-          {
-            if (WebConfigurationManager.AppSettings["HeaderLinksColor"] != null && WebConfigurationManager.AppSettings["HeaderLinksColor"]== "1")
-              return true;
-            else
-              return false;
-          }
+            get
+            {
+                if (WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK] != null && WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK] == "1")
+                    return true;
+                else
+                    return false;
+            }
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -72,9 +72,9 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
 
-            ViewBag.header_color_code = Session["header_color_code"];
-            ViewBag.header_links_color_code = Session["header_links_color_code"];
-
+            ViewBag.header_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
+            ViewBag.header_links_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
+            ViewBag.is_sso_domain = false;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
             if (user == null)
             {
