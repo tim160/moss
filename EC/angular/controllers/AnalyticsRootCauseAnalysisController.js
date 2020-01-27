@@ -39,7 +39,6 @@
 
         $scope.refresh = function (secondaryType, companyIdArray) {
             AnalyticsRootCauseAnalysisService.get({ secondaryType: secondaryType, companyId: companyIdArray }, function (data) {
-                debugger;
 
                 if ($scope.secondaryTypes.length === 0) {
                     $scope.secondaryTypes = data.SecondaryTypes;
@@ -98,7 +97,7 @@
                 y: function (d) {
                     return d.count;
                 },
-                width: 220,
+                width: 225,
                 height: 300,
                 format: '',
                 showLabels: false,
@@ -128,7 +127,7 @@
                 y: function (d) {
                     return d.count;
                 },
-                width: 220,
+                width: 225,
                 height: 300,
                 format: '',
                 showLabels: false,
@@ -159,7 +158,7 @@
                 y: function (d) {
                     return d.count;
                 },
-                width: 220,
+                width: 225,
                 height: 300,
                 format: '',
                 showLabels: false,

@@ -4065,5 +4065,6 @@ body .bigBlock  .blockLinesItem p{
         padding: 0 20px;
     }
     #rootCauseAnalysis #chart1 svg, #rootCauseAnalysis #chart2 svg, #rootCauseAnalysis #chart3 svg {
-        padding-left: 30px;
+        padding-left: 20px;
+        margin-left: 40px;
     }
