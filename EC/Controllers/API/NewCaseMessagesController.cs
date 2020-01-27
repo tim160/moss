@@ -13,7 +13,7 @@ namespace EC.Controllers.API
         public class Filter
         {
             public int? ReportFlag { get; set; }
-            public int? Report_id { get; set; }
+            public int? id { get; set; }
             public int? Mode { get; set; }
             public string NewMessage { get; set; }
         }
@@ -64,7 +64,7 @@ namespace EC.Controllers.API
             message.subject_ds = "";
             message.reporter_access = filter.Mode == 1 ? 2 : 1;
             message.body_tx = filter.NewMessage;
-            message.report_id = filter.Report_id.Value;
+            message.report_id = filter.id.Value;
             DB.message.Add(message);
             DB.SaveChanges();
 
