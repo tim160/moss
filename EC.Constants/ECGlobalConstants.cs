@@ -48,5 +48,7 @@ namespace EC.Constants
                ContactInfoShared = Localization.Resources.GetString("ContactInfoShared")
            }*/
 
+        public const string APP_SETTING_HEADER_COLOR = "HeaderColor";
+        public const string APP_SETTING_HEADER_COLOR_LINK = "HeaderLinksColor";
     }
 }

@@ -1,4 +1,5 @@
-﻿using EC.Models.Database;
+﻿using EC.Constants;
+using EC.Models.Database;
 using System.Linq;
 using System.Web.Configuration;
 
@@ -6,9 +7,6 @@ namespace EC.Models
 {
     public class UserColorSchemaModel : BaseModel
     {
-        private const string APP_SETTING_HEADER_COLOR = "HeaderColor";
-        private const string APP_SETTING_HEADER_COLOR_LINK = "HeaderLinksColor";
-
         private company company { get; set; }
         public global_settings global_Setting { get; set; }
         public UserColorSchemaModel(int? companyid)
@@ -23,16 +21,16 @@ namespace EC.Models
                     {
                         if (string.IsNullOrWhiteSpace(global_Setting.header_color_code))
                         {
-                            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR]))
+                            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR]))
                             {
-                                global_Setting.header_color_code = WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR];
+                                global_Setting.header_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
                             }
                         }
                         if (string.IsNullOrWhiteSpace(global_Setting.header_links_color_code))
                         {
-                            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR_LINK]))
+                            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK]))
                             {
-                                global_Setting.header_links_color_code = WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR_LINK];
+                                global_Setting.header_links_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
                             }
                         }
                     } else
@@ -44,13 +42,13 @@ namespace EC.Models
             else
             {
                 global_Setting = new global_settings();
-                if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR]))
+                if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR]))
                 {
-                    global_Setting.header_color_code = WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR];
+                    global_Setting.header_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
                 }
-                if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR_LINK]))
+                if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK]))
                 {
-                    global_Setting.header_links_color_code = WebConfigurationManager.AppSettings[APP_SETTING_HEADER_COLOR_LINK];
+                    global_Setting.header_links_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
                 }
             }
         }

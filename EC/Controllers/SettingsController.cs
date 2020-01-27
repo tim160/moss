@@ -951,8 +951,8 @@ namespace EC.Controllers
                 {
                     if(globalSettings.header_color_code == null)
                     {
-                        ViewBag.header_color_code = WebConfigurationManager.AppSettings["HeaderColor"];
-                        ViewBag.header_links_color_code = WebConfigurationManager.AppSettings["HeaderLinksColor"];
+                        ViewBag.header_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
+                        ViewBag.header_links_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
                     } else
                     {
                         ViewBag.header_color_code = globalSettings.header_color_code;
