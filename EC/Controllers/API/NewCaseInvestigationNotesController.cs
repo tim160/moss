@@ -96,7 +96,7 @@ namespace EC.Controllers.API
                 .ToList();
 
             var departments = DB.company_department
-                .Where(x => x.company_id == user.company_id)
+                .Where(x => x.company_id == user.company_id && x.status_id == 2)
                 .OrderBy(x => x.department_en)
                 .ToList();
 
