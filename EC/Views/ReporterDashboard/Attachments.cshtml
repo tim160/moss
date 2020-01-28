@@ -50,15 +50,14 @@
             @Html.Hidden("mode", "upload_rd")
             <div class="dragAndDropContainer">
                 <div class="dottedContainer drop-box" ngf-drop ngf-select ng-model="files" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-                     accept="image/*,application/pdf"
-                     ngf-pattern="'image/*,application/pdf'">
+                     accept="{{exts}}"
+                     ngf-pattern="{{exts}}">
                     <div class="semiboldText blackText weight18">
                         @LocalizationGetter.GetString("DragDropFilesHere", is_cc)
                     </div>
                     <div class="secondSemiboldText">@LocalizationGetter.GetString("or", is_cc)</div>
                     <div class="selectFiles">
                         @LocalizationGetter.GetString("SelectFilesUpload", is_cc)
-                        @*<input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="" data-id="attachments" check-file-size="">*@
                     </div>
 
                 </div>
@@ -106,27 +105,3 @@
         }
     </div>
 }
-
-    @*<div id="template">
-        <div class="item">
-            <div class="setAllFilesPaddingLeft">
-                <div class="imgCorner">
-                    <img src="/Content/Icons/generic-file.png">
-                    <div class="square"></div>
-                    <div class="treangle"></div>
-                </div>
-                <div class="description">
-                    <span id="description"></span>
-                    <div class="download">
-                        <a href="" download="">download</a>
-                    </div>
-                </div>
-            </div>
-            <div class="right setAllFilesPaddingRight">
-                <p class="date">
-                </p>
-                <p class="recipient">
-                </p>
-            </div>
-        </div>
-    </div>*@

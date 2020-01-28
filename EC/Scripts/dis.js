@@ -1546,7 +1546,28 @@
         $scope.log = '';
         var report_id = angular.element( document.querySelector( '#report_id' ) ).val();
         var mode = 'upload_rd';
-
+        var mimes = [
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.ms-excel',
+            'application/vnd.oasis.opendocument.spreadsheet',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+            'application/pdf',
+            'application/msword',
+            'text/csv',
+            'text/tsv',
+            '.xlsx',
+            '.xls',
+            '.csv',
+            '.pst',
+            '.doc',
+            'audio/*',
+            '.mp3',
+            '.wav',
+            'image/*',
+            '.docx'
+            ];
+        $scope.exts = mimes.join(',');
         $scope.upload = function (files) {
             if (files && files.length) {
                 var itemsProcessed = 0;
