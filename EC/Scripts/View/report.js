@@ -149,7 +149,6 @@
 
                 if (countryId == 198 || countryId == 171) {
                     /* to emu anonimnuu opciu ( Completely Confidential)  nado ubrat ( eto luchshe) ili disable ( eto huje). */
-                    //alert("HEllo World!!!");
                     var temp = $(".rowBlock.anType");
                     temp.removeClass("vlCorrect");
                     temp.find("input name[incident_anonymity_id]").removeClass("vlCorrect");
@@ -309,16 +308,16 @@
                                 //General Information
                                 var temp = content.find('#reportingFrom');
                                 temp.empty();
-                                temp.append($('.reportingFrom span').text());
+                                temp.append($('.reportingFrom span').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 var anonymityStatus = content.find('#anonymityStatus');
                                 anonymityStatus.empty();
-                                anonymityStatus.append(generalInfo.find("input:radio[name=stay]:checked").val());
+                                anonymityStatus.append(generalInfo.find("input:radio[name=stay]:checked").val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 var formalRole = content.find('#formalRole');
                                 formalRole.empty();
-                                formalRole.append(generalInfo.find("input:radio[name=radioName]:checked").siblings('.radioTitle').text());
-                                var generalInfoTher = generalInfo.find("input:radio[name=radioName]:checked").val().toLowerCase();
+                                formalRole.append(generalInfo.find("input:radio[name=radioName]:checked").siblings('.radioTitle').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+                                var generalInfoTher = generalInfo.find("input:radio[name=radioName]:checked").val().toLowerCase().replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
                                 if (generalInfoTher == "other" ||
                                     generalInfoTher == "former employee") {
@@ -329,9 +328,9 @@
                                 var happenedIn = content.find('#incedentHappenedIn');
                                 happenedIn.empty();
                                 if ($('.location span').text() == "Not listed") {
-                                    happenedIn.append("Not listed : " + $('.otherLocation textarea').val());
+                                    happenedIn.append("Not listed : " + $('.otherLocation textarea').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
                                 } else
-                                    happenedIn.append($('.location span').text());
+                                    happenedIn.append($('.location span').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 //departments
                                 var departments = content.find('#departments');
@@ -341,14 +340,14 @@
                                     elem++;
                                     if ($(this).parent().find('span').text() != "Select department") {
                                         if (elem > 1) departments.append(", ");
-                                        departments.append($(this).parent().find('span').text());
+                                        departments.append($(this).parent().find('span').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
                                     }
                                 });
 
                                 //Parties involved
                                 var isManagementKnow = content.find('#isManagementKnow');
                                 isManagementKnow.empty();
-                                isManagementKnow.append($(' input[name=managementKnow]:checked').siblings(".radioTitle").text());
+                                isManagementKnow.append($(' input[name=managementKnow]:checked').siblings(".radioTitle").text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
                                 if ($(' input[name=managementKnow]:checked').val() == "Yes" ||
                                     $(' input[name=managementKnow]:checked').val() == "Do not want to involve") {
                                     var html = $('.managementIsKnown').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -356,7 +355,7 @@
                                 }
                                 var report_by_myself = content.find("#report_by_myself");
                                 report_by_myself.empty();
-                                report_by_myself.append($('input[name=report_by_myself]:checked').siblings(".radioTitle").text());
+                                report_by_myself.append($('input[name=report_by_myself]:checked').siblings(".radioTitle").text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
                                 //if (generalInfo.find("input:radio[name=managementKnow]:checked").val() === "No") {
                                 if ($("input:radio[name=managementKnow]:checked").val() === "No") {
                                     content.find('#managementFalse').show();
@@ -371,7 +370,7 @@
                                     var temp = $(element);
                                     var fname = temp.find('.fName').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
                                     var lName = temp.find('.lName').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                                    var witnessRole = temp.find('.selectedRoleInReport option:selected').text();
+                                    var witnessRole = temp.find('.selectedRoleInReport option:selected').text().replace(/</g, "&lt;").replace(/>/g, "&gt;");
                                     var witnessTitle = temp.find('.witnessTitle').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
                                     if (temp.parent().hasClass('addPersonContainer')
@@ -394,26 +393,25 @@
 
                                 var isReportedOutside = content.find('#isReportedOutside');
                                 isReportedOutside.empty();
-                                isReportedOutside.append($(' input[name=isReportRefered]:checked').val());
+                                var isReportRefered = $(' input[name=isReportRefered]:checked').val();
+                                if (isReportRefered) {
+                                    isReportedOutside.append(isReportRefered.replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+                                }
                                 if ($(".whoKnow .active input").val() != "No") {
                                     var html = $('.isReportedOutside').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                                    isReportedOutside.append($(".whoKnow .active input").val() + "<br />" + html);
+                                    isReportedOutside.append($(".whoKnow .active input").val().replace(/</g, "&lt;").replace(/>/g, "&gt;") + "<br />" + html);
                                 } else {
                                     isReportedOutside.append("<br /> No");
                                 }
-                                //if ($(' input[name=isReportRefered]:checked').val() != "No"){
-                                //    isReportedOutside.append("<br /> Explanation: " + $('.isReportedOutside').val());
-                                //}
-
 
                                 var isReportUrgent = content.find('#isReportUrgent');
                                 isReportUrgent.empty();
-                                isReportUrgent.append($('.isReportUrgent input[name=isUrgent]:checked').siblings('.radioTitle').text());
+                                isReportUrgent.append($('.isReportUrgent input[name=isUrgent]:checked').siblings('.radioTitle').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 //Case Information
                                 $('.addedFilesList').empty();
                                 for (var i = 0; i < attachmentsFiles.length; i++) {
-                                    $('.addedFilesList').append("<img src=/Content/Icons/generic-file.png><span id=attachedFiles>" + attachmentsFiles[i].name + "</span><br>");
+                                    $('.addedFilesList').append("<img src=/Content/Icons/generic-file.png><span id=attachedFiles>" + attachmentsFiles[i].name.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</span><br>");
                                 }
                                 if (attachmentsFiles.length == 0) {
                                     $(".attachedFilesTitle").hide();
@@ -435,12 +433,12 @@
 
                                 var incidentHappendDate = content.find('#incidentHappendDate');
                                 incidentHappendDate.empty();
-                                incidentHappendDate.append($('#datepicker').val());
+                                incidentHappendDate.append($('#datepicker').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
 
                                 var isIncidentOngoing = content.find('#isIncidentOngoing');
                                 isIncidentOngoing.empty();
-                                isIncidentOngoing.append($(' input[name=isIncidentOngoing]:checked').siblings('.radioTitle').text());
+                                isIncidentOngoing.append($(' input[name=isIncidentOngoing]:checked').siblings('.radioTitle').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 if ($(' input[name=isIncidentOngoing]:checked').val() == "Yes") {
                                     var html = $('.incidentOngoingDescription').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -449,7 +447,7 @@
 
                                 var hasInjury = content.find('#hasInjury');
                                 hasInjury.empty();
-                                hasInjury.append($(' input[name=resultInjury]:checked').siblings('.radioTitle').text());
+                                hasInjury.append($(' input[name=resultInjury]:checked').siblings('.radioTitle').text().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 if ($(' input[name=resultInjury]:checked').val() == "Yes") {
                                     hasInjury.append(".<br />" + $('#injury_damage').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
