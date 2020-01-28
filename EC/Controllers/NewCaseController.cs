@@ -551,7 +551,7 @@ namespace EC.Controllers
                 if (user == null || user.id == 0)
                     return RedirectToAction("Login", "Service");
 
-                ReportModel rm = new ReportModel(newTask.id);
+                ReportModel rm = new ReportModel(newTask.task_id);
                 if (!rm.HasAccessToReport(user.id))
                     return RedirectToAction("Login", "Service");
 
