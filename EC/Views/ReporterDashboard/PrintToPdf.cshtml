@@ -82,6 +82,19 @@
                     </div><!-- /.reportContentBlock__textCols -->
                 }
 
+                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.email))
+                {
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__textColFirst">
+                            Email
+                        </div><!-- /.reportContentBlock__textColFirst -->
+                        <div class="reportContentBlock__textColRight">
+                            <p>
+                                @Model._reporter_user.email
+                            </p>
+                        </div><!-- /.reportContentBlock__textColRight -->
+                    </div><!-- /.reportContentBlock__textCols -->
+                }
                 <div style="@(String.IsNullOrEmpty(Model._reporter_user.phone) ? "display: none" : "display: block")  ">
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
