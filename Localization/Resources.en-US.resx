@@ -1349,7 +1349,7 @@
     <value>Name on Card</value>
   </data>
   <data name="NamesOfWitnesses" xml:space="preserve">
-    <value>Names Of Witnesses</value>
+    <value>Name(s) of witness(es) or people involved in the incident</value>
   </data>
   <data name="NewCase" xml:space="preserve">
     <value>New Case</value>
@@ -3070,6 +3070,6 @@ Do not want to involve</value>
     <value>Global Settings</value>
   </data>
   <data name="CaseManagament" xml:space="preserve">
-    <value>Case Managament</value>
+    <value>Case Management</value>
   </data>
 </root>
