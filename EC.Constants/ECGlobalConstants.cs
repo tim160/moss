@@ -50,5 +50,6 @@ namespace EC.Constants
 
         public const string APP_SETTING_HEADER_COLOR = "HeaderColor";
         public const string APP_SETTING_HEADER_COLOR_LINK = "HeaderLinksColor";
-    }
+        public const string APP_SETTING_IS_PARTNER_SSO_DOMAIN = "isPartnerSSODomain";
+  }
 }

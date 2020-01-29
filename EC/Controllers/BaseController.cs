@@ -56,7 +56,7 @@ namespace EC.Controllers
         {
             get
             {
-                if (WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK] != null && WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK] == "1")
+                if (WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_IS_PARTNER_SSO_DOMAIN] != null && WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_IS_PARTNER_SSO_DOMAIN] == "1")
                     return true;
                 else
                     return false;
