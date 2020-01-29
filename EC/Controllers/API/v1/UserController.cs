@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EC.Constants;
+using EC.Models.ViewModels;
+
 
 namespace EC.Controllers.API.v1
 {
@@ -212,5 +214,25 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
+
+    [HttpGet]
+    [Route]
+    [ResponseType(typeof(UsersUnreadEntitiesNumberViewModel))]
+    public async Task<IHttpActionResult> UnreadCounters()
+    {
+      UsersUnreadEntitiesNumberViewModel unread_entites = new UsersUnreadEntitiesNumberViewModel();
+      var statusModel = new Models.ReadStatusModel();
+      UsersUnreadEntitiesNumberViewModel result = new UsersUnreadEntitiesNumberViewModel();
+      ///  var statusModel = new Models.ReadStatusModel();
+      ///  result.Items.ForEach(entity =>
+  //    {
+///        entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+   //   });
+      return ApiOk(result);
+ 
+    }
+
+
+
     }
 }
