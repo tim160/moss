@@ -1072,6 +1072,10 @@
                         $(this).parent('ul').parent('.subject').find('.validate').addClass('vlCorrect');
                         return;
                     }
+                    if ( $(this).text() != 'Select department' && $(this).val() !== 0 && $(this).attr('data-id') != undefined) {
+                        var newItem = $(".dropdown.subject.selectBlock.department.open").siblings(".delete.redText.deleteDepartmentPosition");
+                        newItem.css("display", "block");
+                    }
                     $(this).siblings('li').removeClass('selected');
                     $(this).addClass('selected');
                     $(this).parent('ul').siblings('span.selected').html(sitem);
