@@ -74,7 +74,7 @@ namespace EC.Controllers
 
             ViewBag.header_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
             ViewBag.header_links_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
-            ViewBag.is_sso_domain = false;
+            ViewBag.is_sso_domain = is_sso_domain;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
             if (user == null)
             {

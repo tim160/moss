@@ -140,8 +140,8 @@ namespace EC.Controllers
                     {
                         UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
 
-                        Session["header_color_code"] = userColorSchema.global_Setting.header_color_code;
-                        Session["header_links_color_code"] = userColorSchema.global_Setting.header_links_color_code;
+                        Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR] = userColorSchema.global_Setting.header_color_code;
+                        Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK] = userColorSchema.global_Setting.header_links_color_code;
 
                         return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
