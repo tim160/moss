@@ -67,7 +67,7 @@
                         <p>@Model._anonymousLevel_reporterVersion()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                @if (!String.IsNullOrWhiteSpace(nameReporter))
+                @if (!String.IsNullOrWhiteSpace(nameReporter) && Model._report.incident_anonymity_id == 3)
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
@@ -81,7 +81,7 @@
                     </div><!-- /.reportContentBlock__textCols -->
                 }
 
-                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.email))
+                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.email) && Model._report.incident_anonymity_id == 3)
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
@@ -95,7 +95,8 @@
                     </div><!-- /.reportContentBlock__textCols -->
                 }
 
-                <div style="@(String.IsNullOrEmpty(Model._reporter_user.phone) ? "display: none" : "display: block")  ">
+                @if (String.IsNullOrWhiteSpace(Model._reporter_user.phone) && Model._report.incident_anonymity_id == 3)
+                {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
                             Telephone
@@ -106,7 +107,7 @@
                             </p>
                         </div><!-- /.reportContentBlock__textColRight -->
                     </div><!-- /.reportContentBlock__textCols -->
-                </div>
+                }
 
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__textColFirst">

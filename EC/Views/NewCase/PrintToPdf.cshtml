@@ -128,7 +128,7 @@
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                @if (!String.IsNullOrWhiteSpace(userName))
+                @if (!String.IsNullOrWhiteSpace(userName) && Model._report.incident_anonymity_id == 3)
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
@@ -142,7 +142,7 @@
                     </div><!-- /.reportContentBlock__textCols -->
                 }
 
-                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.email))
+                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.email) && Model._report.incident_anonymity_id == 3)
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
@@ -156,11 +156,11 @@
                     </div><!-- /.reportContentBlock__textCols -->
                 }
 
-                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.phone))
+                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.phone) && Model._report.incident_anonymity_id == 3)
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
-                            Phone
+                            Telephone
                         </div><!-- /.reportContentBlock__textColFirst -->
                         <div class="reportContentBlock__textColRight">
                             <p>
