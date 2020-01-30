@@ -238,7 +238,7 @@
             newItem.find('.delete').click(function () {
                 delecteDeertmentSelect($(this));
             });
-            newItem.find('select').attr('name', newItem.find('select').attr('name') + lastDepartmentNum);
+            newItem.find('input').attr('name', newItem.find('input').attr('name') + lastDepartmentNum);
             departmentInvolvedNum.val(lastDepartmentNum);
             lastDepartmentNum++;
             departmentInvolvedContainer.append(newItem);
