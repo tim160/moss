@@ -5,48 +5,56 @@
 @using EC.Constants;
 @{
 
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    var um = (UserModel)ViewBag.um;
-    var user_id = um.ID;
-    var role_id = um._user.role_id;
-    bool is_valid_mediator = false;
-    if (role_id == ECLevelConstants.level_supervising_mediator)
-    {
-        is_valid_mediator = true;
-    }
-    if (um._user.user_permissions_change_settings == 1)
-    {
-        is_valid_mediator = true;
-    }
-    var is_invalid_mediator = (!is_valid_mediator).ToString().ToLower();
-    var cm = (CompanyModel)ViewBag.cm;
-    int company_id = cm._company.id;
-    if (string.IsNullOrEmpty(cm._company.path_en))
-    {
-        cm._company.path_en = "~/Content/img/logoDefaultCompany.png";
-    }
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    //is_cc = true;
-    String class_ext = ViewBag.cc_extension;
-    ViewBag.Title = LocalizationGetter.GetString("CompanySettings", is_cc);
-    string report_domain = "https://EmployeeConfidential.com/Report/";
-    if (is_cc.HasValue && is_cc.Value)
-    {
-        report_domain = "https://CampusConfidential.com/Report/";
-    }
-    if (cm._company != null && cm._company.company_short_name != null && cm._company.company_short_name.Trim().Length > 0)
-    {
-        report_domain = report_domain + cm._company.company_short_name.Trim();
-    }
-    else
-    {
-        report_domain = "";
-    }
+  var um = (UserModel)ViewBag.um;
+  var user_id = um.ID;
+  var role_id = um._user.role_id;
+  bool is_valid_mediator = false;
+  if (role_id == ECLevelConstants.level_supervising_mediator)
+  {
+    is_valid_mediator = true;
+  }
+  if (um._user.user_permissions_change_settings == 1)
+  {
+    is_valid_mediator = true;
+  }
+  var is_invalid_mediator = (!is_valid_mediator).ToString().ToLower();
+  var cm = (CompanyModel)ViewBag.cm;
+  int company_id = cm._company.id;
+  if (string.IsNullOrEmpty(cm._company.path_en))
+  {
+    cm._company.path_en = "~/Content/img/logoDefaultCompany.png";
+  }
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  //is_cc = true;
+  String class_ext = ViewBag.cc_extension;
+  ViewBag.Title = LocalizationGetter.GetString("CompanySettings", is_cc);
+  string report_domain = "https://EmployeeConfidential.com/Report/";
+  if (is_cc.HasValue && is_cc.Value)
+  {
+    report_domain = "https://CampusConfidential.com/Report/";
+  }
+  if (cm._company != null && cm._company.company_short_name != null && cm._company.company_short_name.Trim().Length > 0)
+  {
+    report_domain = report_domain + cm._company.company_short_name.Trim();
+  }
+  else
+  {
+    report_domain = "";
+  }
+
+  bool is_sso_domain = false;
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+    report_domain = "https://thinkmammoth.employeeconfidential.com/Service/Disclaimer?companyCode=STA2015"
+  }
+
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />

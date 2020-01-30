@@ -431,5 +431,19 @@ namespace EC.Models
       }
       return flag;
     }
+
+    public string companyClientLogo()
+    {
+      string client_logo = "";
+      if (_company.show_client_logo.HasValue && _company.show_client_logo.Value)
+      {
+        var client_company = db.company.Where(x => x.client_id == _company.client_id && x.controls_client).FirstOrDefault();
+        if (client_company != null)
+          client_logo = client_company.path_en;
+
+      }
+
+      return client_logo;
+    }
   }
 }

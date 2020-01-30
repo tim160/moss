@@ -1,28 +1,39 @@
 ﻿@using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
-    bool showDDLanguages = Model != null && Model.GetType().Name == "Boolean" && Model == true;
-    bool is_cc = false;
+  bool showDDLanguages = Model != null && Model.GetType().Name == "Boolean" && Model == true;
+  bool is_cc = false;
+
+  bool is_sso_domain = false;
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+  }
+
 }
 
 
 
 <header class="header">
     <div class="top-headerBg">
-        <div class="containerCustom" style="overflow: inherit">
-
+        <div class="containerCustom" style="overflow: inherit">&nbsp;
+      @if (is_sso_domain == false)
+      {
             <a href="http://employeeconfidential.com" class="top-header__backLink">
                 <img src="/Content/images/svg-icons/left.svg" alt="">
                 <span class="top-header__backLink-text">
                     EmployeeConfidential.com
                 </span>
             </a>
+      }
             <div class="t1">
                 <ul>
-                    @if (showDDLanguages)
+                @if (is_sso_domain == false)
+                {
+                    if (showDDLanguages)
                     {
-                        using (Html.BeginForm("ChangeCulture", "Service"))
-                        {
-                            
+                      using (Html.BeginForm("ChangeCulture", "Service"))
+                      {
+
                             <li>
                                 <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
                                     @ViewBag.fullNameLanguage
@@ -39,9 +50,9 @@
                                 <input type="submit" name="submit" id="submitChangeLanguage" value="" />
                                 <input name="fullNameLanguage" id="fullNameLanguage" type="hidden" value="English" />
                             </li>
-                        }
+                      }
                     }
-
+                
                     <li>
                         <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                             @LocalizationGetter.GetString("ClientLoginUp", is_cc)
@@ -52,6 +63,7 @@
                             @LocalizationGetter.GetString("CheckReportStatus", is_cc)
                         </a>
                     </li>
+                }
                 </ul>
 
             </div>

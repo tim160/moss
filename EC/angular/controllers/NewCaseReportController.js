@@ -11,17 +11,17 @@
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.model = {
-            reportingFrom: 'Canada',
-            reporterWouldLike: 'Contact Info Shared',
-            reporterName: 'First Last',
-            reporterIs: 'Member of the public',
-            incidentHappenedIn: 'Toronto, ON, Canada',
-            affectedDepartment: 'Marketing',
-            partiesInvolvedName: '(Margot) Cooper',
-            partiesInvolvedTitle: 'CFO',
-            partiesInvolvedType: 'Case Administrators excluded',
-            reportingAbout: 'Breach of Legal Obligations',
-            incidentDate: 'Nov 1, 2016',
+            reportingFrom: '',
+            reporterWouldLike: '',
+            reporterName: '',
+            reporterIs: '',
+            incidentHappenedIn: '',
+            affectedDepartment: '',
+            partiesInvolvedName: '',
+            partiesInvolvedTitle: '',
+            partiesInvolvedType: '',
+            reportingAbout: '',
+            incidentDate: '',
         };
 
         NewCaseReportService.get({ id: $scope.report_id }, function (data) {

@@ -40,14 +40,14 @@ namespace EC.Controllers
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+      ViewBag.is_sso_domain = is_sso_domain;
+      //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
+      //{
+      //       user.password = PasswordUtils.GetHash(user.password);
+      //}
+      //       db.SaveChanges();
 
-            //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
-            //{
-                //       user.password = PasswordUtils.GetHash(user.password);
-            //}
-            //       db.SaveChanges();
-
-            Session.Clear();
+      Session.Clear();
 
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
@@ -159,8 +159,9 @@ namespace EC.Controllers
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             ViewBag.fullNameLanguage = FullNameLanguage;
+      ViewBag.is_sso_domain = is_sso_domain;
 
-            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+      UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
 
@@ -169,7 +170,9 @@ namespace EC.Controllers
 
         public ActionResult Disclaimer(string id, string companyCode)
         {
-            var selectedCompany = GetCompanyModel(id, companyCode);
+
+      ViewBag.is_sso_domain = is_sso_domain;
+      var selectedCompany = GetCompanyModel(id, companyCode);
             if (selectedCompany == null)
             {
                 return RedirectToAction("Index", "Index");
@@ -215,7 +218,8 @@ namespace EC.Controllers
         public ActionResult CheckStatus()
         {
             ViewBag.fullNameLanguage = FullNameLanguage;
-            return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
+      ViewBag.is_sso_domain = is_sso_domain;
+      return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
         }
 
         public ActionResult ForgetPassword()

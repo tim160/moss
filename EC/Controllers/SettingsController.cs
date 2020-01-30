@@ -73,10 +73,12 @@ namespace EC.Controllers
             ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.um = um;
 
+      ViewBag.is_sso_domain = is_sso_domain;
+
             //int company_id = 2;
 
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
+      #region EC-CC Viewbag
+      ViewBag.is_cc = is_cc;
             string cc_ext = "";
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
