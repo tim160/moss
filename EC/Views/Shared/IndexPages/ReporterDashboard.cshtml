@@ -15,13 +15,14 @@
 
     int report_id = um.GetReportIDForReporter();
     ReportModel rm = new ReportModel(report_id);
-    CompanyModel cm = new CompanyModel();
+    CompanyModel cm = new CompanyModel(um._user.company_id);
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
     int _investigation_status = rm._investigation_status;
     if (_investigation_status == 6)
     {
         _investigation_status = 4;
     }
+    var clientLogo = cm.companyClientLogo();
 }
 
 <!DOCTYPE html>
@@ -63,7 +64,15 @@
             }
             <div class="main">
                 <div class="header">
-                    <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
+                    @if (ViewBag.is_sso_domain == true && clientLogo.Length > 0)
+                    {
+                        <img class="logo" src='@Url.Content(clientLogo)' />
+                    }
+                    else
+                    {
+                        <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
+                    }
+
 
                     <div class="headerMenu">
                         <ul>
