@@ -11,7 +11,7 @@ namespace EC.Models
         public global_settings global_Setting { get; set; }
         public UserColorSchemaModel(int? companyid)
         {
-            if (companyid.HasValue)
+            if (companyid > 0)
             {
                 company = db.company.Find(companyid);
                 if (company != null)
