@@ -23,6 +23,17 @@ namespace EC.Controllers
         private readonly CompanyModel companyModel = new CompanyModel();
         private readonly ReportModel reportModel = new ReportModel();
 
+
+        public ActionResult WorkWave()
+        {
+      if (is_sso_domain)
+       /// return View("~/Views/Service/Disclaimer?companyCode=WorkWave");
+            return RedirectToAction("Disclaimer", "Service", new { companyCode = "WorkWave"});
+
+          return RedirectToAction("Index", "Index");
+        }
+
+
         // GET: /Report/
         [HttpGet]
         public ActionResult New(string companyCode)
