@@ -90,7 +90,7 @@ namespace EC.Models.Culture
 
 
             }
-            return secondaryMandatoryViews;
+            return secondaryMandatoryViews.OrderBy(item => item.SecondaryMandatory).ToList();
         }
     }
 }

@@ -429,16 +429,18 @@
                                                 <span class="radioTitle">@item.SecondaryMandatory</span>
                                             </label>
                                         </div>
-
-
                                     </div>
                                 }
                             }
-                            <div class="freeBlock inputRadio option" data-val="Other">
-                                <label class="inputBlock" for="Other">
+                            <div style="padding: 10px 20px" class="freeBlock inputRadio option" data-val="Other">
+                                <div style="width:13px;height:13px;float:left;padding-top: 5px;">
                                     <input id="Other" type="checkbox" name="whatHappened" value="0" />
-                                    <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
-                                </label>
+                                </div>
+                                <div>
+                                    <label style="padding:0px;" class="inputBlock" for="Other">
+                                        <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
+                                    </label>
+                                </div>
                             </div>
 
                         </div>
