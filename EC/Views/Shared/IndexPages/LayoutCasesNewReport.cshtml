@@ -86,6 +86,14 @@
   bool is_sso = false;
   if (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1")
   { is_sso = true; }
+
+  bool is_sso_domain = false;
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+  }
+
+
 }
 <!DOCTYPE html>
 <html>
@@ -155,7 +163,7 @@
         }
         <div class="container clearfix">
             <div class="header__leftBlock">
-                @if (ViewBag.is_sso_domain == true)
+                @if (is_sso_domain == true)
                 {
                 <div class="headerTop-logo">
                     <a href="#" class="headerTop-logo__link" style="padding: 1px 0px;text-align: center;">
@@ -254,22 +262,25 @@
                                     Posters
                                 </a>
                             </li>
+                            if (is_sso_domain == false)
+                            {
                             <li class="dropDown-navigation__li active">
                                 <a href="/Trainer/Calendar" class="dropDown-navigation__a">
                                     Book Training
                                 </a>
                             </li>
-                            if (cm.AllPayments().Count > 0)
+                            if ((cm.AllPayments().Count > 0) && (is_sso_domain == false))
                             {
                                 <li class="dropDown-navigation__li active">
                                     <a href="/Payment/History" class="dropDown-navigation__a">
                                         Subscription
                                     </a>
                                 </li>
+                              }
                             }
 
-                        }
-                        @if (is_sso == false)
+                          }
+                        @if (is_sso_domain == false)
                         {
                             <li class="dropDown-navigation__li active">
                                 <a href="/settings/password/" class="dropDown-navigation__a">
@@ -277,7 +288,7 @@
                                 </a>
                             </li>
                         }
-                        @if (is_sso == false)
+                        @if (is_sso_domain == false)
                         {
                             <li class="dropDown-navigation__li">
                                 <form id="logout_form" action="@Url.Action("Logout", "Base")">
