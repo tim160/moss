@@ -1,26 +1,35 @@
 ﻿@model EC.Controllers.ServiceController.LoginViewModel
 @using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
-    ViewBag.Title = "Employee Confidential";
-    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
-    bool showDDLanguages = true;
-    bool is_cc = false;
+  ViewBag.Title = "Employee Confidential";
+  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  bool showDDLanguages = true;
+  bool is_cc = false;
 
-    ModelState accLoked = new ModelState();
-    string errorMessage = "";
-    ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
-    if (accLoked != null && accLoked.Errors != null)
-    {
-        errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
-    }
+  ModelState accLoked = new ModelState();
+  string errorMessage = "";
+  ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
+  if (accLoked != null && accLoked.Errors != null)
+  {
+    errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
+  }
 
-    ModelState passError = new ModelState();
-    string passErrorString = "";
-    ViewData.ModelState.TryGetValue("PasswordError", out passError);
-    if (passError != null && passError.Errors != null)
-    {
-        passErrorString = "errorLogin";
-    }
+  ModelState passError = new ModelState();
+  string passErrorString = "";
+  ViewData.ModelState.TryGetValue("PasswordError", out passError);
+  if (passError != null && passError.Errors != null)
+  {
+    passErrorString = "errorLogin";
+  }
+
+  bool is_sso_domain = false;
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+ 
+  }
+
+
 }
 
 <style>
@@ -35,20 +44,25 @@
     <div class="top-headerBg">
       <div class="container">
         <div class="top-header">
-
+@if (is_sso_domain == false)
+{
           <a href="http://employeeconfidential.com" class="top-header__backLink">
             <img src="~/Content/images/svg-icons/left.svg" alt="" />
             <span class="top-header__backLink-text">
               EmployeeConfidential.com
             </span>
           </a>
+}
           <div class="top-header__loginBar">
             <nav class="top-header__loginBar-nav">
+@if (is_sso_domain == false)
+{
               <li class="top-header__loginBar-li">
                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                   Client Login
                 </a>
               </li><!-- /.top-header__loginBar-li -->
+}
               <li class="top-header__loginBar-li">
                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                   File a Report
@@ -110,9 +124,12 @@
                                 </text>
                             </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
+@if (is_sso_domain == false)
+{
                             <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
                                 Forgot your password?
                             </a>
+}
                             <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
                                 @LocalizationGetter.GetString("Login", is_cc)
                             </button>
