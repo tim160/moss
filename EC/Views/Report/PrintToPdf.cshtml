@@ -95,7 +95,7 @@
                     </div><!-- /.reportContentBlock__textCols -->
                 }
 
-                @if (String.IsNullOrWhiteSpace(Model._reporter_user.phone) && Model._report.incident_anonymity_id == 3)
+                @if (!String.IsNullOrWhiteSpace(Model._reporter_user.phone) && Model._report.incident_anonymity_id == 3)
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
