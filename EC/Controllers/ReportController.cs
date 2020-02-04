@@ -154,6 +154,8 @@ namespace EC.Controllers
                 var userColors = new UserColorSchemaModel(currentCompany.id);
                 ViewBag.header_color_code = userColors.global_Setting.header_color_code;
                 ViewBag.header_links_color_code = userColors.global_Setting.header_links_color_code;
+
+                ViewBag.clientLogo = cm.companyClientLogo();
             }
             else
             {
@@ -184,7 +186,7 @@ namespace EC.Controllers
             submit.result.StatusCode = currentReport.StatusCode;
             submit.result.ErrorMessage = currentReport.ErrorMessage;
             ViewBag.companylogo = cm._company.path_en;
-
+            ViewBag.clientLogo = cm.companyClientLogo();
 
             if (currentReport.StatusCode == 200)
             {
@@ -205,7 +207,8 @@ namespace EC.Controllers
                     base.logModel.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
                     base.logModel.UpdateReportLog(user.id, 28, currentReport.report.id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                 }
-               
+                
+
 
                 #region SendEmail To Admins
                 ReportModel rm = new ReportModel(currentReport.report.id);
