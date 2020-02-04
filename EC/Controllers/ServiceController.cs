@@ -55,6 +55,7 @@ namespace EC.Controllers
             userColorSchema = new UserColorSchemaModel(cm.ID);
             ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            ViewBag.clientLogo = cm.companyClientLogo();
           }
  
           return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
@@ -176,6 +177,7 @@ namespace EC.Controllers
               userColorSchema = new UserColorSchemaModel(cm.ID);
               ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
               ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+              ViewBag.clientLogo = cm.companyClientLogo();
             }
             else
             {
@@ -199,6 +201,8 @@ namespace EC.Controllers
                 UserColorSchemaModel userColorSchema = new UserColorSchemaModel(selectedCompany.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
                 ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                CompanyModel cm = new CompanyModel(selectedCompany.ID);
+                ViewBag.clientLogo = cm.companyClientLogo();
             }
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", selectedCompany);
         }
@@ -245,6 +249,7 @@ namespace EC.Controllers
         userColorSchema = new UserColorSchemaModel(cm.ID);
         ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
         ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+        ViewBag.clientLogo = cm.companyClientLogo();
       }
       else
       {

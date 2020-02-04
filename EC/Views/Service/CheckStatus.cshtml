@@ -26,11 +26,34 @@
   if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
   {
     is_sso_domain = true;
- 
+
+  }
+  string mainHeaderLogo = "http://report.employeeconfidential.com/Content/img/logo.png";
+
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+    if (ViewBag.clientLogo != null && ViewBag.clientLogo.Length > 0)
+    {
+      mainHeaderLogo = ViewBag.clientLogo;
+    }
+
   }
 
-
 }
+
+<style>
+    .responsiveLogo {
+        float: left;
+        height: 36px;
+        width: 202px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: contain;
+        background-image: url(@Url.Content(mainHeaderLogo));
+    }
+</style>
+
 @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
 {
   <style>
