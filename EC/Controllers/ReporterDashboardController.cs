@@ -52,7 +52,8 @@ namespace EC.Controllers
                 .Where(item => item.report_id == report_id && (item.visible_reporter == true || item.user_id == reporter._report.reporter_user_id))
                 .ToList();
             ViewBag.guid = reporter._report.guid;
-
+            CompanyModel cm = new CompanyModel(user.company_id);
+            ViewBag.clientLogo = cm.companyClientLogo();
             return View();
         }
 

@@ -23,6 +23,17 @@
         _investigation_status = 4;
     }
     var clientLogo = cm.companyClientLogo();
+    string mainHeaderLogo = String.Empty;
+
+    if (ViewBag.is_sso_domain == true && ViewBag.clientLogo.Length > 0)
+    {
+        mainHeaderLogo = ViewBag.clientLogo;
+    }
+    else
+    {
+        mainHeaderLogo = "~/Content/img/ReportDashboardLogo.png";
+    }
+
 }
 
 <!DOCTYPE html>
@@ -47,6 +58,17 @@
     <script src="~/Scripts/dis.min.js?version=@System.Configuration.ConfigurationManager.AppSettings["versionDisJS"]"></script>
 </head>
 <body ng-app="EC">
+    <style>
+    .responsiveLogo {
+        float: left;
+        height: 36px;
+        width: 202px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: contain;
+        background-image: url(@Url.Content(mainHeaderLogo));
+    }
+    </style>
     @if (report_id != 0)
     {
 
@@ -64,62 +86,63 @@
             }
             <div class="main">
                 <div class="header">
-                    @if (ViewBag.is_sso_domain == true && clientLogo.Length > 0)
-                    {
-                        <img class="logo"src='@Url.Content(clientLogo)' />
-                    }
-                    else
-                    {
-                        <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
-                    }
+                    <div class="responsiveLogo"></div>
+                        @*@if (ViewBag.is_sso_domain == true && clientLogo.Length > 0)
+            {
+                <img class="logo" src='@Url.Content(clientLogo)' />
+            }
+            else
+            {
+                <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
+            }*@
 
 
-                    <div class="headerMenu">
-                        <ul>
-                            <li class="logIn">
-                                @LocalizationGetter.GetString("Logout")
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="secondaryMenu">
-                    <div class="positionImageLogo">
-                        <img class="makeImgCenter" src='@Url.Content(_logo)' />
-                    </div>
-                    <div class="statusTitle">
-
-                        <div class="title">@LocalizationGetter.GetString("Case") @rm._report.display_name</div>
-                        <div class="status">
-                            @LocalizationGetter.GetString("Casestatus")<br />
-                            <span class="review">@rm._reportStringModel.InvestigationStatusString()</span>
+                        <div class="headerMenu">
+                            <ul>
+                                <li class="logIn">
+                                    @LocalizationGetter.GetString("Logout")
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="headerPos">
-                        @for (int i = 0; i < 5; i++)
-                        {
-                            if (i < _investigation_status)
+
+                    <div class="secondaryMenu">
+                        <div class="positionImageLogo">
+                            <img class="makeImgCenter" src='@Url.Content(_logo)' />
+                        </div>
+                        <div class="statusTitle">
+
+                            <div class="title">@LocalizationGetter.GetString("Case") @rm._report.display_name</div>
+                            <div class="status">
+                                @LocalizationGetter.GetString("Casestatus")<br />
+                                <span class="review">@rm._reportStringModel.InvestigationStatusString()</span>
+                            </div>
+                        </div>
+                        <div class="headerPos">
+                            @for (int i = 0; i < 5; i++)
                             {
-                                <div class="positionN active@{@class_ext}">
-                                    <span style="color: #38494d;">@_statuses[i]</span>
-                                </div>
-                                <div class="polos"></div>
+                                if (i < _investigation_status)
+                                {
+                                    <div class="positionN active@{@class_ext}">
+                                        <span style="color: #38494d;">@_statuses[i]</span>
+                                    </div>
+                                    <div class="polos"></div>
+                                }
+                                else
+                                {
+
+                                    <div class="positionN">
+                                        <span style="color: #b4b9ba;">@_statuses[i]</span>
+                                    </div>
+                                    <div class="polos"></div>
+                                }
                             }
-                            else
-                            {
 
-                                <div class="positionN">
-                                    <span style="color: #b4b9ba;">@_statuses[i]</span>
-                                </div>
-                                <div class="polos"></div>
-                            }
-                        }
+                        </div><!--headerPos-->
 
-                    </div><!--headerPos-->
-
+                    </div>
+                    @RenderBody()
                 </div>
-                @RenderBody()
-            </div>
             <div class="footer" style="height:150px">
             </div>
         }
