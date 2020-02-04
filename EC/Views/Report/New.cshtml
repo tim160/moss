@@ -32,6 +32,15 @@
     {
         logo = logo.Trim();
     }
+    string mainHeaderLogo = String.Empty;
+
+    if (ViewBag.is_sso_domain == true && ViewBag.clientLogo.Length > 0)
+    {
+        mainHeaderLogo = ViewBag.clientLogo;
+    } else
+    {
+        mainHeaderLogo = "~/Content/img/ReportDashboardLogo.png";
+    }
 }
 
 @section pageStyles{
@@ -48,19 +57,30 @@
 <input type="hidden" value="@LocalizationGetter.GetString("AddPerson", is_cc)" id="AddPerson" />
 <input type="hidden" value="@LocalizationGetter.GetString("AddAnotherPerson", is_cc)" id="AddAnotherPerson" />
 
+<style>
+    .responsiveLogo {
+        height: 36px;
+        width: 202px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: contain;
+        background-image: url(@Url.Content(mainHeaderLogo));
+    }
+</style>
+
 <form action="New" enctype="multipart/form-data" method="POST" ng-app="ReportNew">
     <input type="hidden" value="" />
     <div class="headerBlock">
         <div class="firstBlock">
-            <div class="logo">
-                @if (is_cc.Value)
+            <div class="responsiveLogo">
+                @*@if (is_cc.Value)
                 {
                     <img src='https://report.campusconfidential.com/Content/img/logo2.png' />
                 }
                 else
                 {
                     <img src='https://report.employeeconfidential.com/Content/img/logo.png' />
-                }
+                }*@
             </div>
         </div>
 

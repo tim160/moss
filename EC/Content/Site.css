@@ -75,9 +75,9 @@ body{
     padding-bottom: 220px;
 }
 .headerBlock .firstBlock {
-    min-height: 60px;
-    height: 100%;
     background-color: var(--HeaderColor);
+    overflow: hidden;
+    padding: 12px 10px;
 }
 
 .headerBlock .secondBlock{
@@ -88,11 +88,14 @@ body{
     display: table;
 }
 
-.headerBlock .firstBlock .logo{
+.headerBlock .firstBlock .logo {
     float: left;
-    margin-top: 16px;
-    margin-left: 22px;
-    width: 100%;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
 }
 
 .headerBlock .firstBlock .report{
