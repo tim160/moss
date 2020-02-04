@@ -31,7 +31,15 @@
 
 
 }
-
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+  <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+  </style>
+}
 <style>
     .errorLogin.loginForm__input {
         border: 2px solid red;
@@ -53,6 +61,9 @@
             </span>
           </a>
 }
+else
+{<span>&nbsp;</span>}
+ 
           <div class="top-header__loginBar">
             <nav class="top-header__loginBar-nav">
 @if (is_sso_domain == false)
@@ -63,6 +74,8 @@
                 </a>
               </li><!-- /.top-header__loginBar-li -->
 }
+else
+{<span>&nbsp;</span>}
               <li class="top-header__loginBar-li">
                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                   File a Report
@@ -130,6 +143,8 @@
                                 Forgot your password?
                             </a>
 }
+else
+{<span>&nbsp;</span>}
                             <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
                                 @LocalizationGetter.GetString("Login", is_cc)
                             </button>

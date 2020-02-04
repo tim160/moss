@@ -1,11 +1,26 @@
 ﻿@model EC.Models.CompanyModel
 @using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
-    ViewBag.Title = "Employee Confidential";
-    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
-    bool is_cc = false;
-}
+  ViewBag.Title = "Employee Confidential";
+  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  bool is_cc = false;
 
+  bool is_sso_domain = false;
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+
+  }
+}
+@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
+{
+  <style>
+    :root {
+        --HeaderColor: @ViewBag.header_color_code;
+        --HeaderLinksColor: @ViewBag.header_links_color_code;
+    }
+  </style>
+}
 <style>
     .not-active {
         pointer-events: none;

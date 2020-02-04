@@ -2,16 +2,23 @@
 @model EC.Controllers.ServiceController.LoginViewModel
 
 @{
-    ViewBag.Title = "Employee Confidential";
-    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
-    bool is_cc = false;
-    ModelState accLoked = new ModelState();
-    string errorMessage = "";
-    ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
-    if (accLoked != null && accLoked.Errors != null)
-    {
-        errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
-    }
+  ViewBag.Title = "Employee Confidential";
+  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  bool is_cc = false;
+  ModelState accLoked = new ModelState();
+  string errorMessage = "";
+  ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
+  if (accLoked != null && accLoked.Errors != null)
+  {
+    errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
+  }
+
+  bool is_sso_domain = false;
+  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+  {
+    is_sso_domain = true;
+
+  }
 }
 
 @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
@@ -39,13 +46,17 @@
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
-
+@if (is_sso_domain == false)
+{
                     <a href="http://employeeconfidential.com" class="top-header__backLink">
                         <img src="~/Content/images/svg-icons/left.svg" alt="" />
                         <span class="top-header__backLink-text">
                             EmployeeConfidential.com
                         </span>
                     </a>
+}
+else
+{<span>&nbsp;</span>}
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
@@ -100,10 +111,16 @@
                             </text>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
+
+@if (is_sso_domain == false)
+{
                             <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
 
                                 Forgot your password?
                             </a>
+}
+else
+{<span>&nbsp;</span>}
                             <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
                                 @LocalizationGetter.GetString("Login", is_cc)
                             </button>

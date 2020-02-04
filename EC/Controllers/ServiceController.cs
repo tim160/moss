@@ -47,9 +47,17 @@ namespace EC.Controllers
       //}
       //       db.SaveChanges();
 
-      Session.Clear();
-
-            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
+          Session.Clear();
+       
+          if (is_sso_domain)
+          {
+            CompanyModel cm = new CompanyModel(3136);
+            userColorSchema = new UserColorSchemaModel(cm.ID);
+            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+          }
+ 
+          return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
 
         [HttpPost]
@@ -159,11 +167,21 @@ namespace EC.Controllers
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             ViewBag.fullNameLanguage = FullNameLanguage;
-      ViewBag.is_sso_domain = is_sso_domain;
+            ViewBag.is_sso_domain = is_sso_domain;
 
-      UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
-            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            if (is_sso_domain)
+            {
+              CompanyModel cm = new CompanyModel(3136);
+              userColorSchema = new UserColorSchemaModel(cm.ID);
+              ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+              ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            }
+            else
+            {
+              ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+              ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            }
 
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
@@ -171,8 +189,8 @@ namespace EC.Controllers
         public ActionResult Disclaimer(string id, string companyCode)
         {
 
-      ViewBag.is_sso_domain = is_sso_domain;
-      var selectedCompany = GetCompanyModel(id, companyCode);
+            ViewBag.is_sso_domain = is_sso_domain;
+            var selectedCompany = GetCompanyModel(id, companyCode);
             if (selectedCompany == null)
             {
                 return RedirectToAction("Index", "Index");
@@ -219,6 +237,23 @@ namespace EC.Controllers
         {
             ViewBag.fullNameLanguage = FullNameLanguage;
       ViewBag.is_sso_domain = is_sso_domain;
+
+      UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+      if (is_sso_domain)
+      {
+        CompanyModel cm = new CompanyModel(3136);
+        userColorSchema = new UserColorSchemaModel(cm.ID);
+        ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+        ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+      }
+      else
+      {
+        ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+        ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+      }
+
+
+
       return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
         }
 
