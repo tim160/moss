@@ -91,7 +91,7 @@ namespace EC.Controllers
 
                 ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
-                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id, 2).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
                 ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
                 ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(getDBEntityModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
