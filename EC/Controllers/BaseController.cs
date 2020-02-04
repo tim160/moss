@@ -72,12 +72,19 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
 
-            ViewBag.header_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
-            ViewBag.header_links_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
             ViewBag.is_sso_domain = is_sso_domain;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
+            if (user != null)
+            {
+                UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            }
+
             if (user == null)
             {
+                ViewBag.header_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
+                ViewBag.header_links_color_code = Session[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
                 //sessionManager.User = AuthHelper.GetCookies(httpContext); расскоментировать когда будет использоваться авторизация! и в IndexController
 
                 //NEED TO BE FIXED

@@ -25,76 +25,72 @@
         background-repeat: no-repeat;
         background-position: left top;
         background-size: contain;
-        background-image: url(@Url.Content(mainHeaderLogo));
+        background-image: url("@Url.Content(mainHeaderLogo)");
     }
 </style>
+<header class="header" >
+    <div style="height: 36px;padding-left:10px">
+        @if (is_sso_domain == true)
+        {
+            <div class="responsiveLogo"></div>
+        }
+    </div>
+    <div class="top-headerBg" style="height: 36px;">
 
-<header class="header">
- 
-    <div class="top-headerBg">
-    @if (is_sso_domain == true)
-    {
-      <div class="containerCustom" style="overflow: auto">
-        &nbsp;
-        <div class="responsiveLogo"></div>
-        </div>
-    }
-    <div class="containerCustom" style="overflow: inherit">
-      &nbsp;
-      @if (is_sso_domain == false)
-      {
-        <a href="http://employeeconfidential.com" class="top-header__backLink">
-          <img src="/Content/images/svg-icons/left.svg" alt="">
-          <span class="top-header__backLink-text">
-            EmployeeConfidential.com
-          </span>
-        </a>
-      }
-      <div class="t1">
-        <ul>
-          @if (is_sso_domain == false)
-                {
-                    if (showDDLanguages)
+        <div class="containerCustom" style="overflow: inherit">
+            &nbsp;
+            @if (is_sso_domain == false)
+            {
+                <a href="http://employeeconfidential.com" class="top-header__backLink">
+                    <img src="/Content/images/svg-icons/left.svg" alt="">
+                    <span class="top-header__backLink-text">
+                        EmployeeConfidential.com
+                    </span>
+                </a>
+            }
+            <div class="t1">
+                <ul>
+                    @if (is_sso_domain == false)
                     {
-                      using (Html.BeginForm("ChangeCulture", "Service"))
-                      {
+                        if (showDDLanguages)
+                        {
+                            using (Html.BeginForm("ChangeCulture", "Service"))
+                            {
 
-                  <li>
-                    <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
-                      @ViewBag.fullNameLanguage
-                    </a>
-                    <input name="lang" id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
-                    <table id="manuLanguages">
-                      <tr>
-                        <td value="en-US">English</td>
-                      </tr>
-                      <tr>
-                        <td value="es-ES">Español</td>
-                      </tr>
-                    </table>
-                    <input type="submit" name="submit" id="submitChangeLanguage" value="" />
-                    <input name="fullNameLanguage" id="fullNameLanguage" type="hidden" value="English" />
-                  </li>
-                      }
+                                <li>
+                                    <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
+                                        @ViewBag.fullNameLanguage
+                                    </a>
+                                    <input name="lang" id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
+                                    <table id="manuLanguages">
+                                        <tr>
+                                            <td value="en-US">English</td>
+                                        </tr>
+                                        <tr>
+                                            <td value="es-ES">Español</td>
+                                        </tr>
+                                    </table>
+                                    <input type="submit" name="submit" id="submitChangeLanguage" value="" />
+                                    <input name="fullNameLanguage" id="fullNameLanguage" type="hidden" value="English" />
+                                </li>
+                            }
+                        }
+
+                        <li>
+                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                @LocalizationGetter.GetString("ClientLoginUp", is_cc)
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                @LocalizationGetter.GetString("CheckReportStatus", is_cc)
+                            </a>
+                        </li>
                     }
+                </ul>
+            </div>
+        </div><!--container-->
+    </div>
 
-                  <li>
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
-                      @LocalizationGetter.GetString("ClientLoginUp", is_cc)
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                      @LocalizationGetter.GetString("CheckReportStatus", is_cc)
-                    </a>
-                  </li>
-                }
-        </ul>
-
-      </div>
-
-
-    </div><!--container-->
-  </div>
 </header><!-- /.header -->

@@ -2423,7 +2423,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .containerCustom {
-    display: flex;
+    /*display: flex;*/
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
