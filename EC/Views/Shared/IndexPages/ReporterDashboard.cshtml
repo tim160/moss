@@ -2,37 +2,37 @@
 @using EC.Localization;
 @{
 
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    String class_ext = ViewBag.cc_extension;
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  String class_ext = ViewBag.cc_extension;
 
-    ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard");
-    var user_id = (Int32)ViewBag.user_id;
-    UserModel um = new UserModel(user_id);
+  ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard");
+  var user_id = (Int32)ViewBag.user_id;
+  UserModel um = new UserModel(user_id);
 
-    int report_id = um.GetReportIDForReporter();
-    ReportModel rm = new ReportModel(report_id);
-    CompanyModel cm = new CompanyModel(um._user.company_id);
-    string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
-    int _investigation_status = rm._investigation_status;
-    if (_investigation_status == 6)
-    {
-        _investigation_status = 4;
-    }
-    var clientLogo = cm.companyClientLogo();
-    string mainHeaderLogo = String.Empty;
+  int report_id = um.GetReportIDForReporter();
+  ReportModel rm = new ReportModel(report_id);
+  CompanyModel cm = new CompanyModel(um._user.company_id);
+  string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
+  int _investigation_status = rm._investigation_status;
+  if (_investigation_status == 6)
+  {
+    _investigation_status = 4;
+  }
+  var clientLogo = cm.companyClientLogo();
+  string mainHeaderLogo = String.Empty;
 
-    if (ViewBag.is_sso_domain == true && ViewBag.clientLogo.Length > 0)
-    {
-        mainHeaderLogo = ViewBag.clientLogo;
-    }
-    else
-    {
-        mainHeaderLogo = "~/Content/img/ReportDashboardLogo.png";
-    }
+  if (ViewBag.is_sso_domain != null &&  ViewBag.is_sso_domain == true && ViewBag.clientLogo != null && ViewBag.clientLogo.Length > 0)
+  {
+    mainHeaderLogo = ViewBag.clientLogo;
+  }
+  else
+  {
+    mainHeaderLogo = "~/Content/img/ReportDashboardLogo.png";
+  }
 
 }
 

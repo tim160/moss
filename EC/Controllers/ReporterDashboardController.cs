@@ -96,6 +96,8 @@ namespace EC.Controllers
 
             ReadStatusModel readStatusModel = new ReadStatusModel();
             readStatusModel.UpdateReadMessages(report_id, id.Value, 1);
+            CompanyModel cm1 = new CompanyModel(user.company_id);
+            ViewBag.clientLogo = cm1.companyClientLogo();
 
             return View(cm);
         }
@@ -303,6 +305,9 @@ namespace EC.Controllers
             ViewBag.anon_level = anon_level;
             //ViewBag.notification_new_reports_flag = user.notification_new_reports_flag;
 
+ 
+            ViewBag.clientLogo = cm.companyClientLogo();
+
             return View(rm._reporter_user);
         }
 
@@ -333,10 +338,13 @@ namespace EC.Controllers
             UserModel um = new UserModel(id.Value);
             int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
+            CompanyModel cm = new CompanyModel(user.company_id);
+            ViewBag.clientLogo = cm.companyClientLogo();
 
             return View();
         }
 
+        // to delete
         private string Unread_message_number_string1(int report_id, int user_id)
         {
             EC.Models.UserModel um = new EC.Models.UserModel(user_id);
@@ -393,6 +401,9 @@ namespace EC.Controllers
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
+
+            CompanyModel cm = new CompanyModel(user.company_id);
+            ViewBag.clientLogo = cm.companyClientLogo();
             return View();
         }
 
