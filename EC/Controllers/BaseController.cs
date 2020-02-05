@@ -77,8 +77,8 @@ namespace EC.Controllers
             if (user != null)
             {
                 UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
-                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+           //     ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            //    ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             }
 
             if (user == null)
