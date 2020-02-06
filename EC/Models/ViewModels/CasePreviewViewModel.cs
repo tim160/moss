@@ -31,8 +31,8 @@ namespace EC.Models.ViewModel
         public string location { get; set; }
 
 
-        public string tasks_number { get; set; }
-        public string messages_number { get; set; }
+        public int tasks_number { get; set; }
+        public int messages_number { get; set; }
         public string team_number { get; set; }
 
 

@@ -960,8 +960,8 @@ namespace EC.Models
 
                             reported_dt = rm._reportStringModel.ReportedDateString(),
 
-                    tasks_number = rm.ReportTasksCount(0).ToString(),
-                            messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
+                            tasks_number = rm.ReportTasksCount(0),
+                            messages_number = rm.UserMessagesCountNotSecure(ID, 0),
 
 
                             mediators = (access_mediators == null || access_mediators.Count == 0) ? null : access_mediators.Select(z => new
