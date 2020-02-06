@@ -52,9 +52,9 @@ namespace EC.Controllers
             um._user.user_permissions_approve_case_closure = um._user.user_permissions_approve_case_closure == null ? 2 : um._user.user_permissions_approve_case_closure;
             um._user.user_permissions_change_settings = um._user.user_permissions_change_settings == null ? 2 : um._user.user_permissions_change_settings;
             // my profile
-            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
-            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            //UserColorSchemaModel userColorSchema = new UserColorSchemaModel(user.company_id);
+            //ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            //ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             return View(um._user);
         }
 
@@ -945,24 +945,9 @@ namespace EC.Controllers
             UserModel um = new UserModel(user.id);
             ViewBag.um = um;
             ViewBag.user_id = user.id;
+
             if(SettingsModel.checkIsExistGlobalSettings(user.company_id))
             {
-                var company = db.company.Find(user.company_id);
-                var globalSettings = db.global_settings.Where(gl => gl.client_id == company.client_id).FirstOrDefault();
-                if (globalSettings != null)
-                {
-                    if(globalSettings.header_color_code == null)
-                    {
-                        ViewBag.header_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR];
-                        ViewBag.header_links_color_code = WebConfigurationManager.AppSettings[ECGlobalConstants.APP_SETTING_HEADER_COLOR_LINK];
-                    } else
-                    {
-                        ViewBag.header_color_code = globalSettings.header_color_code;
-                        ViewBag.header_links_color_code = globalSettings.header_links_color_code;
-                    }
-
-
-                }
                 return View();
             } else
             {

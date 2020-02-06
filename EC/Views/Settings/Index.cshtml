@@ -42,15 +42,7 @@
     }
     String class_ext = ViewBag.cc_extension;
 }
-@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
-{
-    <style>
-    :root {
-        --HeaderColor: @ViewBag.header_color_code;
-        --HeaderLinksColor: @ViewBag.header_links_color_code;
-    }
-    </style>
-}
+
 <style>
     .error {
         border: 2px solid red !important;
