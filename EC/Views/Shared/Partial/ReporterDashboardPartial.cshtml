@@ -222,11 +222,12 @@
                                 </tr>
                                 @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                                 {
-                                    <tr>
-                                        <td class="positionReportText reportTextBlack">
-                                            @rm._report.injury_damage
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td class="positionTitleReport">&nbsp;</td>
+                                    <td class="positionReportText reportTextBlack">
+                                        @rm._report.injury_damage
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
