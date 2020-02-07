@@ -124,9 +124,15 @@
     <section class="loginSection">
         <div class="loginSection__titleBg" style="background-color: #edf0f0">
             <div class="container loginTopSection__container">
-                <div class="loginSection__title">
-                    @LocalizationGetter.GetString("ClientLoginUp", is_cc)
-                </div><!-- /.loginSection__title -->
+                @if (is_sso_domain)
+                {
+                    <a href="#" class="loginSection__logo">
+                        <img class="loginSection__logoImg" src="@ViewBag.LogoCompany" alt="">
+                    </a>
+                }
+                    <div class="loginSection__title loginSection__titleWithLlogo">
+                        @LocalizationGetter.GetString("ClientLoginUp", is_cc)
+                    </div><!-- /.loginSection__title -->
             </div><!-- /.container -->
         </div><!-- /.loginSection__titleBg -->
         <div class="loginSection__contentBg">

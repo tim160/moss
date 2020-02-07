@@ -1,46 +1,46 @@
 ﻿@model EC.Controllers.ServiceController.LoginViewModel
 @using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
-                /**/
+        /**/
 
-                ViewBag.Title = "Employee Confidential";
-                Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
-                bool showDDLanguages = true;
-                bool is_cc = false;
+        ViewBag.Title = "Employee Confidential";
+        Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+        bool showDDLanguages = true;
+        bool is_cc = false;
 
-                ModelState accLoked = new ModelState();
-                string errorMessage = "";
-                ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
-                if (accLoked != null && accLoked.Errors != null)
-                {
-                    errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
-                }
+        ModelState accLoked = new ModelState();
+        string errorMessage = "";
+        ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
+        if (accLoked != null && accLoked.Errors != null)
+        {
+            errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
+        }
 
-                ModelState passError = new ModelState();
-                string passErrorString = "";
-                ViewData.ModelState.TryGetValue("PasswordError", out passError);
-                if (passError != null && passError.Errors != null)
-                {
-                    passErrorString = "errorLogin";
-                }
+        ModelState passError = new ModelState();
+        string passErrorString = "";
+        ViewData.ModelState.TryGetValue("PasswordError", out passError);
+        if (passError != null && passError.Errors != null)
+        {
+            passErrorString = "errorLogin";
+        }
 
-                bool is_sso_domain = false;
-                if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
-                {
-                    is_sso_domain = true;
+        bool is_sso_domain = false;
+        if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+        {
+            is_sso_domain = true;
 
-                }
-                string mainHeaderLogo = "http://report.employeeconfidential.com/Content/img/logo.png";
+        }
+        string mainHeaderLogo = "http://report.employeeconfidential.com/Content/img/logo.png";
 
-                if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
-                {
-                    is_sso_domain = true;
-                    if (ViewBag.clientLogo != null && ViewBag.clientLogo.Length > 0)
-                    {
-                        mainHeaderLogo = ViewBag.clientLogo;
-                    }
+        if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+        {
+            is_sso_domain = true;
+            if (ViewBag.clientLogo != null && ViewBag.clientLogo.Length > 0)
+            {
+                mainHeaderLogo = ViewBag.clientLogo;
+            }
 
-                }
+        }
 
 }
 
@@ -107,12 +107,12 @@
                                     </a>
                                 </li><!-- /.top-header__loginBar-li -->
                             }
-                            else
+                            @*else
                             {
                                 <a href="/Service/CheckStatus" class="top-header__loginBar-a">
                                     Check Report Status
                                 </a>            
-                            }
+                            }*@
                             <li class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                                     File a Report
@@ -132,6 +132,13 @@
         <section class="loginSection">
             <div class="loginSection__titleBg" style="background-color: #edf0f0">
                 <div class="container loginTopSection__container">
+                    @if (is_sso_domain)
+                    {
+                        <a href="#" class="loginSection__logo">
+                            <img class="loginSection__logoImg" src="@ViewBag.LogoCompany" alt="">
+                        </a>
+                    }
+
                     <div class="loginSection__title">
                         @LocalizationGetter.GetString("CheckReportStatus", is_cc)
                     </div><!-- /.loginSection__title -->

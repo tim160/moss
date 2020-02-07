@@ -40,25 +40,26 @@ namespace EC.Controllers
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-      ViewBag.is_sso_domain = is_sso_domain;
-      //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
-      //{
-      //       user.password = PasswordUtils.GetHash(user.password);
-      //}
-      //       db.SaveChanges();
+            ViewBag.is_sso_domain = is_sso_domain;
+            //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
+            //{
+            //       user.password = PasswordUtils.GetHash(user.password);
+            //}
+            //       db.SaveChanges();
 
-          Session.Clear();
-       
-          if (is_sso_domain)
-          {
-            CompanyModel cm = new CompanyModel(3136);
-            userColorSchema = new UserColorSchemaModel(cm.ID);
-            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            ViewBag.clientLogo = cm.companyClientLogo();
-          }
- 
-          return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
+            Session.Clear();
+
+            if (is_sso_domain)
+            {
+                CompanyModel cm = new CompanyModel(3136);
+                userColorSchema = new UserColorSchemaModel(cm.ID);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                ViewBag.clientLogo = cm.companyClientLogo();
+                ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
+            }
+
+            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
 
         [HttpPost]
@@ -82,7 +83,7 @@ namespace EC.Controllers
             Session[ECSessionConstants.SessionIsSSO] = "0";
             if (is_sso)
                 Session[ECSessionConstants.SessionIsSSO] = "1";
-      ///      if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
+            ///      if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
 
 
@@ -173,16 +174,17 @@ namespace EC.Controllers
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             if (is_sso_domain)
             {
-              CompanyModel cm = new CompanyModel(3136);
-              userColorSchema = new UserColorSchemaModel(cm.ID);
-              ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-              ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-              ViewBag.clientLogo = cm.companyClientLogo();
+                CompanyModel cm = new CompanyModel(3136);
+                userColorSchema = new UserColorSchemaModel(cm.ID);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                ViewBag.clientLogo = cm.companyClientLogo();
+                ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
             }
             else
             {
-              ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-              ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             }
 
             return View($"Report{(is_cc ? "-CC" : "")}");
@@ -196,7 +198,8 @@ namespace EC.Controllers
             if (selectedCompany == null)
             {
                 return RedirectToAction("Index", "Index");
-            } else
+            }
+            else
             {
                 UserColorSchemaModel userColorSchema = new UserColorSchemaModel(selectedCompany.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
@@ -240,26 +243,26 @@ namespace EC.Controllers
         public ActionResult CheckStatus()
         {
             ViewBag.fullNameLanguage = FullNameLanguage;
-      ViewBag.is_sso_domain = is_sso_domain;
+            ViewBag.is_sso_domain = is_sso_domain;
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            if (is_sso_domain)
+            {
+                CompanyModel cm = new CompanyModel(3136);
+                userColorSchema = new UserColorSchemaModel(cm.ID);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                ViewBag.clientLogo = cm.companyClientLogo();
+                ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
+            }
+            else
+            {
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            }
 
-      UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
-      if (is_sso_domain)
-      {
-        CompanyModel cm = new CompanyModel(3136);
-        userColorSchema = new UserColorSchemaModel(cm.ID);
-        ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-        ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-        ViewBag.clientLogo = cm.companyClientLogo();
-      }
-      else
-      {
-        ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-        ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-      }
 
 
-
-      return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
+            return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
         }
 
         public ActionResult ForgetPassword()
@@ -1022,126 +1025,126 @@ namespace EC.Controllers
         public ActionResult LoginSso(string jwt)
         {
 
-      Session.Clear();
+            Session.Clear();
 
- //     return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel {});
-
-
-      string tokenString = jwt;
-          var handler = new JwtSecurityTokenHandler();
-          var jsonToken = handler.ReadToken(tokenString);
-          var jwtToken = handler.ReadJwtToken(tokenString);
-
-          var tokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
-          var user_id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
+            //     return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel {});
 
 
-          var temp = jwtToken.SigningKey;
-          var jwtTokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+            string tokenString = jwt;
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(tokenString);
+            var jwtToken = handler.ReadJwtToken(tokenString);
 
-          string token  = Decode(tokenString, key, true);
-          if (  !string.IsNullOrWhiteSpace(user_id))
-          {
-            var user = db.user.Where(t => t.id.ToString() == user_id).FirstOrDefault();
-            if (user != null)
+            var tokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+            var user_id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
+
+
+            var temp = jwtToken.SigningKey;
+            var jwtTokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+
+            string token = Decode(tokenString, key, true);
+            if (!string.IsNullOrWhiteSpace(user_id))
             {
-                LoginViewModel model = new LoginViewModel();
-                model.Login = user.login_nm;
-                model.Password = user.password;
- 
-                return DoLogin(model, "", "Login", true);
+                var user = db.user.Where(t => t.id.ToString() == user_id).FirstOrDefault();
+                if (user != null)
+                {
+                    LoginViewModel model = new LoginViewModel();
+                    model.Login = user.login_nm;
+                    model.Password = user.password;
+
+                    return DoLogin(model, "", "Login", true);
+                }
+
+                Response.Write("1" + tokenString);
+                Response.Flush();
+            }
+            else
+            {
+                Response.Write("whitespace");
+                Response.Flush();
             }
 
-              Response.Write("1" + tokenString);
-              Response.Flush();
-          }
-          else
-          {
             Response.Write("whitespace");
             Response.Flush();
-          }
-
-      Response.Write("whitespace");
-      Response.Flush();
-      return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel {}); 
-    }
-
-    public ActionResult LoginSsoString(string jwt)
-    {
-
-      Session.Clear();
-
-      string tokenString = jwt;
-      var handler = new JwtSecurityTokenHandler();
-      var jsonToken = handler.ReadToken(tokenString);
-      var jwtToken = handler.ReadJwtToken(tokenString);
-
-      var tokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
-      var user_id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
-
-
-      var temp = jwtToken.SigningKey;
-      var jwtTokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
-
-      string token = Decode(tokenString, key, true);
-      if (!string.IsNullOrWhiteSpace(user_id))
-      {
-        var user = db.user.Where(t => t.id.ToString() == user_id).FirstOrDefault();
-        if (user != null)
-        {
-          LoginViewModel model = new LoginViewModel();
-          model.Login = user.login_nm;
-          model.Password = user.password;
-
-          return DoLogin(model, "", "Login", true);
+            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { });
         }
 
-        Response.Write("1" + tokenString);
-        Response.Flush();
-      }
-      else
-      {
-        Response.Write("whitespace");
-        Response.Flush();
-      }
+        public ActionResult LoginSsoString(string jwt)
+        {
 
-      Response.Write("whitespace");
-      Response.Flush();
-      return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { });
-    }
-    public static string Decode(string token, string key, bool verify = true)
-    {
-      if (string.IsNullOrEmpty(token))
-        throw new ArgumentException("Given token is null or empty.");
+            Session.Clear();
 
-      JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            string tokenString = jwt;
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(tokenString);
+            var jwtToken = handler.ReadJwtToken(tokenString);
 
-      var tokenHandler = new JwtSecurityTokenHandler();
-      //byte[] symmetricKey = Convert.FromBase64String(key);
-      //byte[] symmetricKey = (Encoding.UTF8.GetBytes(key));// Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature
-      var symmetricKey = Convert.FromBase64String(key);
-      var tokenValidationParameters = new TokenValidationParameters
-      {
-        RequireSignedTokens = true,
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ValidateLifetime = false,
+            var tokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+            var user_id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
 
-        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(symmetricKey)
-      };
 
-      //  Microsoft.IdentityModel.Tokens.SecurityToken validatedToken = new 
-      var tokenSec = tokenHandler.ReadToken(token) as Microsoft.IdentityModel.Tokens.SecurityToken;
-      try
-      {
-        ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out tokenSec);
-        return "";
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
+            var temp = jwtToken.SigningKey;
+            var jwtTokenS = handler.ReadToken(tokenString) as JwtSecurityToken;
+
+            string token = Decode(tokenString, key, true);
+            if (!string.IsNullOrWhiteSpace(user_id))
+            {
+                var user = db.user.Where(t => t.id.ToString() == user_id).FirstOrDefault();
+                if (user != null)
+                {
+                    LoginViewModel model = new LoginViewModel();
+                    model.Login = user.login_nm;
+                    model.Password = user.password;
+
+                    return DoLogin(model, "", "Login", true);
+                }
+
+                Response.Write("1" + tokenString);
+                Response.Flush();
+            }
+            else
+            {
+                Response.Write("whitespace");
+                Response.Flush();
+            }
+
+            Response.Write("whitespace");
+            Response.Flush();
+            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { });
+        }
+        public static string Decode(string token, string key, bool verify = true)
+        {
+            if (string.IsNullOrEmpty(token))
+                throw new ArgumentException("Given token is null or empty.");
+
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            //byte[] symmetricKey = Convert.FromBase64String(key);
+            //byte[] symmetricKey = (Encoding.UTF8.GetBytes(key));// Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature
+            var symmetricKey = Convert.FromBase64String(key);
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                RequireSignedTokens = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = false,
+
+                IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(symmetricKey)
+            };
+
+            //  Microsoft.IdentityModel.Tokens.SecurityToken validatedToken = new 
+            var tokenSec = tokenHandler.ReadToken(token) as Microsoft.IdentityModel.Tokens.SecurityToken;
+            try
+            {
+                ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out tokenSec);
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }
