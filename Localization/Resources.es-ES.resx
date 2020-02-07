@@ -3065,4 +3065,7 @@
   <data name="CaseManagament" xml:space="preserve">
     <value>Manejo de caso</value>
   </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Fecha límite</value>
+  </data>
 </root>
