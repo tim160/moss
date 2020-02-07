@@ -48,7 +48,7 @@ html, body{
 .container ul{
 	margin: 0;
 	padding: 0;
-	border: 0;
+	/*border: 0;*/
 	font-size: 100%;
 	/*font: inherit;*/
 	vertical-align: middle;
@@ -442,19 +442,19 @@ header.header{
 .headerTop-Text__text {
     background: url();
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-    font-size: 23px;
+    font-size: 22px;
     text-align: left;
     font-weight: bold;
     color: #7e9297;
     width: 203px;
     height: 32px;
-    border-right: 1px solid rgb(186, 194, 194);
     background-size: contain;
     background-position: left;
     display: inline-block;
     vertical-align: middle;
 }
 	.mainNavigation{
+        border-left: 1px solid rgb(186, 194, 194);
 		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 		display: inline-block;
 		vertical-align: middle;
