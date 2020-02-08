@@ -44,6 +44,8 @@ namespace EC.Constants
             "application/msword",
             "audio/*",
             "image/*",
+            "video/mp4",
+            "video/quicktime"
         };
     }
 }

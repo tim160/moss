@@ -26,6 +26,8 @@
             'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
             'application/pdf',
             'application/msword',
+            'video/mp4',
+            'video/quicktime',
             'text/csv',
             'text/tsv',
             '.xlsx',
@@ -37,7 +39,9 @@
             '.mp3',
             '.wav',
             'image/*',
-            '.docx'
+            '.docx',
+            '.mov',
+            '.mp4'
             ];
         $scope.exts = mimes.join(',');
         $scope.upload = function (files) {

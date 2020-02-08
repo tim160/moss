@@ -88,6 +88,20 @@ namespace EC.Controllers
         public ActionResult CheckStatus(LoginViewModel model, string returnUrl)
         {
             Session.Clear();
+            UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
+            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            ViewBag.is_sso_domain = is_sso_domain;
+
+            if (is_sso_domain)
+            {
+                CompanyModel cm = new CompanyModel(3136);
+                userColorSchema = new UserColorSchemaModel(cm.ID);
+                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                ViewBag.clientLogo = cm.companyClientLogo();
+                ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
+            }
             return DoLogin(model, returnUrl, "CheckStatus", false);
         }
 

@@ -269,6 +269,108 @@
 
     angular
         .module('EC')
+        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (id) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('SettingsGlobalLogo',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/api/SettingsGlobalLogo',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('uploadImage',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/Settings/AddLogoCompany',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
+            return {
+                validate: function (value, rv) {
+                    if (rv === undefined) {
+                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
+                            return false;
+                        }
+                    } else {
+                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            };
+        }]);
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
         .controller('AnalyticsCACSController',
             ['$scope', 'AnalyticsCACSService', AnalyticsCACSController]);
 
@@ -1262,17 +1364,17 @@
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.model = {
-            reportingFrom: 'Canada',
-            reporterWouldLike: 'Contact Info Shared',
-            reporterName: 'First Last',
-            reporterIs: 'Member of the public',
-            incidentHappenedIn: 'Toronto, ON, Canada',
-            affectedDepartment: 'Marketing',
-            partiesInvolvedName: '(Margot) Cooper',
-            partiesInvolvedTitle: 'CFO',
-            partiesInvolvedType: 'Case Administrators excluded',
-            reportingAbout: 'Breach of Legal Obligations',
-            incidentDate: 'Nov 1, 2016',
+            reportingFrom: '',
+            reporterWouldLike: '',
+            reporterName: '',
+            reporterIs: '',
+            incidentHappenedIn: '',
+            affectedDepartment: '',
+            partiesInvolvedName: '',
+            partiesInvolvedTitle: '',
+            partiesInvolvedType: '',
+            reportingAbout: '',
+            incidentDate: '',
         };
 
         NewCaseReportService.get({ id: $scope.report_id }, function (data) {
@@ -1554,6 +1656,8 @@
             'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
             'application/pdf',
             'application/msword',
+            'video/mp4',
+            'video/quicktime',
             'text/csv',
             'text/tsv',
             '.xlsx',
@@ -1565,7 +1669,9 @@
             '.mp3',
             '.wav',
             'image/*',
-            '.docx'
+            '.docx',
+            '.mov',
+            '.mp4'
             ];
         $scope.exts = mimes.join(',');
         $scope.upload = function (files) {
@@ -2178,108 +2284,6 @@
             },
         };
     }
-}());
-
-(function () {
-
-    'use strict';
-
-    angular
-        .module('EC')
-        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (id) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'GET',
-                        url: '/api/AdditionalCompanies/' + id
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('SettingsGlobalLogo',['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (fd) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'POST',
-                        data: fd,
-                        url: '/api/SettingsGlobalLogo',
-                        headers: { 'Content-Type': undefined },
-                        transformRequest: angular.identity
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('uploadImage',['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (fd) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'POST',
-                        data: fd,
-                        url: '/Settings/AddLogoCompany',
-                        headers: { 'Content-Type': undefined },
-                        transformRequest: angular.identity
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
-            return {
-                validate: function (value, rv) {
-                    if (rv === undefined) {
-                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
-                            return false;
-                        }
-                    } else {
-                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            };
-        }]);
 }());
 
 (function () {
