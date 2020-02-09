@@ -91,8 +91,7 @@ namespace EC.Controllers
 
                 ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
-                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id, null).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-                ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
+                 ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
                 ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(getDBEntityModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = getDBEntityModel.getCountries();
@@ -132,6 +131,7 @@ namespace EC.Controllers
 
                 CompanyLocationCulture locationCulture = new CompanyLocationCulture(companyModel, currentCompany.id);
                 ViewBag.locationsOfIncident = locationCulture.getLocationsCompanyCultureSelect();
+                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id, ECStatusConstants.Active_Value).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
                 InjuryDamageCulture injuryDamageCulture = new InjuryDamageCulture(companyModel);
                 ViewBag.injury_damage = injuryDamageCulture.getInjuryDamageCulture();
