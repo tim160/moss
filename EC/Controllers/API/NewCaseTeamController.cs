@@ -189,7 +189,7 @@ namespace EC.Controllers.API
                     DB.report_owner.Add(new report_owner
                     {
                         created_on = DateTime.Now,
-                        id = filter.id.Value,
+                        report_id = filter.id.Value,
                         user_id = filter.MakeCaseOwner.Value,
                         status_id = 2,
                     });
