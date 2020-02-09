@@ -2,15 +2,23 @@
 @using EC.Models.Database;
 @using EC.Localization;
 @{
-    ViewBag.Title = LocalizationGetter.GetString("Profile");
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
+  ViewBag.Title = LocalizationGetter.GetString("Profile");
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
 
-    UserModel um = new UserModel(ViewBag.user_id);
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  UserModel um = new UserModel(ViewBag.user_id);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int mediatorId = 0;
+  string updateButtonText = LocalizationGetter.GetString("sendInvitation");
+  if (ViewBag.MediatorId != null)
+  {
+    mediatorId = ViewBag.MediatorId;
+    updateButtonText = LocalizationGetter.GetString("Update");
+  }
+
 }
 <script src="~/Scripts/View/SettingsUser.js"></script>
 <style>
@@ -20,7 +28,7 @@
 </style>
 
 @{
-    int active = 4;
+  int active = 4;
 }
 @Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", new ViewDataDictionary { { "active", active }, { "role_id", um._user.role_id } })
 
@@ -225,8 +233,8 @@
             }
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
-                    <input class="greenButton" type="submit" value="@LocalizationGetter.GetString("sendInvitation")" ng-show="canEditUserProfiles" ng-click="post()">
-                    <span style="display: none;">@LocalizationGetter.GetString("sendInvitation")</span>
+                    <input class="greenButton" type="submit" value="@updateButtonText" ng-show="canEditUserProfiles" ng-click="post()">
+                    <span style="display: none;">@updateButtonText</span>
                 </div>
             </div>
         </div>
