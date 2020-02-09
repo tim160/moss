@@ -179,7 +179,7 @@ namespace EC.Controllers.API
             }
             if (filter.MakeCaseOwner.HasValue)
             {
-                var list = DB.report_owner.Where(x => x.id == filter.id).ToList();
+                var list = DB.report_owner.Where(x => x.report_id == filter.id).ToList();
                 foreach (var item in list)
                 {
                     item.status_id = item.user_id == filter.MakeCaseOwner.Value ? 2 : 1;
