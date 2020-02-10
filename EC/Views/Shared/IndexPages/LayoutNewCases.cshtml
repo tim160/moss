@@ -371,12 +371,12 @@
     </header>
     @{
         string hrefURL = Request.Url.AbsoluteUri.ToLower();
-        if (hrefURL.Contains("/settings"))
+        if (hrefURL.ToLower().Contains("/settings"))
         {
             hrefURL = "/settings/index";
             page_subtitle = LocalizationGetter.GetString("Settings");
         }
-        if ((hrefURL.Contains("/tasks")))
+        if ((hrefURL.ToLower().Contains("/tasks")))
         {
             if (!mainURL.Contains("analytics"))
             {
@@ -384,25 +384,25 @@
                 page_subtitle = LocalizationGetter.GetString("Tasks");
             }
         }
-        if (hrefURL.Contains("/cases"))
+        if (hrefURL.ToLower().Contains("/cases"))
         {
             hrefURL = "/cases/index";
             page_subtitle = LocalizationGetter.GetString("Dashboard");
         }
 
-        if ((hrefURL.Contains("NewCase/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("NewCase/task/"))))
+        if ((hrefURL.ToLower().Contains("newcase/")) || (hrefURL.ToLower().Contains("/cases")) || (hrefURL.ToLower().Contains("/newreport") || (hrefURL.ToLower().Contains("newcase/task/"))))
         {
             hrefURL = "/cases/index";
             page_subtitle = LocalizationGetter.GetString("Cases");
         }
 
-        if (hrefURL.Contains("/analytics"))
+        if (hrefURL.ToLower().Contains("/analytics"))
         {
             hrefURL = "/analytics/index";
             page_subtitle = LocalizationGetter.GetString("Analytics");
         }
 
-        if (hrefURL.Contains("/messages"))
+        if (hrefURL.ToLower().Contains("/messages"))
         {
             hrefURL = "/messages/index";
             page_subtitle = LocalizationGetter.GetString("Messages");

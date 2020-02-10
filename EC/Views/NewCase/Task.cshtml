@@ -47,7 +47,7 @@
   string task_name = " - #" + rm._report.display_name + " - " + _tsk._task.title;
   ViewBag.Title = LocalizationGetter.GetString("Task", is_cc) + task_name;
   //    string task_comment_color = "#ffffff";
-
+  string photo_path = string.IsNullOrWhiteSpace(um._user.photo_path) ? Url.Content("~/Content/Icons/noPhoto.png") : um._user.photo_path;
 }
 @{
     Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
@@ -225,7 +225,7 @@
 				                <div class="fullTaskBlock-footer clearfix">
 					                <div class="col-1">
 						                <div class="profileImg">
-							                <img src="Icons/pepperPhoto.png" alt="" class="profileImg__img" />
+							                <img src=@photo_path alt="" class="profileImg__img" />
 							                <div class="profileImg__status online"></div><!-- /.profileImg__status -->
 						                </div><!-- /.profileImg -->
 					                </div><!-- /.col-1 -->

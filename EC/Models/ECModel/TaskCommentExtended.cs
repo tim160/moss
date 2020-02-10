@@ -43,7 +43,7 @@ namespace EC.Models.ECModel
                 if (_task_comment_original.user_id != 0)
                 {
                     UserModel temp_user = new UserModel(_task_comment_original.user_id);
-                    if (temp_user._user.photo_path.Trim().Length > 0)
+                    if (temp_user!= null && !string.IsNullOrWhiteSpace(temp_user._user.photo_path))
                         PosterPath = temp_user._user.photo_path;
                 }
             }
