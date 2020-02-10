@@ -434,7 +434,7 @@
 
                         </div>
                         <input type="hidden" value="@ViewBag.CustomSecondaryType" name="CustomSecondaryType" />
-                        <div class="contentBlock checkboxListStyle rowBlock caseInformationReport" style="border-bottom: 0px;">
+                        <div class="contentBlock checkboxListStyle rowBlock caseInformationReport" style="border-bottom: 0px;margin-bottom: 14px;">
                             <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
                             @if (ViewBag.secondary_type_mandatory != null)
                             {
@@ -495,7 +495,7 @@
 
                             <!--START-->
                             <div class="isAccidentOngoing">
-                                <div class="isOngoing">
+                                <div class="isOngoing rowBlock">
                                     <input type="hidden" class="validate" value="false" name="isOnGoing" data-vltarget=".isOnGoing" data-validate="notEmpty" />
 
                                     <div class="freeBlock inputRadio option" data-val="1">
@@ -532,7 +532,7 @@
                     </div>
 
                     <div class="contentBlock" tabindex="1">
-                        <div class="incidentResultReport">
+                        <div class="incidentResultReport rowBlock ">
                             <p class="title">@LocalizationGetter.GetString("IncidentResultInjury", is_cc)</p>
                             <input type="hidden" class="validate" value="false" name="incidentResultReport" data-vltarget=".incidentResultReport" data-validate="notEmpty" />
                             @foreach (var item in ViewBag.injury_damage)
