@@ -1197,7 +1197,9 @@ textarea::-webkit-input-placeholder {
   max-width: 438px;
   height: auto;
   display: block;
-  margin: auto; }
+  margin: auto; 
+  width: 100%;
+  }
 
 .loginSection__title.loginSection__titleWithLlogo {
   padding-top: 70px; }
@@ -1334,12 +1336,13 @@ textarea::-webkit-input-placeholder {
   .login .main.main_white {
     min-height: calc( 100vh - 36px - 550px); }
   .top-header {
+	  grid-template-columns: 1fr;
     height: 36px;
     overflow: hidden; }
     .top-header__campusLink {
       display: none; }
     .top-header__loginBar {
-      justify-self: center; }
+      justify-self: end; }
     .top-header__loginBar-nav {
       list-style: none;
       display: grid;
@@ -1362,7 +1365,7 @@ textarea::-webkit-input-placeholder {
     display: grid; }
   .login .top-header__loginBar-nav {
     display: grid;
-    grid-template-columns: 1fr 1fr; }
+    grid-template-columns: 1fr; }
     .login .top-header__loginBar-nav.language {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -1885,9 +1888,14 @@ textarea::-webkit-input-placeholder {
   .login .main {
     min-height: calc( 100vh - 36px - 125px); }
   .top-header {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     height: 36px;
-    overflow: hidden; }
+    overflow: hidden;
+	
+	}
+	.top-header span {
+		display: none;
+	}
     .top-header__campusLink {
       display: block;
       justify-self: start;
