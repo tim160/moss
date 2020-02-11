@@ -58,7 +58,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpPost]
-        [Route("new")]
+        [Route]
         public async Task<IHttpActionResult> Create(CreateUserModel createUserModel)
         {
             if (createUserModel == null)
@@ -88,7 +88,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("internal/{id}")]
         public async Task<IHttpActionResult> Update(int id, UpdateUserModel updateUserModel)
         {
             _logger.Debug($"id={id}");
@@ -122,7 +122,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpPut]
-        [Route("externaluser/{id}")]
+        [Route("{id}")]
         public async Task<IHttpActionResult> UpdateExternalUser(string id, UpdateUserModel updateUserModel)
         {
             _logger.Debug($"id={id}");
@@ -162,7 +162,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("internal/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)
@@ -187,7 +187,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpDelete]
-        [Route("externaldelete/{id}")]
+        [Route("{id}")]
         public async Task<IHttpActionResult> Delete(string id)
         {
             if (String.IsNullOrEmpty(id))
@@ -216,9 +216,9 @@ namespace EC.Controllers.API.v1
         }
 
     [HttpGet]
-    [Route]
+    [Route("unreadCounters/{id}")]
     [ResponseType(typeof(UsersUnreadEntitiesNumberViewModel))]
-    public async Task<IHttpActionResult> UnreadCounters()
+    public async Task<IHttpActionResult> UnreadCounters(string id)
     {
       UsersUnreadEntitiesNumberViewModel unread_entites = new UsersUnreadEntitiesNumberViewModel();
       var statusModel = new Models.ReadStatusModel();

@@ -55,7 +55,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpPost]
-        [Route("new")]
+        [Route()]
         public async Task<IHttpActionResult> Create(CreateClientModel createClientModel)
         {
             if (createClientModel == null)
@@ -101,8 +101,8 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> Update(int id, UpdateClientModel updateClientModel)
+        [Route("internal/{id}")]
+        public async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
         {
             _logger.Debug($"id={id}");
 
@@ -148,8 +148,8 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpPut]
-        [Route("externalclient/{id}")]
-        public async Task<IHttpActionResult> UpdateExternalUser(string id, UpdateClientModel updateClientModel)
+        [Route("{id}")]
+        public async Task<IHttpActionResult> Update(string id, UpdateClientModel updateClientModel)
         {
             _logger.Debug($"id={id}");
 
@@ -188,8 +188,8 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpDelete]
-        [Route("delete/{id}")]
-        public async Task<IHttpActionResult> Delete(int id)
+        [Route("internal/{id}")]
+        public async Task<IHttpActionResult> DeleteInternal(int id)
         {
             if (id == 0)
             {
@@ -211,7 +211,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpDelete]
-        [Route("externaldelete/{id}")]
+        [Route("{id}")]
         public async Task<IHttpActionResult> Delete(string id)
         {
             if (String.IsNullOrEmpty(id))

@@ -46,7 +46,7 @@ namespace EC.Controllers.API.v1
 		}
 
 		[HttpPost]
-		[Route("new")]
+		[Route()]
 		public async Task<IHttpActionResult> Create(CreateCompanyModel createCompanyModel)
 		{
 			if (createCompanyModel == null)
@@ -76,7 +76,7 @@ namespace EC.Controllers.API.v1
 		}
 
 		[HttpPut]
-		[Route("{id}")]
+		[Route("internal/{id}")]
 		public async Task<IHttpActionResult> Update(int id, UpdateCompanyModel updateCompanyModel)
 		{
 			_logger.Debug($"id={id}");
@@ -110,7 +110,7 @@ namespace EC.Controllers.API.v1
 		}
 
         [HttpPut]
-        [Route("externalcompany/{id}")]
+        [Route("{id}")]
         public async Task<IHttpActionResult> UpdateExternalCompany(string id, UpdateCompanyModel updateCompanyModel)
         {
             _logger.Debug($"id={id}");
@@ -151,7 +151,7 @@ namespace EC.Controllers.API.v1
 
 
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("internal/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)
@@ -174,7 +174,7 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpDelete]
-        [Route("externaldelete/{id}")]
+        [Route("{id}")]
         public async Task<IHttpActionResult> Delete(string id)
         {
             if (String.IsNullOrEmpty(id))

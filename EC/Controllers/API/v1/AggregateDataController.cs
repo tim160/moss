@@ -16,7 +16,7 @@ namespace EC.Controllers.API.v1
   [JwtAuthentication]
   [Authorize]
   [RoutePrefix("api/v1/aggregate")]
-  public class AggregateDataController : BaseApiController
+  public class cController : BaseApiController
   {
     private readonly CompanyService _companyService;
     protected readonly ILog _logger;
