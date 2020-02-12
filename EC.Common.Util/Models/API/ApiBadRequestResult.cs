@@ -21,22 +21,26 @@ namespace EC.Common.Util.Models.API
 		{
 		}
 
-		public ApiBadRequestResult(ModelStateDictionary modelState, ApiController controller)
-			: base(HttpStatusCode.BadRequest, modelState
-				.Where(item => item.Value.Errors.Any())
-				.ToDictionary(
-					item => item.Key,
-					item => item.Value.Errors.Select(e => e.ErrorMessage).ToArray()))
-		{
-			_modelState = modelState ?? throw new ArgumentNullException(nameof(modelState));
-			_controller = controller ?? throw new ArgumentNullException(nameof(controller));
+    public ApiBadRequestResult(ModelStateDictionary modelState, ApiController controller)
+      : base(HttpStatusCode.BadRequest, modelState
+        .Where(item => item.Value.Errors.Any())
+        .ToDictionary(
+          item => item.Key,
+          item => item.Value.Errors.Select(e => e.ErrorMessage).ToArray()))
+    {
+      if (modelState == null)
+        throw new ArgumentNullException(nameof(modelState));
+          else _modelState = modelState ;
+      if (controller == null)
+        throw new ArgumentNullException(nameof(controller));
+      else _controller = controller;
 		}
 
 		async Task<HttpResponseMessage> IHttpActionResult.ExecuteAsync(CancellationToken cancellationToken)
 		{
 			HttpResponseMessage responseMessage;
 
-			if (_modelState is null)
+			if (_modelState == null)
 			{
 				responseMessage = await base.ExecuteAsync(cancellationToken);
 			}

@@ -11,87 +11,88 @@ using EC.Common.Util.Models.API;
 
 namespace EC.Common.Util.Filters
 {
-	public class JwtAuthenticationAttribute : Attribute, IAuthenticationFilter
-	{
-		private const string _authorizationScheme = "Bearer";
+  public class JwtAuthenticationAttribute : Attribute, IAuthenticationFilter
+  {
+    private const string _authorizationScheme = "Bearer";
 
-		public bool AllowMultiple => false;
+    public bool AllowMultiple => false;
 
-		public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
-		{
-			HttpRequestMessage request = context.Request;
-			AuthenticationHeaderValue authorization = request.Headers.Authorization;
+    public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
+    {
+      HttpRequestMessage request = context.Request;
+      AuthenticationHeaderValue authorization = request.Headers.Authorization;
 
-			// If there are no credentials or if there are credentials but the filter does not recognize the authentication scheme, do nothing.
-			if (authorization == null
-				|| authorization.Scheme != _authorizationScheme)
-			{
-				return;
-			}
+      // If there are no credentials or if there are credentials but the filter does not recognize the authentication scheme, do nothing.
+      if (authorization == null
+        || authorization.Scheme != _authorizationScheme)
+      {
+        return;
+      }
 
-			string token = authorization.Parameter;
-			if (string.IsNullOrWhiteSpace(token))
-			{
-				context.ErrorResult = new ApiUnauthorizedResult("Missing token.");
-				return;
-			}
+      string token = authorization.Parameter;
+      if (string.IsNullOrWhiteSpace(token))
+      {
+        context.ErrorResult = new ApiUnauthorizedResult("Missing token.");
+        return;
+      }
 
-			IPrincipal principal = await AuthenticateJwtAsync(token);
-			if (principal == null)
-			{
-				context.ErrorResult = new ApiUnauthorizedResult("Invalid token.");
-			}
-			else
-			{
-				context.Principal = principal;
-			}
-		}
+      IPrincipal principal = await AuthenticateJwtAsync(token);
+      if (principal == null)
+      {
+        context.ErrorResult = new ApiUnauthorizedResult("Invalid token.");
+      }
+      else
+      {
+        context.Principal = principal;
+      }
+    }
 
-		public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
-		{
-			AuthenticationHeaderValue challenge = new AuthenticationHeaderValue(_authorizationScheme);
-			context.Result = new AddChallengeOnUnauthorizedResult(challenge, context.Result);
+    public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
+    {
+      AuthenticationHeaderValue challenge = new AuthenticationHeaderValue(_authorizationScheme);
+      context.Result = new AddChallengeOnUnauthorizedResult(challenge, context.Result);
 
-			return Task.FromResult<object>(null);
-		}
+      return Task.FromResult<object>(null);
+    }
 
-		protected Task<IPrincipal> AuthenticateJwtAsync(string token)
-		{
-			if (ValidateToken(token, out string username))
-			{
-				ClaimsIdentity identity = JwtManager.GetIdentity(username);
-				IPrincipal user = new ClaimsPrincipal(identity);
+    protected Task<IPrincipal> AuthenticateJwtAsync(string token)
+    {
+      string username = "";
+      if (ValidateToken(token, out username))
+      {
+        ClaimsIdentity identity = JwtManager.GetIdentity(username);
+        IPrincipal user = new ClaimsPrincipal(identity);
 
-				return Task.FromResult(user);
-			}
+        return Task.FromResult(user);
+      }
 
-			return Task.FromResult<IPrincipal>(null);
-		}
+      return Task.FromResult<IPrincipal>(null);
+    }
 
-		private static bool ValidateToken(string token, out string username)
-		{
-			username = null;
+    private static bool ValidateToken(string token, out string username)
+    {
+      username = null;
 
-			ClaimsPrincipal simplePrinciple = JwtManager.GetPrincipal(token);
-			ClaimsIdentity identity = simplePrinciple?.Identity as ClaimsIdentity;
+      ClaimsPrincipal simplePrinciple = JwtManager.GetPrincipal(token);
+      ClaimsIdentity identity = simplePrinciple?.Identity as ClaimsIdentity;
 
-			if (identity == null
-				|| !identity.IsAuthenticated)
-			{
-				return false;
-			}
+      if (identity == null
+        || !identity.IsAuthenticated)
+      {
+        return false;
+      }
 
-			Claim usernameClaim = identity.FindFirst(ClaimTypes.Name);
-			username = usernameClaim?.Value;
+      Claim usernameClaim = identity.FindFirst(ClaimTypes.Name);
+      username = usernameClaim?.Value;
 
-			if (string.IsNullOrWhiteSpace(username))
-			{
-				return false;
-			}
+      if (string.IsNullOrWhiteSpace(username))
+      {
+        return false;
+      }
 
-			// TODO: More validate to check whether username exists in system
+      // TODO: More validate to check whether username exists in system
 
-			return true;
-		}
-	}
+      return true;
+    }
+  }
 }

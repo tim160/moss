@@ -9,31 +9,38 @@ using System.Web.Http;
 
 namespace EC.Common.Util.Filters
 {
-	public class AddChallengeOnUnauthorizedResult : IHttpActionResult
-	{
-		public AuthenticationHeaderValue _challenge;
-		public IHttpActionResult _innerResult;
+  public class AddChallengeOnUnauthorizedResult : IHttpActionResult
+  {
+    public AuthenticationHeaderValue _challenge;
+    public IHttpActionResult _innerResult;
 
-		public AddChallengeOnUnauthorizedResult(AuthenticationHeaderValue challenge, IHttpActionResult innerResult)
-		{
-			_challenge = challenge ?? throw new ArgumentNullException(nameof(challenge));
-			_innerResult = innerResult ?? throw new ArgumentNullException(nameof(innerResult));
-		}
+    public AddChallengeOnUnauthorizedResult(AuthenticationHeaderValue challenge, IHttpActionResult innerResult)
+    {
+      if (challenge != null)
+        _challenge = challenge;
+      else
+        throw new ArgumentNullException(nameof(challenge));
 
-		public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
-		{
-			HttpResponseMessage response = await _innerResult.ExecuteAsync(cancellationToken);
+      if (innerResult != null)
+        _innerResult = innerResult;
+      else
+        throw new ArgumentNullException(nameof(innerResult));
+    }
 
-			if (response.StatusCode == HttpStatusCode.Unauthorized)
-			{
-				// Only add one challenge per authentication scheme.
-				if (response.Headers.WwwAuthenticate.All(headerValue => headerValue.Scheme != _challenge.Scheme))
-				{
-					response.Headers.WwwAuthenticate.Add(_challenge);
-				}
-			}
+    public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+    {
+      HttpResponseMessage response = await _innerResult.ExecuteAsync(cancellationToken);
 
-			return response;
-		}
-	}
+      if (response.StatusCode == HttpStatusCode.Unauthorized)
+      {
+        // Only add one challenge per authentication scheme.
+        if (response.Headers.WwwAuthenticate.All(headerValue => headerValue.Scheme != _challenge.Scheme))
+        {
+          response.Headers.WwwAuthenticate.Add(_challenge);
+        }
+      }
+
+      return response;
+    }
+  }
 }
