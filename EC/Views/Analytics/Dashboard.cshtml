@@ -430,7 +430,10 @@
             </div>
         </div>
         <script>
+            'use strict';
+
             $(document).ready(function () {
+                
                 //Filter case
 
 
@@ -449,8 +452,8 @@
                 // Toggle block
 
                 $(document).click(function (event) {
-                    $target = $(event.target);
-                    if (!$target.closest(".case-TotalHeader__items").length &&
+                    var target = $(event.target);
+                    if (!target.closest(".case-TotalHeader__items").length &&
                         $(".case-DropDownList-contentBlock").is(":visible")) {
                         $(".case-DropDownList-contentBlock").hide("fast");
                         $(".case-DropDownList-contentBlock").parent(".case-TotalHeader__items").removeClass("selected");
