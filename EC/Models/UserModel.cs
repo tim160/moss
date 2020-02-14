@@ -116,8 +116,6 @@ namespace EC.Models
             ID = id;
             if (id != 0)
             {
-                user _user = db.user.FirstOrDefault(item => item.id == id);
-                // ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
                 return db.user.FirstOrDefault(item => item.id == id);
             }
             else
