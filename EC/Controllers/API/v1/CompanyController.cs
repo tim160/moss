@@ -235,5 +235,97 @@ namespace EC.Controllers.API.v1
 
       return ApiOk(result);
     }
+
+
+
+
+    // to do  - move to common area
+    public class AggregateData
+    {
+      public int Name { get; set; }
+      public int Quantity { get; set; }
+
+      public decimal Percentage { get; set; }
+
+    }
+
+
+    #region Analytics
+
+    [HttpGet]
+    [Route("{id}/analytics/Departments")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsDepartments(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+
+    [HttpGet]
+    [Route("{id}/analytics/Locations")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsLocations(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+
+    [HttpGet]
+    [Route("{id}/analytics/IncidentTypes")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsIncidentTypes(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+    [HttpGet]
+    [Route("{id}/analytics/ReporterTypes")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsReporterTypes(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+
+    [HttpGet]
+    [Route("{id}/analytics/behavioralFactors")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+
+    [HttpGet]
+    [Route("{id}/analytics/externalInfluences")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsExternalInfluences(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+    [HttpGet]
+    [Route("{id}/analytics/organizationalInfluences")]
+    [ResponseType(typeof(AggregateData))]
+    public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string start_dt, string end_dt)
+    {
+      // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      AggregateData result = new AggregateData();
+      return ApiOk(result);
+    }
+    #endregion
   }
 }
