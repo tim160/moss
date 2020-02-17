@@ -32,13 +32,12 @@ namespace EC.Controllers.API.v1
             _userService = new UserService();
         }
 
+        // should be 1 item, not list
         [HttpGet]
         [Route]
-        [ResponseType(typeof(PagedList<UserModel>))]
-        public async Task<IHttpActionResult> GetList(int page = 1, int pageSize = 10)
+        [ResponseType(typeof(UserModel))]
+        public async Task<IHttpActionResult> GetUser()
         {
-            _logger.Debug($"page={page}; pageSize={pageSize}");
-
             if (!ModelState.IsValid)
             {
                 return ApiBadRequest(ModelState);
@@ -46,7 +45,7 @@ namespace EC.Controllers.API.v1
 
         Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
             PagedList<UserModel> result = await _userService
-                .GetPagedAsync(page, pageSize, filterApp)
+                .GetPagedAsync(1, 1, filterApp)
                 .ConfigureAwait(false);
             var statusModel = new Models.ReadStatusModel();
             result.Items.ForEach(entity =>
@@ -86,10 +85,10 @@ namespace EC.Controllers.API.v1
 
             return ApiCreated(id);
         }
-
-        [HttpPut]
+    // do not do it now
+    [HttpPut]
         [Route("internal/{id}")]
-        public async Task<IHttpActionResult> Update(int id, UpdateUserModel updateUserModel)
+    private async Task<IHttpActionResult> Update(int id, UpdateUserModel updateUserModel)
         {
             _logger.Debug($"id={id}");
 
@@ -160,10 +159,10 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
-
-        [HttpDelete]
+    // do not do it now
+    [HttpDelete]
         [Route("internal/{id}")]
-        public async Task<IHttpActionResult> Delete(int id)
+    private async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)
             {

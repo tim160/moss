@@ -35,10 +35,10 @@ namespace EC.Controllers.API.v1
 			_logger = LogManager.GetLogger(GetType());
 			_companyService = new CompanyService();
 		}
-
+    // should be 1 item, not list
 		[HttpGet]
     [Route("{id}")]
-    [ResponseType(typeof(PagedList<CompanyModel>))]
+    [ResponseType(typeof(CompanyModel))]
 		public async Task<IHttpActionResult> GetCompany()
 		{
 
@@ -82,10 +82,10 @@ namespace EC.Controllers.API.v1
 
 			return ApiCreated(id);
 		}
-
-		[HttpPut]
+    // do not do it now
+    [HttpPut]
 		[Route("internal/{id}")]
-		public async Task<IHttpActionResult> Update(int id, UpdateCompanyModel updateCompanyModel)
+    private async Task<IHttpActionResult> Update(int id, UpdateCompanyModel updateCompanyModel)
 		{
 			_logger.Debug($"id={id}");
 
@@ -157,10 +157,10 @@ namespace EC.Controllers.API.v1
             return ApiOk();
         }
 
-
-        [HttpDelete]
+    // do not do it now
+    [HttpDelete]
         [Route("internal/{id}")]
-        public async Task<IHttpActionResult> Delete(int id)
+        private async Task<IHttpActionResult> Delete(int id)
         {
             if (id == 0)
             {
