@@ -9,7 +9,14 @@ using EC.Common.Util.Filters;
 using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.Company;
 using EC.Services.API.v1.CompanyServices;
+using EC.Models.API.v1.User;
+using EC.Services.API.v1.UserService;
+using System.Linq.Expressions;
+using EC.Models.ViewModels;
 using log4net;
+using EC.Models.Database;
+using EC.Constants;
+
 
 namespace EC.Controllers.API.v1
 {
@@ -19,7 +26,9 @@ namespace EC.Controllers.API.v1
 	public class CompanyController : BaseApiController
 	{
 		private readonly CompanyService _companyService;
-		protected readonly ILog _logger;
+    private readonly UserService _userService;
+
+    protected readonly ILog _logger;
 
 		public CompanyController()
 		{
@@ -28,11 +37,10 @@ namespace EC.Controllers.API.v1
 		}
 
 		[HttpGet]
-		[Route]
-		[ResponseType(typeof(PagedList<CompanyModel>))]
-		public async Task<IHttpActionResult> GetList(int page = 1, int pageSize = 10)
+    [Route("{id}")]
+    [ResponseType(typeof(PagedList<CompanyModel>))]
+		public async Task<IHttpActionResult> GetCompany()
 		{
-			_logger.Debug($"page={page}; pageSize={pageSize}");
 
 			if (!ModelState.IsValid)
 			{
@@ -40,7 +48,7 @@ namespace EC.Controllers.API.v1
 			}
 
 			PagedList<CompanyModel> result = await _companyService
-				.GetPagedAsync(page, pageSize)
+				.GetPagedAsync(1, 1)
 				.ConfigureAwait(false);
 			return ApiOk(result);
 		}
@@ -201,5 +209,31 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
+
+
+    [HttpGet]
+    [Route("{id}/users")]
+    [ResponseType(typeof(PagedList<UserModel>))]
+    public async Task<IHttpActionResult> GetUsersList(int page = 1, int pageSize = 10)
+    {
+      _logger.Debug($"page={page}; pageSize={pageSize}");
+
+      if (!ModelState.IsValid)
+      {
+        return ApiBadRequest(ModelState);
+      }
+
+      Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
+      PagedList<UserModel> result = await _userService
+          .GetPagedAsync(page, pageSize, filterApp)
+          .ConfigureAwait(false);
+      var statusModel = new Models.ReadStatusModel();
+      result.Items.ForEach(entity =>
+      {
+        entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+      });
+
+      return ApiOk(result);
     }
+  }
 }

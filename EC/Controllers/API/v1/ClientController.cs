@@ -11,6 +11,9 @@ using EC.Services.API.v1.GlobalSettingsService;
 using EC.Common.Util.Filters;
 using System.Web.Http.Description;
 using EC.Common.Base;
+using EC.Models.API.v1.Company;
+using EC.Services.API.v1.CompanyServices;
+
 
 namespace EC.Controllers.API.v1
 {
@@ -21,6 +24,7 @@ namespace EC.Controllers.API.v1
     {
         private readonly ClientService _clientService;
         private readonly GlobalSettingsService _globalSettingsService;
+        private readonly CompanyService _companyService;
 
         protected readonly ILog _logger;
 
@@ -32,11 +36,11 @@ namespace EC.Controllers.API.v1
         }
 
         [HttpGet]
-        [Route]
-        [ResponseType(typeof(PagedList<ClientModel>))]
-        public async Task<IHttpActionResult> GetList(int page = 1, int pageSize = 10)
+        [Route("{id}")]
+        [ResponseType(typeof(ClientModel))]
+        public async Task<IHttpActionResult> GetClient()
         {
-            _logger.Debug($"page={page}; pageSize={pageSize}");
+ 
 
             if (!ModelState.IsValid)
             {
@@ -44,7 +48,7 @@ namespace EC.Controllers.API.v1
             }
 
             PagedList<ClientModel> result = await _clientService
-                .GetPagedAsync(page, pageSize)
+                .GetPagedAsync(1, 1)
                 .ConfigureAwait(false);
 
             result.Items.ForEach(entity =>
@@ -100,9 +104,10 @@ namespace EC.Controllers.API.v1
             return ApiCreated(id);
         }
 
+        // do not do it now
         [HttpPut]
         [Route("internal/{id}")]
-        public async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
+        private async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
         {
             _logger.Debug($"id={id}");
 
@@ -187,9 +192,11 @@ namespace EC.Controllers.API.v1
             return ApiOk();
         }
 
+
+        // do not do it now
         [HttpDelete]
         [Route("internal/{id}")]
-        public async Task<IHttpActionResult> DeleteInternal(int id)
+        private async Task<IHttpActionResult> DeleteInternal(int id)
         {
             if (id == 0)
             {
@@ -237,5 +244,25 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
-    }
+
+
+        //filter by client_id ( note, it is external _client_id )
+        [HttpGet]
+        [Route("{id}/companies")]
+        [ResponseType(typeof(PagedList<CompanyModel>))]
+        public async Task<IHttpActionResult> GetCompaniesList()
+        {
+ 
+
+          if (!ModelState.IsValid)
+          {
+            return ApiBadRequest(ModelState);
+          }
+
+          PagedList<CompanyModel> result = await _companyService
+            .GetPagedAsync(1, 1)
+            .ConfigureAwait(false);
+          return ApiOk(result);
+        }
+  }
 }
