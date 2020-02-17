@@ -12,7 +12,7 @@
     };
     var app = angular.module('EC', ['nvd3', 'daterangepicker']);
 
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, HolderAdditionalCompanies, getTurnAroundTime, responseTimeSettingsByStage ) {
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, HolderAdditionalCompanies, getTurnAroundTime, responseTimeSettingsByStage) {
         var columnData = [];
         var barData = [0];
         var anotherBar = [];
@@ -95,18 +95,20 @@
                 mywindow.document.write('<html><head><title>' + title + '</title>');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/analyticsDashboard.css" type="text/css"/>');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/analyticsDashboardPrint.css" type="text/css"/>');
-                mywindow.document.write('</head><body onload="window.print(); window.close()">');
+                mywindow.document.write('</head><body ">');
                 //mywindow.document.write('</head><body>');
                 //mywindow.document.write('<h1>' + title + '</h1>');
                 mywindow.document.write('<div class="container">');
                 mywindow.document.write(document.getElementById("templateForPrinting").innerHTML);
                 mywindow.document.write(printHtml);
-                mywindow.document.write('</div></body></html>');
+
+                mywindow.document.write('</div></body ></html >');
+                mywindow.document.write("<script>setTimeout(function () {window.onload = window.print();window.close();}, 800);</script>");
                 mywindow.document.close(); // necessary for IE >= 10
                 mywindow.focus(); // necessary for IE >= 10*/
 
                 return true;
-            }, 250);
+            }, 800);
         }
         /* drop down list functionality */
         $scope.ddListClickedCompany = function (company_id, company_name) {
@@ -175,32 +177,32 @@
         //var promiseObjGetMenu = getMenuFilterCases.getData(companyIdArray);
         //promiseObjGetMenu.then(function (response) {
         console.log($scope.dataCases);
-            //$scope.MenuCases = response.data;
-            $scope.selectedCasesFilters = 0;
-            $scope.selectedCasesFilterString = '';
-            $scope.selectedItemClick = function ($event, clickedItemId, menu) {
-                if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
-                    arraySelectedItems[menu].push(clickedItemId);
-                    $scope.selectedCasesFilters++;
-                } else {
-                    arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
-                    $scope.selectedCasesFilters--;
-                }
-                if ($scope.selectedCasesFilters > 0) {
-                    $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters + ']';
-                }
-                else { $scope.selectedCasesFilterString = ''; }
-                $event.currentTarget.classList.toggle('checked');
-                updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+        //$scope.MenuCases = response.data;
+        $scope.selectedCasesFilters = 0;
+        $scope.selectedCasesFilterString = '';
+        $scope.selectedItemClick = function ($event, clickedItemId, menu) {
+            if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
+                arraySelectedItems[menu].push(clickedItemId);
+                $scope.selectedCasesFilters++;
+            } else {
+                arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
+                $scope.selectedCasesFilters--;
             }
-            $scope.dataRangeClick = function ($event, clickedItemId) {
-                angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
-                if (clickedItemId == 0) {
-                    angular.element('#selectedCasesDateRange').html("");
-                }
-                arraySelectedItems["data_range"] = clickedItemId;
-                updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+            if ($scope.selectedCasesFilters > 0) {
+                $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters + ']';
             }
+            else { $scope.selectedCasesFilterString = ''; }
+            $event.currentTarget.classList.toggle('checked');
+            updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+        }
+        $scope.dataRangeClick = function ($event, clickedItemId) {
+            angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
+            if (clickedItemId == 0) {
+                angular.element('#selectedCasesDateRange').html("");
+            }
+            arraySelectedItems["data_range"] = clickedItemId;
+            updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+        }
         //});
     }
 
@@ -212,7 +214,7 @@
             $scope.dataCases = JSON.parse(response);
             //update menu
             var updateMenu = (function () {
-                
+
                 return function () {
                     if (!executed) {
                         executed = true;
@@ -223,7 +225,7 @@
                 };
             })();
             updateMenu();
-           // makeMenuWithFilter(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+            // makeMenuWithFilter(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
 
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
             $scope.chartColorsFunction = function (index) {
@@ -233,7 +235,7 @@
                     return $scope.chartColors[index];
                 }
             };
-            
+
             function returnGraph() {
                 var chart = {
                     type: 'pieChart',

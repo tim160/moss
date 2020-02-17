@@ -392,8 +392,39 @@
 
         if ((hrefURL.ToLower().Contains("newcase/")) || (hrefURL.ToLower().Contains("/cases")) || (hrefURL.ToLower().Contains("/newreport") || (hrefURL.ToLower().Contains("newcase/task/"))))
         {
-            hrefURL = "/cases/index";
             page_subtitle = LocalizationGetter.GetString("Cases");
+            if ((hrefURL.ToLower().Contains("index/")))
+            {
+                hrefURL = "/cases/index";
+                page_subtitle = LocalizationGetter.GetString("report");
+            }
+            if ((hrefURL.ToLower().Contains("messages/")))
+            {
+                hrefURL = "/cases/index";
+                page_subtitle = LocalizationGetter.GetString("Messages");
+            }
+
+            if ((hrefURL.ToLower().Contains("team/")))
+            {
+                hrefURL = "/cases/index";
+                page_subtitle = LocalizationGetter.GetString("Team");
+            }
+            if ((hrefURL.ToLower().Contains("investigationnotes/")))
+            {
+                hrefURL = "/cases/index";
+                page_subtitle = LocalizationGetter.GetString("Investigation");
+            }
+
+            if ((hrefURL.ToLower().Contains("attachments/")))
+            {
+                hrefURL = "/cases/index";
+                page_subtitle = LocalizationGetter.GetString("Attachments");
+            }
+            if ((hrefURL.ToLower().Contains("activity/")))
+            {
+                hrefURL = "/cases/index";
+                page_subtitle = LocalizationGetter.GetString("Activity");
+            }
         }
 
         if (hrefURL.ToLower().Contains("/analytics"))

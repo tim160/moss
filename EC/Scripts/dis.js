@@ -269,108 +269,6 @@
 
     angular
         .module('EC')
-        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (id) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'GET',
-                        url: '/api/AdditionalCompanies/' + id
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('SettingsGlobalLogo',['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (fd) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'POST',
-                        data: fd,
-                        url: '/api/SettingsGlobalLogo',
-                        headers: { 'Content-Type': undefined },
-                        transformRequest: angular.identity
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('uploadImage',['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (fd) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'POST',
-                        data: fd,
-                        url: '/Settings/AddLogoCompany',
-                        headers: { 'Content-Type': undefined },
-                        transformRequest: angular.identity
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            };
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
-            return {
-                validate: function (value, rv) {
-                    if (rv === undefined) {
-                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
-                            return false;
-                        }
-                    } else {
-                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            };
-        }]);
-}());
-
-(function () {
-
-    'use strict';
-
-    angular
-        .module('EC')
         .controller('AnalyticsCACSController',
             ['$scope', 'AnalyticsCACSService', AnalyticsCACSController]);
 
@@ -697,19 +595,19 @@
                 mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalytics.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
-                mywindow.document.write('</head><body onload="window.print(); window.close()">');
+                mywindow.document.write('</head><body>');
                 mywindow.document.write('<h1>' + title + '</h1>');
                 mywindow.document.write('<div class="container">');
                 mywindow.document.write(document.getElementById('templateForPrinting').innerHTML.trim());
                 mywindow.document.write(document.getElementById(elem).innerHTML);
                 mywindow.document.write('</div></body></html>');
-
+                mywindow.document.write('<script>setTimeout(function () {window.onload = window.print();window.close();}, 800);</script>');
                 mywindow.document.close(); // necessary for IE >= 10
                 mywindow.focus(); // necessary for IE >= 10*/
 
                 return true;
 
-            }, 250);
+            }, 800);
         };
     }
 }());
@@ -2284,6 +2182,108 @@
             },
         };
     }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (id) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('SettingsGlobalLogo',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/api/SettingsGlobalLogo',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('uploadImage',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/Settings/AddLogoCompany',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
+            return {
+                validate: function (value, rv) {
+                    if (rv === undefined) {
+                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
+                            return false;
+                        }
+                    } else {
+                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            };
+        }]);
 }());
 
 (function () {
