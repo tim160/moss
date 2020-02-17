@@ -1493,6 +1493,7 @@
     <Compile Include="Controllers\API\UserStatusButtonsController.cs" />
     <Compile Include="Controllers\API\v1\AggregateDataController.cs" />
     <Compile Include="Controllers\API\v1\CasesApiV1Controller.cs" />
+    <Compile Include="Controllers\API\v1\PartnerController.cs" />
     <Compile Include="Controllers\API\v1\ClientController.cs" />
     <Compile Include="Controllers\API\v1\CompanyController.cs" />
     <Compile Include="Controllers\API\v1\PartnerCaseAnalyticsController.cs" />
