@@ -442,7 +442,7 @@ header.header{
 .headerTop-Text__text {
     background: url();
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-    font-size: 22px;
+    font-size: 21px;
     text-align: left;
     font-weight: bold;
     color: #7e9297;
@@ -665,6 +665,7 @@ header.header{
 			color: #aeb3b4;
 			text-decoration: none;
 			margin-right: 15px;
+            text-transform: lowercase;
 		}
 		.breadcrumbs-info__tree-links:hover,
 		.breadcrumbs-info__tree-links:active,
