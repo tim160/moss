@@ -10,12 +10,12 @@ namespace EC.Models.API.v1.GlobalSettings
     {
         [Required]
         [StringLength(255)]
-        public string custom_logo_path { get; set; }
+        public string customLogoPath { get; set; }
         [Required]
         [StringLength(255)]
-        public string header_links_color_code { get; set; }
+        public string headerLinksColorCode { get; set; }
         [Required]
         [StringLength(255)]
-        public string header_color_code { get; set; }
+        public string headerColorCode { get; set; }
     }
 }

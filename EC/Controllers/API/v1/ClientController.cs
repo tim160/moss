@@ -219,6 +219,9 @@ namespace EC.Controllers.API.v1
       return ApiOk();
     }
 
+
+
+
     [HttpDelete]
     [Route("{id}")]
     public async Task<IHttpActionResult> Delete(string id)
@@ -246,10 +249,71 @@ namespace EC.Controllers.API.v1
 
       return ApiOk();
     }
+
     #endregion
 
+    #region Client Activate/Deactive
 
-        #region Companies List by external clientID
+    [HttpPatch]
+    [Route("{id}/activate")]
+    public async Task<IHttpActionResult> clientActivate(string id)
+    {
+      if (String.IsNullOrEmpty(id))
+      {
+        ModelState.AddModelError(nameof(id), "Client ID required.");
+      }
+      int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+      if (idFromDb == 0)
+      {
+        ModelState.AddModelError(nameof(id), "Client not found.");
+      }
+
+      try
+      {
+        ///   await _clientService
+        ///      .DeleteAsync(idFromDb)
+        //      .ConfigureAwait(false);
+      }
+      catch (NotFoundException exception)
+      {
+        return ApiNotFound(exception.Message);
+      }
+
+      return ApiOk();
+    }
+
+
+    [HttpPatch]
+    [Route("{id}/deactivate")]
+    public async Task<IHttpActionResult> clientDeactivate(string id)
+    {
+      if (String.IsNullOrEmpty(id))
+      {
+        ModelState.AddModelError(nameof(id), "Client ID required.");
+      }
+      int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+      if (idFromDb == 0)
+      {
+        ModelState.AddModelError(nameof(id), "Client not found.");
+      }
+
+      try
+      {
+        /// await _clientService
+        ///    .DeleteAsync(idFromDb)
+        ///     .ConfigureAwait(false);
+      }
+      catch (NotFoundException exception)
+      {
+        return ApiNotFound(exception.Message);
+      }
+
+      return ApiOk();
+    }
+
+    #endregion
+
+    #region Companies List by external clientID
     //filter by client_id ( note, it is external _client_id )
     [HttpGet]
     [Route("{id}/companies")]
@@ -287,7 +351,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/Departments")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateDepartments(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateDepartments(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -298,7 +362,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/Locations")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateLocations(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateLocations(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -309,7 +373,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/IncidentTypes")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateIncidentTypes(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateIncidentTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -319,7 +383,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/ReporterTypes")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateReporterTypes(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateReporterTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -330,7 +394,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/behavioralFactors")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateBehavioralFactors(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateBehavioralFactors(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -341,7 +405,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/externalInfluences")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateExternalInfluences(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateExternalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -351,7 +415,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/aggregatedata/organizationalInfluences")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AggregateoOrganizationalInfluences(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AggregateoOrganizationalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -366,7 +430,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/Departments")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsDepartments(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -377,7 +441,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/Locations")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsLocations(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -388,7 +452,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/IncidentTypes")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsIncidentTypes(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -398,7 +462,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/ReporterTypes")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsReporterTypes(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -409,7 +473,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/behavioralFactors")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -420,7 +484,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/externalInfluences")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsExternalInfluences(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsExternalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
@@ -430,7 +494,7 @@ namespace EC.Controllers.API.v1
     [HttpGet]
     [Route("{id}/analytics/organizationalInfluences")]
     [ResponseType(typeof(AggregateData))]
-    public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string start_dt, string end_dt)
+    public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 

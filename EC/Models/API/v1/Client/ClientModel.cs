@@ -13,9 +13,9 @@ namespace EC.Models.API.v1.Client
         public int id { get; set; }
         [StringLength(100)]
         [Required]
-        public string client_nm { get; set; }
-        [DisplayName("PartnerInternalID")]
-        public string partner_api_id { get; set; }
+        public string clientName { get; set; }
+        [DisplayName("partnerClientId")]
+        public string partnerClientId { get; set; }
         public GlobalSettingsModel globalSettings { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace EC.Services.API.v1.GlobalSettingsService
             {
                 return new GlobalSettingsModel()
                 {
-                    custom_logo_path = globalSetting.custom_logo_path,
-                    header_color_code = globalSetting.header_color_code,
-                    header_links_color_code = globalSetting.header_links_color_code
+                    customLogoPath = globalSetting.custom_logo_path,
+                    headerColorCode = globalSetting.header_color_code,
+                    headerLinksColorCode = globalSetting.header_links_color_code
                 };
             }
             return null;

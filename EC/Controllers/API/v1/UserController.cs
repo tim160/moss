@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EC.Constants;
-using EC.Models.ViewModels;
+
 
 
 namespace EC.Controllers.API.v1
@@ -216,12 +216,12 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("unreadCounters/{id}")]
-    [ResponseType(typeof(UsersUnreadEntitiesNumberViewModel))]
-    public async Task<IHttpActionResult> UnreadCounters(string id)
+    [ResponseType(typeof(usersUnreadEntitiesNumberViewModel))]
+    public async Task<IHttpActionResult> unreadCounters(string id)
     {
-      UsersUnreadEntitiesNumberViewModel unread_entites = new UsersUnreadEntitiesNumberViewModel();
+      usersUnreadEntitiesNumberViewModel unread_entites = new usersUnreadEntitiesNumberViewModel();
       var statusModel = new Models.ReadStatusModel();
-      UsersUnreadEntitiesNumberViewModel result = new UsersUnreadEntitiesNumberViewModel();
+      usersUnreadEntitiesNumberViewModel result = new usersUnreadEntitiesNumberViewModel();
       ///  var statusModel = new Models.ReadStatusModel();
       ///  result.Items.ForEach(entity =>
   //    {
@@ -231,7 +231,77 @@ namespace EC.Controllers.API.v1
  
     }
 
+    //to do - merge with using EC.Models.ViewModels;   usersUnreadEntitiesNumberViewModel
+    public class usersUnreadEntitiesNumberViewModel
+    {
+      public int unreadNewReports { get; set; }
 
+      public int unreadMessages { get; set; }
 
+      public int unreadTasks { get; set; }
     }
+
+
+
+    [HttpPatch]
+    [Route("{id}/activate")]
+    public async Task<IHttpActionResult> userActivate(string id)
+    {
+      if (String.IsNullOrEmpty(id))
+      {
+        ModelState.AddModelError(nameof(id), "User ID required.");
+      }
+
+      int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
+      if (idFromDb == 0)
+      {
+        ModelState.AddModelError(nameof(id), "User not found.");
+      }
+
+      try
+      {
+     /////   await _userService
+     ////       .DeleteAsync(idFromDb)
+     ////       .ConfigureAwait(false);
+      }
+      catch (NotFoundException exception)
+      {
+        return ApiNotFound(exception.Message);
+      }
+
+      return ApiOk();
+    }
+
+
+    [HttpPatch]
+    [Route("{id}/deactivate")]
+    public async Task<IHttpActionResult> userDeactivate(string id)
+    {
+      if (String.IsNullOrEmpty(id))
+      {
+        ModelState.AddModelError(nameof(id), "User ID required.");
+      }
+
+      int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
+      if (idFromDb == 0)
+      {
+        ModelState.AddModelError(nameof(id), "User not found.");
+      }
+
+      try
+      {
+        /////   await _userService
+        ////       .DeleteAsync(idFromDb)
+        ////       .ConfigureAwait(false);
+      }
+      catch (NotFoundException exception)
+      {
+        return ApiNotFound(exception.Message);
+      }
+
+      return ApiOk();
+    }
+
+
+  }
 }
