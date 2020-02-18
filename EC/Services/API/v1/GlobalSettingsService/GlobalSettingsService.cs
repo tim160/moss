@@ -13,11 +13,11 @@ namespace EC.Services.API.v1.GlobalSettingsService
             var globalSetting = _set.Where(gl => gl.client_id == client_id).FirstOrDefault();
             if(globalSetting!=null)
             {
-                return new GlobalSettingsModel()
-                {
-                    customLogoPath = globalSetting.custom_logo_path,
-                    headerColorCode = globalSetting.header_color_code,
-                    headerLinksColorCode = globalSetting.header_links_color_code
+        return new GlobalSettingsModel()
+        {
+                    customLogoPath = "your logo path",// globalSetting.custom_logo_path,
+                    headerColorCode = "#8ac858", // globalSetting.header_color_code,
+                    headerLinksColorCode = "#fff"// globalSetting.header_links_color_code
                 };
             }
             return null;

@@ -15,8 +15,7 @@ using EC.Common.Base;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/partners")]
-  [JwtAuthentication]
-  [Authorize]
+ 
   public class PartnerController : BaseApiController
     {
         private readonly ClientService _clientService;

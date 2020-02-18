@@ -18,9 +18,8 @@ using EC.Constants;
 
 namespace EC.Controllers.API.v1
 {
-    [RoutePrefix("api/v1/user")]
-    [JwtAuthentication]
-    [Authorize]
+    [RoutePrefix("api/v1/users")]
+ 
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
@@ -34,7 +33,7 @@ namespace EC.Controllers.API.v1
 
         // should be 1 item, not list
         [HttpGet]
-        [Route]
+        [Route("{id}")]
         [ResponseType(typeof(UserModel))]
         public async Task<IHttpActionResult> GetUser()
         {
@@ -215,7 +214,7 @@ namespace EC.Controllers.API.v1
         }
 
     [HttpGet]
-    [Route("unreadCounters/{id}")]
+    [Route("{id}/unreadCounters")]
     [ResponseType(typeof(usersUnreadEntitiesNumberViewModel))]
     public async Task<IHttpActionResult> unreadCounters(string id)
     {

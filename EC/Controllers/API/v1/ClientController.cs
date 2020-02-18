@@ -13,13 +13,12 @@ using System.Web.Http.Description;
 using EC.Common.Base;
 using EC.Models.API.v1.Company;
 using EC.Services.API.v1.CompanyServices;
-
+using System.Collections.Generic;
 
 namespace EC.Controllers.API.v1
 {
-    [RoutePrefix("api/v1/client")]
-    [JwtAuthentication]
-    [Authorize]
+    [RoutePrefix("api/v1/clients")]
+
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;
@@ -339,10 +338,10 @@ namespace EC.Controllers.API.v1
         // to do  - move to common area
         public class AggregateData
     {
-      public int Name { get; set; }
-      public int Quantity { get; set; }
+      public string name { get; set; }
+      public int quantity { get; set; }
 
-      public decimal Percentage { get; set; }
+      public decimal percentage { get; set; }
 
     }
 
@@ -350,7 +349,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/aggregatedata/Departments")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateDepartments(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -361,7 +360,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/aggregatedata/Locations")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateLocations(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -372,7 +371,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/aggregatedata/IncidentTypes")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateIncidentTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -382,7 +381,7 @@ namespace EC.Controllers.API.v1
     }
     [HttpGet]
     [Route("{id}/aggregatedata/ReporterTypes")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateReporterTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -393,7 +392,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/aggregatedata/behavioralFactors")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateBehavioralFactors(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -404,7 +403,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/aggregatedata/externalInfluences")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateExternalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -414,7 +413,7 @@ namespace EC.Controllers.API.v1
     }
     [HttpGet]
     [Route("{id}/aggregatedata/organizationalInfluences")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AggregateoOrganizationalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -429,7 +428,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/Departments")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -440,18 +439,20 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/Locations")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
 
-      AggregateData result = new AggregateData();
+      List<AggregateData> result = new List<AggregateData>();
+      //result.Add(new AggregateData() { name = "Seattle", quantity = 1, percentage =50});
+      //result.Add(new AggregateData() { name = "New York", quantity = 1, percentage = 50 });
       return ApiOk(result);
     }
 
     [HttpGet]
     [Route("{id}/analytics/IncidentTypes")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -461,7 +462,7 @@ namespace EC.Controllers.API.v1
     }
     [HttpGet]
     [Route("{id}/analytics/ReporterTypes")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -472,7 +473,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/behavioralFactors")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -483,7 +484,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/externalInfluences")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsExternalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -493,7 +494,7 @@ namespace EC.Controllers.API.v1
     }
     [HttpGet]
     [Route("{id}/analytics/organizationalInfluences")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");

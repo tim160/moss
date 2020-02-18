@@ -16,13 +16,12 @@ using EC.Models.ViewModels;
 using log4net;
 using EC.Models.Database;
 using EC.Constants;
-
+using System.Collections.Generic;
 
 namespace EC.Controllers.API.v1
 {
 	[RoutePrefix("api/v1/companies")]
-	[JwtAuthentication]
-	[Authorize]
+ 
 	public class CompanyController : BaseApiController
 	{
 		private readonly CompanyService _companyService;
@@ -302,10 +301,10 @@ namespace EC.Controllers.API.v1
     // to do  - move to common area
     public class AggregateData
     {
-      public int Name { get; set; }
-      public int Quantity { get; set; }
+      public string name { get; set; }
+      public int quantity { get; set; }
 
-      public decimal Percentage { get; set; }
+      public decimal percentage { get; set; }
 
     }
 
@@ -314,7 +313,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/Departments")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -325,7 +324,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/Locations")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -336,7 +335,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/IncidentTypes")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -346,7 +345,7 @@ namespace EC.Controllers.API.v1
     }
     [HttpGet]
     [Route("{id}/analytics/ReporterTypes")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -357,7 +356,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/behavioralFactors")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -368,7 +367,7 @@ namespace EC.Controllers.API.v1
 
     [HttpGet]
     [Route("{id}/analytics/externalInfluences")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsExternalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
@@ -378,7 +377,7 @@ namespace EC.Controllers.API.v1
     }
     [HttpGet]
     [Route("{id}/analytics/organizationalInfluences")]
-    [ResponseType(typeof(AggregateData))]
+    [ResponseType(typeof(List<AggregateData>))]
     public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string startDate, string endDate)
     {
       // _logger.Debug($"page={page}; pageSize={pageSize}");
