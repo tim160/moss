@@ -20,101 +20,100 @@ using System.Collections.Generic;
 
 namespace EC.Controllers.API.v1
 {
-	[RoutePrefix("api/v1/companies")]
- 
-	public class CompanyController : BaseApiController
-	{
-		private readonly CompanyService _companyService;
-    private readonly UserService _userService;
+    [RoutePrefix("api/v1/companies")]
 
-    protected readonly ILog _logger;
+    public class CompanyController : BaseApiController
+    {
+        private readonly CompanyService _companyService;
+        private readonly UserService _userService;
+        protected readonly ILog _logger;
 
-		public CompanyController()
-		{
-			_logger = LogManager.GetLogger(GetType());
-			_companyService = new CompanyService();
-		}
-    // should be 1 item, not list
-		[HttpGet]
-    [Route("{id}")]
-    [ResponseType(typeof(CompanyModel))]
-		public async Task<IHttpActionResult> GetCompany()
-		{
+        public CompanyController()
+        {
+            _logger = LogManager.GetLogger(GetType());
+            _companyService = new CompanyService();
+        }
+        // should be 1 item, not list
+        [HttpGet]
+        [Route("{id}")]
+        [ResponseType(typeof(CompanyModel))]
+        public async Task<IHttpActionResult> GetCompany()
+        {
 
-			if (!ModelState.IsValid)
-			{
-				return ApiBadRequest(ModelState);
-			}
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
 
-			PagedList<CompanyModel> result = await _companyService
-				.GetPagedAsync(1, 1)
-				.ConfigureAwait(false);
-			return ApiOk(result);
-		}
+            PagedList<CompanyModel> result = await _companyService
+                .GetPagedAsync(1, 1)
+                .ConfigureAwait(false);
+            return ApiOk(result);
+        }
 
-		[HttpPost]
-		[Route()]
-		public async Task<IHttpActionResult> Create(CreateCompanyModel createCompanyModel)
-		{
-			if (createCompanyModel == null)
-			{
-				ModelState.AddModelError(nameof(createCompanyModel), "Company data required.");
-			}
+        [HttpPost]
+        [Route()]
+        public async Task<IHttpActionResult> Create(CreateCompanyModel createCompanyModel)
+        {
+            if (createCompanyModel == null)
+            {
+                ModelState.AddModelError(nameof(createCompanyModel), "Company data required.");
+            }
 
-			if (!ModelState.IsValid)
-			{
-				return ApiBadRequest(ModelState);
-			}
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
 
-			bool isCC = DomainUtil.IsCC(Request.RequestUri.AbsoluteUri);
-			int id;
-			try
-			{
-				id = await _companyService
-					.CreateAsync(createCompanyModel, isCC)
-					.ConfigureAwait(false);
-			}
-			catch (AggregateException exception)
-			{
-				return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
-			}
+            bool isCC = DomainUtil.IsCC(Request.RequestUri.AbsoluteUri);
+            int id;
+            try
+            {
+                id = await _companyService
+                    .CreateAsync(createCompanyModel, isCC)
+                    .ConfigureAwait(false);
+            }
+            catch (AggregateException exception)
+            {
+                return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
+            }
 
-			return ApiCreated(id);
-		}
-    // do not do it now
-    [HttpPut]
-		[Route("internal/{id}")]
-    private async Task<IHttpActionResult> Update(int id, UpdateCompanyModel updateCompanyModel)
-		{
-			_logger.Debug($"id={id}");
+            return ApiCreated(id);
+        }
+        // do not do it now
+        [HttpPut]
+        [Route("internal/{id}")]
+        private async Task<IHttpActionResult> Update(int id, UpdateCompanyModel updateCompanyModel)
+        {
+            _logger.Debug($"id={id}");
 
-			if (updateCompanyModel == null)
-			{
-				ModelState.AddModelError(nameof(updateCompanyModel), "Company data required.");
-			}
-			if (id == 0)
-			{
-				ModelState.AddModelError(nameof(id), "Company ID required.");
-			}
+            if (updateCompanyModel == null)
+            {
+                ModelState.AddModelError(nameof(updateCompanyModel), "Company data required.");
+            }
+            if (id == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
 
-			if (!ModelState.IsValid)
-			{
-				return ApiBadRequest(ModelState);
-			}
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
 
-			try
-			{
-				await _companyService
-					.UpdateAsync(updateCompanyModel, id)
-					.ConfigureAwait(false);
-			}
-			catch (NotFoundException exception)
-			{
-				return ApiNotFound(exception.Message);
-			}
+            try
+            {
+                await _companyService
+                    .UpdateAsync(updateCompanyModel, id)
+                    .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
 
-			return ApiOk();
-		}
+            return ApiOk();
+        }
 
         [HttpPut]
         [Route("{id}")]
@@ -156,8 +155,8 @@ namespace EC.Controllers.API.v1
             return ApiOk();
         }
 
-    // do not do it now
-    [HttpDelete]
+        // do not do it now
+        [HttpDelete]
         [Route("internal/{id}")]
         private async Task<IHttpActionResult> Delete(int id)
         {
@@ -210,181 +209,175 @@ namespace EC.Controllers.API.v1
         }
 
 
-    [HttpPatch]
-    [Route("{id}/activate")]
-    public async Task<IHttpActionResult> companyActivate(string id)
-    {
-      if (String.IsNullOrEmpty(id))
-      {
-        ModelState.AddModelError(nameof(id), "Company ID required.");
-      }
+        [HttpPatch]
+        [Route("{id}/activate")]
+        public async Task<IHttpActionResult> CompanyActivate(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
 
-      int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
-      if (idFromDb == 0)
-      {
-        ModelState.AddModelError(nameof(id), "Company not found.");
-      }
+            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company not found.");
+            }
 
-      try
-      {
-     //   await _companyService
-     //       .DeleteAsync(idFromDb)
-      //      .ConfigureAwait(false);
-      }
-      catch (NotFoundException exception)
-      {
-        return ApiNotFound(exception.Message);
-      }
+            try
+            {
+                //   await _companyService
+                //       .DeleteAsync(idFromDb)
+                //      .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
 
-      return ApiOk();
+            return ApiOk();
+        }
+
+        [HttpPatch]
+        [Route("{id}/deactivate")]
+        public async Task<IHttpActionResult> CompanyDeactivate(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
+
+            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+                ModelState.AddModelError(nameof(id), "Company not found.");
+            }
+
+            try
+            {
+                //   await _companyService
+                //    .DeleteAsync(idFromDb)
+                //     .ConfigureAwait(false);
+            }
+            catch (NotFoundException exception)
+            {
+                return ApiNotFound(exception.Message);
+            }
+
+            return ApiOk();
+        }
+
+
+
+        [HttpGet]
+        [Route("{id}/users")]
+        [ResponseType(typeof(PagedList<UserModel>))]
+        public async Task<IHttpActionResult> GetUsersList(int page = 1, int pageSize = 10)
+        {
+            _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequest(ModelState);
+            }
+
+            Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
+            PagedList<UserModel> result = await _userService
+                .GetPagedAsync(page, pageSize, filterApp)
+                .ConfigureAwait(false);
+            var statusModel = new Models.ReadStatusModel();
+            result.Items.ForEach(entity =>
+            {
+                entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+            });
+
+            return ApiOk(result);
+        }
+
+        // to do  - move to common area
+        public class AggregateData
+        {
+            public string name { get; set; }
+            public int quantity { get; set; }
+            public decimal percentage { get; set; }
+        }
+
+        #region Analytics
+
+        [HttpGet]
+        [Route("{id}/analytics/departments")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+
+        [HttpGet]
+        [Route("{id}/analytics/locations")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+
+        [HttpGet]
+        [Route("{id}/analytics/incidentTypes")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+        [HttpGet]
+        [Route("{id}/analytics/reporterTypes")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+
+        [HttpGet]
+        [Route("{id}/analytics/behavioralFactors")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+
+        [HttpGet]
+        [Route("{id}/analytics/externalInfluences")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsExternalInfluences(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+        [HttpGet]
+        [Route("{id}/analytics/organizationalInfluences")]
+        [ResponseType(typeof(List<AggregateData>))]
+        public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string startDate, string endDate)
+        {
+            // _logger.Debug($"page={page}; pageSize={pageSize}");
+
+            AggregateData result = new AggregateData();
+            return ApiOk(result);
+        }
+        #endregion
     }
-
-    [HttpPatch]
-    [Route("{id}/deactivate")]
-    public async Task<IHttpActionResult> companyDeactivate(string id)
-    {
-      if (String.IsNullOrEmpty(id))
-      {
-        ModelState.AddModelError(nameof(id), "Company ID required.");
-      }
-
-      int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
-      if (idFromDb == 0)
-      {
-        ModelState.AddModelError(nameof(id), "Company not found.");
-      }
-
-      try
-      {
-     //   await _companyService
-        //    .DeleteAsync(idFromDb)
-       //     .ConfigureAwait(false);
-      }
-      catch (NotFoundException exception)
-      {
-        return ApiNotFound(exception.Message);
-      }
-
-      return ApiOk();
-    }
-
-
-
-    [HttpGet]
-    [Route("{id}/users")]
-    [ResponseType(typeof(PagedList<UserModel>))]
-    public async Task<IHttpActionResult> GetUsersList(int page = 1, int pageSize = 10)
-    {
-      _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      if (!ModelState.IsValid)
-      {
-        return ApiBadRequest(ModelState);
-      }
-
-      Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
-      PagedList<UserModel> result = await _userService
-          .GetPagedAsync(page, pageSize, filterApp)
-          .ConfigureAwait(false);
-      var statusModel = new Models.ReadStatusModel();
-      result.Items.ForEach(entity =>
-      {
-        entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
-      });
-
-      return ApiOk(result);
-    }
-
-
-
-
-    // to do  - move to common area
-    public class AggregateData
-    {
-      public string name { get; set; }
-      public int quantity { get; set; }
-
-      public decimal percentage { get; set; }
-
-    }
-
-
-    #region Analytics
-
-    [HttpGet]
-    [Route("{id}/analytics/Departments")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-
-    [HttpGet]
-    [Route("{id}/analytics/Locations")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-
-    [HttpGet]
-    [Route("{id}/analytics/IncidentTypes")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-    [HttpGet]
-    [Route("{id}/analytics/ReporterTypes")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-
-    [HttpGet]
-    [Route("{id}/analytics/behavioralFactors")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsBehavioralFactors(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-
-    [HttpGet]
-    [Route("{id}/analytics/externalInfluences")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsExternalInfluences(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-    [HttpGet]
-    [Route("{id}/analytics/organizationalInfluences")]
-    [ResponseType(typeof(List<AggregateData>))]
-    public async Task<IHttpActionResult> AnalyticsOrganizationalInfluences(string startDate, string endDate)
-    {
-      // _logger.Debug($"page={page}; pageSize={pageSize}");
-
-      AggregateData result = new AggregateData();
-      return ApiOk(result);
-    }
-    #endregion
-  }
 }

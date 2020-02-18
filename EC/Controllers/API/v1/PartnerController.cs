@@ -15,12 +15,11 @@ using EC.Common.Base;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/partners")]
- 
-  public class PartnerController : BaseApiController
+
+    public class PartnerController : BaseApiController
     {
         private readonly ClientService _clientService;
         private readonly GlobalSettingsService _globalSettingsService;
-
         protected readonly ILog _logger;
 
         public PartnerController()
@@ -53,7 +52,5 @@ namespace EC.Controllers.API.v1
             });
             return ApiOk(result);
         }
-
- 
     }
 }
