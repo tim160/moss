@@ -7,6 +7,7 @@ using EC.Models.Database;
 using EC.Services.API.v1.UserService;
 using log4net;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -33,24 +34,14 @@ namespace EC.Controllers.API.v1
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(UserModel))]
-        public async Task<IHttpActionResult> GetUser()
+        public async Task<IHttpActionResult> GetUser(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return ApiBadRequest(ModelState);
-            }
+            var result =  await DB.user.FirstOrDefaultAsync(u => u.id == id);
 
-            Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
-            PagedList<UserModel> result = await _userService
-                .GetPagedAsync(1, 1, filterApp)
-                .ConfigureAwait(false);
-            var statusModel = new Models.ReadStatusModel();
-            result.Items.ForEach(entity =>
-            {
-                entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
-            });
+            if (result != null)
+                return ApiOk(result);
 
-            return ApiOk(result);
+            return ApiNotFound();
         }
 
         [HttpPost]
@@ -236,65 +227,34 @@ namespace EC.Controllers.API.v1
             public int unreadTasks { get; set; }
         }
 
-
-
         [HttpPatch]
         [Route("{id}/activate")]
-        public async Task<IHttpActionResult> UserActivate(string id)
+        public async Task<IHttpActionResult> UserActivate(int id)
         {
-            if (String.IsNullOrEmpty(id))
+            var user = await DB.user.FirstOrDefaultAsync(u => u.id == id);
+            if (user != null)
             {
-                ModelState.AddModelError(nameof(id), "User ID required.");
+                user.status_id = 2;
+                await DB.SaveChangesAsync();
+                return ApiOk();
             }
 
-            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "User not found.");
-            }
-
-            try
-            {
-                /////   await _userService
-                ////       .DeleteAsync(idFromDb)
-                ////       .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            return ApiOk();
+            return ApiNotFound();
         }
-
 
         [HttpPatch]
         [Route("{id}/deactivate")]
-        public async Task<IHttpActionResult> UserDeactivate(string id)
+        public async Task<IHttpActionResult> UserDeactivate(int id)
         {
-            if (String.IsNullOrEmpty(id))
+            var user = await DB.user.FirstOrDefaultAsync(u => u.id == id);
+            if (user != null)
             {
-                ModelState.AddModelError(nameof(id), "User ID required.");
+                user.status_id = 3;
+                await DB.SaveChangesAsync();
+                return ApiOk();
             }
 
-            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "User not found.");
-            }
-
-            try
-            {
-                /////   await _userService
-                ////       .DeleteAsync(idFromDb)
-                ////       .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            return ApiOk();
+            return ApiNotFound();
         }
     }
 }

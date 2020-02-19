@@ -17,6 +17,7 @@ using log4net;
 using EC.Models.Database;
 using EC.Constants;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace EC.Controllers.API.v1
 {
@@ -37,18 +38,14 @@ namespace EC.Controllers.API.v1
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(CompanyModel))]
-        public async Task<IHttpActionResult> GetCompany()
+        public async Task<IHttpActionResult> GetCompany(int id)
         {
+            var result = await DB.company.FirstOrDefaultAsync(u => u.id == id);
 
-            if (!ModelState.IsValid)
-            {
-                return ApiBadRequest(ModelState);
-            }
+            if (result != null)
+                return ApiOk(result);
 
-            PagedList<CompanyModel> result = await _companyService
-                .GetPagedAsync(1, 1)
-                .ConfigureAwait(false);
-            return ApiOk(result);
+            return ApiNotFound();
         }
 
         [HttpPost]
@@ -211,63 +208,33 @@ namespace EC.Controllers.API.v1
 
         [HttpPatch]
         [Route("{id}/activate")]
-        public async Task<IHttpActionResult> CompanyActivate(string id)
+        public async Task<IHttpActionResult> CompanyActivate(int id)
         {
-            if (String.IsNullOrEmpty(id))
+            var company = await DB.company.FirstOrDefaultAsync(u => u.id == id);
+            if (company != null)
             {
-                ModelState.AddModelError(nameof(id), "Company ID required.");
+                company.status_id = 2;
+                await DB.SaveChangesAsync();
+                return ApiOk();
             }
 
-            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Company not found.");
-            }
-
-            try
-            {
-                //   await _companyService
-                //       .DeleteAsync(idFromDb)
-                //      .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            return ApiOk();
+            return ApiNotFound();
         }
 
         [HttpPatch]
         [Route("{id}/deactivate")]
-        public async Task<IHttpActionResult> CompanyDeactivate(string id)
+        public async Task<IHttpActionResult> CompanyDeactivate(int id)
         {
-            if (String.IsNullOrEmpty(id))
+            var company = await DB.company.FirstOrDefaultAsync(u => u.id == id);
+            if (company != null)
             {
-                ModelState.AddModelError(nameof(id), "Company ID required.");
+                company.status_id = 3;
+                await DB.SaveChangesAsync();
+                return ApiOk();
             }
 
-            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Company not found.");
-            }
-
-            try
-            {
-                //   await _companyService
-                //    .DeleteAsync(idFromDb)
-                //     .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            return ApiOk();
+            return ApiNotFound();
         }
-
-
 
         [HttpGet]
         [Route("{id}/users")]
