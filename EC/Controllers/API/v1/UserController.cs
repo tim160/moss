@@ -7,6 +7,7 @@ using EC.Models.Database;
 using EC.Services.API.v1.UserService;
 using log4net;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -46,53 +47,40 @@ namespace EC.Controllers.API.v1
 
         [HttpPost]
         [Route]
-        public async Task<IHttpActionResult> Create(CreateUserModel createUserModel)
+        public async Task<IHttpActionResult> Create(List<CreateUserModel> createUserModel)
         {
-            if (createUserModel == null)
-            {
+            if (createUserModel == null || !createUserModel.Any())
                 ModelState.AddModelError(nameof(createUserModel), "User data required.");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return ApiBadRequest(ModelState);
-            }
 
-            bool isCC = DomainUtil.IsCC(Request.RequestUri.AbsoluteUri);
-            int id = 0;
             try
             {
-                id = await _userService
-                    .CreateAsync(createUserModel, isCC)
+                var createdUsers = await _userService
+                    .CreateAsync(createUserModel)
                     .ConfigureAwait(false);
+
+                return ApiCreated(createdUsers);
             }
             catch (AggregateException exception)
             {
                 return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
             }
-
-            return ApiCreated(id);
         }
-        // do not do it now
-        [HttpPut]
-        [Route("internal/{id}")]
-        private async Task<IHttpActionResult> Update(int id, UpdateUserModel updateUserModel)
-        {
-            _logger.Debug($"id={id}");
 
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IHttpActionResult> Update(int id, UpdateUserModel updateUserModel)
+        {
             if (updateUserModel == null)
-            {
                 ModelState.AddModelError(nameof(updateUserModel), "User data required.");
-            }
+
             if (id == 0)
-            {
                 ModelState.AddModelError(nameof(id), "User ID required.");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return ApiBadRequest(ModelState);
-            }
 
             try
             {
@@ -108,45 +96,46 @@ namespace EC.Controllers.API.v1
             return ApiOk();
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> UpdateExternalUser(string id, UpdateUserModel updateUserModel)
-        {
-            _logger.Debug($"id={id}");
+//        [HttpPut]
+//        [Route("{id}")]
+//        public async Task<IHttpActionResult> UpdateExternalUser(string id, UpdateUserModel updateUserModel)
+//        {
+//            _logger.Debug($"id={id}");
+//
+//            if (updateUserModel == null)
+//            {
+//                ModelState.AddModelError(nameof(updateUserModel), "User data required.");
+//            }
+//            if (String.IsNullOrEmpty(id))
+//            {
+//                ModelState.AddModelError(nameof(id), "User ID required.");
+//            }
+//
+//            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
+//            if (idFromDb == 0)
+//            {
+//                ModelState.AddModelError(nameof(id), "User not found.");
+//            }
+//
+//            if (!ModelState.IsValid)
+//            {
+//                return ApiBadRequest(ModelState);
+//            }
+//
+//            try
+//            {
+//                await _userService
+//                    .UpdateAsync(updateUserModel, idFromDb)
+//                    .ConfigureAwait(false);
+//            }
+//            catch (NotFoundException exception)
+//            {
+//                return ApiNotFound(exception.Message);
+//            }
+//
+//            return ApiOk();
+//        }
 
-            if (updateUserModel == null)
-            {
-                ModelState.AddModelError(nameof(updateUserModel), "User data required.");
-            }
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "User ID required.");
-            }
-
-            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "User not found.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return ApiBadRequest(ModelState);
-            }
-
-            try
-            {
-                await _userService
-                    .UpdateAsync(updateUserModel, idFromDb)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            return ApiOk();
-        }
         // do not do it now
         [HttpDelete]
         [Route("internal/{id}")]

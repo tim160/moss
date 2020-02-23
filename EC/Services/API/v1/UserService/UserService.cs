@@ -1,9 +1,5 @@
 ﻿using EC.Common.Base;
-using EC.Common.Interfaces;
 using EC.Constants;
-using EC.Core.Common;
-using EC.Errors.CommonExceptions;
-using EC.Localization;
 using EC.Models;
 using EC.Models.API.v1.User;
 using EC.Models.Database;
@@ -11,9 +7,11 @@ using EC.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using log4net;
 
 namespace EC.Services.API.v1.UserService
 {
@@ -23,96 +21,29 @@ namespace EC.Services.API.v1.UserService
         {
             return GetPagedAsync<string, EC.Models.API.v1.User.UserModel>(page, pageSize, filter, null);
         }
-        public async Task<int> CreateAsync(CreateUserModel createUserModel, bool isCC)
+
+        public async Task<IEnumerable<user>> CreateAsync(List<CreateUserModel> createUserModels)
         {
-            if (createUserModel == null)
-            {
-                throw new ArgumentNullException(nameof(createUserModel));
-            }
-
-            List<Exception> errors = new List<Exception>();
-
-            if (!String.IsNullOrEmpty(createUserModel.PartnerInternalID))
-            {
-                var partnerInternal = _appContext.user.Where(user => user.partner_api_id.Equals(createUserModel.PartnerInternalID)).FirstOrDefault();
-                if (partnerInternal != null)
-                {
-                    errors.Add(new Exception("PartnerInternalID already exists"));
-                }
-            }
+            List<Exception> errors = await CheckPartnerUserId(createUserModels);
 
             if (errors.Count > 0)
-            {
                 throw new AggregateException(errors);
-            }
 
-            var generateModel = new GenerateRecordsModel();
-            string login = generateModel.GenerateLoginName(createUserModel.first_nm, createUserModel.last_nm);
-            string pass = generateModel.GeneretedPassword().Trim();
+            var users = GetUsersFromCreatedModel(createUserModels);
 
-            user newUser = _set.Add(createUserModel, user =>
-            {
-                user.company_id = createUserModel.company_id;
-                user.role_id = createUserModel.role_id;
-                user.first_nm = createUserModel.first_nm;
-                user.last_nm = createUserModel.last_nm;
-                user.login_nm = login;
-                user.password = PasswordUtils.GetHash(pass);
-                user.photo_path = createUserModel.photo_path;
-                user.last_update_dt = DateTime.Now;
-                user.is_api = true;
-                user.api_source_id = null;
-                user.partner_api_id = createUserModel.PartnerInternalID;
-            });
-
+            _appContext.user.AddRange(users);
+            
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
 
-            try
-            {
-                var currentCreateduser = _appContext.user.Find(newUser.id);
-                var sessionUser = _appContext.user.Find(currentCreateduser.user_id);
+            SendEmailToCreatedUsers(users);
 
-                if (sessionUser != null)
-                {
-                    var company = _appContext.company.Find(sessionUser.company_id);
-                    if (company != null)
-                    {
-                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(isCC);
-                        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, "");
-                        eb.NewMediator(
-                            $"{sessionUser.first_nm} {sessionUser.last_nm}",
-                            $"{company.company_nm}",
-                            System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
-                            System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
-                            $"{currentCreateduser.login_nm}",
-                            $"{pass}");
-                        string body = eb.Body;
-                        EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
-                        emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, currentCreateduser.id, sessionUser.company_id, currentCreateduser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return newUser.id;
+            return users;
         }
 
-        public async Task<int> UpdateAsync(UpdateUserModel updateUserModel, int id)
+        public async Task<user> UpdateAsync(UpdateUserModel updateUserModel, int id)
         {
-            if (updateUserModel == null)
-            {
-                throw new ArgumentNullException(nameof(updateUserModel));
-            }
-            if (id == 0)
-            {
-                throw new ArgumentException("The ID can't be empty.", nameof(id));
-            }
-
             user user = await _set
                 .UpdateAsync(id, updateUserModel)
                 .ConfigureAwait(false);
@@ -122,7 +53,8 @@ namespace EC.Services.API.v1.UserService
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
-            return user.id;
+
+            return user;
         }
 
         public async Task<int> DeleteAsync(int id)
@@ -147,6 +79,84 @@ namespace EC.Services.API.v1.UserService
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
             return user.id;
+        }
+
+        private async Task<List<Exception>> CheckPartnerUserId(List<CreateUserModel> data)
+        {
+            List<Exception> errors = new List<Exception>();
+            var usersInDb = await _appContext.user.ToListAsync();
+            foreach (var item in data)
+            {
+                var partnerInternal = usersInDb
+                    .FirstOrDefault(user => user.partner_api_id != null && user.partner_api_id.Equals(item.PartnerUserId));
+                if (partnerInternal != null)
+                    errors.Add(new Exception($"PartnerInternalID = {item.PartnerUserId} already exists"));
+            }
+
+            return errors;
+        }
+
+        private List<user> GetUsersFromCreatedModel(List<CreateUserModel> createUserModels)
+        {
+            List<user> users = new List<user>();
+
+            foreach (var userToCreate in createUserModels)
+            {
+                var generateModel = new GenerateRecordsModel();
+                string login = generateModel.GenerateLoginName(userToCreate.FirstName, userToCreate.LastName);
+                string pass = generateModel.GeneretedPassword().Trim();
+
+                users.Add(new user()
+                {
+                    first_nm = userToCreate.FirstName,
+                    last_nm = userToCreate.LastName,
+                    login_nm = login,
+                    password = PasswordUtils.GetHash(pass),
+                    photo_path = userToCreate.PhotoPath,
+                    last_update_dt = DateTime.Now,
+                    is_api = true,
+                    api_source_id = null,
+                    partner_api_id = userToCreate.PartnerUserId,
+                    answer_ds = string.Empty,
+                    question_ds = string.Empty
+                });
+            }
+
+            return users;
+        }
+
+        private void SendEmailToCreatedUsers(List<user> users)
+        {
+            foreach (var user in users)
+            {
+                try
+                {
+                    var currentCreatedUser = _appContext.user.Find(user.id);
+                    var sessionUser = _appContext.user.Find(currentCreatedUser.user_id);
+                    if (sessionUser != null)
+                    {
+                        var company = _appContext.company.Find(sessionUser.company_id);
+                        if (company != null)
+                        {
+                            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, "");
+                            eb.NewMediator(
+                                $"{sessionUser.first_nm} {sessionUser.last_nm}",
+                                $"{company.company_nm}",
+                                System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
+                                System.Configuration.ConfigurationManager.AppSettings["SiteRoot"] + "/settings/index",
+                                $"{currentCreatedUser.login_nm}",
+                                $"{sessionUser.password}");
+                            string body = eb.Body;
+                            EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
+                            emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, currentCreatedUser.id, sessionUser.company_id, currentCreatedUser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    LogManager.GetLogger(GetType()).Error($"Send email failed, userId = {user.id}");
+                }
+            }
         }
     }
 }

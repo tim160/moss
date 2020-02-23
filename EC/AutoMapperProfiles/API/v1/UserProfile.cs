@@ -11,20 +11,14 @@ namespace EC.AutoMapperProfiles.API.v1
         {
             CreateMap<CreateUserModel, user>()
                 .ForMember(
-                    destinationMember => destinationMember.company_id,
-                    options => options.MapFrom(sourceMember => sourceMember.company_id)
-                    ).ForMember(
-                    destinationMember => destinationMember.role_id,
-                    options => options.MapFrom(sourceMember => sourceMember.role_id)
-                    ).ForMember(
                     destinationMember => destinationMember.status_id,
                     options => options.UseValue(3)
                     ).ForMember(
                     destinationMember => destinationMember.first_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.first_nm)
+                    options => options.MapFrom(sourceMember => sourceMember.FirstName)
                     ).ForMember(
                     destinationMember => destinationMember.last_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.last_nm)
+                    options => options.MapFrom(sourceMember => sourceMember.LastName)
                     ).ForMember(
                     destinationMember => destinationMember.login_nm,
                     options => options.UseValue("")
@@ -33,7 +27,7 @@ namespace EC.AutoMapperProfiles.API.v1
                     options => options.UseValue("")
                     ).ForMember(
                     destinationMember => destinationMember.photo_path,
-                    options => options.MapFrom(sourceMember => sourceMember.photo_path)
+                    options => options.MapFrom(sourceMember => sourceMember.PhotoPath)
                     ).ForMember(
                     destinationMember => destinationMember.preferred_contact_method_id,
                     options => options.UseValue(1)
@@ -64,21 +58,15 @@ namespace EC.AutoMapperProfiles.API.v1
                     );
 
             CreateMap<UpdateUserModel, user>()
-                                .ForMember(
-                    destinationMember => destinationMember.company_id,
-                    options => options.MapFrom(sourceMember => sourceMember.company_id)
-                    ).ForMember(
-                    destinationMember => destinationMember.role_id,
-                    options => options.MapFrom(sourceMember => sourceMember.role_id)
-                    ).ForMember(
+                    .ForMember(
                     destinationMember => destinationMember.status_id,
                     options => options.UseValue(3)
                     ).ForMember(
                     destinationMember => destinationMember.first_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.first_nm)
+                    options => options.MapFrom(sourceMember => sourceMember.FirstName)
                     ).ForMember(
                     destinationMember => destinationMember.last_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.last_nm)
+                    options => options.MapFrom(sourceMember => sourceMember.LastName)
                     ).ForMember(
                     destinationMember => destinationMember.login_nm,
                     options => options.UseValue("")
@@ -87,7 +75,7 @@ namespace EC.AutoMapperProfiles.API.v1
                     options => options.UseValue("")
                     ).ForMember(
                     destinationMember => destinationMember.photo_path,
-                    options => options.MapFrom(sourceMember => sourceMember.photo_path)
+                    options => options.MapFrom(sourceMember => sourceMember.PhotoPath)
                     ).ForMember(
                     destinationMember => destinationMember.preferred_contact_method_id,
                     options => options.UseValue(1)
