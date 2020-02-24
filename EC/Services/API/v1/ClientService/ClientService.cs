@@ -18,56 +18,28 @@ namespace EC.Services.API.v1.ClientService
         {
             return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
         }
-        public async Task<int> CreateAsync(CreateClientModel createClientModel, bool isCC)
+
+        public async Task<client> CreateAsync(CreateClientModel createClientModel)
         {
-            if (createClientModel == null)
-            {
-                throw new ArgumentNullException(nameof(createClientModel));
-            }
-
-            List<Exception> errors = new List<Exception>();
-
-            if (!String.IsNullOrEmpty(createClientModel.PartnerInternalID))
-            {
-                var partnerInternal = _appContext.client.Where(client => client.partner_api_id.Equals(createClientModel.PartnerInternalID)).FirstOrDefault();
-                if (partnerInternal != null)
-                {
-                    errors.Add(new Exception("PartnerInternalID already exists"));
-                }
-            }
+            List<Exception> errors = await CheckPartnerUserId(createClientModel);
 
             if (errors.Count > 0)
-            {
                 throw new AggregateException(errors);
-            }
 
-            client newClient = _set.Add(createClientModel, client =>
-            { 
-                client.client_nm = createClientModel.client_nm;
-                client.last_update_dt = DateTime.Now;
-                client.registration_dt = DateTime.Now;
-                client.is_api = true;
-                client.api_source_id = null;
-                client.partner_api_id = createClientModel.PartnerInternalID;
-            });
+            var client = GetClientsFromCreatedModel(createClientModel);
+
+            _appContext.client.Add(client);
 
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
 
-            return newClient.id;
+            return client;
         }
 
-        public async Task<int> UpdateAsync(UpdateClientModel updateClientModel, int id)
+        public async Task<client> UpdateAsync(UpdateClientModel updateClientModel, int id)
         {
-            if (updateClientModel == null)
-            {
-                throw new ArgumentNullException(nameof(updateClientModel));
-            }
-            if (id == 0)
-            {
-                throw new ArgumentException("The ID can't be empty.", nameof(id));
-            }
+            updateClientModel.Id = id;
             client client = await _set
                 .UpdateAsync(id, updateClientModel)
                 .ConfigureAwait(false);
@@ -78,7 +50,7 @@ namespace EC.Services.API.v1.ClientService
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
 
-            return client.id;
+            return client;
         }
 
         public async Task<int> DeleteAsync(int id)
@@ -101,6 +73,31 @@ namespace EC.Services.API.v1.ClientService
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
             return client.id;
+        }
+
+        private async Task<List<Exception>> CheckPartnerUserId(CreateClientModel data)
+        {
+            List<Exception> errors = new List<Exception>();
+            var clientsInDb = await _appContext.client.ToListAsync();
+            var partnerInternal = clientsInDb
+                    .FirstOrDefault(client => client.partner_api_id != null && client.partner_api_id.Equals(data.PartnerClientId));
+                if (partnerInternal != null)
+                    errors.Add(new Exception($"PartnerInternalID = {data.PartnerClientId} already exists"));
+
+            return errors;
+        }
+
+        private client GetClientsFromCreatedModel(CreateClientModel clientToCreate)
+        {
+            return new client()
+            {
+                client_nm = clientToCreate.ClientName,
+                last_update_dt = DateTime.Now,
+                registration_dt = DateTime.Now,
+                is_api = true,
+                api_source_id = null,
+                partner_api_id = clientToCreate.PartnerClientId
+            };
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using EC.Models.API.v1.GlobalSettings;
 using EC.Models.Database;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Castle.Components.DictionaryAdapter;
+using EC.Models.API.v1.Client;
 
 namespace EC.Services.API.v1.GlobalSettingsService
 {
@@ -22,52 +25,51 @@ namespace EC.Services.API.v1.GlobalSettingsService
             }
             return null;
         }
-        public async Task<int> CreateAsync(CreateGlobalSettingsModel createGlobalSettingsModel, bool isCC)
+
+        public async Task CreateAsync(List<CreateClientModel> createClientModel)
         {
-            if (createGlobalSettingsModel == null)
+            List<global_settings> globalSettings = new EditableList<global_settings>();
+
+            foreach (var client in createClientModel)
             {
-                throw new ArgumentNullException(nameof(createGlobalSettingsModel));
+                if(client.GlobalSettings == null)
+                    throw new ArgumentNullException(nameof(CreateGlobalSettingsModel));
+
+                globalSettings.Add(new global_settings()
+                {
+                    client_id = client.Id,
+                    custom_logo_path = client.GlobalSettings.CustomLogoPath,
+                    header_color_code = client.GlobalSettings.HeaderColorCode,
+                    header_links_color_code = client.GlobalSettings.HeaderLinksColorCode
+                });
             }
-            global_settings newGlobal_Settings = _set.Add(createGlobalSettingsModel, global_setting =>
-            {
-                global_setting.client_id = createGlobalSettingsModel.client_id;
-                global_setting.custom_logo_path = createGlobalSettingsModel.custom_logo_path;
-                global_setting.header_color_code = createGlobalSettingsModel.header_color_code;
-                global_setting.header_links_color_code = createGlobalSettingsModel.header_links_color_code;
-            });
+
+            _appContext.global_settings.AddRange(globalSettings);
 
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
 
-            return newGlobal_Settings.id;
         }
+
         public async Task<int> UpdateAsync(CreateGlobalSettingsModel createGlobalSettingsModel, int id)
         {
-            if (createGlobalSettingsModel == null)
-            {
-                throw new ArgumentNullException(nameof(createGlobalSettingsModel));
-            }
 
-            if (id == 0)
-            {
-                throw new ArgumentException("The ID can't be empty.", nameof(id));
-            }
-            var newGlobalSetting = _appContext.global_settings.Where(global_setting => global_setting.client_id == id).FirstOrDefault();
+            var newGlobalSetting = _appContext.global_settings.FirstOrDefault(global_setting => global_setting.client_id == id);
             if (newGlobalSetting == null)
-            {
-                throw new ArgumentException("global setting not found.", nameof(id));
-            }
+                throw new ArgumentException("Global setting not found.", nameof(id));
 
-            createGlobalSettingsModel.client_id = id;
-            global_settings newGlobal_Settings = await _set
+            createGlobalSettingsModel.ClientId = id;
+
+            global_settings newGlobalSettings = await _set
                 .UpdateAsync(newGlobalSetting.id, createGlobalSettingsModel)
                 .ConfigureAwait(false);
 
             await _appContext
                 .SaveChangesAsync()
                 .ConfigureAwait(false);
-            return newGlobal_Settings.id;
+
+            return newGlobalSettings.id;
         }
         public async Task<int> DeleteAsync(int id)
         {

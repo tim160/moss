@@ -17,7 +17,7 @@ namespace EC.AutoMapperProfiles.API.v1
                     options => options.UseValue(2)
                     ).ForMember(
                     destinationMember => destinationMember.client_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.client_nm.Trim())
+                    options => options.MapFrom(sourceMember => sourceMember.ClientName.Trim())
                     ).ForMember(
                     destinationMember => destinationMember.client_ds,
                     options => options.UseValue("")
@@ -39,7 +39,7 @@ namespace EC.AutoMapperProfiles.API.v1
                     options => options.UseValue(2)
                     ).ForMember(
                     destinationMember => destinationMember.client_nm,
-                    options => options.MapFrom(sourceMember => sourceMember.client_nm.Trim())
+                    options => options.MapFrom(sourceMember => sourceMember.ClientName.Trim())
                     ).ForMember(
                     destinationMember => destinationMember.client_ds,
                     options => options.UseValue("")

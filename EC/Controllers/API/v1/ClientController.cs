@@ -14,6 +14,7 @@ using EC.Common.Base;
 using EC.Models.API.v1.Company;
 using EC.Services.API.v1.CompanyServices;
 using System.Collections.Generic;
+using EC.Models.Database;
 
 namespace EC.Controllers.API.v1
 {
@@ -60,25 +61,33 @@ namespace EC.Controllers.API.v1
 
         [HttpPost]
         [Route()]
-        public async Task<IHttpActionResult> Create(CreateClientModel createClientModel)
+        public async Task<IHttpActionResult> Create(List<CreateClientModel> createClientModel)
         {
-            if (createClientModel == null)
-            {
+            if (createClientModel == null || !createClientModel.Any())
                 ModelState.AddModelError(nameof(createClientModel), "Client data required.");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return ApiBadRequest(ModelState);
-            }
-
-            bool isCC = DomainUtil.IsCC(Request.RequestUri.AbsoluteUri);
-            int id = 0;
 
             try
             {
-                id = await _clientService
-                    .CreateAsync(createClientModel, isCC)
+                foreach (var t in createClientModel)
+                {
+                    t.Id = (await _clientService
+                        .CreateAsync(t)
+                        .ConfigureAwait(false)).id;
+                }
+            }
+            catch (AggregateException exception)
+            {
+                return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
+            }
+
+
+            try
+            {
+                await _globalSettingsService
+                    .CreateAsync(createClientModel)
                     .ConfigureAwait(false);
             }
             catch (AggregateException exception)
@@ -86,44 +95,22 @@ namespace EC.Controllers.API.v1
                 return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
             }
 
-            if (createClientModel.globalSettings != null)
-            {
-                try
-                {
-                    createClientModel.globalSettings.client_id = id;
-                    await _globalSettingsService
-                        .CreateAsync(createClientModel.globalSettings, isCC)
-                        .ConfigureAwait(false);
-                }
-                catch (AggregateException exception)
-                {
-                    return ApiBadRequest(string.Join(Environment.NewLine, exception.InnerExceptions.Select(item => item.Message)));
-                }
-            }
-
-            return ApiCreated(id);
+            return ApiCreated(createClientModel);
         }
 
-        // do not do it now
         [HttpPut]
-        [Route("internal/{id}")]
-        private async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
+        [Route("{id}")]
+        public async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
         {
-            _logger.Debug($"id={id}");
-
             if (updateClientModel == null)
-            {
                 ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
-            }
+
             if (id == 0)
-            {
                 ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return ApiBadRequest(ModelState);
-            }
+
             try
             {
                 await _clientService
@@ -135,53 +122,10 @@ namespace EC.Controllers.API.v1
                 return ApiNotFound(exception.Message);
             }
 
-            if (updateClientModel.globalSettings != null)
-            {
-                try
-                {
-                    await _globalSettingsService
-                        .UpdateAsync(updateClientModel.globalSettings, id)
-                        .ConfigureAwait(false);
-                }
-                catch (NotFoundException exception)
-                {
-                    return ApiNotFound(exception.Message);
-                }
-            }
-
-            return ApiOk();
-        }
-
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> Update(string id, UpdateClientModel updateClientModel)
-        {
-            _logger.Debug($"id={id}");
-
-            if (updateClientModel == null)
-            {
-                ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
-            }
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
-
-            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Client not found.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return ApiBadRequest(ModelState);
-            }
-
             try
             {
-                await _clientService
-                    .UpdateAsync(updateClientModel, idFromDb)
+                await _globalSettingsService
+                    .UpdateAsync(updateClientModel.GlobalSettings, id)
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)
@@ -191,6 +135,46 @@ namespace EC.Controllers.API.v1
 
             return ApiOk();
         }
+
+//        [HttpPut]
+//        [Route("{id}")]
+//        public async Task<IHttpActionResult> Update(string id, UpdateClientModel updateClientModel)
+//        {
+//            _logger.Debug($"id={id}");
+//
+//            if (updateClientModel == null)
+//            {
+//                ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
+//            }
+//            if (String.IsNullOrEmpty(id))
+//            {
+//                ModelState.AddModelError(nameof(id), "Client ID required.");
+//            }
+//
+//            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+//            if (idFromDb == 0)
+//            {
+//                ModelState.AddModelError(nameof(id), "Client not found.");
+//            }
+//
+//            if (!ModelState.IsValid)
+//            {
+//                return ApiBadRequest(ModelState);
+//            }
+//
+//            try
+//            {
+//                await _clientService
+//                    .UpdateAsync(updateClientModel, idFromDb)
+//                    .ConfigureAwait(false);
+//            }
+//            catch (NotFoundException exception)
+//            {
+//                return ApiNotFound(exception.Message);
+//            }
+//
+//            return ApiOk();
+//        }
 
         // do not do it now
         [HttpDelete]
