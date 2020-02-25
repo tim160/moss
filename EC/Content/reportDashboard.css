@@ -27,10 +27,10 @@ body{
     float: left;
     margin: 15px 0 0 20px;
 }
-.headerMenu{
+/*.headerMenu{
     float: right;
     height: 100%;
-}
+}*/
 .headerMenu ul{
     height: 100%;
     margin-top: 13px;
@@ -47,13 +47,13 @@ body{
     text-decoration: none;
     color: rgb(146,160,163);
 }
-.headerMenu li:after {
-    content: " \d7";
-    font-size: 19px;
-    color: #92a0a3;
-    position: relative;
-    top: 2px;
-}
+    .headerMenu .logIn:after {
+        content: " \d7";
+        font-size: 19px;
+        color: #92a0a3;
+        position: relative;
+        top: 2px;
+    }
 .headerMenu .logIn{
     border-left: 1px solid rgb(206,211,211);
     padding: 6px 19px 6px 25px !important;
@@ -64,7 +64,13 @@ body{
 .headerMenu ul li:hover{
     /*color: rgb(120,120,120);*/
 }
-.header{
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
     position: relative;
     height: 60px;
     background-color: rgb(229,235,235);
@@ -1209,9 +1215,9 @@ h2.menuItem:nth-child(4).active::after {
     .headerMenu ul li {
         padding: 35px 10px 30px 10px;
     }
-    .positionImageLogo {
+    /*.positionImageLogo {
         display: none;
-    }
+    }*/
     .secondaryMenu ul {
         padding-left: 5px;
     }
@@ -1318,11 +1324,11 @@ h2.menuItem:nth-child(4).active::after {
 
 
 @media (max-width: 620px) {
-    .main .header {
+    /*.main .header {
         display: table;
         width: 100%;
         text-align: center;
-    }
+    }*/
     .main .header .logo {
         margin: 0 auto;
         width: 162px;
@@ -1330,11 +1336,11 @@ h2.menuItem:nth-child(4).active::after {
         margin-top: 20px;
     }
     .main .header .headerMenu {
-        float: none;
+        /*float: none;
         width: 100%;
         margin: auto;
         display: table;
-        height: auto;
+        height: auto;*/
     }
     .main .header .headerMenu ul {
         padding-left: 10px;

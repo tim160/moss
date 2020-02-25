@@ -1,16 +1,17 @@
 ﻿@using EC.Models.Database;
 @using EC.Localization;
 @{
-  var report_id = (Int32)ViewBag.report_id;
-  var user_id = (Int32)ViewBag.user_id;
-  List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
-  Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  ViewBag.Title = "Case Details";
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    ViewBag.Title = "Case Details";
+    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 }
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")

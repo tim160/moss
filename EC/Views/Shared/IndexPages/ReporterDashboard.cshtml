@@ -2,37 +2,37 @@
 @using EC.Localization;
 @{
 
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  String class_ext = ViewBag.cc_extension;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
 
-  ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard");
-  var user_id = (Int32)ViewBag.user_id;
-  UserModel um = new UserModel(user_id);
+    ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard");
+    var user_id = (Int32)ViewBag.user_id;
+    UserModel um = new UserModel(user_id);
 
-  int report_id = um.GetReportIDForReporter();
-  ReportModel rm = new ReportModel(report_id);
-  CompanyModel cm = new CompanyModel(um._user.company_id);
-  string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
-  int _investigation_status = rm._investigation_status;
-  if (_investigation_status == 6)
-  {
-    _investigation_status = 4;
-  }
-  var clientLogo = cm.companyClientLogo();
-  string mainHeaderLogo = String.Empty;
+    int report_id = um.GetReportIDForReporter();
+    ReportModel rm = new ReportModel(report_id);
+    CompanyModel cm = new CompanyModel(um._user.company_id);
+    string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
+    int _investigation_status = rm._investigation_status;
+    if (_investigation_status == 6)
+    {
+        _investigation_status = 4;
+    }
+    var clientLogo = cm.companyClientLogo();
+    string mainHeaderLogo = String.Empty;
 
-  if (ViewBag.is_sso_domain != null &&  ViewBag.is_sso_domain == true && ViewBag.clientLogo != null && ViewBag.clientLogo.Length > 0)
-  {
-    mainHeaderLogo = ViewBag.clientLogo;
-  }
-  else
-  {
-    mainHeaderLogo = "~/Content/img/ReportDashboardLogo.png";
-  }
+    if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true && ViewBag.clientLogo != null && ViewBag.clientLogo.Length > 0)
+    {
+        mainHeaderLogo = ViewBag.clientLogo;
+    }
+    else
+    {
+        mainHeaderLogo = "~/Content/img/ReportDashboardLogo.png";
+    }
 
 }
 
@@ -60,9 +60,7 @@
 <body ng-app="EC">
     <style>
     .responsiveLogo {
-        margin-top: 5px;
         margin-left: 10px;
-        float: left;
         height: 50px;
         width: 225px;
         background-repeat: no-repeat;
@@ -87,64 +85,78 @@
                 _logo = "http://report.employeeconfidential.com/Content/img/logo.png";
             }
             <div class="main">
+                @*<style>
+                    .header {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        align-items: center;
+                        align-content: stretch;
+                    }
+                </style>*@
                 <div class="header">
                     <div class="responsiveLogo"></div>
-                        @*@if (ViewBag.is_sso_domain == true && clientLogo.Length > 0)
-            {
-                <img class="logo" src='@Url.Content(clientLogo)' />
-            }
-            else
-            {
-                <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
-            }*@
+                    @*@if (ViewBag.is_sso_domain == true && clientLogo.Length > 0)
+                        {
+                            <img class="logo" src='@Url.Content(clientLogo)' />
+                        }
+                        else
+                        {
+                            <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
+                        }*@
 
 
-                        <div class="headerMenu">
-                            <ul>
-                                <li class="logIn">
-                                    @LocalizationGetter.GetString("Logout")
-                                </li>
-                            </ul>
-                        </div>
+                    @*<div class="headerMenu">
+                        <ul>
+                            <li class="logIn">
+                                @LocalizationGetter.GetString("Logout")
+                            </li>
+                        </ul>
+                    </div>*@
+                    <div class="headerMenu">
+                        <div class="logIn">@LocalizationGetter.GetString("Logout")</div>
                     </div>
 
-                    <div class="secondaryMenu">
-                        <div class="positionImageLogo">
-                            <img class="makeImgCenter" src='@Url.Content(_logo)' />
-                        </div>
-                        <div class="statusTitle">
-
-                            <div class="title">@LocalizationGetter.GetString("Case") @rm._report.display_name</div>
-                            <div class="status">
-                                @LocalizationGetter.GetString("Casestatus")<br />
-                                <span class="review">@rm._reportStringModel.InvestigationStatusString()</span>
-                            </div>
-                        </div>
-                        <div class="headerPos">
-                            @for (int i = 0; i < 5; i++)
-                            {
-                                if (i < _investigation_status)
-                                {
-                                    <div class="positionN active@{@class_ext}">
-                                        <span style="color: #38494d;">@_statuses[i]</span>
-                                    </div>
-                                    <div class="polos"></div>
-                                }
-                                else
-                                {
-
-                                    <div class="positionN">
-                                        <span style="color: #b4b9ba;">@_statuses[i]</span>
-                                    </div>
-                                    <div class="polos"></div>
-                                }
-                            }
-
-                        </div><!--headerPos-->
-
-                    </div>
-                    @RenderBody()
                 </div>
+
+                <div class="secondaryMenu">
+                    <div class="positionImageLogo">
+                        <img class="makeImgCenter" src='@Url.Content(_logo)' />
+                    </div>
+                    <div class="statusTitle">
+
+                        <div class="title">@LocalizationGetter.GetString("Case") @rm._report.display_name</div>
+                        <div class="status">
+                            @LocalizationGetter.GetString("Casestatus")<br />
+                            <span class="review">@rm._reportStringModel.InvestigationStatusString()</span>
+                        </div>
+                    </div>
+                    <div class="headerPos">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            if (i < _investigation_status)
+                            {
+                                <div class="positionN active@{@class_ext}">
+                                    <span style="color: #38494d;">@_statuses[i]</span>
+                                </div>
+                                <div class="polos"></div>
+                            }
+                            else
+                            {
+
+                                <div class="positionN">
+                                    <span style="color: #b4b9ba;">@_statuses[i]</span>
+                                </div>
+                                <div class="polos"></div>
+                            }
+                        }
+
+                    </div><!--headerPos-->
+
+                </div>
+                @RenderBody()
+            </div>
             <div class="footer" style="height:150px">
             </div>
         }
