@@ -68,6 +68,11 @@
         background-size: contain;
         background-image: url(@Url.Content(mainHeaderLogo));
     }
+        @@media (max-width: 620px) {
+        .responsiveLogo {
+        width: 217px;
+        }
+        }
     </style>
     @if (report_id != 0)
     {
