@@ -11,6 +11,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using EC.Model.Impl;
 using log4net;
 
 namespace EC.Services.API.v1.UserService
@@ -117,6 +118,7 @@ namespace EC.Services.API.v1.UserService
                     is_api = true,
                     api_source_id = null,
                     partner_api_id = userToCreate.PartnerUserId,
+                    company_id = Int32.TryParse(userToCreate.PartnerCompanyId, out int compId)? compId: 0,
                     answer_ds = string.Empty,
                     question_ds = string.Empty
                 });
