@@ -27,7 +27,6 @@ namespace EC.Models.API.v1.User
         [StringLength(250)]
         public string Department { get; set; }
         
-        [Required]
         public string PartnerCompanyId { get; set; }
 
         [Required]
