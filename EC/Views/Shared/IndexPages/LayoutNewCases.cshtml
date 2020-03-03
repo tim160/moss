@@ -1,126 +1,127 @@
-﻿@using EC.Models;
-@using EC.Models.Database;
-@using EC.Constants;
+﻿@using EC.Models.Database;
 @using EC.Localization;
 @using EC.Constants;
+@using EC.Services;
 @using EC.Models;
 @using EC.Models.ViewModels;
 
 @{
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  String class_ext = ViewBag.cc_extension;
-
-  var user_id = ViewBag.user_id;
-
-  string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
-
-  UserModel um = new UserModel(user_id);
-  CompanyModel cm = new CompanyModel(um._user.company_id);
-  ReportModel rm = new ReportModel();
-
-  ReadStatusModel rsm = new ReadStatusModel();
-
-  UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
-
-  var unread_report_number = userUnreadEntities.unread_reports;
-
-  // var unread_report_number = um.UnreadReport(0, 0).Count;
-  var unread_report_number_string = "";
-  string page_subtitle = "";
-  if (unread_report_number > 0)
-  {
-    unread_report_number_string = unread_report_number.ToString();
-  }
-
-  int unread_message_number = userUnreadEntities.unread_messages;
-  // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
-  var unread_message_number_string = "";
-  if (unread_message_number > 0)
-  {
-    unread_message_number_string = unread_message_number.ToString();
-  }
-
-  int unread_task_number = userUnreadEntities.unread_tasks;
-  //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
-  var unread_task_number_string = "";
-  if (unread_task_number > 0)
-  {
-    unread_task_number_string = unread_task_number.ToString();
-  }
-
-  user _user = um._user;
-  company _company = cm.GetById(_user.company_id);
-
-  string report_name = "Case";
-
-  int _report_id = 0;
-  int investigationstatus = 1;
-  string report_color = "", report_color_code = "", report_name_code = "";
-  bool is_owner = false;
-  user soff = null;
-
-  if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
-  {
-    _report_id = (int)ViewBag.report_id;
-    rm = new ReportModel(_report_id);
-
-    report_name = rm._reportStringModel.SecondaryTypeString() + " - " + rm._reportStringModel.LocationString() + " - #" + rm._report.display_name;
-    report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
-    report_color = rm._reportStringModel.ColorDescr();
-    report_color_code = rm._reportStringModel.ColorCode();
-    investigationstatus = rm._investigation_status;
-
-    is_owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user_id && x.status_id == 2) != null;
-    soff = rm.GetSignOffMeditoar();
-  }
-
-  string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
-
-  string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
-  if (rm != null && user_id == rm.Last_investigation_status_user_id())
-  {
-    ///     same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
-  }
-
-  string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase"); //ResolveCaseUp
-  string Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
-  string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
-  string textbox_title = LocalizationGetter.GetString("Caseresolution");
-  string left_button_promotion = "";
-  string normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Completed).ToString();
-  string left_button_value = "";// Constant.investigation_status_completed.ToString();
-  List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
-
-  if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
-  {
-    Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
-    if ((investigationstatus == 4) || (investigationstatus == 6))
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
     {
-      Res_or_comp = "";
+        is_cc = false;
     }
-    if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
-    {
-      Res_or_comp = LocalizationGetter.GetString("Reopen");
-      normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Investigation).ToString();
-    }
-    if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
-    {
-      Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
-    }
-  }
-  bool is_sso = false;
-  if (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1")
-  { is_sso = true; }
-  bool is_sso_domain = false;
-  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
-  {
-    is_sso_domain = true;
-   }
+    String class_ext = ViewBag.cc_extension;
 
+    var user_id = ViewBag.user_id;
+
+    string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
+
+    UserModel um = new UserModel(user_id);
+    CompanyModel cm = new CompanyModel(um._user.company_id);
+    ReportModel rm = new ReportModel();
+
+    ReadStatusModel rsm = new ReadStatusModel();
+
+    UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
+
+    var unread_report_number = userUnreadEntities.unread_reports;
+
+    // var unread_report_number = um.UnreadReport(0, 0).Count;
+    var unread_report_number_string = "";
+    if (unread_report_number > 0)
+    {
+        unread_report_number_string = unread_report_number.ToString();
+    }
+
+    int unread_message_number = userUnreadEntities.unread_messages;
+    // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    var unread_message_number_string = "";
+    if (unread_message_number > 0)
+    {
+        unread_message_number_string = unread_message_number.ToString();
+    }
+
+    int unread_task_number = userUnreadEntities.unread_tasks;
+    //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
+    var unread_task_number_string = "";
+    if (unread_task_number > 0)
+    {
+        unread_task_number_string = unread_task_number.ToString();
+    }
+
+    user _user = um._user;
+    company _company = cm.GetById(_user.company_id);
+
+    string report_name = "Case";
+
+    int _report_id = 0;
+    int investigationstatus = 1;
+    string report_color = "", report_color_code = "", report_name_code = "";
+    bool is_owner = false;
+    user soff = null;
+
+    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+    {
+        _report_id = (int)ViewBag.report_id;
+        rm = new ReportModel(_report_id);
+
+        report_name = rm._reportStringModel.SecondaryTypeString() + " - " + rm._reportStringModel.LocationString() + " - #" + rm._report.display_name;
+        report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
+        report_color = rm._reportStringModel.ColorDescr();
+        report_color_code = rm._reportStringModel.ColorCode();
+        investigationstatus = rm._investigation_status;
+
+        is_owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user_id && x.status_id == 2) != null;
+        soff = rm.GetSignOffMeditoar();
+    }
+
+    string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
+
+    string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
+    if (rm != null && user_id == rm.Last_investigation_status_user_id())
+    {
+        ///     same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
+    }
+
+    string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase"); //ResolveCaseUp
+    string Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
+    string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
+    string textbox_title = LocalizationGetter.GetString("Caseresolution");
+    string left_button_promotion = "";
+    string normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Completed).ToString();
+    string left_button_value = "";// Constant.investigation_status_completed.ToString();
+    List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
+
+    if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
+    {
+        Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
+        if ((investigationstatus == 4) || (investigationstatus == 6))
+        {
+            Res_or_comp = "";
+        }
+        if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+        {
+            Res_or_comp = LocalizationGetter.GetString("Reopen");
+            normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Investigation).ToString();
+        }
+        if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
+        {
+            Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
+        }
+    }
+    bool is_sso = false;
+    if (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1")
+    { is_sso = true; }
+    bool is_sso_domain = false;
+    if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+    {
+        is_sso_domain = true;
+    }
+
+    URLService layoutNew = new URLService();
+    string page_subtitle = layoutNew.generateHeader(Request.Url.AbsoluteUri);
+    string hrefURL = "/cases/index";
 }
 <!DOCTYPE html>
 <html>
@@ -322,24 +323,24 @@
                                 Posters
                             </a>
                         </li>
-                      @if (is_sso_domain == false)
-                      {
-                        <li class="dropDown-navigation__li">
-                            <a href="/Trainer/Calendar" class="dropDown-navigation__a">
-                                Book Training
-                            </a>
-                        </li>
-                      }
-                        @if (cm.AllPayments().Count > 0)
+                        @if (is_sso_domain == false)
                         {
-                          if (is_sso_domain == false)
-                          {
                             <li class="dropDown-navigation__li">
-                                <a href="/Payment/History" class="dropDown-navigation__a">
-                                    Subscription
+                                <a href="/Trainer/Calendar" class="dropDown-navigation__a">
+                                    Book Training
                                 </a>
                             </li>
-                          }
+                        }
+                        @if (cm.AllPayments().Count > 0)
+                        {
+                            if (is_sso_domain == false)
+                            {
+                                <li class="dropDown-navigation__li">
+                                    <a href="/Payment/History" class="dropDown-navigation__a">
+                                        Subscription
+                                    </a>
+                                </li>
+                            }
                         }
                         @if (is_sso_domain == false)
                         {
@@ -369,82 +370,7 @@
             </div>
         </div>
     </header>
-    @{
-        string hrefURL = Request.Url.AbsoluteUri.ToLower();
-        if (hrefURL.ToLower().Contains("/settings"))
-        {
-            hrefURL = "/settings/index";
-            page_subtitle = LocalizationGetter.GetString("Settings");
-        }
-        if ((hrefURL.ToLower().Contains("/tasks")))
-        {
-            if (!mainURL.Contains("analytics"))
-            {
-                hrefURL = "/tasks/index";
-                page_subtitle = LocalizationGetter.GetString("Tasks");
-            }
-        }
-        if (hrefURL.ToLower().Contains("/cases"))
-        {
-            hrefURL = "/cases/index";
-            page_subtitle = LocalizationGetter.GetString("Dashboard");
-        }
 
-        if ((hrefURL.ToLower().Contains("newcase/")) || (hrefURL.ToLower().Contains("/cases")) || (hrefURL.ToLower().Contains("/newreport") || (hrefURL.ToLower().Contains("newcase/task/"))))
-        {
-            page_subtitle = LocalizationGetter.GetString("Cases");
-            if ((hrefURL.ToLower().Contains("index/")))
-            {
-                hrefURL = "/cases/index";
-                page_subtitle = LocalizationGetter.GetString("report");
-            }
-            if ((hrefURL.ToLower().Contains("messages/")))
-            {
-                hrefURL = "/cases/index";
-                page_subtitle = LocalizationGetter.GetString("Messages");
-            }
-
-            if ((hrefURL.ToLower().Contains("team/")))
-            {
-                hrefURL = "/cases/index";
-                page_subtitle = LocalizationGetter.GetString("Team");
-            }
-            if ((hrefURL.ToLower().Contains("investigationnotes/")))
-            {
-                hrefURL = "/cases/index";
-                page_subtitle = LocalizationGetter.GetString("Investigation");
-            }
-
-            if ((hrefURL.ToLower().Contains("attachments/")))
-            {
-                hrefURL = "/cases/index";
-                page_subtitle = LocalizationGetter.GetString("Attachments");
-            }
-            if ((hrefURL.ToLower().Contains("activity/")))
-            {
-                hrefURL = "/cases/index";
-                page_subtitle = LocalizationGetter.GetString("Activity");
-            }
-        }
-
-        if (hrefURL.ToLower().Contains("/analytics"))
-        {
-            hrefURL = "/analytics/index";
-            page_subtitle = LocalizationGetter.GetString("Analytics");
-        }
-
-        if (hrefURL.ToLower().Contains("/messages"))
-        {
-            hrefURL = "/messages/index";
-            page_subtitle = LocalizationGetter.GetString("Messages");
-        }
-
-        if (hrefURL.Contains("/payment"))
-        {
-            hrefURL = "/Payment/History";
-            page_subtitle = LocalizationGetter.GetString("Payments");
-        }
-    }
     @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
     {
         <style>
