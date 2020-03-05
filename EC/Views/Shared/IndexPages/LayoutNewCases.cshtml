@@ -395,8 +395,6 @@
 
                 @if ((rm.MediatorsWhoHasAccessToReport().Select(t => t.id).ToList().Contains(_user.id)))
                 {
-
-
                     if (Res_or_comp == LocalizationGetter.GetString("Awaitingapproval") && (_user.role_id == ECLevelConstants.level_supervising_mediator || ((soff != null) && (soff.id == _user.id))))
                     {
                         <a href="#approveDialog" rel="modal:open" id="return_investigation" style="margin-right: 30px;" class="btn-link" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
@@ -404,7 +402,7 @@
                     }
                     else if (_user.role_id == ECLevelConstants.level_supervising_mediator || is_owner)
                     {
-                        if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+                        if ((investigationstatus == (int)CaseStatusConstants.CaseStatusValues.Investigation) && (_user.role_id == 4 || _user.role_id == 5))
                         {
                             <a href="#openModal" class="btn-link" rel="modal:open" disabled>@Res_or_comp</a>
                         }
