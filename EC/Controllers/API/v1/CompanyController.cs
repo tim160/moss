@@ -262,14 +262,6 @@ namespace EC.Controllers.API.v1
             return ApiOk(result);
         }
 
-        // to do  - move to common area
-        public class AggregateData
-        {
-            public string name { get; set; }
-            public int quantity { get; set; }
-            public decimal percentage { get; set; }
-        }
-
         #region Analytics
 
         [HttpGet]
@@ -286,11 +278,16 @@ namespace EC.Controllers.API.v1
         [HttpGet]
         [Route("{id}/analytics/locations")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsLocations(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
 
-            AggregateData result = new AggregateData();
+            var locationsAnalytic = await _companyService.GetCompanyLocationAnalytic(id, startDate, endDate);
+
+            var result = new LocationAnalyticViewModel()
+            {
+                LocationTable = locationsAnalytic
+            };
+
             return ApiOk(result);
         }
 

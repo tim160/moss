@@ -119,6 +119,37 @@ namespace EC.Services.API.v1.CompanyServices
             return errors;
         }
 
+        public async Task<List<AggregateData>> GetCompanyLocationAnalytic(int id, string startDate, string endDate)
+        {
+            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+                startDateTime = DateTime.MinValue;
+
+            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+                endDateTime = DateTime.MaxValue;
+
+            
+            var allReportsCount = await _appContext.report.CountAsync(r => r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime);
+
+            var locationsAnalytic = await _appContext.company_location.Where(l => l.company_id == id)
+                                .Select(l => new
+                                {
+                                    Id = l.id,
+                                    Name = l.location_en,
+                                    ReportsCount = _appContext.report.Count(rep => rep.location_id == l.id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime)
+                                })
+                                .GroupJoin(_appContext.report.Where(rep => rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
+                                           l => l.Id,
+                                           r => r.location_id,
+                                           (l, r) => new AggregateData
+                                           {
+                                               Name = l.Name,
+                                               Quantity = l.ReportsCount,
+                                               Percentage = allReportsCount != 0 ? ((decimal)l.ReportsCount / allReportsCount * 100) : 0
+                                           }).ToListAsync();
+
+            return locationsAnalytic;
+        }
+
         private company GetCompaniesFromCreatedModel(CreateCompanyModel createCompanyModels)
         {
             return new company()
@@ -134,5 +165,17 @@ namespace EC.Services.API.v1.CompanyServices
                 last_update_dt = DateTime.Now
             };
         }
+    }
+
+    public class AggregateData
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public decimal Percentage { get; set; }
+    }
+
+    public class LocationAnalyticViewModel
+    {
+        public List<AggregateData> LocationTable { get; set; }
     }
 }
