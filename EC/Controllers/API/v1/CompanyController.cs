@@ -267,11 +267,15 @@ namespace EC.Controllers.API.v1
         [HttpGet]
         [Route("{id}/analytics/departments")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsDepartments(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var departmentsAnalytics = await _companyService.GetCompanyDepartmentsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new DepartmentAnalyticViewModel()
+            {
+                DepartmentTable = departmentsAnalytics
+            };
+
             return ApiOk(result);
         }
 
@@ -280,8 +284,7 @@ namespace EC.Controllers.API.v1
         [ResponseType(typeof(List<AggregateData>))]
         public async Task<IHttpActionResult> AnalyticsLocations(int id, string startDate = "", string endDate = "")
         {
-
-            var locationsAnalytics = await _companyService.GetCompanyLocationAnalytics(id, startDate, endDate);
+            var locationsAnalytics = await _companyService.GetCompanyLocationsAnalytics(id, startDate, endDate);
 
             var result = new LocationAnalyticViewModel()
             {
@@ -294,13 +297,18 @@ namespace EC.Controllers.API.v1
         [HttpGet]
         [Route("{id}/analytics/incidentTypes")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsIncidentTypes(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var incidentsAnalytics = await _companyService.GetCompanyIncidentsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new IncidentAnalyticViewModel()
+            {
+                IncidentTable = incidentsAnalytics
+            };
+
             return ApiOk(result);
         }
+
         [HttpGet]
         [Route("{id}/analytics/reporterTypes")]
         [ResponseType(typeof(List<AggregateData>))]
