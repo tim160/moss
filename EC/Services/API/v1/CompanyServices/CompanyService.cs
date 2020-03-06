@@ -147,6 +147,8 @@ namespace EC.Services.API.v1.CompanyServices
                                                Percentage = allReportsCount != 0 ? ((decimal)l.ReportsCount / allReportsCount * 100) : 0
                                            }).ToListAsync();
 
+            locationsAnalytics.ForEach(l => l.Percentage = decimal.Parse(l.Percentage.ToString("0.00")) );
+
             return locationsAnalytics;
         }
 
