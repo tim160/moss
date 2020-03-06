@@ -119,7 +119,7 @@ namespace EC.Services.API.v1.CompanyServices
             return errors;
         }
 
-        public async Task<List<AggregateData>> GetCompanyLocationAnalytic(int id, string startDate, string endDate)
+        public async Task<List<AggregateData>> GetCompanyLocationAnalytics(int id, string startDate, string endDate)
         {
             if (!DateTime.TryParse(startDate, out DateTime startDateTime))
                 startDateTime = DateTime.MinValue;
@@ -130,7 +130,7 @@ namespace EC.Services.API.v1.CompanyServices
             
             var allReportsCount = await _appContext.report.CountAsync(r => r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime);
 
-            var locationsAnalytic = await _appContext.company_location.Where(l => l.company_id == id)
+            var locationsAnalytics = await _appContext.company_location.Where(l => l.company_id == id)
                                 .Select(l => new
                                 {
                                     Id = l.id,
@@ -147,7 +147,7 @@ namespace EC.Services.API.v1.CompanyServices
                                                Percentage = allReportsCount != 0 ? ((decimal)l.ReportsCount / allReportsCount * 100) : 0
                                            }).ToListAsync();
 
-            return locationsAnalytic;
+            return locationsAnalytics;
         }
 
         private company GetCompaniesFromCreatedModel(CreateCompanyModel createCompanyModels)

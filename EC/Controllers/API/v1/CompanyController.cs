@@ -281,11 +281,11 @@ namespace EC.Controllers.API.v1
         public async Task<IHttpActionResult> AnalyticsLocations(int id, string startDate = "", string endDate = "")
         {
 
-            var locationsAnalytic = await _companyService.GetCompanyLocationAnalytic(id, startDate, endDate);
+            var locationsAnalytics = await _companyService.GetCompanyLocationAnalytics(id, startDate, endDate);
 
             var result = new LocationAnalyticViewModel()
             {
-                LocationTable = locationsAnalytic
+                LocationTable = locationsAnalytics
             };
 
             return ApiOk(result);
