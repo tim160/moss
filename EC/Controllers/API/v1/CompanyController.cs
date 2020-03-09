@@ -303,7 +303,7 @@ namespace EC.Controllers.API.v1
 
             var result = new IncidentAnalyticViewModel()
             {
-                IncidentTable = incidentsAnalytics
+                SecondaryTypeTable = incidentsAnalytics
             };
 
             return ApiOk(result);
@@ -312,11 +312,15 @@ namespace EC.Controllers.API.v1
         [HttpGet]
         [Route("{id}/analytics/reporterTypes")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsReporterTypes(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var reporterTypesAnalytics = await _companyService.GetCompanyReporterTypeAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new ReporterTypeAnalyticViewModel()
+            {
+                RelationTable = reporterTypesAnalytics
+            };
+
             return ApiOk(result);
         }
 
