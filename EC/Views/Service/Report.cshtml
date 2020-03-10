@@ -1,14 +1,16 @@
 ﻿@using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
-  ViewBag.Title = "Employee Confidential";
-  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
-  bool showDDLanguages = true;
-  bool is_cc = false;
-  bool is_sso_domain = false;
-  if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
-  {
-    is_sso_domain = true;
-  }
+    /**/
+
+    ViewBag.Title = "Employee Confidential";
+    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+    bool showDDLanguages = true;
+    bool is_cc = false;
+    bool is_sso_domain = false;
+    if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
+    {
+        is_sso_domain = true;
+    }
 }
 
 @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
@@ -34,6 +36,7 @@
                             <img class="loginSection__logoImg" src="@ViewBag.LogoCompany" alt="">
                         </a>
                     }
+                   
                     <div class="loginSection__title">
                         @LocalizationGetter.GetString("FileReport", is_cc)
                     </div><!-- /.loginSection__title -->
@@ -45,32 +48,40 @@
                         <p class="loginContentBlock__textP">
                             @LocalizationGetter.GetString("PlatformMakesEasyReport", is_cc)
                         </p><!-- /.loginContentBlock__textP -->
-    @if (is_sso_domain == false)
-    {
+                        @if (is_sso_domain == false)
+                        {
                             <p class="loginContentBlock__textP">
                                 @LocalizationGetter.GetString("zzzzFind", is_cc)
                             </p><!-- /.loginContentBlock__textP -->
                             <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="loginContentBlock__link">
                                 @LocalizationGetter.GetString("AlreadyFiledReport", is_cc)
                             </a>
-    }
+                        }
+                        else
+                        {
+                                <p class="loginContentBlock__textP">
+                                </p>
+                                <a href="" class="loginContentBlock__link">
+                                </a>
+                        }
                     </div><!-- /.loginContentBlock -->
                     <div class="loginTextForm">
-                      @if (is_sso_domain == false)
-                      {
-                        <label class="loginForm__input">
-                            @LocalizationGetter.GetString("Companyname", is_cc)
-                            <input id="specialInput" type="text" name="text" required="" autocomplete="off">
-                            <input id="companyCode" type="hidden" value="false" />
-                        </label>
-                        <div class="loginTextFormLinks">
-                            <a href="#" id="startBtn" class="btn loginTextFormLinks__startBtn m_t_20">
-                                @LocalizationGetter.GetString("Start", is_cc)
-                            </a>
-                        </div>
-                      }
+                        @if (is_sso_domain == false)
+                        {
+                            <label class="loginForm__input">
+                                @LocalizationGetter.GetString("Companyname", is_cc)
+                                <input id="specialInput" type="text" name="text" required="" autocomplete="off">
+                                <input id="companyCode" type="hidden" value="false" />
+                            </label>
+                            <div class="loginTextFormLinks">
+                                <a href="#" id="startBtn" class="btn loginTextFormLinks__startBtn m_t_20">
+                                    @LocalizationGetter.GetString("Start", is_cc)
+                                </a>
+                            </div>
+                        }
                     </div><!-- /.loginTextForm -->
                 </div><!-- /.loginSection__contentBg -->
+            </div>
         </section><!-- /.loginSection -->
     </main><!-- /.main -->
 

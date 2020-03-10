@@ -90,6 +90,12 @@ namespace EC.Controllers
                 //NEED TO BE FIXED
                 //Session["user"] = UserModel.inst.GetById(2);
             }
+            if (is_sso_domain)
+            {
+                ViewBag.header_color_code = "#085c68";
+                ViewBag.header_links_color_code = "#fff";
+            }
+
 
             sessionManager.Lang = CurrentLangCode;
         }
