@@ -38,14 +38,14 @@ namespace EC.Controllers
         public ActionResult Login(string host_url)
         {
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
-            ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            ViewBag.is_sso_domain = is_sso_domain;
-            //foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
-            //{
-            //       user.password = PasswordUtils.GetHash(user.password);
-            //}
-            //       db.SaveChanges();
+            ViewBag.showDDLanguages = true;
+            //ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            //ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
+            {
+                user.password = PasswordUtils.GetHash(user.password);
+            }
+            db.SaveChanges();
 
             Session.Clear();
 
@@ -197,7 +197,7 @@ namespace EC.Controllers
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             ViewBag.fullNameLanguage = FullNameLanguage;
-            ViewBag.is_sso_domain = is_sso_domain;
+            //ViewBag.is_sso_domain = is_sso_domain;
 
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             if (is_sso_domain)
@@ -209,11 +209,11 @@ namespace EC.Controllers
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
             }
-            else
-            {
-                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            }
+            //else
+            //{
+            //    ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            //    ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            //}
             var count_active_company = db.company.Where(comp => comp.status_id == ECStatusConstants.Active_Value).Count();
             if (count_active_company == 1)
             {
@@ -227,7 +227,7 @@ namespace EC.Controllers
         public ActionResult Disclaimer(string id, string companyCode)
         {
 
-            ViewBag.is_sso_domain = is_sso_domain;
+            //ViewBag.is_sso_domain = is_sso_domain;
             var selectedCompany = GetCompanyModel(id, companyCode);
             if (selectedCompany == null)
             {
@@ -235,11 +235,14 @@ namespace EC.Controllers
             }
             else
             {
-                UserColorSchemaModel userColorSchema = new UserColorSchemaModel(selectedCompany.ID);
-                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-                CompanyModel cm = new CompanyModel(selectedCompany.ID);
-                ViewBag.clientLogo = cm.companyClientLogo();
+                if (is_sso_domain)
+                {
+                    UserColorSchemaModel userColorSchema = new UserColorSchemaModel(selectedCompany.ID);
+                    ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                    ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+                    CompanyModel cm = new CompanyModel(selectedCompany.ID);
+                    ViewBag.clientLogo = cm.companyClientLogo();
+                }
             }
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", selectedCompany);
         }
@@ -288,11 +291,11 @@ namespace EC.Controllers
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
             }
-            else
-            {
-                ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-                ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            }
+            //else
+            //{
+            //    ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+            //    ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            //}
 
 
 

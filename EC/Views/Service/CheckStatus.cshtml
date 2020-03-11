@@ -74,7 +74,7 @@
 <div class="general-container login">
 
     <header class="header">
-        @if (is_sso_domain != false)
+        @if (is_sso_domain)
         {
             <div style="height: 56px;padding-left: 10px;padding-top: 10px;">
                 <div class="responsiveLogo"></div>
@@ -83,7 +83,8 @@
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
-                    @if (is_sso_domain == false)
+
+                    @if (!is_sso_domain)
                     {
                         <a href="http://employeeconfidential.com" class="top-header__backLink">
                             <img src="~/Content/images/svg-icons/left.svg" alt="" />
@@ -91,34 +92,38 @@
                                 EmployeeConfidential.com
                             </span>
                         </a>
-                    }
-                    @*else
+                        <style>
+                            .top-header span {
+                                display: block;
+                            }
+                            /*.top-header {
+                                grid-template-columns: repeat(2, 1fr);
+                            }*/
+                            .login .top-header__loginBar-nav {
+                                grid-template-columns: 1fr 1fr;
+                            }
+                        </style>
+                    } else
                     {
-                        <span>&nbsp;</span>            
-                    }*@
+                        <div></div>
+                    }
 
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             @if (is_sso_domain == false)
                             {
-                                <li class="top-header__loginBar-li">
+
+                                <span class="top-header__loginBar-li">
                                     <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                                         Client Login
                                     </a>
-                                </li><!-- /.top-header__loginBar-li -->
+                                </span>
                             }
-                            @*else
-                            {
-                                <a href="/Service/CheckStatus" class="top-header__loginBar-a">
-                                    Check Report Status
-                                </a>            
-                            }*@
-                            <li class="top-header__loginBar-li">
+                            <span class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                                     File a Report
                                 </a>
-                            </li><!-- /.top-header__loginBar-li -->
-
+                            </span><!-- /.top-header__loginBar-li -->
                         </nav><!-- /.top-header__loginBar-nav -->
                     </div><!-- /.top-header__loginBar -->
                 </div><!-- /.top-header -->

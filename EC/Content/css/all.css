@@ -470,7 +470,9 @@ p {
   background-color: #4b5a4d; }
 
 .top-header {
-  display: grid; }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
   .top-header__campusLink {
     color: #fff;
     text-decoration: none;
@@ -1312,6 +1314,11 @@ textarea::-webkit-input-placeholder {
 
 /* Small Devices, Tablets */
 @media only screen and (max-width: 767px) {
+    .top-header {
+        grid-template-columns: 1fr;
+        height: 36px;
+        overflow: hidden;
+    }
   /**/ }
 
 /* Extra Small Devices, Phones */
@@ -1335,14 +1342,11 @@ textarea::-webkit-input-placeholder {
     min-height: calc( 100vh - 36px - 105px); }
   .login .main.main_white {
     min-height: calc( 100vh - 36px - 550px); }
-  .top-header {
-	  grid-template-columns: 1fr;
-    height: 36px;
-    overflow: hidden; }
+
     .top-header__campusLink {
       display: none; }
-    .top-header__loginBar {
-      justify-self: end; }
+    /*.top-header__loginBar {
+      justify-self: end; }*/
     .top-header__loginBar-nav {
       list-style: none;
       display: grid;
@@ -1887,15 +1891,14 @@ textarea::-webkit-input-placeholder {
     }
   .login .main {
     min-height: calc( 100vh - 36px - 125px); }
-  .top-header {
+  /*.top-header {
     grid-template-columns: 1fr;
     height: 36px;
     overflow: hidden;
-	
-	}
-	.top-header span {
+	}*/
+	/*.top-header span {
 		display: none;
-	}
+	}*/
     .top-header__campusLink {
       display: block;
       justify-self: start;

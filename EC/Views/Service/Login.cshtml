@@ -14,11 +14,6 @@
     }
 
     bool is_sso_domain = false;
-    if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
-    {
-        is_sso_domain = true;
-
-    }
     string mainHeaderLogo = "http://report.employeeconfidential.com/Content/img/logo.png";
     if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
     {
@@ -61,43 +56,64 @@
 </style>
 
 <div class="general-container login">
-
-    <header class="header">
-
-        <div style="height: 56px;padding-left: 10px;padding-top: 10px;">
-            @if (is_sso_domain == true)
-            {
+    <input type="hidden" value="@ViewBag.is_sso_domain" id="is_sso_domain" />
+    @if (ViewBag.is_sso_domain == true)
+    {
+        <header class="header">
+            <div style="height: 56px;padding-left: 10px;padding-top: 10px;">
                 <div class="responsiveLogo"></div>
+            </div>
+            <div class="top-headerBg">
+                <div class="container">
+                    <div class="top-header">
+                        <div class="top-header__loginBar">
+                            <nav class="top-header__loginBar-nav">
+                                <li class="top-header__loginBar-li">
+                                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                        File a Report
+                                    </a>
+                                </li>
+                                <li class="top-header__loginBar-li">
+                                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                        Check Report Status
+                                    </a>
+                                </li>
+                            </nav><!-- /.top-header__loginBar-nav -->
+                        </div><!-- /.top-header__loginBar -->
+
+                    </div><!-- /.top-header -->
+                </div>
+            </div>
+        </header><!-- /.header -->
+    }
+    @if (ViewBag.is_sso_domain == false)
+    {
+        <style>
+            .top-header span {
+                display: block;
             }
-        </div>
-        @*<div class="top-headerBg">
-            <div class="top-header__loginBar">
-                <nav class="top-header__loginBar-nav">
-                    <li class="top-header__loginBar-li">
-                        <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
-                            File a Report
-                        </a>
-                    </li>
-                    <li class="top-header__loginBar-li">
-                        <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                            Check Report Status
-                        </a>
-                    </li>
-                </nav><!-- /.top-header__loginBar-nav -->
-            </div><!-- /.top-header__loginBar -->*@
-        <div class="top-headerBg">
-            <div class="container">
-                <div class="top-header">
-                    @if (is_sso_domain == false)
-                    {
-                        <a href="http://employeeconfidential.com" class="top-header__backLink">
-                            <img src="~/Content/images/svg-icons/left.svg" alt="" />
-                            <span class="top-header__backLink-text">
-                                EmployeeConfidential.com
-                            </span>
-                        </a>
-                    }
-                    @*<span>&nbsp;</span>*@
+            .top-header {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .login .top-header__loginBar-nav {
+                grid-template-columns: 1fr 1fr;
+            }
+            .loginSection__title.loginSection__titleWithLlogo {
+                padding-top: 150px;
+            }
+            .containerCustom {
+                display: flex;
+            }
+        </style>
+        <header class="header">
+            <div class="top-headerBg">
+                <div class="containerCustom">
+                    <a href="http://employeeconfidential.com" class="top-header__backLink">
+                        <img src="~/Content/images/svg-icons/left.svg" alt="" />
+                        <span class="top-header__backLink-text">
+                            EmployeeConfidential.com
+                        </span>
+                    </a>
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
@@ -112,96 +128,95 @@
                             </li>
                         </nav><!-- /.top-header__loginBar-nav -->
                     </div><!-- /.top-header__loginBar -->
-
                 </div><!-- /.top-header -->
+                @*<div class="container">
+
+                </div>*@
             </div>
-        </div>
-
-
-    </header><!-- /.header -->
-
-<main class="main">
-    <section class="loginSection">
-        <div class="loginSection__titleBg" style="background-color: #edf0f0">
-            <div class="container loginTopSection__container">
-                @if (is_sso_domain)
-                {
-                    <a href="#" class="loginSection__logo">
-                        <img class="loginSection__logoImg" src="@ViewBag.LogoCompany" alt="">
-                    </a>
-                }
+        </header><!-- /.header -->
+    }
+    <main class="main">
+        <section class="loginSection">
+            <div class="loginSection__titleBg" style="background-color: #edf0f0">
+                <div class="container loginTopSection__container">
+                    @if (is_sso_domain)
+                    {
+                        <a href="#" class="loginSection__logo">
+                            <img class="loginSection__logoImg" src="@ViewBag.LogoCompany" alt="">
+                        </a>
+                    }
                     <div class="loginSection__title loginSection__titleWithLlogo">
                         @LocalizationGetter.GetString("ClientLoginUp", is_cc)
                     </div><!-- /.loginSection__title -->
-            </div><!-- /.container -->
-        </div><!-- /.loginSection__titleBg -->
-        <div class="loginSection__contentBg">
-            @using (Html.BeginForm("Login", "Service", new { returnUrl = Request.Params["returnUrl"] }, FormMethod.Post))
-            {
-                if (this.Request.HttpMethod == "POST")
-                {
-                    <input style="opacity: 0;position: absolute;">
-                    <input type="password" style="opacity: 0;position: absolute;">
-                }
-                @Html.HiddenFor(x => x.HostUrl)
-
-                <div class="container loginSection__container">
-                    <div class="loginForm">
-                        <label class="loginForm__input">
-                            @LocalizationGetter.GetString("Login", is_cc)
-                            @Html.TextBoxFor(x => x.Login)
-                        </label>
-                        <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
-                            @LocalizationGetter.GetString("Password", is_cc)
-                            @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
-                        </label>
-                        <text>
-                            <p class="red">@errorMessage</p>
-                        </text>
-                    </div><!-- /.loginForm -->
-                    <div class="loginFormLinks">
-
-                        @if (is_sso_domain == false)
-                        {
-                            <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
-
-                                Forgot your password?
-                            </a>
-                        }
-                        else
-                        {<span>&nbsp;</span>}
-                        <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
-                            @LocalizationGetter.GetString("Login", is_cc)
-                        </button>
-                    </div><!-- /.loginFormLinks -->
                 </div><!-- /.container -->
-            }
-        </div><!-- /.loginSection__contentBg -->
-    </section><!-- /.loginSection -->
-</main><!-- /.main -->
-<!-- ------------------  Footer ---------------- -->
-<footer class="footerBg">
-    <div class="container">
-        <div class="footer">
-            <div></div>
-            <div class="footer__copyright">
-                Copyright © 2020 Employee Confidential LLC. All Rights Reserved
-            </div><!-- /.footer__copyright -->
-            <div class="footer__navLinks">
-                <nav class="footer__navLinks-nav">
-                    <li class="footer__navLinks-li">
-                        <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
-                            Privacy Policy
-                        </a>
-                    </li><!-- /.footer__navLinks-li -->
-                    <li class="footer__navLinks-li">
-                        <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
-                            Terms of Use
-                        </a>
-                    </li><!-- /.footer__navLinks-li -->
-                </nav><!-- /.footer__navLinks-nav -->
-            </div><!-- /.footer__navLinks -->
-        </div><!-- /.footer -->
-    </div><!-- /.container -->
-</footer><!-- /.footer -->
+            </div><!-- /.loginSection__titleBg -->
+            <div class="loginSection__contentBg">
+                @using (Html.BeginForm("Login", "Service", new { returnUrl = Request.Params["returnUrl"] }, FormMethod.Post))
+                {
+                    if (this.Request.HttpMethod == "POST")
+                    {
+                        <input style="opacity: 0;position: absolute;">
+                        <input type="password" style="opacity: 0;position: absolute;">
+                    }
+                    @Html.HiddenFor(x => x.HostUrl)
+
+                    <div class="container loginSection__container">
+                        <div class="loginForm">
+                            <label class="loginForm__input">
+                                @LocalizationGetter.GetString("Login", is_cc)
+                                @Html.TextBoxFor(x => x.Login)
+                            </label>
+                            <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
+                                @LocalizationGetter.GetString("Password", is_cc)
+                                @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
+                            </label>
+                            <text>
+                                <p class="red">@errorMessage</p>
+                            </text>
+                        </div><!-- /.loginForm -->
+                        <div class="loginFormLinks">
+
+                            @if (is_sso_domain == false)
+                            {
+                                <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
+
+                                    Forgot your password?
+                                </a>
+                            }
+                            else
+                            {<span>&nbsp;</span>}
+                            <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
+                                @LocalizationGetter.GetString("Login", is_cc)
+                            </button>
+                        </div><!-- /.loginFormLinks -->
+                    </div><!-- /.container -->
+                }
+            </div><!-- /.loginSection__contentBg -->
+        </section><!-- /.loginSection -->
+    </main><!-- /.main -->
+    <!-- ------------------  Footer ---------------- -->
+    <footer class="footerBg">
+        <div class="container">
+            <div class="footer">
+                <div></div>
+                <div class="footer__copyright">
+                    Copyright © 2020 Employee Confidential LLC. All Rights Reserved
+                </div><!-- /.footer__copyright -->
+                <div class="footer__navLinks">
+                    <nav class="footer__navLinks-nav">
+                        <li class="footer__navLinks-li">
+                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
+                                Privacy Policy
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                        <li class="footer__navLinks-li">
+                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
+                                Terms of Use
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                    </nav><!-- /.footer__navLinks-nav -->
+                </div><!-- /.footer__navLinks -->
+            </div><!-- /.footer -->
+        </div><!-- /.container -->
+    </footer><!-- /.footer -->
 </div><!-- /.general-container -->

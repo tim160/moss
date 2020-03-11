@@ -665,7 +665,7 @@ header.header{
 			color: #aeb3b4;
 			text-decoration: none;
 			margin-right: 15px;
-            text-transform: lowercase;
+            text-transform: capitalize;
 		}
 		.breadcrumbs-info__tree-links:hover,
 		.breadcrumbs-info__tree-links:active,

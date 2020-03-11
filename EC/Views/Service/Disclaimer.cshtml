@@ -43,15 +43,7 @@
         align-content: stretch;
     }
 </style>
-@if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
-{
-    <style>
-    :root {
-        --HeaderColor: @ViewBag.header_color_code;
-        --HeaderLinksColor: @ViewBag.header_links_color_code;
-    }
-    </style>
-}
+
 <div class="general-container login">
 
     @{Html.RenderPartial("Header"); }

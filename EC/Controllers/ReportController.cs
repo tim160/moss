@@ -26,11 +26,11 @@ namespace EC.Controllers
 
         public ActionResult WorkWave()
         {
-      if (is_sso_domain)
-       /// return View("~/Views/Service/Disclaimer?companyCode=WorkWave");
-            return RedirectToAction("Disclaimer", "Service", new { companyCode = "WorkWave"});
+            if (is_sso_domain)
+                /// return View("~/Views/Service/Disclaimer?companyCode=WorkWave");
+                return RedirectToAction("Disclaimer", "Service", new { companyCode = "WorkWave" });
 
-          return RedirectToAction("Index", "Index");
+            return RedirectToAction("Index", "Index");
         }
 
 
@@ -67,7 +67,7 @@ namespace EC.Controllers
                 string cc_ext = "";
                 if (is_cc) cc_ext = "_cc";
                 ViewBag.cc_extension = cc_ext;
-        #endregion
+                #endregion
 
                 CompanyModel model = new CompanyModel(id);
                 company currentCompany = model.GetById(id);
@@ -91,19 +91,19 @@ namespace EC.Controllers
 
                 ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
-                 ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
+                ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
                 ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(getDBEntityModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = getDBEntityModel.getCountries();
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
 
-                arr.ForEach(t => t.country_description = (string.IsNullOrWhiteSpace(t.country_cl)  ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
+                arr.ForEach(t => t.country_description = (string.IsNullOrWhiteSpace(t.country_cl) ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
                 arr.ForEach(t => t.country_description_en = (string.IsNullOrWhiteSpace(t.country_cl) ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
                 arr.ForEach(t => t.country_description_es = (string.IsNullOrWhiteSpace(t.country_cl) ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
 
                 ViewBag.countriesDescription = arr;
                 ReportedOutsideCulture reportedOutsideCulture = new ReportedOutsideCulture(companyModel);
-                ViewBag.reportedOutsides =reportedOutsideCulture.getReportedOutside();
+                ViewBag.reportedOutsides = reportedOutsideCulture.getReportedOutside();
 
                 RoleInReportCulture roleInReportCulture = new RoleInReportCulture(db, is_cc);
                 ViewBag.selectedRoleInReport = roleInReportCulture.getRoleInReportCultureSelect();
@@ -207,7 +207,7 @@ namespace EC.Controllers
                     base.logModel.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
                     base.logModel.UpdateReportLog(user.id, 28, currentReport.report.id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                 }
-                
+
 
 
                 #region SendEmail To Admins
@@ -258,7 +258,7 @@ namespace EC.Controllers
             return View("CaseSubmitted");
         }
 
- 
+
         [HttpPost]
         public ActionResult SaveLoginChanges(int userId, string pass)
         {
@@ -272,7 +272,7 @@ namespace EC.Controllers
                 return json;
             }
 
-            
+
             if (user.id == userId)
             {
                 LoginModel lm = new LoginModel();
@@ -282,7 +282,7 @@ namespace EC.Controllers
                     SignIn(db.user.Find(userId));
                 }
             }
-            
+
             json.Data = result;
             return json;
         }
@@ -324,7 +324,7 @@ namespace EC.Controllers
             {
                 var fn = $"Report to {rm.CompanyName()}";
                 //return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
-                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) {  };
+                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { };
             }
 
             ViewBag.Roles = db.role_in_report.ToList();
@@ -351,7 +351,7 @@ namespace EC.Controllers
             reportModel.ID = reportId;
             if (user != null)
             {
-                if(reportModel._report != null && (reportModel._report.incident_anonymity_id == 2 || reportModel._report.incident_anonymity_id == 3))
+                if (reportModel._report != null && (reportModel._report.incident_anonymity_id == 2 || reportModel._report.incident_anonymity_id == 3))
                 {
                     Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
                     Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
@@ -360,7 +360,8 @@ namespace EC.Controllers
                     emailNotificationModel.SaveEmailBeforeSend(0, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
                         "", LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 30);
                 }
-            } else
+            }
+            else
             {
                 return RedirectToAction("Login", "Service");
             }
