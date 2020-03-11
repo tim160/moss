@@ -15,11 +15,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EC.Constants;
+using EC.Utils.Auth;
 
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/users")]
-
+    [CustomAuthorize]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;

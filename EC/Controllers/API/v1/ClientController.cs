@@ -15,11 +15,12 @@ using EC.Models.API.v1.Company;
 using EC.Services.API.v1.CompanyServices;
 using System.Collections.Generic;
 using EC.Models.Database;
+using EC.Utils.Auth;
 
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/clients")]
-
+    [CustomAuthorize]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;

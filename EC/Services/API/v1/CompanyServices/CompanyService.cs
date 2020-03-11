@@ -119,6 +119,173 @@ namespace EC.Services.API.v1.CompanyServices
             return errors;
         }
 
+        public async Task<List<AggregateData>> GetCompanyLocationsAnalytics(int id, string startDate, string endDate)
+        {
+            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+                startDateTime = DateTime.MinValue;
+
+            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+                endDateTime = DateTime.MaxValue;
+
+            var allReportsQuery = _appContext.report.Where(r =>
+                r.location_id != null && r.company_id == id && r.reported_dt > startDateTime &&
+                r.reported_dt < endDateTime);
+
+            var allReportsCount = await allReportsQuery.CountAsync();
+
+            var locationsAnalytics = await allReportsQuery
+                .Join(_appContext.company_location,
+                    r => r.location_id,
+                    cl => cl.id,
+                    (r, cl) => new
+                    {
+                        Name = cl.location_en
+                    })
+                .GroupBy(g => g.Name).Select(g => new AggregateData
+                {
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+                }).AsNoTracking().ToListAsync();
+
+            locationsAnalytics.ForEach(l => l.Percentage = decimal.Parse(l.Percentage.ToString("0.00")) );
+
+            return locationsAnalytics;
+        }
+
+        public async Task<List<AggregateData>> GetCompanyDepartmentsAnalytics(int id, string startDate, string endDate)
+        {
+            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+                startDateTime = DateTime.MinValue;
+
+            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+                endDateTime = DateTime.MaxValue;
+
+            var departmentsAnalyticsQuery = _appContext.report_department
+                .Join(_appContext.company_department.Where(cd => cd.company_id == id),
+                    rd => rd.department_id,
+                    cd => cd.id,
+                    (rd, cd) => new
+                    {
+                        rd.report_id,
+                        Name = cd.department_en
+                    })
+                .Join(
+                    _appContext.report.Where(r =>
+                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+                    rd => rd.report_id,
+                    r => r.id,
+                    (rd, r) => new
+                    {
+                        rd.Name
+                    });
+
+            var allReportsCount = await departmentsAnalyticsQuery.CountAsync();
+
+            var departmentsAnalytics = await departmentsAnalyticsQuery
+                .GroupBy(g => g.Name).Select(g => new AggregateData
+                {
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+                }).AsNoTracking().ToListAsync();
+
+            departmentsAnalytics = FormatPercentage(departmentsAnalytics);
+
+            return departmentsAnalytics;
+        }
+
+        public async Task<List<AggregateData>> GetCompanyIncidentsAnalytics(int id, string startDate, string endDate)
+        {
+            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+                startDateTime = DateTime.MinValue;
+
+            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+                endDateTime = DateTime.MaxValue;
+
+            var incidentsAnalyticsQuery = _appContext.report_secondary_type
+                .Join(_appContext.company_secondary_type.Where(cd => cd.company_id == id),
+                    rs => rs.secondary_type_id,
+                    cst => cst.id,
+                    (rs, cst) => new
+                    {
+                        rs.report_id,
+                        Name = cst.secondary_type_en
+                    })
+                .Join(
+                    _appContext.report.Where(r =>
+                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+                    rd => rd.report_id,
+                    r => r.id,
+                    (rd, r) => new
+                    {
+                        rd.Name
+                    });
+
+            var allReportsCount = await incidentsAnalyticsQuery.CountAsync();
+
+            var incidentsAnalytics = await incidentsAnalyticsQuery
+                .GroupBy(g => g.Name).Select(g => new AggregateData
+                {
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+                }).AsNoTracking().ToListAsync();
+
+            incidentsAnalytics = FormatPercentage(incidentsAnalytics);
+
+            return incidentsAnalytics;
+        }
+
+        public async Task<List<AggregateData>> GetCompanyReporterTypeAnalytics(int id, string startDate, string endDate)
+        {
+            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+                startDateTime = DateTime.MinValue;
+
+            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+                endDateTime = DateTime.MaxValue;
+
+            var reporterTypesAnalyticsQuery = _appContext.report_relationship
+                .Join(_appContext.company_relationship.Where(cd => cd.company_id == id),
+                    rr => rr.company_relationship_id,
+                    cr => cr.id,
+                    (rr, cr) => new
+                    {
+                        rr.report_id,
+                        Name = cr.relationship_en
+                    })
+                .Join(
+                    _appContext.report.Where(r =>
+                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+                    rd => rd.report_id,
+                    r => r.id,
+                    (rd, r) => new
+                    {
+                        rd.Name
+                    });
+
+            var allReportsCount = await reporterTypesAnalyticsQuery.CountAsync();
+
+            var reporterTypesAnalytics = await reporterTypesAnalyticsQuery
+                .GroupBy(g => g.Name).Select(g => new AggregateData
+                {
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+                }).AsNoTracking().ToListAsync();
+
+            reporterTypesAnalytics = FormatPercentage(reporterTypesAnalytics);
+
+            return reporterTypesAnalytics;
+        }
+
+        private List<AggregateData> FormatPercentage(List<AggregateData> data)
+        {
+            data.ForEach(d => d.Percentage = decimal.Parse(d.Percentage.ToString("0.00")));
+
+            return data;
+        }
+
         private company GetCompaniesFromCreatedModel(CreateCompanyModel createCompanyModels)
         {
             return new company()
@@ -134,5 +301,42 @@ namespace EC.Services.API.v1.CompanyServices
                 last_update_dt = DateTime.Now
             };
         }
+    }
+
+    //TODO: move to common area
+    public class ReportForEntity
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int ReportsCount { get; set; }
+    }
+
+    public class AggregateData
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public decimal Percentage { get; set; }
+    }
+
+    public class LocationAnalyticViewModel
+    {
+        public List<AggregateData> LocationTable { get; set; }
+    }
+
+    public class DepartmentAnalyticViewModel
+    {
+        public List<AggregateData> DepartmentTable { get; set; }
+    }
+
+    public class IncidentAnalyticViewModel
+    {
+        public List<AggregateData> SecondaryTypeTable { get; set; }
+    }
+
+    public class ReporterTypeAnalyticViewModel
+    {
+        public List<AggregateData> RelationTable { get; set; }
     }
 }

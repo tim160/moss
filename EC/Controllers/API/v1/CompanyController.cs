@@ -18,11 +18,12 @@ using EC.Models.Database;
 using EC.Constants;
 using System.Collections.Generic;
 using System.Data.Entity;
+using EC.Utils.Auth;
 
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/companies")]
-
+    [CustomAuthorize]
     public class CompanyController : BaseApiController
     {
         private readonly CompanyService _companyService;
@@ -262,56 +263,65 @@ namespace EC.Controllers.API.v1
             return ApiOk(result);
         }
 
-        // to do  - move to common area
-        public class AggregateData
-        {
-            public string name { get; set; }
-            public int quantity { get; set; }
-            public decimal percentage { get; set; }
-        }
-
         #region Analytics
 
         [HttpGet]
         [Route("{id}/analytics/departments")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsDepartments(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var departmentsAnalytics = await _companyService.GetCompanyDepartmentsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new DepartmentAnalyticViewModel()
+            {
+                DepartmentTable = departmentsAnalytics
+            };
+
             return ApiOk(result);
         }
 
         [HttpGet]
         [Route("{id}/analytics/locations")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsLocations(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var locationsAnalytics = await _companyService.GetCompanyLocationsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new LocationAnalyticViewModel()
+            {
+                LocationTable = locationsAnalytics
+            };
+
             return ApiOk(result);
         }
 
         [HttpGet]
         [Route("{id}/analytics/incidentTypes")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsIncidentTypes(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var incidentsAnalytics = await _companyService.GetCompanyIncidentsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new IncidentAnalyticViewModel()
+            {
+                SecondaryTypeTable = incidentsAnalytics
+            };
+
             return ApiOk(result);
         }
+
         [HttpGet]
         [Route("{id}/analytics/reporterTypes")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsReporterTypes(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var reporterTypesAnalytics = await _companyService.GetCompanyReporterTypeAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
+            var result = new ReporterTypeAnalyticViewModel()
+            {
+                RelationTable = reporterTypesAnalytics
+            };
+
             return ApiOk(result);
         }
 
