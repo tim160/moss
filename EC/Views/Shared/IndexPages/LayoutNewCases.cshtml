@@ -371,15 +371,6 @@
         </div>
     </header>
 
-    @if (ViewData.ContainsKey("header_color_code") && ViewBag.header_color_code != null)
-    {
-        <style>
-    :root {
-        --HeaderColor: @ViewBag.header_color_code;
-        --HeaderLinksColor: @ViewBag.header_links_color_code;
-    }
-        </style>
-    }
     <div class="container clearfix">
         <div class="breadcrumbs clearfix">
             <div class="breadcrumbs-info clearfix">
