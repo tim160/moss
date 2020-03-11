@@ -129,28 +129,24 @@ namespace EC.Services.API.v1.CompanyServices
 
             var allReportsCount = await _appContext.report.CountAsync(r => r.location_id != null && r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime);
 
-            var companyLocations = _appContext.company_location.Where(l => l.company_id == id)
-                .Select(l => new ReportForEntity
+            var locationsAnalytics = await _appContext.report
+                .Where(r => r.location_id != null && r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime)
+                .Join(_appContext.company_location,
+                    r => r.location_id,
+                    cl => cl.id,
+                    (r, cl) => new
+                    {
+                        Name = cl.location_en
+                    })
+                .GroupBy(g => g.Name).Select(g => new AggregateData
                 {
-                    Id = l.id,
-                    Name = l.location_en,
-                    ReportsCount = _appContext.report.Count(rep =>
-                        rep.company_id == id && rep.location_id == l.id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime)
-                });
-
-            var locationsAnalytics = await companyLocations
-                .GroupJoin(_appContext.report.Where(rep => rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                            e => e.Id,
-                            r => r.location_id,
-                            (e, r) => new AggregateData
-                            {
-                                Name = e.Name,
-                                Quantity = e.ReportsCount,
-                                Percentage = allReportsCount != 0 ? ((decimal)e.ReportsCount / allReportsCount * 100) : 0
-                            }).AsNoTracking().ToListAsync();
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+                }).AsNoTracking().ToListAsync();
 
             locationsAnalytics.ForEach(l => l.Percentage = decimal.Parse(l.Percentage.ToString("0.00")) );
-            
+
             return locationsAnalytics;
         }
 
