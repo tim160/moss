@@ -83,6 +83,7 @@
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
+
                     @if (!is_sso_domain)
                     {
                         <a href="http://employeeconfidential.com" class="top-header__backLink">
@@ -102,6 +103,9 @@
                                 grid-template-columns: 1fr 1fr;
                             }
                         </style>
+                    } else
+                    {
+                        <div></div>
                     }
 
                     <div class="top-header__loginBar">
