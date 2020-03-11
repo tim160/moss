@@ -127,10 +127,13 @@ namespace EC.Services.API.v1.CompanyServices
             if (!DateTime.TryParse(endDate, out DateTime endDateTime))
                 endDateTime = DateTime.MaxValue;
 
-            var allReportsCount = await _appContext.report.CountAsync(r => r.location_id != null && r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime);
+            var allReportsQuery = _appContext.report.Where(r =>
+                r.location_id != null && r.company_id == id && r.reported_dt > startDateTime &&
+                r.reported_dt < endDateTime);
 
-            var locationsAnalytics = await _appContext.report
-                .Where(r => r.location_id != null && r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime)
+            var allReportsCount = await allReportsQuery.CountAsync();
+
+            var locationsAnalytics = await allReportsQuery
                 .Join(_appContext.company_location,
                     r => r.location_id,
                     cl => cl.id,
@@ -158,33 +161,33 @@ namespace EC.Services.API.v1.CompanyServices
             if (!DateTime.TryParse(endDate, out DateTime endDateTime))
                 endDateTime = DateTime.MaxValue;
 
-            var allReportsCount = await _appContext.company_department.Where(cd => cd.company_id == id)
-                .Join(_appContext.report_department,
-                    cd => cd.id,
+            var departmentsAnalyticsQuery = _appContext.report_department
+                .Join(_appContext.company_department.Where(cd => cd.company_id == id),
                     rd => rd.department_id,
-                    (cd, rd) => new {rd.report_id})
+                    cd => cd.id,
+                    (rd, cd) => new
+                    {
+                        rd.report_id,
+                        Name = cd.department_en
+                    })
                 .Join(
-                    _appContext.report.Where(rep =>
-                        rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                    sr => sr.report_id,
+                    _appContext.report.Where(r =>
+                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+                    rd => rd.report_id,
                     r => r.id,
-                    (sr, r) => new { }).CountAsync();
+                    (rd, r) => new
+                    {
+                        rd.Name
+                    });
 
-            var departmentsAnalytics = await _appContext.company_department.Where(i => i.company_id == id)
-                .Select(d => new ReportForEntity
+            var allReportsCount = await departmentsAnalyticsQuery.CountAsync();
+
+            var departmentsAnalytics = await departmentsAnalyticsQuery
+                .GroupBy(g => g.Name).Select(g => new AggregateData
                 {
-                    Id = d.id,
-                    Name = d.department_en,
-                    ReportsCount = _appContext.report_department.Where(rd => rd.department_id == d.id)
-                        .Join(_appContext.report.Where(rep => rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                            type => type.report_id,
-                            rep => rep.id,
-                            (dep, rep) => new { }).Count()
-                }).Select(e => new AggregateData()
-                {
-                    Name = e.Name,
-                    Quantity = e.ReportsCount,
-                    Percentage = allReportsCount != 0 ? ((decimal)e.ReportsCount / allReportsCount * 100) : 0
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
                 }).AsNoTracking().ToListAsync();
 
             departmentsAnalytics = FormatPercentage(departmentsAnalytics);
@@ -200,32 +203,33 @@ namespace EC.Services.API.v1.CompanyServices
             if (!DateTime.TryParse(endDate, out DateTime endDateTime))
                 endDateTime = DateTime.MaxValue;
 
-            var allReportsCount = await _appContext.company_secondary_type.Where(cst => cst.company_id == id)
-                .Join(_appContext.report_secondary_type,
+            var incidentsAnalyticsQuery = _appContext.report_secondary_type
+                .Join(_appContext.company_secondary_type.Where(cd => cd.company_id == id),
+                    rs => rs.secondary_type_id,
                     cst => cst.id,
-                    rst => rst.secondary_type_id,
-                    (cst, rst) => new { report_id = rst.report_id })
+                    (rs, cst) => new
+                    {
+                        rs.report_id,
+                        Name = cst.secondary_type_en
+                    })
                 .Join(
-                    _appContext.report.Where(rep => rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                    type => type.report_id,
-                    rep => rep.id,
-                    (dep, rep) => new { }).CountAsync();
+                    _appContext.report.Where(r =>
+                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+                    rd => rd.report_id,
+                    r => r.id,
+                    (rd, r) => new
+                    {
+                        rd.Name
+                    });
 
-            var incidentsAnalytics = await  _appContext.company_secondary_type.Where(i => i.company_id == id)
-                .Select(t => new ReportForEntity
+            var allReportsCount = await incidentsAnalyticsQuery.CountAsync();
+
+            var incidentsAnalytics = await incidentsAnalyticsQuery
+                .GroupBy(g => g.Name).Select(g => new AggregateData
                 {
-                    Id = t.id,
-                    Name = t.secondary_type_en,
-                    ReportsCount = _appContext.report_secondary_type.Where(rd => rd.secondary_type_id == t.id)
-                        .Join(_appContext.report.Where(rep => rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                            type => type.report_id,
-                            rep => rep.id,
-                            (dep, rep) => new {}).Count()
-                }).Select(e => new AggregateData()
-                {
-                    Name = e.Name,
-                    Quantity = e.ReportsCount,
-                    Percentage = allReportsCount != 0 ? ((decimal)e.ReportsCount / allReportsCount * 100) : 0
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
                 }).AsNoTracking().ToListAsync();
 
             incidentsAnalytics = FormatPercentage(incidentsAnalytics);
@@ -241,33 +245,33 @@ namespace EC.Services.API.v1.CompanyServices
             if (!DateTime.TryParse(endDate, out DateTime endDateTime))
                 endDateTime = DateTime.MaxValue;
 
-            var allReportsCount = await _appContext.company_relationship.Where(cr => cr.company_id == id)
-                .Join(_appContext.report_relationship,
-                    cr => cr.id,
+            var reporterTypesAnalyticsQuery = _appContext.report_relationship
+                .Join(_appContext.company_relationship.Where(cd => cd.company_id == id),
                     rr => rr.company_relationship_id,
-                    (cr, rr) => new {report_id = rr.report_id})
+                    cr => cr.id,
+                    (rr, cr) => new
+                    {
+                        rr.report_id,
+                        Name = cr.relationship_en
+                    })
                 .Join(
-                    _appContext.report.Where(rep =>
-                        rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                    rel => rel.report_id,
-                    rep => rep.id,
-                    (rel, rep) => new { }).CountAsync();
+                    _appContext.report.Where(r =>
+                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+                    rd => rd.report_id,
+                    r => r.id,
+                    (rd, r) => new
+                    {
+                        rd.Name
+                    });
 
-            var reporterTypesAnalytics = await _appContext.company_relationship.Where(c => c.company_id == id)
-                .Select(r => new ReportForEntity
+            var allReportsCount = await reporterTypesAnalyticsQuery.CountAsync();
+
+            var reporterTypesAnalytics = await reporterTypesAnalyticsQuery
+                .GroupBy(g => g.Name).Select(g => new AggregateData
                 {
-                    Id = r.id,
-                    Name = r.relationship_en,
-                    ReportsCount = _appContext.report_relationship.Where(rd => rd.company_relationship_id == r.id)
-                        .Join(_appContext.report.Where(rep => rep.company_id == id && rep.reported_dt > startDateTime && rep.reported_dt < endDateTime),
-                            type => type.report_id,
-                            rep => rep.id,
-                            (dep, rep) => new { }).Count()
-                }).Select( e => new AggregateData()
-                {
-                    Name = e.Name,
-                    Quantity = e.ReportsCount,
-                    Percentage = allReportsCount != 0 ? ((decimal)e.ReportsCount / allReportsCount * 100) : 0
+                    Name = g.Key,
+                    Quantity = g.Count(),
+                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
                 }).AsNoTracking().ToListAsync();
 
             reporterTypesAnalytics = FormatPercentage(reporterTypesAnalytics);
