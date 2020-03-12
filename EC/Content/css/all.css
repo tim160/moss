@@ -1891,11 +1891,11 @@ textarea::-webkit-input-placeholder {
     }
   .login .main {
     min-height: calc( 100vh - 36px - 125px); }
-  /*.top-header {
+  .top-header {
     grid-template-columns: 1fr;
     height: 36px;
     overflow: hidden;
-	}*/
+	}
 	/*.top-header span {
 		display: none;
 	}*/
