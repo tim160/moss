@@ -20,7 +20,6 @@ using EC.Utils.Auth;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/users")]
-    [CustomAuthorize]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;

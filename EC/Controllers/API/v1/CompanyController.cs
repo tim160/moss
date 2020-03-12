@@ -23,7 +23,6 @@ using EC.Utils.Auth;
 namespace EC.Controllers.API.v1
 {
     [RoutePrefix("api/v1/companies")]
-    [CustomAuthorize]
     public class CompanyController : BaseApiController
     {
         private readonly CompanyService _companyService;
