@@ -61,7 +61,6 @@ namespace EC.Controllers
 
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
-
         [HttpPost]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
@@ -81,8 +80,6 @@ namespace EC.Controllers
             }
             return DoLogin(model, returnUrl, "Login", false);
         }
-
-
 
         [HttpPost]
         public ActionResult CheckStatus(LoginViewModel model, string returnUrl)
@@ -104,7 +101,35 @@ namespace EC.Controllers
             }
             return DoLogin(model, returnUrl, "CheckStatus", false);
         }
-
+        
+        [HttpGet]
+        [Authorize]
+        public ActionResult SignInGoogle()
+        {
+            var userClaims = (User as ClaimsPrincipal).Claims;
+            var userId = 0;
+            foreach (var claim in userClaims)
+            {
+                if(claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")
+                {
+                    if(claim.Value.IndexOf("@gmail.com") > 0)
+                    {
+                        userId = 2;
+                    }
+                }
+            }
+            if(userId != 0)
+            {
+                var _user = userModel.GetById(userId);
+                if (_user != null)
+                {
+                    LoginViewModel model = new LoginViewModel() { Login = _user.login_nm, Password = _user.password, Email = _user.email, HostUrl = "" };
+                    Session.Clear();
+                    return DoLogin(model, null, "CheckStatus", false);
+                }
+            }
+            return RedirectToAction("Login");
+        }
         private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view, bool is_sso = false)
         {
             Session.Clear();
