@@ -1897,6 +1897,7 @@
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
     <Compile Include="Controllers\NewReportController.cs" />
     <Compile Include="Models\ViewModels\CaseSubmittedViewModel.cs" />
+    <Compile Include="Models\ViewModels\LinksViewModel.cs" />
     <Compile Include="Models\ViewModels\MediatorsView.cs" />
     <Compile Include="Models\ViewModels\MessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\ReportAddModel.cs" />
