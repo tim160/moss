@@ -16,7 +16,7 @@ using log4net;
 
 namespace EC.Services.API.v1.UserService
 {
-    public class UserService : ServiceBase<user>
+    internal class UserService : ServiceBase<user>
     {
         public Task<PagedList<EC.Models.API.v1.User.UserModel>> GetPagedAsync(int page, int pageSize, Expression<Func<user, bool>> filter = null)
         {

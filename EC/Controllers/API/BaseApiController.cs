@@ -16,7 +16,7 @@ namespace EC.Controllers.API
 	public class BaseApiController : ApiController
 	{
 		private ECEntities db = null;
-		public ECEntities DB
+		internal ECEntities DB
 		{
 			get
 			{
