@@ -9,12 +9,11 @@ using EC.Controllers.ViewModel;
 using EC.Constants;
 using EC.Common.Base;
 using EC.Localization;
-using Rotativa;
 using EC.Models.ViewModels;
 using EC.Models.Culture;
 using EC.Utils;
 using EC.Common.Util;
-using System.Web.Configuration;
+using Rotativa.MVC;
 
 namespace EC.Controllers
 {

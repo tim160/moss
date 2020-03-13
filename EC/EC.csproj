@@ -114,6 +114,15 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
