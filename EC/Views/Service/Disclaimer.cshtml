@@ -46,6 +46,8 @@
 
 <div class="general-container login">
 
+
+    @Html.Partial("Header", new { showDDLanguages = ViewBag.showDDLanguages, linksArray = ViewBag.linksArray })
     @{Html.RenderPartial("Header"); }
 
     <main class="main">

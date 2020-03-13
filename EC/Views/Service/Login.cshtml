@@ -22,7 +22,6 @@
         {
             mainHeaderLogo = ViewBag.clientLogo;
         }
-
     }
 }
 <style>
@@ -56,78 +55,7 @@
 </style>
 
 <div class="general-container login">
-    <input type="hidden" value="@ViewBag.is_sso_domain" id="is_sso_domain" />
-    @if (ViewBag.is_sso_domain == true)
-    {
-        <header class="header">
-            <div style="height: 56px;padding-left: 10px;padding-top: 10px;">
-                <div class="responsiveLogo"></div>
-            </div>
-            <div class="top-headerBg">
-                <div class="container">
-                    <div class="top-header">
-                    <div></div>
-                        <div class="top-header__loginBar">
-                            <nav class="top-header__loginBar-nav">
-                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
-                                    File a Report
-                                </a>
-                            </nav><!-- /.top-header__loginBar-nav -->
-                        </div><!-- /.top-header__loginBar -->
-
-                    </div><!-- /.top-header -->
-                </div>
-            </div>
-        </header><!-- /.header -->
-    }
-    @if (ViewBag.is_sso_domain == false)
-    {
-        <style>
-            .top-header span {
-                display: block;
-            }
-
-            .top-header {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .login .top-header__loginBar-nav {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .loginSection__title.loginSection__titleWithLlogo {
-                padding-top: 150px;
-            }
-        </style>
-        <header class="header">
-            <div class="top-headerBg">
-                <div class="container">
-                    <div class="top-header">
-                        <a href="http://employeeconfidential.com" class="top-header__backLink">
-                            <img src="~/Content/images/svg-icons/left.svg" alt="" />
-                            <span class="top-header__backLink-text">
-                                EmployeeConfidential.com
-                            </span>
-                        </a>
-                        <div class="top-header__loginBar">
-                            <nav class="top-header__loginBar-nav">
-                                <li class="top-header__loginBar-li">
-                                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
-                                        File a Report
-                                    </a>
-                                </li>
-                                <li class="top-header__loginBar-li">
-                                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                                        Check Report Status
-                                    </a>
-                                </li>
-                            </nav><!-- /.top-header__loginBar-nav -->
-                        </div><!-- /.top-header__loginBar -->
-                    </div><!-- /.top-header -->
-                </div>
-            </div>
-        </header><!-- /.header -->
-    }
+    @Html.Partial("Header", new { showDDLanguages = ViewBag.showDDLanguages, linksArray = ViewBag.linksArray })
     <main class="main">
         <section class="loginSection">
             <div class="loginSection__titleBg" style="background-color: #edf0f0">
@@ -138,7 +66,7 @@
                             <img class="loginSection__logoImg" src="@ViewBag.LogoCompany" alt="">
                         </a>
                     }
-                    <div class="loginSection__title loginSection__titleWithLlogo">
+                    <div class="loginSection__title">
                         @LocalizationGetter.GetString("ClientLoginUp", is_cc)
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->

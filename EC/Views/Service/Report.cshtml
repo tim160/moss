@@ -4,7 +4,6 @@
 
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
-    bool showDDLanguages = true;
     bool is_cc = false;
     bool is_sso_domain = false;
     if (ViewBag.is_sso_domain != null && ViewBag.is_sso_domain == true)
@@ -25,7 +24,7 @@
 
 <input type="hidden" value="@Url.Action("SeekCompany", "Index")" id="SeekCompanyLocation" />
 <div class="general-container login">
-    @Html.Partial("Header", showDDLanguages)
+    @Html.Partial("Header",new { showDDLanguages = ViewBag.showDDLanguages, linksArray = ViewBag.linksArray })
     <main class="main">
         <section class="loginSection">
             <div class="loginSection__titleBg" style="background-color: #edf0f0">

@@ -18,6 +18,7 @@ using EC.Utils;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using EC.Models.ViewModels;
 
 namespace EC.Controllers
 {
@@ -38,7 +39,7 @@ namespace EC.Controllers
         public ActionResult Login(string host_url)
         {
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
-            ViewBag.showDDLanguages = true;
+            ViewBag.showDDLanguages = false;
             //ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             //ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
@@ -48,15 +49,23 @@ namespace EC.Controllers
             db.SaveChanges();
 
             Session.Clear();
-
+            
             if (is_sso_domain)
             {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)) };
+
                 CompanyModel cm = new CompanyModel(3136);
                 userColorSchema = new UserColorSchemaModel(cm.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
                 ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
+            } else
+            {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)),
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
             }
 
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
@@ -68,7 +77,7 @@ namespace EC.Controllers
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            ViewBag.is_sso_domain = is_sso_domain;
+            ViewBag.showDDLanguages = false;
 
             if (is_sso_domain)
             {
@@ -92,15 +101,22 @@ namespace EC.Controllers
             ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
             ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
             ViewBag.is_sso_domain = is_sso_domain;
-
+            ViewBag.showDDLanguages = false;
             if (is_sso_domain)
             {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
                 CompanyModel cm = new CompanyModel(3136);
                 userColorSchema = new UserColorSchemaModel(cm.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
                 ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
+            } else
+            {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Login", LocalizationGetter.GetString("ClientLoginUp", is_cc)),
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)) };
             }
             return DoLogin(model, returnUrl, "CheckStatus", false);
         }
@@ -197,11 +213,14 @@ namespace EC.Controllers
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             ViewBag.fullNameLanguage = FullNameLanguage;
-            //ViewBag.is_sso_domain = is_sso_domain;
 
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             if (is_sso_domain)
             {
+                ViewBag.showDDLanguages = false;
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
+
                 CompanyModel cm = new CompanyModel(3136);
                 userColorSchema = new UserColorSchemaModel(cm.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
@@ -209,11 +228,16 @@ namespace EC.Controllers
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
             }
-            //else
-            //{
-            //    ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            //    ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            //}
+            else
+            {
+                ViewBag.showDDLanguages = true;
+
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Login", LocalizationGetter.GetString("ClientLoginUp", is_cc)),
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
+                //ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                //ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            }
             var count_active_company = db.company.Where(comp => comp.status_id == ECStatusConstants.Active_Value).Count();
             if (count_active_company == 1)
             {
@@ -226,8 +250,6 @@ namespace EC.Controllers
 
         public ActionResult Disclaimer(string id, string companyCode)
         {
-
-            //ViewBag.is_sso_domain = is_sso_domain;
             var selectedCompany = GetCompanyModel(id, companyCode);
             if (selectedCompany == null)
             {
@@ -235,13 +257,22 @@ namespace EC.Controllers
             }
             else
             {
+                ViewBag.showDDLanguages = false;
                 if (is_sso_domain)
                 {
+                    ViewBag.linksArray = new List<LinksViewModel>() {
+                        new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
+
                     UserColorSchemaModel userColorSchema = new UserColorSchemaModel(selectedCompany.ID);
                     ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
                     ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
                     CompanyModel cm = new CompanyModel(selectedCompany.ID);
                     ViewBag.clientLogo = cm.companyClientLogo();
+                } else
+                {
+                    ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Login", LocalizationGetter.GetString("ClientLoginUp", is_cc)),
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
                 }
             }
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", selectedCompany);
@@ -280,10 +311,13 @@ namespace EC.Controllers
         public ActionResult CheckStatus()
         {
             ViewBag.fullNameLanguage = FullNameLanguage;
-            ViewBag.is_sso_domain = is_sso_domain;
+            ViewBag.showDDLanguages = false;
             UserColorSchemaModel userColorSchema = new UserColorSchemaModel(null);
             if (is_sso_domain)
             {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)) };
+
                 CompanyModel cm = new CompanyModel(3136);
                 userColorSchema = new UserColorSchemaModel(cm.ID);
                 ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
@@ -291,11 +325,15 @@ namespace EC.Controllers
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
             }
-            //else
-            //{
-            //    ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
-            //    ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
-            //}
+            else
+            {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Login", LocalizationGetter.GetString("ClientLoginUp", is_cc)),
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)) };
+
+                //ViewBag.header_color_code = userColorSchema.global_Setting.header_color_code;
+                //ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
+            }
 
 
 
