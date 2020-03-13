@@ -53,10 +53,10 @@ namespace EC.Controllers
         {
             var client = new TokenClient(
                 isURL + "/identity/connect/token",
-                "mvc_service",
-                "secret");
+                "EcAPI_service",
+                "verySecretCode1234");
 
-            return await client.RequestClientCredentialsAsync("sampleApi");
+            return await client.RequestClientCredentialsAsync("ecApiService");
         }
     }
 }

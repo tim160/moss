@@ -30,9 +30,16 @@ namespace IdentityServer.IdentityModels
                 Name = "sampleApi",
                 Description = "Access to a sample API",
                 Type = ScopeType.Resource
+            },
+            new Scope
+            {
+                Enabled = true,
+                DisplayName = "EcDev API",
+                Name = "ecApiService",
+                Description = "Access to a EC dev API",
+                Type = ScopeType.Resource
             }
         };
-
             scopes.AddRange(StandardScopes.All);
 
             return scopes;
