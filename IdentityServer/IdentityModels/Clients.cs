@@ -13,50 +13,64 @@ namespace IdentityServer.IdentityModels
         {
             return new[]
             {
-            new Client
-            {
-                Enabled = true,
-                ClientName = "MVC Client",
-                ClientId = "mvc",
-                Flow = Flows.Implicit,
-
-                RedirectUris = new List<string>
+                new Client
                 {
-                    isUrl
+                    Enabled = true,
+                    ClientName = "MVC Client",
+                    ClientId = "mvc",
+                    Flow = Flows.Implicit,
+
+                    RedirectUris = new List<string>
+                    {
+                        isUrl
+                    },
+
+                    AllowAccessToAllScopes = true
                 },
-
-                AllowAccessToAllScopes = true
-            },
-            new Client
-            {
-                Enabled = true,
-                ClientName = "EC Client",
-                ClientId = "ec_client",
-                Flow = Flows.Implicit,
-
-                RedirectUris = new List<string>
+                new Client
                 {
-                    siteUrl + "/Service/SignInGoogle"
+                    Enabled = true,
+                    ClientName = "EC Client",
+                    ClientId = "ec_client",
+                    Flow = Flows.Implicit,
+
+                    RedirectUris = new List<string>
+                    {
+                        siteUrl + "/Service/SignInGoogle"
+                    },
+
+                    AllowAccessToAllScopes = true
                 },
-
-                AllowAccessToAllScopes = true
-            },
-            new Client
-            {
-                ClientName = "MVC Client (service communication)",
-                ClientId = "mvc_service",
-                Flow = Flows.ClientCredentials,
-
-                ClientSecrets = new List<Secret>
+                new Client
                 {
-                    new Secret("secret".Sha256())
+                    ClientName = "MVC Client (service communication)",
+                    ClientId = "mvc_service",
+                    Flow = Flows.ClientCredentials,
+
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "sampleApi"
+                    }
                 },
-                AllowedScopes = new List<string>
+                new Client()
                 {
-                    "sampleApi"
+                    ClientName = "EC api service",
+                    ClientId = "EcAPI_service",
+                    Flow = Flows.ClientCredentials,
+                    ClientSecrets = new List<Secret>()
+                    {
+                        new Secret("verySecretCode1234".Sha256())
+                    },
+                    AllowedScopes = new List<string>()
+                    {
+                        "ecApiService"
+                    }
                 }
-            }
-        };
+            };
         }
     }
 }

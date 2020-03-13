@@ -33,6 +33,11 @@ namespace EC
                 SignInAsAuthenticationType = "Cookies",
 
             });
+            //app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+            //{
+            //    Authority = "https://employeeconfidentiadevidentity.azurewebsites.net/identity",
+            //    RequiredScopes = new[] { "sampleApi" }
+            //});
             app.UseResourceAuthorization(new AuthorizationManager());
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
