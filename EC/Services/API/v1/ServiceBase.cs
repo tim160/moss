@@ -8,7 +8,7 @@ using log4net;
 
 namespace EC.Services.API.v1
 {
-	internal class ServiceBase<T>
+	public class ServiceBase<T>
 		where T : class
 	{
 		protected readonly ApplicationContext _appContext;

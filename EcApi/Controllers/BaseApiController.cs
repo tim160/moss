@@ -1,6 +1,10 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
@@ -10,9 +14,8 @@ using EC.Models;
 using EC.Models.Database;
 using Newtonsoft.Json;
 
-namespace EC.Controllers.API
+namespace EcApi.Controllers
 {
-	//[AuthFilterApi]
 	public class BaseApiController : ApiController
 	{
 		private ECEntities db = null;
@@ -90,4 +93,55 @@ namespace EC.Controllers.API
 
 		#endregion
 	}
+
+    public class ApiResponseResult<T> : ApiResponseResult
+    {
+        public ApiResponseResult(
+            HttpStatusCode code,
+            T data,
+            string message = null,
+            string status = null,
+            string exceptionDetails = null)
+            : base(code, message, status, exceptionDetails)
+        {
+            Data = data;
+        }
+
+        public T Data { get; }
+    }
+
+    public class ApiResponseResult : IHttpActionResult
+    {
+        protected readonly MediaTypeFormatter _mediaTypeFormatter = new JsonMediaTypeFormatter();
+
+        public ApiResponseResult(
+            HttpStatusCode code,
+            string message = null,
+            string status = null,
+            string exceptionDetails = null)
+        {
+            Code = code;
+            Message = message;
+            Status = string.IsNullOrWhiteSpace(status) ? code.ToString() : status;
+            ExceptionDetails = exceptionDetails;
+        }
+
+        public Guid ApiRequestReferenceId { get; } = Guid.NewGuid();
+        public DateTimeOffset Timestamp { get; } = DateTimeOffset.UtcNow;
+        public string Status { get; }
+        public HttpStatusCode Code { get; }
+        public string Message { get; }
+        public string ExceptionDetails { get; }
+
+        public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+        {
+            HttpResponseMessage responseMessage = new HttpResponseMessage(Code)
+            {
+                Content = new ObjectContent<ApiResponseResult>(this, _mediaTypeFormatter),
+                ReasonPhrase = Status
+            };
+
+            return Task.FromResult(responseMessage);
+        }
+    }
 }
