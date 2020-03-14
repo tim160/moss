@@ -1897,6 +1897,7 @@
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
     <Compile Include="Controllers\NewReportController.cs" />
     <Compile Include="Models\ViewModels\CaseSubmittedViewModel.cs" />
+    <Compile Include="Models\ViewModels\LinksViewModel.cs" />
     <Compile Include="Models\ViewModels\MediatorsView.cs" />
     <Compile Include="Models\ViewModels\MessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\ReportAddModel.cs" />
@@ -1970,8 +1971,10 @@
     <Compile Include="Services\API\v1\ServiceBase.cs" />
     <Compile Include="Services\API\v1\UserService\UserService.cs" />
     <Compile Include="Services\MemoryCacheService.cs" />
+    <Compile Include="Services\URLService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Auth\AuthHttpModule .cs" />
+    <Compile Include="Utils\Auth\AuthorizeDomainAttribute.cs" />
     <Compile Include="Utils\Auth\AuthUser.cs" />
     <Compile Include="Utils\Auth\CookiesAuthentication.cs" />
     <Compile Include="Utils\Auth\EcMembershipProvider.cs" />

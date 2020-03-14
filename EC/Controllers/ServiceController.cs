@@ -266,7 +266,8 @@ namespace EC.Controllers
             var count_active_company = db.company.Where(comp => comp.status_id == ECStatusConstants.Active_Value).Count();
             if (count_active_company == 1)
             {
-                string companyCode = "DS6552";
+                var singleActiveCompany = db.company.Where(comp => comp.status_id == ECStatusConstants.Active_Value).Single();
+                string companyCode = singleActiveCompany.company_code;
                 return RedirectToAction("Disclaimer", new { id = companyCode, companyCode = companyCode });
             }
 

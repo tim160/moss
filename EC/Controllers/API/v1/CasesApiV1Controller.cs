@@ -88,7 +88,7 @@ namespace EC.Controllers.API.v1
             title = reportFlag == 4 ? LocalizationGetter.GetString("NewReportsUp") : title;
 
             CompanyModel cm = new CompanyModel(um._user.company_id);
-            var additionalCompanies = cm.AdditionalCompanies().Select(additional_company => new
+            var additionalCompanies = cm.AdditionalCompanies(true).Select(additional_company => new
             {
                 id = additional_company.id,
                 company_nm = additional_company.company_nm,
