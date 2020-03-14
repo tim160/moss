@@ -12,7 +12,7 @@ using System.Web;
 
 namespace EC.Services.API.v1.ClientService
 {
-    internal class ClientService : ServiceBase<client>
+    public class ClientService : ServiceBase<client>
     {
         public Task<PagedList<ClientModel>> GetPagedAsync(int page, int pageSize, Expression<Func<client, bool>> filter = null)
         {

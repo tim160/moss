@@ -77,8 +77,8 @@ namespace IdentityServer
 
         X509Certificate2 LoadCertificate()
         {
-            return new X509Certificate2(
-                string.Format(@"{0}\localhost.pfx", AppDomain.CurrentDomain.BaseDirectory), "12345678");
+            var certPath = $"{ AppDomain.CurrentDomain.BaseDirectory }\\localhost.pfx";
+            return new X509Certificate2(certPath, "12345678");
         }
     }
 }

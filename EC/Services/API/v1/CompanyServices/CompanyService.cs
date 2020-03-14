@@ -17,7 +17,7 @@ using static EC.Constants.LanguageConstants;
 
 namespace EC.Services.API.v1.CompanyServices
 {
-	internal class CompanyService : ServiceBase<company>
+    public class CompanyService : ServiceBase<company>
 	{
 		public Task<PagedList<CompanyModel>> GetPagedAsync(
 			int page,
