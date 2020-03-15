@@ -12,6 +12,7 @@ using EC.Services.API.v1.UserService;
 namespace TestApi.Controllers
 {
     [RoutePrefix("api/v1/users")]
+    [Authorize]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;

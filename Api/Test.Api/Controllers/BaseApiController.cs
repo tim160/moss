@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 
 namespace TestApi.Controllers
 {
-	//[AuthFilterApi]
 	public class BaseApiController : ApiController
 	{
 		private ECEntities db = null;

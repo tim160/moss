@@ -15,6 +15,7 @@ using EC.Services.API.v1.GlobalSettingsService;
 namespace TestApi.Controllers
 {
     [RoutePrefix("api/v1/clients")]
+    [Authorize]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;
