@@ -369,16 +369,23 @@ namespace EC.Models
     //// GetAllUserReportIdsLists  -- use here 
 
     /// <summary>
-    ///  List of dependent companies
+    /// 
     /// </summary>
+    /// <param name="exceptExcluded">this flag allows to include only company who gave consent to use their data. use default for Aggregate Data </param>
     /// <returns></returns>
-    public List<company> AdditionalCompanies()
+    public List<company> AdditionalCompanies(bool exceptExcluded = false)
     {
       List<company> initial = db.company.Where(x => x.id == ID).ToList();
-      var additional_companies = db.company.Where(x => x.client_id == ID).ToList();
-      foreach (company cm in additional_companies)
-      {
-        initial.Add(cm);
+      var initialCompany = db.company.Where(x => x.id == ID).FirstOrDefault();
+
+      if (initialCompany.controls_client)
+      { 
+        var additional_companies = db.company.Where(x => x.client_id == ID).ToList();
+        foreach (company cm in additional_companies)
+        {
+          if(!exceptExcluded || (cm.is_parent_active.HasValue && cm.is_parent_active.Value))
+            initial.Add(cm);
+        }
       }
       return initial;
     }

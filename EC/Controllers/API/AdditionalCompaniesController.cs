@@ -24,7 +24,7 @@ namespace EC.Controllers.API
             {
                 cm = new CompanyModel(user.company_id);
             }
-            var additionalCompanies = cm.AdditionalCompanies();
+            var additionalCompanies = cm.AdditionalCompanies(true);
 
             return new
             {

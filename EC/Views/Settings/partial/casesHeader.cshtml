@@ -45,14 +45,7 @@
                 <div class="divCasesTabActive @(number_active_page == 7 ? "active":"")">
                 </div>
             </td>
-            @if (role_id <= ECLevelConstants.level_escalation_mediator)
-            {
-                <td>
-                    <a href="/Settings/GlobalSettings" class="caseesTab1">@LocalizationGetter.GetString("GlobalSettings")</a>
-                    <div class="divCasesTabActive @(number_active_page == 8 ? "active":"")">
-                    </div>
-                </td>
-            }
+ 
         </tr>
     </table>
 </div>

@@ -275,7 +275,7 @@ namespace EC.Models
                 {
 
                     CompanyModel cm = new CompanyModel(_user.company_id);
-                    List<company> availableCompanies = cm.AdditionalCompanies();
+                    List<company> availableCompanies = cm.AdditionalCompanies(true);
 
                     List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
                     if (availableCompanies.Count > 1)
@@ -401,7 +401,7 @@ namespace EC.Models
                         List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
 
                         CompanyModel cm = new CompanyModel(_user.company_id);
-                        List<company> availableCompanies = cm.AdditionalCompanies();
+                        List<company> availableCompanies = cm.AdditionalCompanies(true);
 
                         if (availableCompanies.Count > 1)
                         {
@@ -432,7 +432,7 @@ namespace EC.Models
                         List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
 
                         CompanyModel cm = new CompanyModel(_user.company_id);
-                        List<company> availableCompanies = cm.AdditionalCompanies();
+                        List<company> availableCompanies = cm.AdditionalCompanies(true);
 
                         if (availableCompanies.Count > 1)
                         {
@@ -873,7 +873,7 @@ namespace EC.Models
             List<int> all_reports_id = new List<int>();
             List<int> statuses_match_all_report_id = new List<int>();
             CompanyModel cm = new CompanyModel(_user.company_id);
-            List<company> availableCompanies = cm.AdditionalCompanies();
+            List<company> availableCompanies = cm.AdditionalCompanies(true);
 
             if ((_user.role_id == 4) || (_user.role_id == 5))
             {
