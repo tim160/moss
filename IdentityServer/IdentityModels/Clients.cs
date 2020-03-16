@@ -44,12 +44,12 @@ namespace IdentityServer.IdentityModels
             new Client
             {
                 ClientName = "MVC Client (service communication)",
-                ClientId = "mvc_service",
+                ClientId = "e3c0cb7f-6c8c-47ae-a39a-1b32023308ac",
                 Flow = Flows.ClientCredentials,
 
                 ClientSecrets = new List<Secret>
                 {
-                    new Secret("secret".Sha256())
+                    new Secret("hWmZq4t7w9z$C&F)J@NcRfUjXn2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXn2r5u8x/".Sha256())
                 },
                 AllowedScopes = new List<string>
                 {

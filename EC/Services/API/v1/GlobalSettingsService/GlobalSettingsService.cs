@@ -9,7 +9,7 @@ using EC.Models.API.v1.Client;
 
 namespace EC.Services.API.v1.GlobalSettingsService
 {
-    internal class GlobalSettingsService : ServiceBase<global_settings>
+    public class GlobalSettingsService : ServiceBase<global_settings>
     {
         public GlobalSettingsModel getByClientId(int client_id)
         {
