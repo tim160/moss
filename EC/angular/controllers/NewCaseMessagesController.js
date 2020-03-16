@@ -33,10 +33,20 @@
         };
 
         $scope.sendMessage = function () {
-            NewCaseMessagesService.post({ mode: 1, id: $scope.report_id, newMessage: $scope.newMessage }, function () {
-                $scope.newMessage = '';
-                $scope.refresh();
-            });
+            if ($scope.newMessage.trim().length > 0) {
+                NewCaseMessagesService.post({ mode: 1, id: $scope.report_id, newMessage: $scope.newMessage }, function () {
+                    $scope.newMessage = '';
+                    $scope.refresh();
+                });
+            } else {
+                angular.element('textarea').addClass('error');
+            }
+        };
+
+        $scope.change = function () {
+            if ($scope.newMessage.trim().length > 0) {
+                angular.element('textarea').removeClass('error');
+            }
         };
 
         $scope.sendMessageReporter = function () {

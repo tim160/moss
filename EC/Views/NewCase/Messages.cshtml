@@ -79,17 +79,25 @@
                                     <span class="profile-status online"></span>
                                 </span>
                             </span>
-                            <span class="col-11">
-                                <a href="#" class="navContentMessages-tabContent__newMessageBox">
-                                    <textarea class="navContentMessages-tabContent__newMessageBox-textarea" ng-model="newMessage"></textarea>
-                                </a>
-                                <span class="navContentMessages-tabContent__newMessageBox-sendRow clearfix">
-                                    <a href="#!" class=" btn-linkReverse navContentMessages-tabContent__newMessageBox-sendBtn pull-right" ng-click="sendMessage()">
-                                        Send to Case Administrators
+                            <form name="myForm">
+                                <style>
+                                    textarea.error {
+                                        border: 1px solid red;
+                                    }
+                                </style>
+                                <span class="col-11">
+                                    <a href="#" class="navContentMessages-tabContent__newMessageBox">
+                                        <textarea name="newMessage" ng-change="change()" class="navContentMessages-tabContent__newMessageBox-textarea" ng-model="newMessage" required ng-class="myForm.newMessage.$touched && myForm.newMessage.$invalid ? 'error' :''"></textarea>
+
                                     </a>
+                                    <span class="navContentMessages-tabContent__newMessageBox-sendRow clearfix">
+                                        <a href="#!" class=" btn-linkReverse navContentMessages-tabContent__newMessageBox-sendBtn pull-right" ng-click="sendMessage()">
+                                            Send to Case Administrators
+                                        </a>
+                                    </span>
+                                    <div class="divider p-tb-10"></div>
                                 </span>
-                                <div class="divider p-tb-10"></div>
-                            </span>
+                            </form>
                         </div><!-- /.navContentMessages-tabContent__newMessageBox -->
                     </div><!-- /.navContentMessages-tabContent -->
                     <div id="sub-Reporter" class="navContentMessages-tabContent" ng-class="{ 'active': activeTab == 2}">
