@@ -9,11 +9,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
+using EC.Services.API.v1.CompanyServices;
 
 namespace EC.Services.API.v1.ClientService
 {
     public class ClientService : ServiceBase<client>
     {
+        private readonly CompanyService _companyService;
+
+        public ClientService()
+        {
+            _companyService = new CompanyService();
+        }
+
         public Task<PagedList<ClientModel>> GetPagedAsync(int page, int pageSize, Expression<Func<client, bool>> filter = null)
         {
             return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
@@ -98,6 +106,17 @@ namespace EC.Services.API.v1.ClientService
                 api_source_id = null,
                 partner_api_id = clientToCreate.PartnerClientId
             };
+        }
+
+        public async Task GetClientDepartmentsAnalytics(int id, string startDate, string endDate)
+        {
+            var companies = await _appContext.company.Where(c => c.client_id == id).ToListAsync();
+            List<List<AggregateData>> result = new List<List<AggregateData>>();
+            foreach (var company in companies)
+            {
+                var res = await _companyService.GetCompanyDepartmentsAnalytics(company.id, startDate, endDate);
+                result.Add(res);
+            }
         }
     }
 }

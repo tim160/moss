@@ -27,6 +27,7 @@ namespace TestApi.Controllers
         {
             _clientService = new ClientService();
             _globalSettingsService = new GlobalSettingsService();
+            _companyService = new CompanyService();
         }
 
         [HttpGet]
@@ -337,9 +338,10 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}/analytics/departments")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsDepartments(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            
+            await _clientService.GetClientDepartmentsAnalytics(id, startDate, endDate);
 
             AggregateData result = new AggregateData();
             return ApiOk(result);
