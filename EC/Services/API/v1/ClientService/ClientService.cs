@@ -9,11 +9,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
+using EC.Services.API.v1.CompanyServices;
 
 namespace EC.Services.API.v1.ClientService
 {
     public class ClientService : ServiceBase<client>
     {
+        private readonly CompanyService _companyService;
+
+        public ClientService()
+        {
+            _companyService = new CompanyService();
+        }
+
         public Task<PagedList<ClientModel>> GetPagedAsync(int page, int pageSize, Expression<Func<client, bool>> filter = null)
         {
             return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
@@ -99,5 +107,99 @@ namespace EC.Services.API.v1.ClientService
                 partner_api_id = clientToCreate.PartnerClientId
             };
         }
+
+        public async Task<List<ClientCompanyDepartmentAggregateData>> GetClientDepartmentsAnalytics(int id, string startDate, string endDate)
+        {
+            var companies = await _appContext.company.Where(c => c.client_id == id).ToListAsync();
+            List<ClientCompanyDepartmentAggregateData> result = new List<ClientCompanyDepartmentAggregateData>();
+            foreach (var company in companies)
+            {
+                var departmentsAnalytics = await _companyService.GetCompanyDepartmentsAnalytics(company.id, startDate, endDate);
+                result.Add(new ClientCompanyDepartmentAggregateData()
+                {
+                    CompanyName = company.company_nm,
+                    DepartmentTable = departmentsAnalytics
+                });
+            }
+
+            return result;
+        }
+
+
+        public async Task<List<ClientCompanyLocationAggregateData>> GetClientLocationsAnalytics(int id, string startDate, string endDate)
+        {
+            var companies = await _appContext.company.Where(c => c.client_id == id).ToListAsync();
+            List<ClientCompanyLocationAggregateData> result = new List<ClientCompanyLocationAggregateData>();
+            foreach (var company in companies)
+            {
+                var departmentsAnalytics = await _companyService.GetCompanyLocationsAnalytics(company.id, startDate, endDate);
+                result.Add(new ClientCompanyLocationAggregateData()
+                {
+                    CompanyName = company.company_nm,
+                    LocationTable = departmentsAnalytics
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<List<ClientCompanyIncidentAggregateData>> GetClientIncidentsAnalytics(int id, string startDate, string endDate)
+        {
+            var companies = await _appContext.company.Where(c => c.client_id == id).ToListAsync();
+            List<ClientCompanyIncidentAggregateData> result = new List<ClientCompanyIncidentAggregateData>();
+            foreach (var company in companies)
+            {
+                var departmentsAnalytics = await _companyService.GetCompanyLocationsAnalytics(company.id, startDate, endDate);
+                result.Add(new ClientCompanyIncidentAggregateData()
+                {
+                    CompanyName = company.company_nm,
+                    SecondaryTypeTable = departmentsAnalytics
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<List<ClientCompanyReporterTypeAggregateData>> GetClientReporterTypeAnalytics(int id, string startDate, string endDate)
+        {
+            var companies = await _appContext.company.Where(c => c.client_id == id).ToListAsync();
+            List<ClientCompanyReporterTypeAggregateData> result = new List<ClientCompanyReporterTypeAggregateData>();
+            foreach (var company in companies)
+            {
+                var departmentsAnalytics = await _companyService.GetCompanyLocationsAnalytics(company.id, startDate, endDate);
+                result.Add(new ClientCompanyReporterTypeAggregateData()
+                {
+                    CompanyName = company.company_nm,
+                    RelationTable = departmentsAnalytics
+                });
+            }
+
+            return result;
+        }
+    }
+
+    //TODO: Move to common area
+    public class ClientCompanyDepartmentAggregateData
+    {
+        public string CompanyName { get; set; }
+        public List<AggregateData> DepartmentTable { get; set; }
+    }
+
+    public class ClientCompanyLocationAggregateData
+    {
+        public string CompanyName { get; set; }
+        public List<AggregateData> LocationTable { get; set; }
+    }
+
+    public class ClientCompanyIncidentAggregateData
+    {
+        public string CompanyName { get; set; }
+        public List<AggregateData> SecondaryTypeTable { get; set; }
+    }
+
+    public class ClientCompanyReporterTypeAggregateData
+    {
+        public string CompanyName { get; set; }
+        public List<AggregateData> RelationTable { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace TestApi.Controllers
         {
             _clientService = new ClientService();
             _globalSettingsService = new GlobalSettingsService();
+            _companyService = new CompanyService();
         }
 
         [HttpGet]
@@ -337,47 +338,42 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}/analytics/departments")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsDepartments(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsDepartments(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            
+            var clientDepartmentsAnalytics = await _clientService.GetClientDepartmentsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
-            return ApiOk(result);
+            return ApiOk(clientDepartmentsAnalytics);
         }
 
         [HttpGet]
         [Route("{id}/analytics/locations")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsLocations(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsLocations(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var clientLocationsAnalytics = await _clientService.GetClientLocationsAnalytics(id, startDate, endDate);
 
-            List<AggregateData> result = new List<AggregateData>();
-            //result.Add(new AggregateData() { name = "Seattle", quantity = 1, percentage =50});
-            //result.Add(new AggregateData() { name = "New York", quantity = 1, percentage = 50 });
-            return ApiOk(result);
+            return ApiOk(clientLocationsAnalytics);
         }
 
         [HttpGet]
         [Route("{id}/analytics/incidentTypes")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsIncidentTypes(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsIncidentTypes(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var clientIncidentsAnalytics = await _clientService.GetClientIncidentsAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
-            return ApiOk(result);
+            return ApiOk(clientIncidentsAnalytics);
         }
 
         [HttpGet]
         [Route("{id}/analytics/reporterTypes")]
         [ResponseType(typeof(List<AggregateData>))]
-        public async Task<IHttpActionResult> AnalyticsReporterTypes(string startDate, string endDate)
+        public async Task<IHttpActionResult> AnalyticsReporterTypes(int id, string startDate = "", string endDate = "")
         {
-            // _logger.Debug($"page={page}; pageSize={pageSize}");
+            var clientReporterTypeAnalytics = await _clientService.GetClientReporterTypeAnalytics(id, startDate, endDate);
 
-            AggregateData result = new AggregateData();
-            return ApiOk(result);
+            return ApiOk(clientReporterTypeAnalytics);
         }
 
         [HttpGet]
