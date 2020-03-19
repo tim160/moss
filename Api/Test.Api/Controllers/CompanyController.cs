@@ -15,11 +15,12 @@ using EC.Models.API.v1.User;
 using EC.Models.Database;
 using EC.Services.API.v1.CompanyServices;
 using EC.Services.API.v1.UserService;
+using TestApi.Utils;
 
 namespace TestApi.Controllers
 {
     [RoutePrefix("api/v1/companies")]
-    [Authorize]
+    [CustomAuthorization]
     public class CompanyController : BaseApiController
     {
         private readonly CompanyService _companyService;

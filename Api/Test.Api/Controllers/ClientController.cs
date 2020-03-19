@@ -11,11 +11,12 @@ using EC.Models.API.v1.Company;
 using EC.Services.API.v1.ClientService;
 using EC.Services.API.v1.CompanyServices;
 using EC.Services.API.v1.GlobalSettingsService;
+using TestApi.Utils;
 
 namespace TestApi.Controllers
 {
     [RoutePrefix("api/v1/clients")]
-    [Authorize]
+    [CustomAuthorization]
     public class ClientController : BaseApiController
     {
         private readonly ClientService _clientService;

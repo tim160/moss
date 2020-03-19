@@ -8,11 +8,12 @@ using System.Web.Http.Description;
 using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.User;
 using EC.Services.API.v1.UserService;
+using TestApi.Utils;
 
 namespace TestApi.Controllers
 {
     [RoutePrefix("api/v1/users")]
-    [Authorize]
+    [CustomAuthorization]
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
