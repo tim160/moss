@@ -1214,6 +1214,10 @@
         $scope.newMessageReporter = '';
 
         $scope.refresh = function () {
+            if ($scope.caseAdminForm !== undefined && $scope.reporterForm !== undefined) {
+                $scope.caseAdminForm.$setUntouched();
+                $scope.reporterForm.$setUntouched();
+            }
             NewCaseMessagesService.get({ id: $scope.report_id }, function (data) {
                 $scope.mediators = data.mediators;
                 $scope.reporters = data.reporters;
@@ -1224,8 +1228,12 @@
         };
 
         $scope.sendMessage = function () {
-            if ($scope.newMessage.trim().length > 0) {
-                NewCaseMessagesService.post({ mode: 1, id: $scope.report_id, newMessage: $scope.newMessage }, function () {
+            if ($scope.newMessage !== undefined && $scope.newMessage.trim().length > 0) {
+                NewCaseMessagesService.post({
+                    mode: 1,
+                    id: $scope.report_id,
+                    newMessage: $scope.newMessage
+                }, function () {
                     $scope.newMessage = '';
                     $scope.refresh();
                 });
@@ -1234,17 +1242,27 @@
             }
         };
 
-        $scope.change = function () {
-            if ($scope.newMessage.trim().length > 0) {
-                angular.element('textarea').removeClass('error');
+        $scope.changeTextArea = function () {
+            if (angular.element('textarea').hasClass('error')) {
+                if ($scope.newMessage.trim().length > 0 || $scope.newMessageReporter.trim().length > 0) {
+                    angular.element('textarea').removeClass('error');
+                }
             }
         };
 
         $scope.sendMessageReporter = function () {
-            NewCaseMessagesService.post({ mode: 2, id: $scope.report_id, newMessage: $scope.newMessageReporter }, function () {
-                $scope.newMessageReporter = '';
-                $scope.refresh();
-            });
+            if ($scope.newMessageReporter !== undefined && $scope.newMessageReporter.trim().length > 0) {
+                NewCaseMessagesService.post({
+                    mode: 2,
+                    id: $scope.report_id,
+                    newMessage: $scope.newMessageReporter
+                }, function () {
+                    $scope.newMessageReporter = '';
+                    $scope.refresh();
+                });
+            } else {
+                angular.element('textarea').addClass('error');
+            }
         };
 
         $scope.unreaded = function (list) {
