@@ -1,5 +1,4 @@
-﻿using Rotativa;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -35,11 +34,6 @@ namespace IdentityServer.Controllers
         {
             Request.GetOwinContext().Authentication.SignOut();
             return Redirect(Url.Action("Index", "Home"));
-        }
-        [HttpGet]
-        public async Task<ActionResult> Pdf()
-        {
-            return new ActionAsPdf("Index", new { name = "TestName" }) { FileName = "Test.pdf" };
         }
     }
 }

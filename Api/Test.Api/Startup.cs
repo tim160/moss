@@ -16,7 +16,7 @@ namespace TestApi
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
-                Authority = "https://employeeconfidentiadevidentity.azurewebsites.net/identity",
+                Authority = "https://isazuredevemployeeconfidential.azurewebsites.net/identity",
                 RequiredScopes = new[] { "sampleApi" }
             });
 

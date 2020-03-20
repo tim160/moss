@@ -7,10 +7,10 @@ using EC.Models.Database;
 using EC.Models.ViewModels;
 using EC.Models;
 using EC.Models.ECModel;
-using Rotativa;
 using EC.Localization;
 using EC.Business.Actions;
 using System.Threading.Tasks;
+using Rotativa;
 
 namespace EC.Controllers
 {

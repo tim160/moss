@@ -21,7 +21,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Settings User", "About", "Home")</li>
-                    <li>@Html.ActionLink("Test PDF", "Pdf", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
