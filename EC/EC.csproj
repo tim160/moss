@@ -1461,7 +1461,6 @@
     <Content Include="Views\Service\ForgetLogin-CC.cshtml" />
     <Content Include="Views\Settings\partial\casesHeader.cshtml" />
     <Content Include="Views\Settings\GlobalSettings.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\CallApi\Index.cshtml" />
     <Content Include="Views\CallApi\ShowApiResult.cshtml" />
     <None Include="Web.Debug.config">
