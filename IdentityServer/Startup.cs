@@ -52,7 +52,7 @@ namespace IdentityServer
             {
                 Authority = isUrl + "/identity",
                 ClientId = "mvc",
-                Scope = "openid profile roles sampleApi",
+                Scope = "openid profile roles thinkhr",
                 RedirectUri = isUrl,
                 ResponseType = "id_token token",
 
