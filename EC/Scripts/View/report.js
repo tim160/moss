@@ -803,7 +803,7 @@
         $("#datepicker").datepicker({
             inline: true,
             maxDate: "+1D",
-            dateFormat: "dd/mm/yy"
+            dateFormat: "mm/dd/yy"
         });
         $("#datepicker").on('click', function () {
             var temp = $(event.currentTarget).parents('.contentBlock');
