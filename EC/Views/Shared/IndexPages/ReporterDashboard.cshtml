@@ -18,10 +18,10 @@
     CompanyModel cm = new CompanyModel(um._user.company_id);
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
     int _investigation_status = rm._investigation_status;
-    if (_investigation_status == 6)
-    {
-        _investigation_status = 4;
-    }
+    //if (_investigation_status == 6)
+    //{
+    //    _investigation_status = 4;
+    //}
     var clientLogo = cm.companyClientLogo();
     string mainHeaderLogo = String.Empty;
 
