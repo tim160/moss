@@ -46,7 +46,7 @@ namespace Api.Controllers
                 "mvc_service",
                 "secret");
 
-            return await client.RequestClientCredentialsAsync("sampleApi");
+            return await client.RequestClientCredentialsAsync("thinkhr");
         }
     }
 }

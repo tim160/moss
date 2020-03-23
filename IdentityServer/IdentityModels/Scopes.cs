@@ -27,7 +27,7 @@ namespace IdentityServer.IdentityModels
             {
                 Enabled = true,
                 DisplayName = "Sample API",
-                Name = "sampleApi",
+                Name = "thinkhr",
                 Description = "Access to a sample API",
                 Type = ScopeType.Resource
             }

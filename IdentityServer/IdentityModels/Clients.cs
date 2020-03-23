@@ -44,16 +44,16 @@ namespace IdentityServer.IdentityModels
             new Client
             {
                 ClientName = "MVC Client (service communication)",
-                ClientId = "e3c0cb7f-6c8c-47ae-a39a-1b32023308ac",
+                ClientId = "6e20c12e-c3f5-4694-90e3-034c00e8aef4",
                 Flow = Flows.ClientCredentials,
 
                 ClientSecrets = new List<Secret>
                 {
-                    new Secret("hWmZq4t7w9z$C&F)J@NcRfUjXn2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXn2r5u8x/".Sha256())
+                    new Secret("QeThWmZq4t6w9z$C&F)J@NcRfUjXn2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H".Sha256())
                 },
                 AllowedScopes = new List<string>
                 {
-                    "sampleApi"
+                    "thinkhr"
                 }
             }
         };
