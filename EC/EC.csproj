@@ -114,8 +114,8 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="Rotativa">
-      <HintPath>..\Api\Test.Api\Bin\Rotativa.dll</HintPath>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -1899,7 +1899,6 @@
     <Compile Include="Models\ViewModels\AnonimityViewModel.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
     <Compile Include="Controllers\NewReportController.cs" />
-    <Compile Include="Models\ViewModels\CaseSubmittedViewModel.cs" />
     <Compile Include="Models\ViewModels\LinksViewModel.cs" />
     <Compile Include="Models\ViewModels\MediatorsView.cs" />
     <Compile Include="Models\ViewModels\MessagesViewModel.cs" />
