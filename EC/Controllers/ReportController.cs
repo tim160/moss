@@ -172,6 +172,10 @@ namespace EC.Controllers
             {
                 model.agentId = (int)Session["id_agent"];
             }
+
+            ReportViewModel testModel = new ReportViewModel();
+            model.dateIncidentHappened = DateTime.Parse(Request["dateIncidentHappened"],
+                                      System.Globalization.CultureInfo.InvariantCulture);
             ViewBag.displayAngular = !CheckBrowser.detectOldIE(Request.Browser.Type);
 
             var cm = new CompanyModel(model.currentCompanyId);

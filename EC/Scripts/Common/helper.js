@@ -104,19 +104,21 @@ var vl = {
     },
 
     date: function (date) {
+        
         var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
+        today = new Date(today).setDate(today.getDate() + 1);
+        //var dd = today.getDate();
+        //var mm = today.getMonth(); //January is 0!
 
-        var yyyy = today.getFullYear();
-        dd += 1;
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-        var today = yyyy + '-' + mm + '-' + dd;
+        //var yyyy = today.getFullYear();
+        //dd += 1;
+        //if (dd < 10) {
+        //    dd = '0' + dd
+        //}
+        //if (mm < 10) {
+        //    mm = '0' + mm
+        //}
+        //var today = yyyy + '-' + mm + '-' + dd;
         var maxDate = Date.parse(today);
 
 

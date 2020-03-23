@@ -18,6 +18,11 @@
         updateLoginInfo(pass, userId);
     }
 
+    $("#newReport").on('click', function () {
+        var CompanyCode = document.getElementById('CompanyCode').value;
+        window.location.href = "/Service/Disclaimer?companyCode=" + CompanyCode;
+    });
+
     function updateLoginInfo(pass, userId) {
         var xhr = new XMLHttpRequest();
         var body = 'pass=' + encodeURIComponent(pass) +
