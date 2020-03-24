@@ -174,8 +174,17 @@ namespace EC.Controllers
             }
 
             ReportViewModel testModel = new ReportViewModel();
-            model.dateIncidentHappened = DateTime.Parse(Request["dateIncidentHappened"],
-                                      System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+                model.dateIncidentHappened = DateTime.Parse(Request["dateIncidentHappened"],
+                                          System.Globalization.CultureInfo.InvariantCulture);
+
+            } catch(FormatException message)
+            {
+                model.dateIncidentHappened = DateTime.Now;
+                logger.Error("Error parsing dateIncidentHappened time" + Request["dateIncidentHappened"] + " " + message.ToString());
+            }
+
             ViewBag.displayAngular = !CheckBrowser.detectOldIE(Request.Browser.Type);
 
             var cm = new CompanyModel(model.currentCompanyId);
