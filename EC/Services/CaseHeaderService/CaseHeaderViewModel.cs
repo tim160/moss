@@ -6,8 +6,8 @@ using System.Web;
 
 namespace EC.Services.ProgressLineService
 {
-    public class ProgressLineViewModel
-    {
+    public class CaseHeaderViewModel
+  {
         public int ProgressStepsCount { get; set; }
 
         public string ActionButton { get; set; }

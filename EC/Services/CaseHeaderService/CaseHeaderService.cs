@@ -8,12 +8,12 @@ using System.Web;
 
 namespace EC.Services.ProgressLineService
 {
-    public class ProgressLineService
-    {
+    public class CaseHeaderService
+  {
         private int user_id;
         private ECEntities db;
         private ReportModel rm;
-        public ProgressLineService(int user_id, ECEntities db, ReportModel rm)
+        public CaseHeaderService(int user_id, ECEntities db, ReportModel rm)
         {
             this.user_id = user_id;
             this.db = db;
@@ -21,10 +21,10 @@ namespace EC.Services.ProgressLineService
         }
 
 
-        public ProgressLineViewModel getHeaderProgressLine()
+        public CaseHeaderViewModel getHeaderProgressLine()
         {
 
-            var progressLineViewModel = new ProgressLineViewModel();
+            var progressLineViewModel = new CaseHeaderViewModel();
             if (checkUserRole())
             {
 
