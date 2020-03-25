@@ -9,10 +9,12 @@ using System.Web;
 namespace EC.Services.ProgressLineService
 {
     public class CaseHeaderService
-  {
+    {
         private int user_id;
         private ECEntities db;
         private ReportModel rm;
+        private const string ACTIVE_CLASS_NAME = "active";
+
         public CaseHeaderService(int user_id, ECEntities db, ReportModel rm)
         {
             this.user_id = user_id;
@@ -21,7 +23,7 @@ namespace EC.Services.ProgressLineService
         }
 
 
-        public CaseHeaderViewModel getHeaderProgressLine()
+        public CaseHeaderViewModel getHeader()
         {
 
             var progressLineViewModel = new CaseHeaderViewModel();
@@ -29,7 +31,7 @@ namespace EC.Services.ProgressLineService
             {
 
             }
-
+            progressLineViewModel.ProgressStepsCount = gettingProgressLineStepsCount();
 
             /*
              1) можно взять роль юзера ,и по ней определить надо ли ему грузить медиаторов или только вернуть колическтво закрашеных полосок
@@ -41,16 +43,39 @@ namespace EC.Services.ProgressLineService
             return progressLineViewModel;
         }
 
-        private int gettingProgressStepsCount()
+        private List<DataProgressLine> gettingProgressLineStepsCount()
         {
+            //передасть во вью массив с текстом и классом active или done
+
+            var progressLine = new List<DataProgressLine>(ECGlobalConstants.ReportFlowStatusesList.Length);
+
             int investigationstatus = rm._investigation_status;
 
-            if (investigationstatus == 6)
+            if (investigationstatus == (int)CaseStatusConstants.CaseStatusValues.Completed)
             {
-                investigationstatus = 4;
+                investigationstatus = (int)CaseStatusConstants.CaseStatusValues.Resolution;
             }
 
-            return 0;
+            //investigation_status_id int from 1 to 9
+
+            for (int i = 1; i <= ECGlobalConstants.ReportFlowStatusesList.Length; i++)
+            {
+                var newItem = new DataProgressLine();
+                if (i <= investigationstatus)
+                {
+                    newItem.ProgressStepsClass = ACTIVE_CLASS_NAME;
+                }
+                else
+                {
+                    newItem.ProgressStepsClass = "";
+                }
+
+                newItem.ProgressStepsText = ECGlobalConstants.ReportFlowStatusesList[i-1];
+                progressLine.Add(newItem);
+
+            }
+
+            return progressLine;
         }
 
         private bool checkUserRole()
