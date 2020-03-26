@@ -1287,7 +1287,6 @@
     <Content Include="PrivacyStatement.html" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
-    <Content Include="Rotativa\wkhtmltoimage.exe" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\daterangepicker.js" />
     <None Include="Properties\PublishProfiles\test-identity-server - Web Deploy.pubxml" />
@@ -1973,6 +1972,8 @@
     <Compile Include="Services\API\v1\CompanyServices\CompanyQueries.cs" />
     <Compile Include="Services\API\v1\ServiceBase.cs" />
     <Compile Include="Services\API\v1\UserService\UserService.cs" />
+    <Compile Include="Services\CaseHeaderService\CaseHeaderService.cs" />
+    <Compile Include="Services\CaseHeaderService\CaseHeaderViewModel.cs" />
     <Compile Include="Services\MemoryCacheService.cs" />
     <Compile Include="Services\URLService.cs" />
     <Compile Include="Startup.cs" />

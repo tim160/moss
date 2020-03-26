@@ -30,7 +30,7 @@ namespace EC.Controllers
             {
                 return RedirectToAction("Index", "NewCase", new { id = report_id_from_qs });
             }
-   
+
 
             ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
@@ -64,12 +64,12 @@ namespace EC.Controllers
         public ActionResult InvestigationNotes(int id)
         {
 
-      string report_id_from_qs = Request.QueryString["report_id"];
-      if (!string.IsNullOrWhiteSpace(report_id_from_qs))
-      {
-        return RedirectToAction("InvestigationNotes", "NewCase", new { id = report_id_from_qs });
-      }
-      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            string report_id_from_qs = Request.QueryString["report_id"];
+            if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+            {
+                return RedirectToAction("InvestigationNotes", "NewCase", new { id = report_id_from_qs });
+            }
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -106,12 +106,12 @@ namespace EC.Controllers
         public ActionResult CaseClosureReport(int id)
         {
 
-          string report_id_from_qs = Request.QueryString["report_id"];
-          if (!string.IsNullOrWhiteSpace(report_id_from_qs))
-          {
-            return RedirectToAction("CaseClosureReport", "NewCase", new { id = report_id_from_qs });
-          }
-          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            string report_id_from_qs = Request.QueryString["report_id"];
+            if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+            {
+                return RedirectToAction("CaseClosureReport", "NewCase", new { id = report_id_from_qs });
+            }
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -149,13 +149,13 @@ namespace EC.Controllers
 
         public ActionResult Activity(int id)
         {
-          string report_id_from_qs = Request.QueryString["report_id"];
-          if (!string.IsNullOrWhiteSpace(report_id_from_qs))
-          {
-            return RedirectToAction("Activity", "NewCase", new { id = report_id_from_qs });
-          }
+            string report_id_from_qs = Request.QueryString["report_id"];
+            if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+            {
+                return RedirectToAction("Activity", "NewCase", new { id = report_id_from_qs });
+            }
 
-          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -185,7 +185,7 @@ namespace EC.Controllers
         {
 
 
-          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
@@ -229,12 +229,12 @@ namespace EC.Controllers
         public ActionResult Messages(int id)
         {
 
-      string report_id_from_qs = Request.QueryString["report_id"];
-      if (!string.IsNullOrWhiteSpace(report_id_from_qs))
-      {
-        return RedirectToAction("Messages", "NewCase", new { id = report_id_from_qs });
-      }
-      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            string report_id_from_qs = Request.QueryString["report_id"];
+            if (!string.IsNullOrWhiteSpace(report_id_from_qs))
+            {
+                return RedirectToAction("Messages", "NewCase", new { id = report_id_from_qs });
+            }
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
@@ -539,7 +539,7 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-   ////cors for sso- remove for live site    [ValidateAntiForgeryToken]
+        ////cors for sso- remove for live site    [ValidateAntiForgeryToken]
         public ActionResult Task([Bind(Include = "body,task_id,user_id")] task_comment newTask)
         {
             newTask.created_date = DateTime.Now;
@@ -606,7 +606,7 @@ namespace EC.Controllers
             if (pdf)
             {
                 var report = db.report.FirstOrDefault(x => x.id == id);
-                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}.pdf"; 
+                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}.pdf";
                 //return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
                 return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
             }
@@ -870,7 +870,7 @@ namespace EC.Controllers
 
                 case 3:
                     if (old_status == 9)
-                      logModel.UpdateReportLog(user.id, 29, report_id, "", null, description);
+                        logModel.UpdateReportLog(user.id, 29, report_id, "", null, description);
                     logModel.UpdateReportLog(user.id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, description);
 
                     break;
@@ -881,8 +881,8 @@ namespace EC.Controllers
                 case 9:
 
                     if (old_status == 6)
-                      logModel.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, description);
-                  logModel.UpdateReportLog(user.id, 25, report_id, "", null, description);
+                        logModel.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, description);
+                    logModel.UpdateReportLog(user.id, 25, report_id, "", null, description);
                     break;
             }
             return 1;

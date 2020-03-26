@@ -6,9 +6,9 @@ using System.Web;
 
 namespace EC.Services.ProgressLineService
 {
-    public class ProgressLineViewModel
+    public class CaseHeaderViewModel
     {
-        public int ProgressStepsCount { get; set; }
+        public List<DataProgressLine> ProgressStepsCount { get; set; }
 
         public string ActionButton { get; set; }
 
@@ -16,5 +16,11 @@ namespace EC.Services.ProgressLineService
 
         //need pctures and names
 
+    }
+
+    public struct DataProgressLine
+    {
+        public String ProgressStepsText { get; set; }
+        public String ProgressStepsClass { get; set; }
     }
 }
