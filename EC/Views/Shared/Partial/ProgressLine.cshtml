@@ -1,0 +1,26 @@
+﻿@model EC.Models.ViewModels.HeaderPos
+@{
+    string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
+    //ViewBag._investigation_status
+}
+<div class="headerPos">
+    @for (int i = 0; i < 5; i++)
+    {
+        if (i < ViewBag._investigation_status)
+        {
+            <div class="positionN active">
+                <span>@_statuses[i]</span>
+            </div>
+
+            <div class="polos"></div>
+        }
+        else
+        {
+            <div class="positionN">
+                <span>@_statuses[i]</span>
+            </div>
+            <div class="polos"></div>
+        }
+
+    }
+</div>

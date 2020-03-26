@@ -18,10 +18,10 @@
     CompanyModel cm = new CompanyModel(um._user.company_id);
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
     int _investigation_status = rm._investigation_status;
-    //if (_investigation_status == 6)
-    //{
-    //    _investigation_status = 4;
-    //}
+    if (_investigation_status == 6)
+    {
+        _investigation_status = 4;
+    }
     var clientLogo = cm.companyClientLogo();
     string mainHeaderLogo = String.Empty;
 
@@ -137,27 +137,9 @@
                             <span class="review">@rm._reportStringModel.InvestigationStatusString()</span>
                         </div>
                     </div>
-                    <div class="headerPos">
-                        @for (int i = 0; i < 5; i++)
-                        {
-                            if (i < _investigation_status)
-                            {
-                                <div class="positionN active@{@class_ext}">
-                                    <span style="color: #38494d;">@_statuses[i]</span>
-                                </div>
-                                <div class="polos"></div>
-                            }
-                            else
-                            {
-
-                                <div class="positionN">
-                                    <span style="color: #b4b9ba;">@_statuses[i]</span>
-                                </div>
-                                <div class="polos"></div>
-                            }
-                        }
-
-                    </div><!--headerPos-->
+                    <!--HeaderPos ProgressLine-->
+                    @Html.Partial("~/Views/Shared/Partial/ProgressLine.cshtml", new ViewDataDictionary { { "_investigation_status", _investigation_status } })
+                    <!--end headerPos end progress Line-->
 
                 </div>
                 @RenderBody()
