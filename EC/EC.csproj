@@ -1269,6 +1269,7 @@
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\AzuredevEmployeeconfidential - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\AzuretestEmployeeconfidential - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
