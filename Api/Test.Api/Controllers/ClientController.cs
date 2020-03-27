@@ -12,6 +12,7 @@ using EC.Services.API.v1.ClientService;
 using EC.Services.API.v1.CompanyServices;
 using EC.Services.API.v1.GlobalSettingsService;
 using TestApi.Utils;
+using EC.Constants;
 
 namespace TestApi.Controllers
 {
@@ -198,16 +199,24 @@ namespace TestApi.Controllers
 
             try
             {
-                ///   await _clientService
-                ///      .DeleteAsync(idFromDb)
-                //      .ConfigureAwait(false);
+              var client = DB.client.FirstOrDefault(c => c.id == idFromDb);
+              if (client != null)
+              {
+                client.status_id = ECStatusConstants.Active_Value;
+                await DB.SaveChangesAsync();
+                return ApiOk();
+              }
+
+              return ApiNotFound();
+
             }
             catch (NotFoundException exception)
             {
-                return ApiNotFound(exception.Message);
+              return ApiNotFound(exception.Message);
             }
 
-            return ApiOk();
+
+ 
         }
 
         [HttpPatch]
@@ -226,9 +235,16 @@ namespace TestApi.Controllers
 
             try
             {
-                /// await _clientService
-                ///    .DeleteAsync(idFromDb)
-                ///     .ConfigureAwait(false);
+              var client = DB.client.FirstOrDefault(c => c.id == idFromDb);
+              if (client != null)
+              {
+                client.status_id = ECStatusConstants.Inactive_Value;
+                await DB.SaveChangesAsync();
+                return ApiOk();
+              }
+
+              return ApiNotFound();
+ 
             }
             catch (NotFoundException exception)
             {

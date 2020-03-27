@@ -17,6 +17,7 @@ using EC.Services.API.v1.CompanyServices;
 using EC.Services.API.v1.UserService;
 using TestApi.Utils;
 
+
 namespace TestApi.Controllers
 {
     [RoutePrefix("api/v1/companies")]
@@ -144,12 +145,22 @@ namespace TestApi.Controllers
 
         [HttpPatch]
         [Route("{id}/deactivate")]
-        public async Task<IHttpActionResult> CompanyDeactivate(int id)
+        public async Task<IHttpActionResult> CompanyDeactivate(string id)
         {
-            var company = await DB.company.FirstOrDefaultAsync(u => u.id == id);
+            if (String.IsNullOrEmpty(id))
+            {
+              ModelState.AddModelError(nameof(id), "Company ID required.");
+            }
+            int idFromDb = DB.company.Where(c => c.partner_api_id.Equals(id)).Select(c => c.id).FirstOrDefault();
+            if (idFromDb == 0)
+            {
+              ModelState.AddModelError(nameof(id), "Company not found.");
+            }
+
+            var company = await DB.company.FirstOrDefaultAsync(c => c.id == idFromDb);
             if (company != null)
             {
-                company.status_id = 3;
+                company.status_id = ECStatusConstants.Inactive_Value;
                 await DB.SaveChangesAsync();
                 return ApiOk();
             }
@@ -159,17 +170,27 @@ namespace TestApi.Controllers
 
         [HttpPatch]
         [Route("{id}/activate")]
-        public async Task<IHttpActionResult> CompanyActivate(int id)
+        public async Task<IHttpActionResult> CompanyActivate(string id)
         {
-            var company = await DB.company.FirstOrDefaultAsync(u => u.id == id);
-            if (company != null)
-            {
-                company.status_id = 2;
-                await DB.SaveChangesAsync();
-                return ApiOk();
-            }
+          if (String.IsNullOrEmpty(id))
+          {
+            ModelState.AddModelError(nameof(id), "Company ID required.");
+          }
+          int idFromDb = DB.company.Where(c => c.partner_api_id.Equals(id)).Select(c => c.id).FirstOrDefault();
+          if (idFromDb == 0)
+          {
+            ModelState.AddModelError(nameof(id), "Company not found.");
+          }
 
-            return ApiNotFound();
+          var company = await DB.company.FirstOrDefaultAsync(c => c.id == idFromDb);
+          if (company != null)
+          {
+            company.status_id = ECStatusConstants.Active_Value;
+            await DB.SaveChangesAsync();
+            return ApiOk();
+          }
+
+          return ApiNotFound();
         }
 
         [HttpDelete]

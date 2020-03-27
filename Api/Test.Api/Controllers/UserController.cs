@@ -9,6 +9,7 @@ using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.User;
 using EC.Services.API.v1.UserService;
 using TestApi.Utils;
+using EC.Constants;
 
 namespace TestApi.Controllers
 {
@@ -158,32 +159,52 @@ namespace TestApi.Controllers
 
         [HttpPatch]
         [Route("{id}/activate")]
-        public async Task<IHttpActionResult> UserActivate(int id)
+        public async Task<IHttpActionResult> UserActivate(string id)
         {
-            var user = await DB.user.FirstOrDefaultAsync(u => u.id == id);
-            if (user != null)
-            {
-                user.status_id = 2;
-                await DB.SaveChangesAsync();
-                return ApiOk();
-            }
+          if (String.IsNullOrEmpty(id))
+          {
+            ModelState.AddModelError(nameof(id), "User ID required.");
+          }
+          int idFromDb = DB.user.Where(u => u.partner_api_id.Equals(id)).Select(u => u.id).FirstOrDefault();
+          if (idFromDb == 0)
+          {
+            ModelState.AddModelError(nameof(id), "User not found.");
+          }
 
-            return ApiNotFound();
-        }
+          var user = await DB.user.FirstOrDefaultAsync(u => u.id == idFromDb);
+          if (user != null)
+          {
+            user.status_id = ECStatusConstants.Active_Value;
+            await DB.SaveChangesAsync();
+            return ApiOk();
+          }
+
+          return ApiNotFound();
+    }
 
         [HttpPatch]
         [Route("{id}/deactivate")]
-        public async Task<IHttpActionResult> UserDeactivate(int id)
+        public async Task<IHttpActionResult> UserDeactivate(string id)
         {
-            var user = await DB.user.FirstOrDefaultAsync(u => u.id == id);
-            if (user != null)
-            {
-                user.status_id = 3;
-                await DB.SaveChangesAsync();
-                return ApiOk();
-            }
+          if (String.IsNullOrEmpty(id))
+          {
+            ModelState.AddModelError(nameof(id), "User ID required.");
+          }
+          int idFromDb = DB.user.Where(u => u.partner_api_id.Equals(id)).Select(u => u.id).FirstOrDefault();
+          if (idFromDb == 0)
+          {
+            ModelState.AddModelError(nameof(id), "User not found.");
+          }
 
-            return ApiNotFound();
+          var user = await DB.user.FirstOrDefaultAsync(u => u.id == idFromDb);
+          if (user != null)
+          {
+            user.status_id = ECStatusConstants.Inactive_Value;
+            await DB.SaveChangesAsync();
+            return ApiOk();
+          }
+
+          return ApiNotFound();
         }
     }
 
