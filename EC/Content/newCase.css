@@ -638,7 +638,7 @@ header.header{
 
 .breadcrumbs{
 	margin-top: 35px;
-	margin-bottom: 20px;
+	margin-bottom: 37px;
 }
 	.breadcrumbs-info,
 	.breadcrumbs-mediators{
@@ -936,49 +936,65 @@ header.header{
 }
 /*---------------------------------/profile-status-------------------------------*/
 
-		.progress-steps{
-			/*background-color: rgba(0,0,0,0.2);*/
-		}
-			.progress-steps_5-steps .progress-steps__li{
-				width: calc( 100% / 5 );
-			}
-			.progress-steps__li{
-				display: inline-block;
-				float: left;
-				text-align: center;
-			}
-				.progress-steps__text{
-					font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-					font-size: 14px;
-					line-height: 12px;
-					color: rgba(56, 73, 77, 0.5);
-					position: relative;
-					margin-bottom: 8px;
-				}
-				.progress-steps__li.done .progress-steps__text{
-					color: rgba(56, 73, 77, 0.5);
-				}
-				.progress-steps__li.current .progress-steps__text{
-					color: rgba(56, 73, 77, 1);;
-				}
-				.progress-steps__text:after{
-					position: absolute;
-					left: 0;
-					bottom: -8px;
-					content: '';
-					width: calc( 100% - 2px );
-					height: 4px;
-					border-right: 2px solid #d7e3e4;
-					border-bottom: 4px solid #d7e3e4;
-				}
-				.progress-steps__li:last-child .progress-steps__text:after{
-					border-right: 0;
-					width: 100%;
-				}
-				.progress-steps__li.done .progress-steps__text:after{
-					border-right: 2px solid #6ccec3;
-					border-bottom: 4px solid #6ccec3;
-				}
+.headerPos {
+    display: flex;
+    width: 100%;
+    height: 21px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 12px;
+    margin-top: -21px;
+    background-color: #ffffff;
+    position: absolute;
+}
+
+.headerPos .positionN {
+    border-bottom: 4px solid #e5f3f2;
+    width: 135px;
+    width: 145px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+    .headerPos .positionN.active {
+        border-bottom: 3px solid #6ccec3;
+    }
+
+    .headerPos .positionN span {
+        color: #b4b9ba;
+        font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+        font-size: 14px;
+        line-height: 12px;
+    }
+
+.headerPos .positionN {
+    border-bottom: 3px solid #d7e3e4;
+    width: 20%;
+    height: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+    .headerPos .positionN span {
+        color: #b4b9ba;
+    }
+
+    .headerPos .positionN + .polos {
+        height: 6px;
+        width: 3px;
+        background: #d7e3e4 none repeat scroll 0% 0%;
+        margin-bottom: 0px;
+        margin-top: 16px;
+    }
+
+    .headerPos .positionN.active + .polos {
+        background: #6ccec3 none repeat scroll 0% 0%;
+    }
+
 
 /*======================================================
 ==================mainNavigationTabs====================
