@@ -193,57 +193,57 @@ namespace TestApi.Controllers
           return ApiNotFound();
         }
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(string id)
-        {
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "Company ID required.");
-            }
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<IHttpActionResult> Delete(string id)
+        //{
+        //    if (String.IsNullOrEmpty(id))
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Company ID required.");
+        //    }
 
-            int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Company not found.");
-            }
+        //    int idFromDb = DB.company.Where(company => company.partner_api_id.Equals(id)).Select(company => company.id).FirstOrDefault();
+        //    if (idFromDb == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Company not found.");
+        //    }
 
-            try
-            {
-                await _companyService
-                    .DeleteAsync(idFromDb)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+        //    try
+        //    {
+        //        await _companyService
+        //            .DeleteAsync(idFromDb)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
 
-            return ApiOk();
-        }
+        //    return ApiOk();
+        //}
 
-        [HttpDelete]
-        [Route("internal/{id}")]
-        private async Task<IHttpActionResult> Delete(int id)
-        {
-            if (id == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Company ID required.");
-            }
+        //[HttpDelete]
+        //[Route("internal/{id}")]
+        //private async Task<IHttpActionResult> Delete(int id)
+        //{
+        //    if (id == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Company ID required.");
+        //    }
 
-            try
-            {
-                await _companyService
-                    .DeleteAsync(id)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+        //    try
+        //    {
+        //        await _companyService
+        //            .DeleteAsync(id)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
 
-            return ApiOk();
-        }
+        //    return ApiOk();
+        //}
 
         [HttpPut]
         [Route("{id}")]

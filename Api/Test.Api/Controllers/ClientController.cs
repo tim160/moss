@@ -132,56 +132,56 @@ namespace TestApi.Controllers
             return ApiOk();
         }
 
-        [HttpDelete]
-        [Route("internal/{id}")]
-        private async Task<IHttpActionResult> DeleteInternal(int id)
-        {
-            if (id == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
+        //[HttpDelete]
+        //[Route("internal/{id}")]
+        //private async Task<IHttpActionResult> DeleteInternal(int id)
+        //{
+        //    if (id == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Client ID required.");
+        //    }
 
-            try
-            {
-                await _clientService
-                    .DeleteAsync(id)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+        //    try
+        //    {
+        //        await _clientService
+        //            .DeleteAsync(id)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
 
-            return ApiOk();
-        }
+        //    return ApiOk();
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(string id)
-        {
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
-            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Client not found.");
-            }
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<IHttpActionResult> Delete(string id)
+        //{
+        //    if (String.IsNullOrEmpty(id))
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Client ID required.");
+        //    }
+        //    int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+        //    if (idFromDb == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Client not found.");
+        //    }
 
-            try
-            {
-                await _clientService
-                    .DeleteAsync(idFromDb)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+        //    try
+        //    {
+        //        await _clientService
+        //            .DeleteAsync(idFromDb)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
 
-            return ApiOk();
-        }
+        //    return ApiOk();
+        //}
 
         [HttpPatch]
         [Route("{id}/activate")]

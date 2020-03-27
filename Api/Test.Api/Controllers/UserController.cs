@@ -88,57 +88,57 @@ namespace TestApi.Controllers
             return ApiOk();
         }
 
-        [HttpDelete]
-        [Route("internal/{id}")]
-        private async Task<IHttpActionResult> Delete(int id)
-        {
-            if (id == 0)
-            {
-                ModelState.AddModelError(nameof(id), "User ID required.");
-            }
+        //[HttpDelete]
+        //[Route("internal/{id}")]
+        //private async Task<IHttpActionResult> Delete(int id)
+        //{
+        //    if (id == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "User ID required.");
+        //    }
 
-            try
-            {
-                await _userService
-                    .DeleteAsync(id)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+        //    try
+        //    {
+        //        await _userService
+        //            .DeleteAsync(id)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
 
-            return ApiOk();
-        }
+        //    return ApiOk();
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(string id)
-        {
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "User ID required.");
-            }
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<IHttpActionResult> Delete(string id)
+        //{
+        //    if (String.IsNullOrEmpty(id))
+        //    {
+        //        ModelState.AddModelError(nameof(id), "User ID required.");
+        //    }
 
-            int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "User not found.");
-            }
+        //    int idFromDb = DB.user.Where(user => user.partner_api_id.Equals(id)).Select(user => user.id).FirstOrDefault();
+        //    if (idFromDb == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "User not found.");
+        //    }
 
-            try
-            {
-                await _userService
-                    .DeleteAsync(idFromDb)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+        //    try
+        //    {
+        //        await _userService
+        //            .DeleteAsync(idFromDb)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
 
-            return ApiOk();
-        }
+        //    return ApiOk();
+        //}
 
         [HttpGet]
         [Route("{id}/unreadCounters")]
