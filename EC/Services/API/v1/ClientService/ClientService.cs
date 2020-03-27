@@ -28,12 +28,12 @@ namespace EC.Services.API.v1.ClientService
             return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
         }
 
-        public async Task<ClientModel> GetClientById(int id)
+        public async Task<ClientModel> GetClientById(string id)
         {
-            var client = await _appContext.client.FindAsync(id);
+            var client = await _appContext.client.FirstOrDefaultAsync(c => c.partner_api_id == id);
             if (client != null)
             {
-                var globalSettings = await _appContext.global_settings.FirstOrDefaultAsync(g => g.client_id == id);
+                var globalSettings = await _appContext.global_settings.FirstOrDefaultAsync(g => g.client_id == client.id);
                 return new ClientModel()
                 {
                     clientName = client.client_nm,

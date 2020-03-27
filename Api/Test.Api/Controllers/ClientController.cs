@@ -35,9 +35,9 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(ClientModel))]
-        public async Task<IHttpActionResult> GetClient(int id)
+        public async Task<IHttpActionResult> GetClient(string id)
         {
-            if (id <= 0)
+            if (string.IsNullOrEmpty(id))
                 return ApiBadRequest(ModelState);
 
             var client = await _clientService.GetClientById(id);

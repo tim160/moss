@@ -312,9 +312,12 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(CompanyModel))]
-        public async Task<IHttpActionResult> GetCompany(int id)
+        public async Task<IHttpActionResult> GetCompany(string id)
         {
-            var result = await DB.company.FirstOrDefaultAsync(u => u.id == id);
+      // to do - check how it is done in client and do in the same way
+            if (string.IsNullOrEmpty(id))
+              return ApiBadRequest(ModelState);
+            var result = await DB.company.FirstOrDefaultAsync(u => u.partner_api_id == id);
 
             if (result != null)
                 return ApiOk(result);

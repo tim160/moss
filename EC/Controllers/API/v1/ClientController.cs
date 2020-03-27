@@ -100,13 +100,18 @@ namespace EC.Controllers.API.v1
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
+        public async Task<IHttpActionResult> Update(string id, UpdateClientModel updateClientModel)
         {
-            if (updateClientModel == null)
-                ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
+          if (string.IsNullOrEmpty(id))
+            ModelState.AddModelError(nameof(id), "Client ID required.");
 
-            if (id == 0)
-                ModelState.AddModelError(nameof(id), "Client ID required.");
+           int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+           if (idFromDb == 0)
+           {
+               ModelState.AddModelError(nameof(id), "Client not found.");
+           }
+           if (updateClientModel == null)
+             ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
 
             if (!ModelState.IsValid)
                 return ApiBadRequest(ModelState);
@@ -114,7 +119,7 @@ namespace EC.Controllers.API.v1
             try
             {
                 await _clientService
-                    .UpdateAsync(updateClientModel, id)
+                    .UpdateAsync(updateClientModel, idFromDb)
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)
