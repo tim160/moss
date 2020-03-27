@@ -34,23 +34,24 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(ClientModel))]
-        public async Task<IHttpActionResult> GetClient()
+        public async Task<IHttpActionResult> GetClient(int id)
         {
-
-            if (!ModelState.IsValid)
-            {
+            if (id <= 0)
                 return ApiBadRequest(ModelState);
+
+            var client = await _clientService.GetClientById(id);
+            if (client != null)
+            {
+                var clientViewModel = new ClientViewModel()
+                {
+                    Total = 1,
+                    Items = new List<ClientModel>() {client}
+                };
+                return ApiOk(clientViewModel);
+
             }
 
-            PagedList<ClientModel> result = await _clientService
-                .GetPagedAsync(1, 1)
-                .ConfigureAwait(false);
-
-            result.Items.ForEach(entity =>
-            {
-                entity.globalSettings = _globalSettingsService.getByClientId(entity.id);
-            });
-            return ApiOk(result);
+            return ApiNotFound();
         }
 
         [HttpPost]

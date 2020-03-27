@@ -1539,7 +1539,9 @@
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Models\AnalyticsModel.cs" />
+    <Compile Include="Models\API\v1\Client\ClientAnalyticsModels.cs" />
     <Compile Include="Models\API\v1\Client\ClientModel.cs" />
+    <Compile Include="Models\API\v1\Client\ClientViewModel.cs" />
     <Compile Include="Models\API\v1\Client\CreateClientModel.cs" />
     <Compile Include="Models\API\v1\Client\UpdateClientModel.cs" />
     <Compile Include="Models\API\v1\Company\UpdateCompanyModel.cs" />

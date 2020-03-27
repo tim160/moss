@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
+using EC.Models.API.v1.GlobalSettings;
 using EC.Services.API.v1.CompanyServices;
 
 namespace EC.Services.API.v1.ClientService
@@ -25,6 +26,28 @@ namespace EC.Services.API.v1.ClientService
         public Task<PagedList<ClientModel>> GetPagedAsync(int page, int pageSize, Expression<Func<client, bool>> filter = null)
         {
             return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
+        }
+
+        public async Task<ClientModel> GetClientById(int id)
+        {
+            var client = await _appContext.client.FindAsync(id);
+            if (client != null)
+            {
+                var globalSettings = await _appContext.global_settings.FirstOrDefaultAsync(g => g.client_id == id);
+                return new ClientModel()
+                {
+                    clientName = client.client_nm,
+                    partnerClientId = client.partner_api_id,
+                    globalSettings = new GlobalSettingsModel()
+                    {
+                        customLogoPath = globalSettings?.custom_logo_path,
+                        headerColorCode = globalSettings?.header_color_code,
+                        headerLinksColorCode = globalSettings?.header_links_color_code
+                    }
+                };
+            }
+
+            return null;
         }
 
         public async Task<client> CreateAsync(CreateClientModel createClientModel)
@@ -176,30 +199,5 @@ namespace EC.Services.API.v1.ClientService
 
             return result;
         }
-    }
-
-    //TODO: Move to common area
-    public class ClientCompanyDepartmentAggregateData
-    {
-        public string CompanyName { get; set; }
-        public List<AggregateData> DepartmentTable { get; set; }
-    }
-
-    public class ClientCompanyLocationAggregateData
-    {
-        public string CompanyName { get; set; }
-        public List<AggregateData> LocationTable { get; set; }
-    }
-
-    public class ClientCompanyIncidentAggregateData
-    {
-        public string CompanyName { get; set; }
-        public List<AggregateData> SecondaryTypeTable { get; set; }
-    }
-
-    public class ClientCompanyReporterTypeAggregateData
-    {
-        public string CompanyName { get; set; }
-        public List<AggregateData> RelationTable { get; set; }
     }
 }
