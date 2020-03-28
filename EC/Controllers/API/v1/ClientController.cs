@@ -130,7 +130,7 @@ namespace EC.Controllers.API.v1
             try
             {
                 await _globalSettingsService
-                    .UpdateAsync(updateClientModel.GlobalSettings, id)
+                    .UpdateAsync(updateClientModel.GlobalSettings, Int32.Parse(id))
                     .ConfigureAwait(false);
             }
             catch (NotFoundException exception)
