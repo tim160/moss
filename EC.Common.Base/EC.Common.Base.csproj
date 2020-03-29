@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncHelper.cs" />
     <Compile Include="Calculations.cs" />
     <Compile Include="DebugUtils.cs" />
     <Compile Include="Extensions.cs" />
