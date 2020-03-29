@@ -132,16 +132,45 @@ namespace TestApi.Controllers
         return ApiNotFound("Client not found.");
       }
 
+
       try
       {
-        await _clientService
-            .UpdateAsync(updateClientModel, idFromDb)
-            .ConfigureAwait(false);
+        var client = DB.client.FirstOrDefault(c => c.id == idFromDb);
+        var globalSettings = DB.global_settings.FirstOrDefault(gs => gs.client_id == idFromDb);
+
+        if (client != null)
+        {
+          client.client_nm = updateClientModel.ClientName;
+          // do not update this field, it is their id
+    //      client.partner_api_id = updateClientModel.PartnerClientId;
+          globalSettings.custom_logo_path = updateClientModel.GlobalSettings.CustomLogoPath;
+          globalSettings.header_color_code = updateClientModel.GlobalSettings.HeaderColorCode;
+          globalSettings.header_links_color_code = updateClientModel.GlobalSettings.HeaderLinksColorCode;
+
+          await DB.SaveChangesAsync();
+
+
+          return ApiOk();
+        }
+
+        return ApiNotFound();
+
       }
       catch (NotFoundException exception)
       {
         return ApiNotFound(exception.Message);
       }
+              ///
+              ////try
+              ////{
+              ////  await _clientService
+              ////      .UpdateAsync(updateClientModel, idFromDb)
+              ////      .ConfigureAwait(false);
+              ////}
+              ////catch (NotFoundException exception)
+              ////{
+              ////  return ApiNotFound(exception.Message);
+              ////}
 
       try
       {

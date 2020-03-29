@@ -8,6 +8,8 @@ using System.Web.Http.Description;
 using EC.Errors.CommonExceptions;
 using EC.Models.API.v1.User;
 using EC.Services.API.v1.UserService;
+using EC.Services.API.v1.CompanyServices;
+
 using TestApi.Utils;
 using EC.Constants;
 
@@ -18,13 +20,18 @@ namespace TestApi.Controllers
     public class UserController : BaseApiController
     {
         private readonly UserService _userService;
+        private readonly CompanyService _companyService;
 
-        public UserController()
-        {
+
+
+    public UserController()
+    {
             _userService = new UserService();
-        }
+          _companyService = new CompanyService();
 
-        [HttpGet]
+    }
+
+    [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(UserModel))]
         public async Task<IHttpActionResult> GetUser(string id)
@@ -87,29 +94,69 @@ namespace TestApi.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IHttpActionResult> Update(int id, UpdateUserModel updateUserModel)
+        public async Task<IHttpActionResult> Update(string id, UpdateUserModel updateUserModel)
         {
             if (updateUserModel == null)
                 ModelState.AddModelError(nameof(updateUserModel), "User data required.");
 
-            if (id == 0)
+            if (id.Length == 0)
                 ModelState.AddModelError(nameof(id), "User ID required.");
 
             if (!ModelState.IsValid)
                 return ApiBadRequest(ModelState);
 
-            try
+            var idFromDb = await _userService.GetInternalIDfromExternal(id);
+            var idCompanyFromDb = await _companyService.GetInternalIDfromExternal(updateUserModel.PartnerCompanyId);
+
+            if (idFromDb == 0)
             {
-                await _userService
-                    .UpdateAsync(updateUserModel, id)
-                    .ConfigureAwait(false);
+              return ApiNotFound("User not found.");
             }
-            catch (NotFoundException exception)
+            if (idCompanyFromDb == 0)
             {
-                return ApiNotFound(exception.Message);
+              return ApiNotFound("Company not found.");
             }
 
-            return ApiOk();
+      try
+      {
+        var user = DB.user.FirstOrDefault(c => c.id == idFromDb);
+
+
+        if (user != null)
+        {
+          user.email = updateUserModel.Email;
+          //user.depar = updateUserModel.Department;
+          user.first_nm = updateUserModel.FirstName;
+          user.last_nm = updateUserModel.LastName;
+          user.photo_path = updateUserModel.PhotoPath;
+          user.title_ds = updateUserModel.Title;
+          user.company_id = idCompanyFromDb;
+
+ 
+
+
+          await DB.SaveChangesAsync();
+
+
+          return ApiOk();
+        }
+      }
+      catch (NotFoundException exception)
+      { return ApiNotFound(exception.Message); }
+
+
+      ////try
+      ////{
+      ////    await _userService
+      ////        .UpdateAsync(updateUserModel, id)
+      ////        .ConfigureAwait(false);
+      ////}
+      ////catch (NotFoundException exception)
+      ////{
+      ////    return ApiNotFound(exception.Message);
+      ////}
+
+      return ApiOk();
         }
 
         //[HttpDelete]

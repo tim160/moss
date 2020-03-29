@@ -279,23 +279,55 @@ namespace TestApi.Controllers
               return ApiBadRequest(ModelState);
 
             var idFromDb = await _companyService.GetInternalIDfromExternal(id);
+            var idClientFromDb = await _clientService.GetInternalIDfromExternal(updateCompanyModel.PartnerClientId);
+
             if (idFromDb == 0)
             {
               return ApiNotFound("Company not found.");
             }
-
-            try
+            if (idClientFromDb == 0)
             {
-                await _companyService
-                    .UpdateAsync(updateCompanyModel, idFromDb)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
+              return ApiNotFound("Client not found.");
             }
 
-            return ApiOk();
+      try
+      {
+        var company = DB.company.FirstOrDefault(c => c.id == idFromDb);
+
+
+        if (company != null)
+        {
+          company.company_nm = updateCompanyModel.CompanyName;
+          //   company.partner_api_id = updateCompanyModel.PartnerCompanyId;  
+          company.client_id = idClientFromDb;
+          company.employee_quantity = updateCompanyModel.EmployeeQuantity;
+          company.path_en = updateCompanyModel.CustomLogoPath;
+          /// company.opt = updateCompanyModel.OptinCaseAnalytics;
+
+
+          await DB.SaveChangesAsync();
+
+
+          return ApiOk();
+        }
+      }
+      catch (NotFoundException exception)
+      { return ApiNotFound(exception.Message); }
+        ////   
+        ////}
+
+        ////try
+        ////{
+        ////    await _companyService
+        ////        .UpdateAsync(updateCompanyModel, idFromDb)
+        ////        .ConfigureAwait(false);
+        ////}
+        ////catch (NotFoundException exception)
+        ////{
+        ////    return ApiNotFound(exception.Message);
+        ////}
+
+        return ApiOk();
         }
 
         [HttpPost]
