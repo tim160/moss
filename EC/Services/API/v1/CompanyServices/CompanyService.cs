@@ -15,11 +15,26 @@ using EC.Models.API.v1.Company;
 using EC.Models.Database;
 using static EC.Constants.LanguageConstants;
 
+
 namespace EC.Services.API.v1.CompanyServices
 {
     public class CompanyService : ServiceBase<company>
 	{
-		public Task<PagedList<CompanyModel>> GetPagedAsync(
+
+    public async Task<int> GetInternalIDfromExternal(string id)
+    {
+      int idFromDb = 0;
+      var companies = await _appContext.company.ToListAsync();
+      var _companies = companies.Where(c => c.partner_api_id == id).ToList();
+      if (_companies.Count() > 0)
+        idFromDb = _companies[0].id;
+
+      return idFromDb;
+    }
+
+
+
+    public Task<PagedList<CompanyModel>> GetPagedAsync(
 			int page,
 			int pageSize,
 			Expression<Func<company, bool>> filter = null)
@@ -28,7 +43,54 @@ namespace EC.Services.API.v1.CompanyServices
 		}
 
 
-        public async Task<company> CreateAsync(CreateCompanyModel createCompanyModel, bool isCc)
+
+    public async Task<CompanyModel> GetCompanyById(int id)
+    {
+
+      var company = await _appContext.company.FindAsync(id);
+      if (company != null)
+      {
+ 
+        return new CompanyModel()
+        {
+          companyName = company.company_nm,
+      //    partnerClientID = company.partner_api_id, todo - get client.partner_api_id
+
+          partnerCompanyID = company.partner_api_id,
+          employeeQuantity = company.employee_quantity,
+          customLogoPath = company.path_en
+        };
+      }
+
+      return null;
+    }
+
+
+    public async Task<List<CompanyModel>> GetCompaniesByClientId(int id, string originalId)
+    {
+
+      var allCompanies = await _appContext.company.ToListAsync();
+      var _companies = allCompanies.Where(c => c.client_id == id).ToList();
+
+      var companyModel = _companies.Select(item => new CompanyModel()
+        {
+          companyName = item.company_nm,
+          //    partnerClientID = company.partner_api_id, todo - get client.partner_api_id
+
+          partnerCompanyID = item.partner_api_id,
+          employeeQuantity = item.employee_quantity,
+          customLogoPath = item.path_en,
+          partnerClientID = originalId
+ 
+        }).ToList();
+ 
+
+      return companyModel;
+    }
+
+
+
+    public async Task<company> CreateAsync(CreateCompanyModel createCompanyModel, bool isCc, int client_id)
 		{
             List<Exception> errors = await CheckCreateCompanyForErrors(createCompanyModel, isCc);
 
@@ -36,6 +98,7 @@ namespace EC.Services.API.v1.CompanyServices
                 throw new AggregateException(errors);
 
             company newCompany = GetCompaniesFromCreatedModel(createCompanyModel);
+            newCompany.client_id = client_id;
 
             _appContext.company.Add(newCompany);
 
@@ -92,193 +155,195 @@ namespace EC.Services.API.v1.CompanyServices
             return client.id;
         }
 
-        private async Task<List<Exception>> CheckCreateCompanyForErrors(CreateCompanyModel data, bool isCc)
-        {
-            List<Exception> errors = new List<Exception>();
+        #region Analytics
+    private async Task<List<Exception>> CheckCreateCompanyForErrors(CreateCompanyModel data, bool isCc)
+    {
+      List<Exception> errors = new List<Exception>();
 
-            var generateRecordsModel = new Models.GenerateRecordsModel();
-            var companiesInDb = await _appContext.company.ToListAsync();
-            IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
-            string messageCompanyInUse = LocalizationGetter.GetString("CompanyInUse", isCc);
-           
-            if (generateRecordsModel.isCompanyInUse(data.CompanyName))
-                errors.Add(new AlreadyExistsException(messageCompanyInUse, data.CompanyName));
+      var generateRecordsModel = new Models.GenerateRecordsModel();
+      var companiesInDb = await _appContext.company.ToListAsync();
+      IEmailAddressHelper emailAddressHelper = new EmailAddressHelper();
+      string messageCompanyInUse = LocalizationGetter.GetString("CompanyInUse", isCc);
 
-            string shortName = await generateRecordsModel.GenerateUnusedCompanyShortName(StringUtil.ShortString(data.CompanyName));
-            if (string.IsNullOrWhiteSpace(shortName))
-                errors.Add(new AlreadyExistsException(messageCompanyInUse, data.CompanyName));
+      if (generateRecordsModel.isCompanyInUse(data.CompanyName))
+        errors.Add(new AlreadyExistsException(messageCompanyInUse, data.CompanyName));
 
-            if (!string.IsNullOrEmpty(data.PartnerCompanyId))
-            {
-                var partnerInternal = companiesInDb
-                    .FirstOrDefault(user => user.partner_api_id != null && user.partner_api_id.Equals(data.PartnerCompanyId));
-                if (partnerInternal != null)
-                    errors.Add(new Exception($"PartnerInternalID = {data.PartnerCompanyId} already exists"));
-            }
-            
-            return errors;
-        }
+      string shortName = await generateRecordsModel.GenerateUnusedCompanyShortName(StringUtil.ShortString(data.CompanyName));
+      if (string.IsNullOrWhiteSpace(shortName))
+        errors.Add(new AlreadyExistsException(messageCompanyInUse, data.CompanyName));
 
-        public async Task<List<AggregateData>> GetCompanyLocationsAnalytics(int id, string startDate, string endDate)
-        {
-            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
-                startDateTime = DateTime.MinValue;
+      if (!string.IsNullOrEmpty(data.PartnerCompanyId))
+      {
+        var partnerInternal = companiesInDb
+            .FirstOrDefault(user => user.partner_api_id != null && user.partner_api_id.Equals(data.PartnerCompanyId));
+        if (partnerInternal != null)
+          errors.Add(new Exception($"PartnerInternalID = {data.PartnerCompanyId} already exists"));
+      }
 
-            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
-                endDateTime = DateTime.MaxValue;
+      return errors;
+    }
 
-            var allReportsQuery = _appContext.report.Where(r =>
-                r.location_id != null && r.company_id == id && r.reported_dt > startDateTime &&
-                r.reported_dt < endDateTime);
+    public async Task<List<AggregateData>> GetCompanyLocationsAnalytics(int id, string startDate, string endDate)
+    {
+      if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+        startDateTime = DateTime.MinValue;
 
-            var allReportsCount = await allReportsQuery.CountAsync();
+      if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+        endDateTime = DateTime.MaxValue;
 
-            var locationsAnalytics = await allReportsQuery
-                .Join(_appContext.company_location,
-                    r => r.location_id,
-                    cl => cl.id,
-                    (r, cl) => new
-                    {
-                        Name = cl.location_en
-                    })
-                .GroupBy(g => g.Name).Select(g => new AggregateData
-                {
-                    Name = g.Key,
-                    Quantity = g.Count(),
-                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
-                }).AsNoTracking().ToListAsync();
+      var allReportsQuery = _appContext.report.Where(r =>
+          r.location_id != null && r.company_id == id && r.reported_dt > startDateTime &&
+          r.reported_dt < endDateTime);
 
-            locationsAnalytics.ForEach(l => l.Percentage = decimal.Parse(l.Percentage.ToString("0.00")) );
+      var allReportsCount = await allReportsQuery.CountAsync();
 
-            return locationsAnalytics;
-        }
+      var locationsAnalytics = await allReportsQuery
+          .Join(_appContext.company_location,
+              r => r.location_id,
+              cl => cl.id,
+              (r, cl) => new
+              {
+                Name = cl.location_en
+              })
+          .GroupBy(g => g.Name).Select(g => new AggregateData
+          {
+            Name = g.Key,
+            Quantity = g.Count(),
+            Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+          }).AsNoTracking().ToListAsync();
 
-        public async Task<List<AggregateData>> GetCompanyDepartmentsAnalytics(int id, string startDate, string endDate)
-        {
-            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
-                startDateTime = DateTime.MinValue;
+      locationsAnalytics.ForEach(l => l.Percentage = decimal.Parse(l.Percentage.ToString("0.00")));
 
-            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
-                endDateTime = DateTime.MaxValue;
+      return locationsAnalytics;
+    }
 
-            var departmentsAnalyticsQuery = _appContext.report_department
-                .Join(_appContext.company_department.Where(cd => cd.company_id == id),
-                    rd => rd.department_id,
-                    cd => cd.id,
-                    (rd, cd) => new
-                    {
-                        rd.report_id,
-                        Name = cd.department_en
-                    })
-                .Join(
-                    _appContext.report.Where(r =>
-                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
-                    rd => rd.report_id,
-                    r => r.id,
-                    (rd, r) => new
-                    {
-                        rd.Name
-                    });
+    public async Task<List<AggregateData>> GetCompanyDepartmentsAnalytics(int id, string startDate, string endDate)
+    {
+      if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+        startDateTime = DateTime.MinValue;
 
-            var allReportsCount = await departmentsAnalyticsQuery.CountAsync();
+      if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+        endDateTime = DateTime.MaxValue;
 
-            var departmentsAnalytics = await departmentsAnalyticsQuery
-                .GroupBy(g => g.Name).Select(g => new AggregateData
-                {
-                    Name = g.Key,
-                    Quantity = g.Count(),
-                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
-                }).AsNoTracking().ToListAsync();
+      var departmentsAnalyticsQuery = _appContext.report_department
+          .Join(_appContext.company_department.Where(cd => cd.company_id == id),
+              rd => rd.department_id,
+              cd => cd.id,
+              (rd, cd) => new
+              {
+                rd.report_id,
+                Name = cd.department_en
+              })
+          .Join(
+              _appContext.report.Where(r =>
+                  r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+              rd => rd.report_id,
+              r => r.id,
+              (rd, r) => new
+              {
+                rd.Name
+              });
 
-            departmentsAnalytics = FormatPercentage(departmentsAnalytics);
+      var allReportsCount = await departmentsAnalyticsQuery.CountAsync();
 
-            return departmentsAnalytics;
-        }
+      var departmentsAnalytics = await departmentsAnalyticsQuery
+          .GroupBy(g => g.Name).Select(g => new AggregateData
+          {
+            Name = g.Key,
+            Quantity = g.Count(),
+            Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+          }).AsNoTracking().ToListAsync();
 
-        public async Task<List<AggregateData>> GetCompanyIncidentsAnalytics(int id, string startDate, string endDate)
-        {
-            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
-                startDateTime = DateTime.MinValue;
+      departmentsAnalytics = FormatPercentage(departmentsAnalytics);
 
-            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
-                endDateTime = DateTime.MaxValue;
+      return departmentsAnalytics;
+    }
 
-            var incidentsAnalyticsQuery = _appContext.report_secondary_type
-                .Join(_appContext.company_secondary_type.Where(cd => cd.company_id == id),
-                    rs => rs.secondary_type_id,
-                    cst => cst.id,
-                    (rs, cst) => new
-                    {
-                        rs.report_id,
-                        Name = cst.secondary_type_en
-                    })
-                .Join(
-                    _appContext.report.Where(r =>
-                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
-                    rd => rd.report_id,
-                    r => r.id,
-                    (rd, r) => new
-                    {
-                        rd.Name
-                    });
+    public async Task<List<AggregateData>> GetCompanyIncidentsAnalytics(int id, string startDate, string endDate)
+    {
+      if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+        startDateTime = DateTime.MinValue;
 
-            var allReportsCount = await incidentsAnalyticsQuery.CountAsync();
+      if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+        endDateTime = DateTime.MaxValue;
 
-            var incidentsAnalytics = await incidentsAnalyticsQuery
-                .GroupBy(g => g.Name).Select(g => new AggregateData
-                {
-                    Name = g.Key,
-                    Quantity = g.Count(),
-                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
-                }).AsNoTracking().ToListAsync();
+      var incidentsAnalyticsQuery = _appContext.report_secondary_type
+          .Join(_appContext.company_secondary_type.Where(cd => cd.company_id == id),
+              rs => rs.secondary_type_id,
+              cst => cst.id,
+              (rs, cst) => new
+              {
+                rs.report_id,
+                Name = cst.secondary_type_en
+              })
+          .Join(
+              _appContext.report.Where(r =>
+                  r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+              rd => rd.report_id,
+              r => r.id,
+              (rd, r) => new
+              {
+                rd.Name
+              });
 
-            incidentsAnalytics = FormatPercentage(incidentsAnalytics);
+      var allReportsCount = await incidentsAnalyticsQuery.CountAsync();
 
-            return incidentsAnalytics;
-        }
+      var incidentsAnalytics = await incidentsAnalyticsQuery
+          .GroupBy(g => g.Name).Select(g => new AggregateData
+          {
+            Name = g.Key,
+            Quantity = g.Count(),
+            Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+          }).AsNoTracking().ToListAsync();
 
-        public async Task<List<AggregateData>> GetCompanyReporterTypeAnalytics(int id, string startDate, string endDate)
-        {
-            if (!DateTime.TryParse(startDate, out DateTime startDateTime))
-                startDateTime = DateTime.MinValue;
+      incidentsAnalytics = FormatPercentage(incidentsAnalytics);
 
-            if (!DateTime.TryParse(endDate, out DateTime endDateTime))
-                endDateTime = DateTime.MaxValue;
+      return incidentsAnalytics;
+    }
 
-            var reporterTypesAnalyticsQuery = _appContext.report_relationship
-                .Join(_appContext.company_relationship.Where(cd => cd.company_id == id),
-                    rr => rr.company_relationship_id,
-                    cr => cr.id,
-                    (rr, cr) => new
-                    {
-                        rr.report_id,
-                        Name = cr.relationship_en
-                    })
-                .Join(
-                    _appContext.report.Where(r =>
-                        r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
-                    rd => rd.report_id,
-                    r => r.id,
-                    (rd, r) => new
-                    {
-                        rd.Name
-                    });
+    public async Task<List<AggregateData>> GetCompanyReporterTypeAnalytics(int id, string startDate, string endDate)
+    {
+      if (!DateTime.TryParse(startDate, out DateTime startDateTime))
+        startDateTime = DateTime.MinValue;
 
-            var allReportsCount = await reporterTypesAnalyticsQuery.CountAsync();
+      if (!DateTime.TryParse(endDate, out DateTime endDateTime))
+        endDateTime = DateTime.MaxValue;
 
-            var reporterTypesAnalytics = await reporterTypesAnalyticsQuery
-                .GroupBy(g => g.Name).Select(g => new AggregateData
-                {
-                    Name = g.Key,
-                    Quantity = g.Count(),
-                    Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
-                }).AsNoTracking().ToListAsync();
+      var reporterTypesAnalyticsQuery = _appContext.report_relationship
+          .Join(_appContext.company_relationship.Where(cd => cd.company_id == id),
+              rr => rr.company_relationship_id,
+              cr => cr.id,
+              (rr, cr) => new
+              {
+                rr.report_id,
+                Name = cr.relationship_en
+              })
+          .Join(
+              _appContext.report.Where(r =>
+                  r.company_id == id && r.reported_dt > startDateTime && r.reported_dt < endDateTime),
+              rd => rd.report_id,
+              r => r.id,
+              (rd, r) => new
+              {
+                rd.Name
+              });
 
-            reporterTypesAnalytics = FormatPercentage(reporterTypesAnalytics);
+      var allReportsCount = await reporterTypesAnalyticsQuery.CountAsync();
 
-            return reporterTypesAnalytics;
-        }
+      var reporterTypesAnalytics = await reporterTypesAnalyticsQuery
+          .GroupBy(g => g.Name).Select(g => new AggregateData
+          {
+            Name = g.Key,
+            Quantity = g.Count(),
+            Percentage = allReportsCount != 0 ? ((decimal)g.Count() / allReportsCount * 100) : 0
+          }).AsNoTracking().ToListAsync();
 
+      reporterTypesAnalytics = FormatPercentage(reporterTypesAnalytics);
+
+      return reporterTypesAnalytics;
+    }
+
+    #endregion
         private List<AggregateData> FormatPercentage(List<AggregateData> data)
         {
             data.ForEach(d => d.Percentage = decimal.Parse(d.Percentage.ToString("0.00")));
@@ -288,6 +353,10 @@ namespace EC.Services.API.v1.CompanyServices
 
         private company GetCompaniesFromCreatedModel(CreateCompanyModel createCompanyModels)
         {
+            EC.Models.GenerateRecordsModel generateModel = new EC.Models.GenerateRecordsModel();
+            string companyCode = generateModel.GenerateCompanyCode(createCompanyModels.CompanyName);
+            string shortName = AsyncHelper.RunSync<string>(() => generateModel.GenerateUnusedCompanyShortName(StringUtil.ShortString(createCompanyModels.CompanyName)));
+ 
             return new company()
             {
                 //PartnerClientId
@@ -298,45 +367,72 @@ namespace EC.Services.API.v1.CompanyServices
                 address_id = 1,
                 employee_quantity = createCompanyModels.EmployeeQuantity.ToString(),
                 registration_dt = DateTime.Now,
-                last_update_dt = DateTime.Now
+                last_update_dt = DateTime.Now,
+                status_id = ECStatusConstants.Active_Value,
+                language_id = 1,
+                guid = Guid.NewGuid(),
+                implicated_title_name_id = 1,
+                witness_show_id = 1,
+                show_location_id = 1,
+                show_department_id = 1,
+                default_anonymity_id = 1,
+                time_zone_id = 8,
+                step1_delay = 2,
+                step1_postpone = 2,
+                step2_delay = 2,
+                step2_postpone = 2,
+                step3_delay = 14,
+                step3_postpone = 2,
+                step4_delay = 5,
+                step4_postpone = 2,
+                step5_delay = 7,
+                step5_postpone = 2,
+                step6_delay = 7,
+                step6_postpone = 2,
+                subdomain = "thinkhr",
+                company_code = companyCode,
+                company_short_name = shortName
+
             };
         }
     }
 
-    //TODO: move to common area
-    public class ReportForEntity
-    {
-        public int Id { get; set; }
+      #region Classes
+  //TODO: move to common area
+  public class ReportForEntity
+  {
+    public int Id { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public int ReportsCount { get; set; }
-    }
+    public int ReportsCount { get; set; }
+  }
 
-    public class AggregateData
-    {
-        public string Name { get; set; }
-        public int Quantity { get; set; }
-        public decimal Percentage { get; set; }
-    }
+  public class AggregateData
+  {
+    public string Name { get; set; }
+    public int Quantity { get; set; }
+    public decimal Percentage { get; set; }
+  }
 
-    public class LocationAnalyticViewModel
-    {
-        public List<AggregateData> LocationTable { get; set; }
-    }
+  public class LocationAnalyticViewModel
+  {
+    public List<AggregateData> LocationTable { get; set; }
+  }
 
-    public class DepartmentAnalyticViewModel
-    {
-        public List<AggregateData> DepartmentTable { get; set; }
-    }
+  public class DepartmentAnalyticViewModel
+  {
+    public List<AggregateData> DepartmentTable { get; set; }
+  }
 
-    public class IncidentAnalyticViewModel
-    {
-        public List<AggregateData> SecondaryTypeTable { get; set; }
-    }
+  public class IncidentAnalyticViewModel
+  {
+    public List<AggregateData> SecondaryTypeTable { get; set; }
+  }
 
-    public class ReporterTypeAnalyticViewModel
-    {
-        public List<AggregateData> RelationTable { get; set; }
-    }
+  public class ReporterTypeAnalyticViewModel
+  {
+    public List<AggregateData> RelationTable { get; set; }
+  } 
+  #endregion
 }

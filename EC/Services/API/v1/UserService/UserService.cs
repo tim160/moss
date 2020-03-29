@@ -1,6 +1,5 @@
 ﻿using EC.Common.Base;
 using EC.Constants;
-using EC.Models;
 using EC.Models.API.v1.User;
 using EC.Models.Database;
 using EC.Utils;
@@ -14,11 +13,51 @@ using System.Threading.Tasks;
 using EC.Model.Impl;
 using log4net;
 
+
 namespace EC.Services.API.v1.UserService
 {
     public class UserService : ServiceBase<user>
     {
-        public Task<PagedList<EC.Models.API.v1.User.UserModel>> GetPagedAsync(int page, int pageSize, Expression<Func<user, bool>> filter = null)
+
+        public async Task<int> GetInternalIDfromExternal(string id)
+        {
+          int idFromDb = 0;
+          var users = await _appContext.user.ToListAsync();
+          var _users = users.Where(c => c.partner_api_id == id).ToList();
+          if (_users.Count() > 0)
+            idFromDb = _users[0].id;
+
+          return idFromDb;
+        }
+
+    public async Task<UserModel> GetUserById(int id)
+    {
+
+      var user = await _appContext.user.FindAsync(id);
+      if (user != null)
+      {
+
+        return new EC.Models.API.v1.User.UserModel()
+        {
+          partnerUserID = user.partner_api_id,
+
+
+          // partnerCompanyID = user.partner_api_id, to do
+          firstName = user.first_nm,
+          lastName = user.last_nm,
+          email = user.email,
+          photoPath = user.photo_path,
+         
+
+      };
+      }
+
+      return null;
+    }
+
+
+
+    public Task<PagedList<EC.Models.API.v1.User.UserModel>> GetPagedAsync(int page, int pageSize, Expression<Func<user, bool>> filter = null)
         {
             return GetPagedAsync<string, EC.Models.API.v1.User.UserModel>(page, pageSize, filter, null);
         }
@@ -31,6 +70,8 @@ namespace EC.Services.API.v1.UserService
                 throw new AggregateException(errors);
 
             var users = GetUsersFromCreatedModel(createUserModels);
+
+
 
             _appContext.user.AddRange(users);
             
@@ -101,11 +142,19 @@ namespace EC.Services.API.v1.UserService
         {
             List<user> users = new List<user>();
 
+            var allCompanies = _appContext.company.ToList();
+ 
+
             foreach (var userToCreate in createUserModels)
             {
-                var generateModel = new GenerateRecordsModel();
+                var generateModel = new Models.GenerateRecordsModel();
                 string login = generateModel.GenerateLoginName(userToCreate.FirstName, userToCreate.LastName);
                 string pass = generateModel.GeneretedPassword().Trim();
+
+                int idFromDb = 0;
+                var _companies = allCompanies.Where(c => c.partner_api_id == userToCreate.PartnerCompanyId).ToList();
+                if (_companies.Count() > 0)
+                  idFromDb = _companies[0].id;
 
                 users.Add(new user()
                 {
@@ -118,9 +167,10 @@ namespace EC.Services.API.v1.UserService
                     is_api = true,
                     api_source_id = null,
                     partner_api_id = userToCreate.PartnerUserId,
-                    company_id = Int32.TryParse(userToCreate.PartnerCompanyId, out int compId)? compId: 0,
+                    company_id = idFromDb,
                     answer_ds = string.Empty,
-                    question_ds = string.Empty
+                    question_ds = string.Empty,
+                    status_id = ECStatusConstants.Active_Value 
                 });
             }
 
@@ -149,8 +199,8 @@ namespace EC.Services.API.v1.UserService
                                 $"{currentCreatedUser.login_nm}",
                                 $"{sessionUser.password}");
                             string body = eb.Body;
-                            EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
-                            emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, currentCreatedUser.id, sessionUser.company_id, currentCreatedUser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                            var emailNotificationModel = new Models.EmailNotificationModel();
+      ///  will test later                    emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, currentCreatedUser.id, sessionUser.company_id, currentCreatedUser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
                         }
                     }
                 }
@@ -160,5 +210,40 @@ namespace EC.Services.API.v1.UserService
                 }
             }
         }
+
+
+    
+
+      public async Task<List<UserModel>> GetUsersByCompanyId(int id, string originalId)
+    {
+
+      var allUsers = await _appContext.user.ToListAsync();
+      var _users = allUsers.Where(u => u.company_id == id && new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id)).ToList();
+
+      var companyModel = _users.Select(item => new UserModel()
+      {
+        partnerUserID = item.partner_api_id,
+
+
+        partnerCompanyID = originalId,
+        firstName = item.first_nm,
+        lastName = item.last_nm,
+        email = item.email,
+        photoPath = item.photo_path,
+ 
+      }).ToList();
+
+
+      return companyModel;
     }
+  }
+
+      public class usersUnreadEntitiesNumberViewModel1
+      {
+        public int unreadNewReports { get; set; }
+
+        public int unreadMessages { get; set; }
+
+        public int unreadTasks { get; set; }
+      }
 }

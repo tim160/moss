@@ -27,12 +27,26 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(UserModel))]
-        public async Task<IHttpActionResult> GetUser(int id)
+        public async Task<IHttpActionResult> GetUser(string id)
         {
-            var result = await DB.user.FirstOrDefaultAsync(u => u.id == id);
 
-            if (result != null)
-                return ApiOk(result);
+          if (string.IsNullOrEmpty(id))
+            return ApiBadRequest(ModelState);
+
+          var idFromDb = await _userService.GetInternalIDfromExternal(id);
+          if (idFromDb == 0)
+          {
+            return ApiNotFound("User not found.");
+          }
+
+
+          //var result = await DB.user.FirstOrDefaultAsync(u => u.id == idFromDb);
+            var result = await _userService.GetUserById(idFromDb);
+      if (result != null)
+      {
+       // result.usersUnreadEntities = new TestApi.Controllers.usersUnreadEntitiesNumberViewModel { unreadMessages = 0, unreadNewReports = 0, unreadTasks = 0 }
+        return ApiOk(result);
+      }
 
             return ApiNotFound();
         }
@@ -49,7 +63,17 @@ namespace TestApi.Controllers
 
             try
             {
-                var createdUsers = await _userService
+
+              foreach (var t in createUserModel)
+              {
+                if (string.IsNullOrWhiteSpace(t.PartnerUserId))
+                  return ApiBadRequest("PartnerUserId required.");
+                if (string.IsNullOrWhiteSpace(t.PartnerCompanyId))
+                  return ApiBadRequest("PartnerCompanyId required.");
+              }
+
+
+              var createdUsers = await _userService
                     .CreateAsync(createUserModel)
                     .ConfigureAwait(false);
 
@@ -148,12 +172,17 @@ namespace TestApi.Controllers
             usersUnreadEntitiesNumberViewModel unread_entites = new usersUnreadEntitiesNumberViewModel();
             var statusModel = new EC.Models.ReadStatusModel();
             usersUnreadEntitiesNumberViewModel result = new usersUnreadEntitiesNumberViewModel();
-            ///  var statusModel = new Models.ReadStatusModel();
-            ///  result.Items.ForEach(entity =>
-            //    {
-            ///        entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
-            //   });
-            return ApiOk(result);
+      ///  var statusModel = new Models.ReadStatusModel();
+      ///  result.Items.ForEach(entity =>
+      //    {
+      ///        entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+      //   });
+
+      result.unreadMessages = 0;
+      result.unreadNewReports = 0;
+      result.unreadTasks = 0;
+
+      return ApiOk(result);
 
         }
 
@@ -207,7 +236,7 @@ namespace TestApi.Controllers
           return ApiNotFound();
         }
     }
-
+  // tp d0 - merge it with one in service/
     public class usersUnreadEntitiesNumberViewModel
     {
         public int unreadNewReports { get; set; }

@@ -12,6 +12,7 @@ using System.Web;
 using EC.Models.API.v1.GlobalSettings;
 using EC.Services.API.v1.CompanyServices;
 
+
 namespace EC.Services.API.v1.ClientService
 {
     public class ClientService : ServiceBase<client>
@@ -28,9 +29,21 @@ namespace EC.Services.API.v1.ClientService
             return GetPagedAsync<string, ClientModel>(page, pageSize, filter, null);
         }
 
-        public async Task<ClientModel> GetClientById(string id)
+        public async Task<int> GetInternalIDfromExternal(string id)
         {
-            var client = await _appContext.client.FirstOrDefaultAsync(c => c.partner_api_id == id);
+            int idFromDb = 0;
+            var clients = await _appContext.client.ToListAsync();
+            var _clients = clients.Where(c => c.partner_api_id == id).ToList();
+            if (_clients.Count() > 0)
+              idFromDb = _clients[0].id;
+
+            return idFromDb;
+        }
+
+        public async Task<ClientModel> GetClientById(int id)
+        {
+    
+            var client = await _appContext.client.FindAsync(id);
             if (client != null)
             {
                 var globalSettings = await _appContext.global_settings.FirstOrDefaultAsync(g => g.client_id == client.id);
@@ -127,7 +140,8 @@ namespace EC.Services.API.v1.ClientService
                 registration_dt = DateTime.Now,
                 is_api = true,
                 api_source_id = null,
-                partner_api_id = clientToCreate.PartnerClientId
+                partner_api_id = clientToCreate.PartnerClientId,
+                status_id = ECStatusConstants.Active_Value
             };
         }
 

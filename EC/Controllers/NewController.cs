@@ -394,7 +394,7 @@ namespace EC.Controllers
             _company.guid = Guid.NewGuid(); ;
 
             string url = Request.Url.AbsoluteUri.ToLower();
-            string _url = "registration";
+            string _url = "report";
             if (url.Contains("cai."))
                 _url = "cai";
             if (url.Contains("demo."))

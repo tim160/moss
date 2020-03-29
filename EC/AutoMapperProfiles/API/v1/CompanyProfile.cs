@@ -9,6 +9,9 @@ namespace EC.AutoMapperProfiles.API.v1
 		public CompanyProfile()
 		{
             CreateMap<CreateCompanyModel, company>()
+                 .ForMember(
+                    destinationMember => destinationMember.client_id,
+                    options => options.UseValue(1))
                 .ForMember(
                     destinationMember => destinationMember.address_id,
                     options => options.UseValue(1))
@@ -89,6 +92,8 @@ namespace EC.AutoMapperProfiles.API.v1
                     ;
             //CreateMap<CreateCompanyModel, company>();
 			CreateMap<UpdateCompanyModel, company>();
-		}
+      CreateMap<company, CompanyModel>();
+
+    }
 	}
 }
