@@ -5,8 +5,8 @@ namespace EC.Models.API.v1.Company
 {
     public class CompanyModel
     {
-        [Required]
-        public int partnerCompanyID { get; set; }
+         [Required]
+        public string partnerCompanyID { get; set; }
   /*      [Required]
         public int address_id { get; set; }
         [Required]

@@ -64,7 +64,7 @@ namespace EC.Controllers.API.v1
                 foreach (var c in createCompanyModel)
                 {
                     var companyId = (await _companyService
-                        .CreateAsync(c, DomainUtil.IsCC(Request.RequestUri.AbsoluteUri))
+                        .CreateAsync(c, false, 0)
                         .ConfigureAwait(false)).id;
                     c.Users.ForEach(u => u.PartnerCompanyId = companyId.ToString());
                 }
@@ -253,11 +253,11 @@ namespace EC.Controllers.API.v1
             PagedList<UserModel> result = await _userService
                 .GetPagedAsync(page, pageSize, filterApp)
                 .ConfigureAwait(false);
-            var statusModel = new Models.ReadStatusModel();
-            result.Items.ForEach(entity =>
-            {
-                entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
-            });
+            //var statusModel = new Models.ReadStatusModel();
+            //result.Items.ForEach(entity =>
+            //{
+            //    entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+            //});
 
             return ApiOk(result);
         }

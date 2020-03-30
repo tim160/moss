@@ -5,9 +5,8 @@ namespace EC.Models.API.v1.User
 {
     public class UserModel
     {
-        public int id { get; set; }
-        [Required]
-        public int partnerCompanyID { get; set; }
+  
+        public string partnerCompanyID { get; set; }
         public string partnerUserID { get; set; }
 
      //   [Required]

@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncHelper.cs" />
     <Compile Include="CryptographyHelper.cs" />
     <Compile Include="CryptoSymmetricAes.cs" />
     <Compile Include="CultureHelper.cs" />

@@ -12,6 +12,10 @@ using EC.Services.API.v1.ClientService;
 using EC.Services.API.v1.CompanyServices;
 using EC.Services.API.v1.GlobalSettingsService;
 using TestApi.Utils;
+using EC.Constants;
+using System.Net.Http;
+using System.Linq.Expressions;
+
 
 namespace TestApi.Controllers
 {
@@ -34,23 +38,31 @@ namespace TestApi.Controllers
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(ClientModel))]
-        public async Task<IHttpActionResult> GetClient()
+        public async Task<IHttpActionResult> GetClient(string id)
         {
-
-            if (!ModelState.IsValid)
-            {
+            if (string.IsNullOrEmpty(id))
                 return ApiBadRequest(ModelState);
+
+            var idFromDb = await _clientService.GetInternalIDfromExternal(id);
+            if (idFromDb == 0)
+            {
+              return ApiNotFound("Client not found.");
+            }
+ 
+            var client = await _clientService.GetClientById(idFromDb);
+ 
+            if (client != null)
+            {
+                var clientViewModel = new ClientViewModel()
+                {
+                    Total = 1,
+                    Items = new List<ClientModel>() {client}
+                };
+                return ApiOk(clientViewModel);
+
             }
 
-            PagedList<ClientModel> result = await _clientService
-                .GetPagedAsync(1, 1)
-                .ConfigureAwait(false);
-
-            result.Items.ForEach(entity =>
-            {
-                entity.globalSettings = _globalSettingsService.getByClientId(entity.id);
-            });
-            return ApiOk(result);
+            return ApiNotFound();
         }
 
         [HttpPost]
@@ -65,6 +77,13 @@ namespace TestApi.Controllers
 
             try
             {
+
+                foreach (var t in createClientModel)
+                {
+                  if(string.IsNullOrWhiteSpace(t.PartnerClientId))
+                    return ApiBadRequest("PartnerClientId required.");
+                }
+
                 foreach (var t in createClientModel)
                 {
                     t.Id = (await _clientService
@@ -92,166 +111,273 @@ namespace TestApi.Controllers
             return ApiCreated(createClientModel);
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
+
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IHttpActionResult> Update(string id, UpdateClientModel updateClientModel)
+    {
+      if (updateClientModel == null)
+        ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
+ 
+
+      if (!ModelState.IsValid)
+        return ApiBadRequest(ModelState);
+
+      if (string.IsNullOrEmpty(id))
+        return ApiBadRequest(ModelState);
+
+      var idFromDb = await _clientService.GetInternalIDfromExternal(id);
+      if (idFromDb == 0)
+      {
+        return ApiNotFound("Client not found.");
+      }
+
+
+      try
+      {
+        var client = DB.client.FirstOrDefault(c => c.id == idFromDb);
+        var globalSettings = DB.global_settings.FirstOrDefault(gs => gs.client_id == idFromDb);
+
+        if (client != null)
         {
-            if (updateClientModel == null)
-                ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
+          client.client_nm = updateClientModel.ClientName;
+          // do not update this field, it is their id
+    //      client.partner_api_id = updateClientModel.PartnerClientId;
+          globalSettings.custom_logo_path = updateClientModel.GlobalSettings.CustomLogoPath;
+          globalSettings.header_color_code = updateClientModel.GlobalSettings.HeaderColorCode;
+          globalSettings.header_links_color_code = updateClientModel.GlobalSettings.HeaderLinksColorCode;
 
-            if (id == 0)
-                ModelState.AddModelError(nameof(id), "Client ID required.");
+          await DB.SaveChangesAsync();
 
-            if (!ModelState.IsValid)
-                return ApiBadRequest(ModelState);
 
-            try
-            {
-                await _clientService
-                    .UpdateAsync(updateClientModel, id)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            try
-            {
-                await _globalSettingsService
-                    .UpdateAsync(updateClientModel.GlobalSettings, id)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
-
-            return ApiOk();
+          return ApiOk();
         }
 
-        [HttpDelete]
-        [Route("internal/{id}")]
-        private async Task<IHttpActionResult> DeleteInternal(int id)
-        {
-            if (id == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
+        return ApiNotFound();
 
-            try
-            {
-                await _clientService
-                    .DeleteAsync(id)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
+      }
+      catch (NotFoundException exception)
+      {
+        return ApiNotFound(exception.Message);
+      }
+              ///
+              ////try
+              ////{
+              ////  await _clientService
+              ////      .UpdateAsync(updateClientModel, idFromDb)
+              ////      .ConfigureAwait(false);
+              ////}
+              ////catch (NotFoundException exception)
+              ////{
+              ////  return ApiNotFound(exception.Message);
+              ////}
 
-            return ApiOk();
-        }
+      try
+      {
+        await _globalSettingsService
+            .UpdateAsync(updateClientModel.GlobalSettings, idFromDb)
+            .ConfigureAwait(false);
+      }
+      catch (NotFoundException exception)
+      {
+        return ApiNotFound(exception.Message);
+      }
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(string id)
-        {
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
-            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
-            if (idFromDb == 0)
-            {
-                ModelState.AddModelError(nameof(id), "Client not found.");
-            }
+      return ApiOk();
+    }
 
-            try
-            {
-                await _clientService
-                    .DeleteAsync(idFromDb)
-                    .ConfigureAwait(false);
-            }
-            catch (NotFoundException exception)
-            {
-                return ApiNotFound(exception.Message);
-            }
 
-            return ApiOk();
-        }
+
+    ////[HttpPut]
+    ////    [Route("{id}")]
+    ////    public async Task<IHttpActionResult> UpdateInternal(int id, UpdateClientModel updateClientModel)
+    ////    {
+    ////        if (updateClientModel == null)
+    ////            ModelState.AddModelError(nameof(updateClientModel), "Client data required.");
+
+    ////        if (id == 0)
+    ////            ModelState.AddModelError(nameof(id), "Client ID required.");
+
+    ////        if (!ModelState.IsValid)
+    ////            return ApiBadRequest(ModelState);
+
+    ////        try
+    ////        {
+    ////            await _clientService
+    ////                .UpdateAsync(updateClientModel, id)
+    ////                .ConfigureAwait(false);
+    ////        }
+    ////        catch (NotFoundException exception)
+    ////        {
+    ////            return ApiNotFound(exception.Message);
+    ////        }
+
+    ////        try
+    ////        {
+    ////            await _globalSettingsService
+    ////                .UpdateAsync(updateClientModel.GlobalSettings, id)
+    ////                .ConfigureAwait(false);
+    ////        }
+    ////        catch (NotFoundException exception)
+    ////        {
+    ////            return ApiNotFound(exception.Message);
+    ////        }
+
+    ////        return ApiOk();
+    ////    }
+
+        //[HttpDelete]
+        //[Route("internal/{id}")]
+        //private async Task<IHttpActionResult> DeleteInternal(int id)
+        //{
+        //    if (id == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Client ID required.");
+        //    }
+
+        //    try
+        //    {
+        //        await _clientService
+        //            .DeleteAsync(id)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
+
+        //    return ApiOk();
+        //}
+
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<IHttpActionResult> Delete(string id)
+        //{
+        //    if (String.IsNullOrEmpty(id))
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Client ID required.");
+        //    }
+        //    int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+        //    if (idFromDb == 0)
+        //    {
+        //        ModelState.AddModelError(nameof(id), "Client not found.");
+        //    }
+
+        //    try
+        //    {
+        //        await _clientService
+        //            .DeleteAsync(idFromDb)
+        //            .ConfigureAwait(false);
+        //    }
+        //    catch (NotFoundException exception)
+        //    {
+        //        return ApiNotFound(exception.Message);
+        //    }
+
+        //    return ApiOk();
+        //}
 
         [HttpPatch]
         [Route("{id}/activate")]
         public async Task<IHttpActionResult> ClientActivate(string id)
         {
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
-            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+            if (string.IsNullOrEmpty(id))
+              return ApiBadRequest(ModelState);
+
+            var idFromDb = await _clientService.GetInternalIDfromExternal(id);
             if (idFromDb == 0)
             {
-                ModelState.AddModelError(nameof(id), "Client not found.");
+              return ApiNotFound("Client not found.");
             }
-
+  
             try
             {
-                ///   await _clientService
-                ///      .DeleteAsync(idFromDb)
-                //      .ConfigureAwait(false);
+              var client = DB.client.FirstOrDefault(c => c.id == idFromDb);
+              if (client != null)
+              {
+                client.status_id = ECStatusConstants.Active_Value;
+                await DB.SaveChangesAsync();
+                return ApiOk();
+              }
+
+              return ApiNotFound();
+
             }
             catch (NotFoundException exception)
             {
-                return ApiNotFound(exception.Message);
+              return ApiNotFound(exception.Message);
             }
 
-            return ApiOk();
+
+ 
         }
 
         [HttpPatch]
         [Route("{id}/deactivate")]
         public async Task<IHttpActionResult> ClientDeactivate(string id)
         {
-            if (String.IsNullOrEmpty(id))
-            {
-                ModelState.AddModelError(nameof(id), "Client ID required.");
-            }
-            int idFromDb = DB.client.Where(client => client.partner_api_id.Equals(id)).Select(client => client.id).FirstOrDefault();
+            if (string.IsNullOrEmpty(id))
+              return ApiBadRequest(ModelState);
+
+            var idFromDb = await _clientService.GetInternalIDfromExternal(id);
             if (idFromDb == 0)
             {
-                ModelState.AddModelError(nameof(id), "Client not found.");
+              return ApiNotFound("Client not found.");
             }
 
             try
             {
-                /// await _clientService
-                ///    .DeleteAsync(idFromDb)
-                ///     .ConfigureAwait(false);
+              var client = DB.client.FirstOrDefault(c => c.id == idFromDb);
+              if (client != null)
+              {
+                client.status_id = ECStatusConstants.Inactive_Value;
+                await DB.SaveChangesAsync();
+                return ApiOk();
+              }
+
+              return ApiNotFound();
+ 
             }
             catch (NotFoundException exception)
             {
                 return ApiNotFound(exception.Message);
             }
-
-            return ApiOk();
+ 
         }
 
         //filter by client_id ( note, it is external _client_id )
         [HttpGet]
         [Route("{id}/companies")]
-        [ResponseType(typeof(PagedList<CompanyModel>))]
-        public async Task<IHttpActionResult> GetCompaniesList()
+        [ResponseType(typeof(List<CompanyModel>))]
+        public async Task<IHttpActionResult> GetCompaniesList(string id)
         {
             if (!ModelState.IsValid)
             {
                 return ApiBadRequest(ModelState);
             }
 
-            PagedList<CompanyModel> result = await _companyService
-              .GetPagedAsync(1, 1)
-              .ConfigureAwait(false);
-            return ApiOk(result);
+            if (string.IsNullOrEmpty(id))
+              return ApiBadRequest(ModelState);
+
+            var idFromDb = await _clientService.GetInternalIDfromExternal(id);
+            if (idFromDb == 0)
+            {
+              return ApiNotFound("Client not found.");
+            }
+
+          //Expression<Func<EC.Models.Database.company, bool>> filterApp = c => idFromDb == c.client_id;
+
+
+          List<CompanyModel> result = await _companyService.GetCompaniesByClientId(idFromDb, id);
+ 
+
+          //PagedList<CompanyModel> result1 = await _companyService
+          //        .GetPagedAsync(1, 1, c=> c.client_id == idFromDb)
+          //        .ConfigureAwait(false);
+
+          //Expression<Func<EC.Models.Database.company, bool>> filterApp = c => idFromDb == c.client_id;
+ 
+          return ApiOk(result);
         }
 
         #region Aggregate Data
@@ -410,5 +536,7 @@ namespace TestApi.Controllers
             return ApiOk(result);
         }
         #endregion
-    }
+ 
+
+  }
 }
