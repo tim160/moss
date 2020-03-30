@@ -20,7 +20,7 @@
     {
         report_id = 0;
     }
-    ReportModel rm = new ReportModel(report_id);
+    //ReportModel rm = new ReportModel(report_id);
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -29,10 +29,10 @@
 
     string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes", is_cc);
     var user_id = ViewBag.user_id;
-    if (rm != null && user_id == rm.Last_investigation_status_user_id())
-    {
-     ///   same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1", is_cc) + " " + LocalizationGetter.GetString("RecommendSecond2", is_cc);
-    }
+    //if (rm != null && user_id == rm.Last_investigation_status_user_id())
+    //{
+    //   same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1", is_cc) + " " + LocalizationGetter.GetString("RecommendSecond2", is_cc);
+    //}
 }
 
 @*
