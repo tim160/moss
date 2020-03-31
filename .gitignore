@@ -87,3 +87,7 @@ EC/ConnectionStrings.config
 EC.COM/ConnectionStrings.config
 EC.COM/Smtp.config
 EC/Properties/PublishProfiles/File.pubxml
+######################
+# cake #
+######################
+tools
