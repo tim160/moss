@@ -8,7 +8,6 @@
   string overlay_title = LocalizationGetter.GetString("CloseCaseUp", is_cc);
   string textbox_title = LocalizationGetter.GetString("Description", is_cc);
   string normal_button_promotion = LocalizationGetter.GetString("CloseCaseUp", is_cc);
-  int normal_button_value = 9;
 }
 
 <div id="approveDialog" class="modal case-modal">
@@ -26,7 +25,6 @@
 
 <script>
     $(document).ready(function () {
-        var selectedItem = "";
 
         $("#approveDialog .close1").on('click', function () {
             $("#approveDialog").toggle();
@@ -92,17 +90,10 @@
                 }
             } else {
                 $("#txtEscalate").css({ "border": "2px solid red", "border-bottom": "none" });
-                //$(".footerCreateTask2").css("border-top", "1px solid red");
                 $("#txtEscalate").on('focusin', function () {
                     $("#txtEscalate").css({ "border": "2px solid #05b5a2", "border-bottom": "none" });
-                    //$(".footerCreateTask2").css("border-top", "1px solid #e0e5e6");
                 });
             }
-        }
-
-
-        function SetValues(promotion_value)
-        {
         }
     });
 </script>

@@ -1,4 +1,5 @@
 ﻿using EC.Constants;
+using EC.Localization;
 using EC.Models;
 using EC.Models.Database;
 using System;
@@ -14,6 +15,8 @@ namespace EC.Services.ProgressLineService
         private ECEntities db;
         private ReportModel rm;
         private const string ACTIVE_CLASS_NAME = "active";
+
+        //investigationstatus вынести в отедльный переменную
 
         public CaseHeaderService(int user_id, ECEntities db, ReportModel rm)
         {
@@ -42,6 +45,8 @@ namespace EC.Services.ProgressLineService
 
             return progressLineViewModel;
         }
+
+
 
         private List<DataProgressLine> gettingProgressLineStepsCount()
         {
@@ -91,57 +96,3 @@ namespace EC.Services.ProgressLineService
 
     }
 }
-/*_NewCasesTopMenu.cshtml*/
-/*LayoutNewCases.cshtml*/
-
-//@if(investigationstatus == 9)
-//{
-//    @Html.Partial("~/Views/Shared/EditorTemplates/ReOpenModalNew.cshtml", new ViewDataDictionary {
-//                               { "normal_button_promotion", normal_button_promotion },
-//                               { "Res_or_comp", Res_or_comp },
-//                               { "overlay_title", overlay_title },
-//                               { "textbox_title", textbox_title },
-//                               { "investigationstatus", investigationstatus },
-//                               { "left_button_promotion", left_button_promotion },
-//                               { "normal_button_value", normal_button_value },
-//                               { "left_button_value", left_button_value },
-//                               { "company_outcomes", company_outcomes },
-//                               { "report_id", ViewBag.report_id },
-//                               { "is_cc", is_cc }
-//                        })
-//    }
-//    else if (((rm._investigation_status == (int) CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int) CaseStatusConstants.CaseStatusValues.Resolution)))
-//    {
-//        @Html.Partial("~/Views/Shared/EditorTemplates/AwaitingApprovalModalNew.cshtml", new ViewDataDictionary {
-//                               { "normal_button_promotion", normal_button_promotion },
-//                               { "Res_or_comp", Res_or_comp },
-//                               { "overlay_title", overlay_title },
-//                               { "textbox_title", textbox_title },
-//                               { "investigationstatus", investigationstatus },
-//                               { "left_button_promotion", left_button_promotion },
-//                               { "normal_button_value", normal_button_value },
-//                               { "left_button_value", left_button_value },
-//                               { "company_outcomes", company_outcomes },
-//                               { "report_id", ViewBag.report_id },
-//                               { "is_cc", is_cc },
-//                               { "user_id", user_id}
-//                        })
-//        @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModalNew.cshtml", new ViewDataDictionary { })
-//    }
-//    else
-//    {
-//        @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModalNew.cshtml", new ViewDataDictionary {
-//                               { "normal_button_promotion", normal_button_promotion },
-//                               { "Res_or_comp", Res_or_comp },
-//                               { "overlay_title", overlay_title },
-//                               { "textbox_title", textbox_title },
-//                               { "investigationstatus", investigationstatus },
-//                               { "left_button_promotion", left_button_promotion },
-//                               { "normal_button_value", normal_button_value },
-//                               { "left_button_value", left_button_value },
-//                               { "company_outcomes", company_outcomes },
-//                               { "report_id", ViewBag.report_id },
-//                               { "is_cc", is_cc },
-//                               { "user_id", user_id}
-//                        })
-//    }
