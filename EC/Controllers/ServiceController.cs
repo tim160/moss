@@ -49,7 +49,7 @@ namespace EC.Controllers
             db.SaveChanges();
 
             Session.Clear();
-            
+
             if (is_sso_domain)
             {
                 ViewBag.linksArray = new List<LinksViewModel>() {
@@ -61,7 +61,8 @@ namespace EC.Controllers
                 ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
-            } else
+            }
+            else
             {
                 ViewBag.linksArray = new List<LinksViewModel>() {
                     new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)),
@@ -109,7 +110,8 @@ namespace EC.Controllers
                 ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
                 ViewBag.clientLogo = cm.companyClientLogo();
                 ViewBag.LogoCompany = cm.getLogoCompany(cm.ID);
-            } else
+            }
+            else
             {
                 ViewBag.linksArray = new List<LinksViewModel>() {
                     new LinksViewModel("/Service/Login", LocalizationGetter.GetString("ClientLoginUp", is_cc)),
@@ -117,7 +119,7 @@ namespace EC.Controllers
             }
             return DoLogin(model, returnUrl, "CheckStatus", false);
         }
-        
+
         [HttpGet]
         [Authorize]
         public ActionResult SignInGoogle()
@@ -126,15 +128,15 @@ namespace EC.Controllers
             var userId = 0;
             foreach (var claim in userClaims)
             {
-                if(claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")
+                if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")
                 {
-                    if(claim.Value.IndexOf("@gmail.com") > 0)
+                    if (claim.Value.IndexOf("@gmail.com") > 0)
                     {
                         userId = 2;
                     }
                 }
             }
-            if(userId != 0)
+            if (userId != 0)
             {
                 var _user = userModel.GetById(userId);
                 if (_user != null)
@@ -174,6 +176,17 @@ namespace EC.Controllers
                             ModelState.AddModelError("PasswordError", "Password");
                         }
 
+                        if (is_sso_domain)
+                        {
+                            ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)) };
+                        }
+                        else
+                        {
+                            ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)),
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
+                        }
                         return View($"{view}{(is_cc ? "-CC" : "")}", model);
                     }
                     var user = loginUser.user;
@@ -230,7 +243,17 @@ namespace EC.Controllers
 
             ModelState.AddModelError("PasswordError", "Password");
             model.Password = "";
-
+            if (is_sso_domain)
+            {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)) };
+            }
+            else
+            {
+                ViewBag.linksArray = new List<LinksViewModel>() {
+                    new LinksViewModel("/Service/Report", LocalizationGetter.GetString("FileReport", is_cc)),
+                    new LinksViewModel("/Service/CheckStatus", LocalizationGetter.GetString("CheckReportStatus", is_cc)) };
+            }
             return View($"{view}{(is_cc ? "-CC" : "")}", model);
         }
 
@@ -294,7 +317,8 @@ namespace EC.Controllers
                     ViewBag.header_links_color_code = userColorSchema.global_Setting.header_links_color_code;
                     CompanyModel cm = new CompanyModel(selectedCompany.ID);
                     ViewBag.clientLogo = cm.companyClientLogo();
-                } else
+                }
+                else
                 {
                     ViewBag.linksArray = new List<LinksViewModel>() {
                     new LinksViewModel("/Service/Login", LocalizationGetter.GetString("ClientLoginUp", is_cc)),
