@@ -1467,6 +1467,7 @@
     <Content Include="Views\CallApi\Index.cshtml" />
     <Content Include="Views\CallApi\ShowApiResult.cshtml" />
     <Content Include="Views\Shared\Partial\ProgressLine.cshtml" />
+    <Content Include="Views\Tasks\TaskHeader.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1976,6 +1977,7 @@
     <Compile Include="Services\API\v1\UserService\UserService.cs" />
     <Compile Include="Services\CaseHeaderService\CaseHeaderService.cs" />
     <Compile Include="Services\CaseHeaderService\CaseHeaderViewModel.cs" />
+    <Compile Include="Services\CaseHeaderService\ModalNewCases.cs" />
     <Compile Include="Services\MemoryCacheService.cs" />
     <Compile Include="Services\URLService.cs" />
     <Compile Include="Startup.cs" />
