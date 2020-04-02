@@ -1,0 +1,19 @@
+﻿@using EC.Localization;
+@{ 
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+}
+<div id="casesHeader">
+    <div id="menu">
+        <div>
+            <a href="/tasks/Index" class="caseesTab @ViewBag.activeTasks">
+                @LocalizationGetter.GetString("Myactivetasks", is_cc) @if (ViewBag.unread_tasks > 0)
+                {<span>@ViewBag.unread_tasks</span>}
+            </a>
+            <a style="padding-left:60px;" href="/tasks/Completed" class="caseesTab @ViewBag.completedTasks">@LocalizationGetter.GetString("Mycompletedtasks", is_cc)</a>
+        </div>
+    </div>
+</div>

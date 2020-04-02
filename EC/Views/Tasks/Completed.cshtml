@@ -26,18 +26,7 @@
 }
 
 <div class="blockSettings blockAllTasks">
-    <div id="casesHeader">
-        <div id="menu">
-            <div style="width:80%">
-                <a href="/tasks/Index" class="caseesTab">
-                    @LocalizationGetter.GetString("Myactivetasks", is_cc) @if (unread_tasks > 0)
-                    {<span>@unread_tasks</span>}
-                </a>
-                <a href="/tasks/Completed" class="caseesTab active">@LocalizationGetter.GetString("Mycompletedtasks", is_cc)</a>
-            </div>
-        </div>
-    </div>
-
+    @{ Html.RenderPartial("~/Views/Tasks/TaskHeader.cshtml", new ViewDataDictionary { { "unread_tasks", unread_tasks }, { "activeTasks", "" }, { "completedTasks", "active" } }); }
 
     <div class="contentSettings">
 
