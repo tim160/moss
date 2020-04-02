@@ -1489,7 +1489,7 @@ input.personDataTextBox {
 }
 
 .inputRadio__customnBtn {
-    background: url('http://stark.employeeconfidential.com/Content/img/radio.png') no-repeat;
+    background: url('img/radio.png') no-repeat;
     background-position: top left;
     padding-left: 22px;
     height: 12px;
