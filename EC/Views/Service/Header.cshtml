@@ -43,11 +43,11 @@
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
 
-                            @foreach (var link in ViewBag.linksArray)
+                            @foreach (EC.Models.ViewModels.LinksViewModel link in ViewBag.linksArray)
                             {
                                 <li class="top-header__loginBar-li">
-                                    <a href="/Service/CheckStatus" class="top-header__loginBar-a">
-                                        @link
+                                    <a href="@link.url" class="top-header__loginBar-a">
+                                        @link.linkText
                                     </a>
                                 </li><!-- /.top-header__loginBar-li -->
                             }
