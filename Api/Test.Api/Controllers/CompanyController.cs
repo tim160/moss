@@ -146,19 +146,32 @@ namespace TestApi.Controllers
 
             List<UserModel> result = await _userService.GetUsersByCompanyId(idFromDb, id);
 
-            /*
-            Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
-            PagedList<UserModel> result = await _userService
-                .GetPagedAsync(page, pageSize, filterApp)
-                .ConfigureAwait(false);
-            var statusModel = new EC.Models.ReadStatusModel();
-            result.Items.ForEach(entity =>
-            {
-                entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
-            });
-            */
-      return ApiOk(result);
-        }
+      /*
+      Expression<Func<user, bool>> filterApp = u => new[] { ECLevelConstants.level_ec_mediator, ECLevelConstants.level_escalation_mediator, ECLevelConstants.level_supervising_mediator }.Contains(u.role_id);
+      PagedList<UserModel> result = await _userService
+          .GetPagedAsync(page, pageSize, filterApp)
+          .ConfigureAwait(false);
+      var statusModel = new EC.Models.ReadStatusModel();
+      result.Items.ForEach(entity =>
+      {
+          entity.usersUnreadEntities = statusModel.GetUserUnreadEntitiesNumbers(entity.id);
+      });
+      */
+
+      if (result != null)
+      {
+        var userViewModel = new UserViewModel()
+        {
+          Total = result.Count(),
+          Items = result
+        };
+        return ApiOk(userViewModel);
+
+      }
+
+
+      return ApiNotFound("Users not found.");
+    }
 
         [HttpPatch]
         [Route("{id}/deactivate")]
@@ -397,10 +410,20 @@ namespace TestApi.Controllers
               return ApiNotFound("Company not found.");
             }
           var result = await _companyService.GetCompanyById(idFromDb);
-         // var result = await DB.company.FirstOrDefaultAsync(u => u.partner_api_id == id);
+            // var result = await DB.company.FirstOrDefaultAsync(u => u.partner_api_id == id);
+
 
             if (result != null)
-                return ApiOk(result);
+            {
+              var companyViewModel = new CompanyViewModel()
+              {
+                Total = 1,
+                Items = new List<CompanyModel>() { result }
+              };
+              return ApiOk(companyViewModel);
+
+            }
+ 
 
             return ApiNotFound();
         }

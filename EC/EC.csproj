@@ -1544,11 +1544,13 @@
     <Compile Include="Models\API\v1\Client\ClientViewModel.cs" />
     <Compile Include="Models\API\v1\Client\CreateClientModel.cs" />
     <Compile Include="Models\API\v1\Client\UpdateClientModel.cs" />
+    <Compile Include="Models\API\v1\Company\CompanyViewModel.cs" />
     <Compile Include="Models\API\v1\Company\UpdateCompanyModel.cs" />
     <Compile Include="Models\API\v1\Company\CreateCompanyModel.cs" />
     <Compile Include="Models\API\v1\Company\CompanyModel.cs" />
     <Compile Include="Models\API\v1\GlobalSettings\CreateGlobalSettingsModel.cs" />
     <Compile Include="Models\API\v1\GlobalSettings\GlobalSettingsModel.cs" />
+    <Compile Include="Models\API\v1\User\UserViewModel.cs" />
     <Compile Include="Models\API\v1\User\CreateUserModel.cs" />
     <Compile Include="Models\API\v1\User\UpdateUserModel.cs" />
     <Compile Include="Models\API\v1\User\UserModel.cs" />

@@ -63,7 +63,37 @@ namespace EC.Services.API.v1.ClientService
             return null;
         }
 
-        public async Task<client> CreateAsync(CreateClientModel createClientModel)
+    public async Task<List<ClientModel>> GetAllClients()
+    {
+
+      var allClients = await _appContext.client.ToListAsync();
+      var _clients = allClients.ToList();
+
+      var clientsModel = _clients.Select(item => new ClientModel()
+      {
+        //var globalSettings1 = await _appContext.global_settings.FirstOrDefaultAsync(g => g.client_id == item.id)
+        clientName = item.client_nm,
+        partnerClientId = item.partner_api_id,
+        id = item.id
+      }).ToList();
+      foreach (var mc in clientsModel)
+      {
+        var globalSettings = await _appContext.global_settings.FirstOrDefaultAsync(g => g.client_id == mc.id);
+        mc.globalSettings = new GlobalSettingsModel()
+        {
+          customLogoPath = globalSettings?.custom_logo_path,
+          headerColorCode = globalSettings?.header_color_code,
+          headerLinksColorCode = globalSettings?.header_links_color_code
+        };
+      }
+
+      return clientsModel;
+
+
+    }
+
+
+    public async Task<client> CreateAsync(CreateClientModel createClientModel)
         {
             List<Exception> errors = await CheckPartnerUserId(createClientModel);
 

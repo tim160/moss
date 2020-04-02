@@ -361,7 +361,7 @@ namespace EC.Services.API.v1.CompanyServices
             {
                 //PartnerClientId
                 //OptinCaseAnalytics
-                //CustomLogoPath
+ 
                 company_nm = createCompanyModels.CompanyName,
                 partner_api_id = createCompanyModels.PartnerCompanyId,
                 address_id = 1,
@@ -391,8 +391,8 @@ namespace EC.Services.API.v1.CompanyServices
                 step6_postpone = 2,
                 subdomain = "thinkhr",
                 company_code = companyCode,
-                company_short_name = shortName
-
+                company_short_name = shortName,
+                path_en = createCompanyModels.CustomLogoPath
             };
         }
     }
