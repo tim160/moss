@@ -52,10 +52,25 @@ namespace TestApi.Controllers
       if (result != null)
       {
        // result.usersUnreadEntities = new TestApi.Controllers.usersUnreadEntitiesNumberViewModel { unreadMessages = 0, unreadNewReports = 0, unreadTasks = 0 }
-        return ApiOk(result);
+     ////   return ApiOk(result);
       }
 
-            return ApiNotFound();
+
+      if (result != null)
+      {
+        var userViewModel = new UserViewModel()
+        {
+          Total = 1,
+          Items = new List<UserModel>() { result }
+        };
+        return ApiOk(userViewModel);
+
+      }
+
+
+
+
+      return ApiNotFound();
         }
 
         [HttpPost]

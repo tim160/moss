@@ -369,16 +369,28 @@ namespace TestApi.Controllers
 
 
           List<CompanyModel> result = await _companyService.GetCompaniesByClientId(idFromDb, id);
- 
 
-          //PagedList<CompanyModel> result1 = await _companyService
-          //        .GetPagedAsync(1, 1, c=> c.client_id == idFromDb)
-          //        .ConfigureAwait(false);
 
-          //Expression<Func<EC.Models.Database.company, bool>> filterApp = c => idFromDb == c.client_id;
- 
-          return ApiOk(result);
-        }
+      //PagedList<CompanyModel> result1 = await _companyService
+      //        .GetPagedAsync(1, 1, c=> c.client_id == idFromDb)
+      //        .ConfigureAwait(false);
+
+      //Expression<Func<EC.Models.Database.company, bool>> filterApp = c => idFromDb == c.client_id;
+
+          if (result != null)
+          {
+            var companyViewModel = new CompanyViewModel()
+            {
+              Total = result.Count(),
+              Items = result
+            };
+            return ApiOk(companyViewModel);
+
+          }
+
+
+      return ApiNotFound("Companies not found.");
+    }
 
         #region Aggregate Data
 
